@@ -25,8 +25,8 @@ import org.xml.sax.InputSource;
 
 
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlRootElement(name = "cards")
-@Path("/cards")
+@XmlRootElement(name = "main")
+@Path("/main")
 public class Service {
 
 	//	static ArrayList<Card> allCards;
@@ -50,6 +50,7 @@ public class Service {
 
 	@GET
 	@Path("/search/{region}")
+	@Produces("text/html;charset=UTF-8;version=1")
 	public String addPlayer(@PathParam("region") String player){
 		String dsd = GET("http://patron/restsdmx/sdmx.ashx/GetDataStructure/ABS_CENSUS2011_B01/ABS");
 
