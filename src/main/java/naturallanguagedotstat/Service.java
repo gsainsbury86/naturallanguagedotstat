@@ -7,7 +7,6 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import javax.swing.JOptionPane;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -57,9 +56,6 @@ public class Service {
 
 		Document dsdDocument = XMLToDocument(dsd);
 
-		//String input = JOptionPane.showInputDialog("Where would you like to know the population for?");
-
-		//String SA2code = "601051031";
 		String regionCode = findSA2CodeIterative(dsdDocument, region);
 
 		String regionType = regionTypeForRegionCode(regionCode);
@@ -74,7 +70,6 @@ public class Service {
 
 		return resultString;
 		
-		//System.err.println(System.currentTimeMillis() - startTime);
 	}
 
 	private static String regionTypeForRegionCode(String regionCode) {
