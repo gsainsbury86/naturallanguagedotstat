@@ -29,6 +29,7 @@ import org.xml.sax.InputSource;
 @Path("/main")
 public class Service {
 
+	private static final String serverName = "stat.abs.gov.au";
 	//	static ArrayList<Card> allCards;
 	//	static ArrayList<Card> deck;
 	//	static ArrayList<Card> discard;
@@ -51,19 +52,19 @@ public class Service {
 	@GET
 	@Path("/search/{region}")
 	@Produces("text/html;charset=UTF-8;version=1")
-	public String addPlayer(@PathParam("region") String player){
-		String dsd = GET("http://patron/restsdmx/sdmx.ashx/GetDataStructure/ABS_CENSUS2011_B01/ABS");
+	public String addPlayer(@PathParam("region") String region){
+		String dsd = GET("http://"+serverName+"/restsdmx/sdmx.ashx/GetDataStructure/ABS_CENSUS2011_B01/ABS");
 
 		Document dsdDocument = XMLToDocument(dsd);
 
-		String input = JOptionPane.showInputDialog("Where would you like to know the population for?");
+		//String input = JOptionPane.showInputDialog("Where would you like to know the population for?");
 
 		//String SA2code = "601051031";
-		String regionCode = findSA2CodeIterative(dsdDocument, input);
+		String regionCode = findSA2CodeIterative(dsdDocument, region);
 
 		String regionType = regionTypeForRegionCode(regionCode);
 
-		String urlToRead = "http://patron/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B01/3.TT." + regionCode.charAt(0) + "." + regionType + "." + regionCode +".A/ABS?startTime=2011&endTime=2011";
+		String urlToRead = "http://"+serverName+"/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B01/3.TT." + regionCode.charAt(0) + "." + regionType + "." + regionCode +".A/ABS?startTime=2011&endTime=2011";
 
 		String data = GET(urlToRead);
 
