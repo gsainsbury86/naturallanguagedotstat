@@ -1,6 +1,7 @@
 package naturallanguagedotstat;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -40,6 +41,10 @@ public class Service {
 	
 	public Service() throws IOException, ClassNotFoundException{
 		
+	}
+
+	private void init() throws IOException, ClassNotFoundException,
+			FileNotFoundException {
 		datasets = new ArrayList<Dataset>();
 
 		for(int i = 1; i <= 46; i++){
@@ -87,7 +92,11 @@ public class Service {
 	@GET
 	@Path("/query/{query}")
 	@Produces("text/html;charset=UTF-8;version=1")
-	public String query(@PathParam("query") String query){
+	public String query(@PathParam("query") String query) throws FileNotFoundException, IOException, ClassNotFoundException{
+		
+		if(datasets == null){
+			init();
+		}
 
 		// PARSE QUERY : list of dims and ranges - region separate
 		HashMap<String, String> queryInputs = new HashMap<String, String>();
