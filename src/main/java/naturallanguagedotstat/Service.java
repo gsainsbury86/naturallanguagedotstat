@@ -1,7 +1,6 @@
 package naturallanguagedotstat;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
@@ -15,8 +14,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import naturallanguagedotstat.model.Dataset;
+import naturallanguagedotstat.model.Dimension;
 import naturallanguagedotstat.utils.Utils;
-import naturallanguagedotstat.model.*;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -37,7 +37,7 @@ public class Service {
 
 		for(int i = 1; i <= 46; i++){
 			String dsNumber = Utils.intToString(i,2);
-			FileInputStream fileIn = new FileInputStream("src/main/webapp/DSDs/ABS_CENSUS2011_B"+dsNumber+".ser");
+			FileInputStream fileIn = new FileInputStream("src/main/resources/"+"ABS_CENSUS2011_B"+dsNumber+".ser");
 			ObjectInputStream objIn = new ObjectInputStream(fileIn);
 			Dataset ds = (Dataset) objIn.readObject();
 			datasets.add(ds);
@@ -45,7 +45,7 @@ public class Service {
 			fileIn.close();
 		}
 
-		FileInputStream fileIn = new FileInputStream("src/main/webapp/DSDs/ASGS_2011.ser");
+		FileInputStream fileIn = new FileInputStream("src/main/resources/"+"ASGS_2011.ser");
 		ObjectInputStream objIn = new ObjectInputStream(fileIn);
 		ASGS2011 = (Dimension) objIn.readObject();
 		objIn.close();
