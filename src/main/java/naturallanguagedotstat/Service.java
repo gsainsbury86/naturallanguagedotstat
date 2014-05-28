@@ -2,10 +2,12 @@ package naturallanguagedotstat;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -28,16 +30,21 @@ import org.w3c.dom.NodeList;
 @Path("/main")
 public class Service {
 
+	private static final String RES_DIR = "/WEB-INF/resources/";
 	private static final String serverName = "stat.abs.gov.au";
 	private static Dimension ASGS2011;
 	private static ArrayList<Dataset> datasets = null;
-
+	
+	@javax.ws.rs.core.Context 
+	ServletContext context;
+	
 	public Service() throws IOException, ClassNotFoundException{
+		
 		datasets = new ArrayList<Dataset>();
 
 		for(int i = 1; i <= 46; i++){
 			String dsNumber = Utils.intToString(i,2);
-			FileInputStream fileIn = new FileInputStream("src/main/resources/"+"ABS_CENSUS2011_B"+dsNumber+".ser");
+			InputStream fileIn = context.getResourceAsStream(RES_DIR+"ABS_CENSUS2011_B"+dsNumber+".ser");
 			ObjectInputStream objIn = new ObjectInputStream(fileIn);
 			Dataset ds = (Dataset) objIn.readObject();
 			datasets.add(ds);
@@ -45,7 +52,7 @@ public class Service {
 			fileIn.close();
 		}
 
-		FileInputStream fileIn = new FileInputStream("src/main/resources/"+"ASGS_2011.ser");
+		FileInputStream fileIn = new FileInputStream(RES_DIR+"ASGS_2011.ser");
 		ObjectInputStream objIn = new ObjectInputStream(fileIn);
 		ASGS2011 = (Dimension) objIn.readObject();
 		objIn.close();
