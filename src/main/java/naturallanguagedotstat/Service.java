@@ -33,19 +33,19 @@ public class Service {
 
 	private static final String RES_DIR = "/WEB-INF/resources/";
 	private static final String serverName = "stat.abs.gov.au";
-	private static Dimension ASGS2011;
-	private static ArrayList<Dataset> datasets = null;
-	
+	//private static Dimension ASGS2011;
+	//private static ArrayList<Dataset> datasets = null;
+
 	@javax.ws.rs.core.Context 
 	ServletContext context;
-	
+
 	public Service() throws IOException, ClassNotFoundException{
-		
+
 	}
 
-	private void init() throws IOException, ClassNotFoundException,
-			FileNotFoundException {
-		datasets = new ArrayList<Dataset>();
+	private ArrayList<Dataset> loadDatasets() throws IOException, ClassNotFoundException,
+	FileNotFoundException {
+		ArrayList<Dataset> datasets = new ArrayList<Dataset>();
 
 		for(int i = 1; i <= 46; i++){
 			String dsNumber = Utils.intToString(i,2);
@@ -56,12 +56,21 @@ public class Service {
 			objIn.close();
 			fileIn.close();
 		}
+		
+		return datasets;
+	}
 
+
+	private Dimension loadASGS_2011() throws IOException, ClassNotFoundException,
+	FileNotFoundException {
 		InputStream fileIn = context.getResourceAsStream(RES_DIR+"ASGS_2011.ser");
 		ObjectInputStream objIn = new ObjectInputStream(fileIn);
-		ASGS2011 = (Dimension) objIn.readObject();
+		Dimension ASGS2011 = (Dimension) objIn.readObject();
 		objIn.close();
 		fileIn.close();
+		
+		return ASGS2011;
+		
 	}
 
 	//	@GET
@@ -93,10 +102,9 @@ public class Service {
 	@Path("/query/{query}")
 	@Produces("text/html;charset=UTF-8;version=1")
 	public String query(@PathParam("query") String query) throws FileNotFoundException, IOException, ClassNotFoundException{
-		
-		if(datasets == null){
-			init();
-		}
+
+		ArrayList<Dataset> datasets = loadDatasets();
+		Dimension ASGS2011 = loadASGS_2011();
 
 		// PARSE QUERY : list of dims and ranges - region separate
 		HashMap<String, String> queryInputs = new HashMap<String, String>();
@@ -110,7 +118,7 @@ public class Service {
 
 		Dataset dataset = Utils.findDatasetWithDimensionNames(datasets, dimensionNames);
 
-		String urlToRead = queryBuilder(dataset, region, queryInputs);
+		String urlToRead = queryBuilder(dataset, ASGS2011, region, queryInputs);
 
 		System.out.println(urlToRead);
 
@@ -134,7 +142,7 @@ public class Service {
 	 * @param region the Region (as appears in ASGS 2011)
 	 * @return
 	 */
-	public static String queryBuilder(Dataset ds, String region, HashMap<String, String> dimensionValues){
+	public static String queryBuilder(Dataset ds, Dimension ASGS2011, String region, HashMap<String, String> dimensionValues){
 		String url;
 
 		url = "http://";
