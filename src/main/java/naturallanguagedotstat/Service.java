@@ -1,11 +1,11 @@
 package naturallanguagedotstat;
 
-import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -14,13 +14,13 @@ import javax.ws.rs.Produces;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+
+import naturallanguagedotstat.utils.Utils;
+import naturallanguagedotstat.model.*;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 
 
 @XmlAccessorType(XmlAccessType.NONE)
@@ -29,162 +29,152 @@ import org.xml.sax.InputSource;
 public class Service {
 
 	private static final String serverName = "stat.abs.gov.au";
-	//	static ArrayList<Card> allCards;
-	//	static ArrayList<Card> deck;
-	//	static ArrayList<Card> discard;
-	//	static HashMap<String,ArrayList<Card>> players;
-	//	static String log;
-	
-	static String resultString = null;
+	private static Dimension ASGS2011;
+	private static ArrayList<Dataset> datasets = null;
 
-	public Service(){
+	public Service() throws IOException, ClassNotFoundException{
+		datasets = new ArrayList<Dataset>();
 
+		for(int i = 1; i <= 46; i++){
+			String dsNumber = Utils.intToString(i,2);
+			FileInputStream fileIn = new FileInputStream("src/main/webapp/DSDs/ABS_CENSUS2011_B"+dsNumber+".ser");
+			ObjectInputStream objIn = new ObjectInputStream(fileIn);
+			Dataset ds = (Dataset) objIn.readObject();
+			datasets.add(ds);
+			objIn.close();
+			fileIn.close();
+		}
+
+		FileInputStream fileIn = new FileInputStream("src/main/webapp/DSDs/ASGS_2011.ser");
+		ObjectInputStream objIn = new ObjectInputStream(fileIn);
+		ASGS2011 = (Dimension) objIn.readObject();
+		objIn.close();
+		fileIn.close();
 	}
 
-	@GET
-	@Path("/")
-	@Produces("text/html;charset=UTF-8;version=1")
-	public String hello() {
-		return "Hello World";
-	}
+	//	@GET
+	//	@Path("/search/{region}")
+	//	@Produces("text/html;charset=UTF-8;version=1")
+	//	public String search(@PathParam("region") String region){
+	//		String dsd = Utils.httpGET("http://"+serverName+"/restsdmx/sdmx.ashx/GetDataStructure/ABS_CENSUS2011_B01/ABS");
+	//
+	//		Document dsdDocument = Utils.XMLToDocument(dsd);
+	//
+	//		String regionCode = findASGS2011Code(dsdDocument, region);
+	//
+	//		String regionType = Utils.regionTypeForRegionCode(regionCode);
+	//
+	//		char stateCode = regionCode.charAt(0);
+	//
+	//		String urlToRead = "http://"+serverName+"/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B01/3.TT." + stateCode + "." + regionType + "." + regionCode +".A/ABS?startTime=2011&endTime=2011";
+	//
+	//		String data = Utils.httpGET(urlToRead);
+	//
+	//		Document dataDocument = Utils.XMLToDocument(data);
+	//
+	//		return findObsValue(dataDocument);
+	//
+	//
+	//	}
 
 	@GET
-	@Path("/search/{region}")
+	@Path("/query/{query}")
 	@Produces("text/html;charset=UTF-8;version=1")
-	public String addPlayer(@PathParam("region") String region){
-		String dsd = GET("http://"+serverName+"/restsdmx/sdmx.ashx/GetDataStructure/ABS_CENSUS2011_B01/ABS");
+	public String query(@PathParam("query") String query){
 
-		Document dsdDocument = XMLToDocument(dsd);
+		// PARSE QUERY : list of dims and ranges - region separate
+		HashMap<String, String> queryInputs = new HashMap<String, String>();
+		queryInputs.put("Sex","2");
+		queryInputs.put("Selected Person Characteristics","T25");
 
-		String regionCode = findSA2CodeIterative(dsdDocument, region);
+		String region = "Sandy Bay";
 
-		String regionType = regionTypeForRegionCode(regionCode);
+		ArrayList<String> dimensionNames = new ArrayList<String>();
+		dimensionNames.addAll(queryInputs.keySet());
 
-		String urlToRead = "http://"+serverName+"/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B01/3.TT." + regionCode.charAt(0) + "." + regionType + "." + regionCode +".A/ABS?startTime=2011&endTime=2011";
+		Dataset dataset = Utils.findDatasetWithDimensionNames(datasets, dimensionNames);
 
-		String data = GET(urlToRead);
+		String urlToRead = queryBuilder(dataset, region, queryInputs);
 
-		Document dataDocument = XMLToDocument(data);
+		System.out.println(urlToRead);
 
-		findObsValueRecursive(dataDocument.getDocumentElement());
+		String data = Utils.httpGET(urlToRead);
+
+		Document dataDocument = Utils.XMLToDocument(data);
+
+		String resultString = findObsValue(dataDocument);
+
+		System.out.println(resultString);
 
 		return resultString;
-		
+
 	}
 
-	private static String regionTypeForRegionCode(String regionCode) {
-		String regionType = "";
+	/**
+	 * Builds the query for the given dataset and specified dimension values
+	 * 
+	 * @param ds the Dataset object
+	 * @param dimensionValues a HashMap<String, String> where the key is the dimension name and the value is  the range
+	 * @param region the Region (as appears in ASGS 2011)
+	 * @return
+	 */
+	public static String queryBuilder(Dataset ds, String region, HashMap<String, String> dimensionValues){
+		String url;
 
-		switch(regionCode.length()){
-		case 1:
-			regionType = "STE";
-			break;
-		case 3:
-			regionType = "SA4";
-			break;
-		case 5: 
-			regionType = "SA3";
-			break;
-		case 9: 
-			regionType = "SA2";
-			break;
-		default:
-			break;
-		}
+		url = "http://";
 
-		//System.err.println(regionCode);
+		url += serverName;
 
-		if(regionCode.equals("0")){
-			regionType = "AUS";
-		}
-		return regionType;
-	}
+		url += "/restsdmx/sdmx.ashx/GetData/";
 
-	private static Document XMLToDocument(String xml) {
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();  
-		DocumentBuilder builder;  
-		Document document = null;
-		try  
-		{  	
-			builder = factory.newDocumentBuilder();  
-			document = builder.parse( new InputSource( new StringReader( xml ) ) );
+		url += ds.getName()+"/";
 
-		} catch (Exception e) {  
-			e.printStackTrace();  
-		}
-		return document;
-	}
-
-	public static void findObsValueRecursive(Node node) {
-		// do something with the current node instead of System.out
-		if(node.getNodeName() == "ObsValue"){
-			resultString = node.getAttributes().getNamedItem("value").getNodeValue();
-		}
-
-		NodeList nodeList = node.getChildNodes();
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			Node currentNode = nodeList.item(i);
-			if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
-				//calls this method for all the children which is Element
-				findObsValueRecursive(currentNode);
-			}
-		}
-	}
-
-	public static String findSA2CodeIterative(Document document, String search) {
-
-		NodeList nodeList = document.getElementsByTagName("*");
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			Node node = nodeList.item(i);
-			if (node.getNodeType() == Node.ELEMENT_NODE) {
-				if(node.getTextContent().equals(search) && 
-						node.getParentNode().getParentNode().getAttributes().getNamedItem("id").getTextContent().equals("CL_ABS_CENSUS2011_B01_ASGS_2011")
-						){
-					return node.getParentNode().getAttributes().getNamedItem("value").getNodeValue();
+		/* ensure order */
+		for(Dimension dim : ds.getDimensions()){
+			for(String dimKey : dimensionValues.keySet()){
+				if(dim.getName().equals(dimKey)){
+					url += dimensionValues.get(dimKey) + ".";
 				}
-
 			}
 		}
-		return null;
+
+		String regionCode = Utils.findValue(ASGS2011.getCodelist(), region);
+		String stateCode = regionCode.substring(0,1);
+		String regionType = Utils.regionTypeForRegionCode(regionCode);
+
+		url += stateCode + ".";
+		url += regionType + ".";
+		url += regionCode + ".";
+		url += "A";
+
+		url += "/ABS";
+
+		return url;
 	}
 
+	public static String findObsValue(Document document) {
 
-	//			public static void findSA2CodeRecursive(Node node, String search) {
-	//			 // do something with the current node instead of System.out
-	//			 if(node.getTextContent().equals(search)){
-	//			 System.out.println( node.getParentNode().getAttributes().getNamedItem("value").getNodeValue());
-	//			 }
+		NodeList nodeList = document.getElementsByTagName("ObsValue");
+		Node node = nodeList.item(0);
+		return node.getAttributes().getNamedItem("value").getNodeValue();
+	}
+
+	//	public static String findASGS2011Code(Document document, String search) {
 	//
-	//			 NodeList nodeList = node.getChildNodes();
-	//			 for (int i = 0; i < nodeList.getLength(); i++) {
-	//			 Node currentNode = nodeList.item(i);
-	//			 if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
-	//			 //calls this method for all the children which is Element
-	//			 findSA2CodeRecursive(currentNode,search);
-	//			 }
-	//			 }
+	//		NodeList nodeList = document.getElementsByTagName("*");
+	//		for (int i = 0; i < nodeList.getLength(); i++) {
+	//			Node node = nodeList.item(i);
+	//			if (node.getNodeType() == Node.ELEMENT_NODE) {
+	//				if(node.getTextContent().equals(search) && 
+	//						node.getParentNode().getParentNode().getAttributes().getNamedItem("id").getTextContent().equals("CL_ABS_CENSUS2011_B01_ASGS_2011")
+	//						){
+	//					return node.getParentNode().getAttributes().getNamedItem("value").getNodeValue();
+	//				}
+	//
 	//			}
+	//		}
+	//		return null;
+	//	}
 
-	public static String GET(String urlToRead) {
-		URL url;
-		HttpURLConnection conn;
-		BufferedReader rd;
-		String line;
-		String result = "";
-		try {
-			url = new URL(urlToRead);
-			conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
-			rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			while ((line = rd.readLine()) != null) {
-				result += line;
-			}
-			rd.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
+
 }
