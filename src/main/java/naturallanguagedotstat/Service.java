@@ -57,7 +57,7 @@ public class Service {
 			fileIn.close();
 		}
 
-		FileInputStream fileIn = new FileInputStream(RES_DIR+"ASGS_2011.ser");
+		InputStream fileIn = context.getResourceAsStream(RES_DIR+"ASGS_2011.ser");
 		ObjectInputStream objIn = new ObjectInputStream(fileIn);
 		ASGS2011 = (Dimension) objIn.readObject();
 		objIn.close();
