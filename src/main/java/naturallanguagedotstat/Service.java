@@ -1,12 +1,13 @@
 package naturallanguagedotstat;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,17 +49,15 @@ public class Service {
 	
 	@GET
 	@Path("/")
-	public String landing() throws FileNotFoundException, IOException, ClassNotFoundException, URISyntaxException{
-		URL url = context.getResource(RES_DIR+"index.html");
-		File file = new File(url.toURI());
-		FileInputStream fileIn = new FileInputStream(file);
-	    byte[] data = new byte[(int)file.length()];
-	    fileIn.read(data);
-	    fileIn.close();
-	    //
-	    String s = new String(data, "UTF-8");
-	
-		return s;
+	public String landing() throws FileNotFoundException, IOException, ClassNotFoundException{
+		InputStream fileIn = context.getResourceAsStream(RES_DIR+"index.html");
+		InputStreamReader isr = new InputStreamReader(fileIn);
+		BufferedReader br = new BufferedReader(isr);
+		StringBuffer sb = new StringBuffer();
+		String s;
+		while ((s = br.readLine()) != null)
+		    sb.append(s);	
+		return new String(sb);
 	}
 	
 	private ArrayList<Dataset> loadDatasets() throws IOException, ClassNotFoundException,
