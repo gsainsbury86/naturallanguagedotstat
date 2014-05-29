@@ -226,11 +226,19 @@ pre {
 	type="text/javascript"></script>
 
 <script>
-	$('.go').click(function() {
-		$.get('http://naturallanguagedotstat-gigeo.rhcloud.com/main/query/'+$('.query'), function(data) {
-			$(".result").html(data);
-		});
-	});
+	$(document)
+			.ready(
+					function() {
+						$('.go')
+								.click(
+										function() {
+											var url = 'http://naturallanguagedotstat-gigeo.rhcloud.com/main/query/'
+													+ $('.query').val();
+											$.get(url, function(data) {
+												$(".result").html(data);
+											});
+										});
+					});
 </script>
 
 </head>
