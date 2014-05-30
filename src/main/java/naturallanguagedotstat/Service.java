@@ -122,13 +122,19 @@ public class Service {
 
 		ArrayList<Dataset> datasets = loadDatasets();
 		Dimension ASGS2011 = loadASGS_2011();
+		
+		SemanticParser semanticParser = new SemanticParser(query);
+		
+		HashMap<String,String> queryInputs = semanticParser.getDimensions();
+		String region = queryInputs.get("region");
+		queryInputs.remove("region");
 
 		// PARSE QUERY : list of dims and ranges - region separate
-		HashMap<String, String> queryInputs = new HashMap<String, String>();
-		queryInputs.put("Sex","2");
-		queryInputs.put("Selected Person Characteristics","T25");
+		//HashMap<String, String> queryInputs = new HashMap<String, String>();
+		//queryInputs.put("Sex","2");
+		//queryInputs.put("Selected Person Characteristics","T25");
 
-		String region = "Sandy Bay";
+		//String region = "Sandy Bay";
 
 		ArrayList<String> dimensionNames = new ArrayList<String>();
 		dimensionNames.addAll(queryInputs.keySet());

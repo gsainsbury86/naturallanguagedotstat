@@ -229,13 +229,13 @@ pre {
 	$(document)
 			.ready(
 					function() {
-						$('.go')
+						$('#go')
 								.click(
 										function() {
 											var url = 'http://naturallanguagedotstat-gigeo.rhcloud.com/main/query/'
-													+ $('.query').val();
+													+ $('#query').val();
 											$.get(url, function(data) {
-												$(".result").html(data);
+												$("#result").html(data);
 											});
 										});
 					});
