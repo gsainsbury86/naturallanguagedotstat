@@ -77,12 +77,12 @@ public class SemanticParser {
 		synonyms.put("male","males");
 		synonyms.put("men","males");
 
-		synonyms.put("aged","age");
-		synonyms.put("year","age");
-		synonyms.put("years","age");
-		synonyms.put("old","age");
-		synonyms.put("older","age");
-		synonyms.put("younger","age");
+		synonyms.put("aged","Age");
+		synonyms.put("year","Age");
+		synonyms.put("years","Age");
+		synonyms.put("old","Age");
+		synonyms.put("older","Age");
+		synonyms.put("younger","Age");
 	};
 
 
@@ -95,19 +95,22 @@ public class SemanticParser {
 		return null;
 	}
 	
+	// This code block is hard-coded to match B04 age ranges!
 	public String getAgeCode(String str){
 		if (isaNumber(str)){return str;};
 
 		String[] numberStrings = str.split("[~+]+"); 
-		int i = Integer.parseInt(numberStrings[0]);
-		int i5 = i/5;
 		
-		if(i<5)		{return "A04";};
-		if(i<1)		{return "A59";};
-		if(i<100) 	{return "A"+Integer.toString(5*i5);};		
-		return "A100";
+		int i = (Integer.parseInt(numberStrings[0])!=0) 
+				? Integer.parseInt(numberStrings[0]) : Integer.parseInt(numberStrings[1]) - 5;
+ 		
+		int base = i/5;
+		int i1 = 5*base;
+		int i2 = i1 +4;
+		
+		if(i1<100)	{return Integer.toString(i1) + "-" + Integer.toString(i2) + " years";};
+		return "100 years and over";
 	}
-	
 	
 	
 	public void identifyDimensions(ArrayList<String> phrases){
@@ -121,7 +124,7 @@ public class SemanticParser {
 			// (Note that this code block currently assumes that all numeric data with str corresponds to the age dimension)
 			numericalString = getNumericString(words);
 ;			if(numericalString != null ){
-				dimensions.put("age", getAgeCode(numericalString) ); 
+				dimensions.put("Age", getAgeCode(numericalString) ); 
 			};
 			
 			// check for all other dimensions
@@ -132,6 +135,11 @@ public class SemanticParser {
 				};
 			};			
 		};
+		
+		if (dimensions.get("Age") ==  null){
+			dimensions.put("Selected Person Characteristics", "Total Persons");
+		}; 
+
 	}
 	
 	private boolean isaNumber(String aString){
@@ -155,7 +163,6 @@ public class SemanticParser {
 
 	private void setCoreDimensions(String location) {
 		dimensions.put("region", location ); 
-		dimensions.put("Selected Person Characteristics", "Total Persons"); 
 		
 		// set default values for dimensions.
 		dimensions.put("Sex", "3"); 

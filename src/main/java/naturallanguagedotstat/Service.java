@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import naturallanguagedotstat.model.Dataset;
 import naturallanguagedotstat.model.Dimension;
+import naturallanguagedotstat.utils.LocalTest;
 import naturallanguagedotstat.utils.Utils;
 
 import org.w3c.dom.Document;
@@ -47,7 +48,7 @@ public class Service {
 	public Service() throws IOException, ClassNotFoundException{
 
 	}
-	
+
 	@GET
 	@Path("/")
 	public String landing() throws FileNotFoundException, IOException, ClassNotFoundException{
@@ -57,10 +58,10 @@ public class Service {
 		StringBuffer sb = new StringBuffer();
 		String s;
 		while ((s = br.readLine()) != null)
-		    sb.append(s);	
+			sb.append(s);	
 		return new String(sb);
 	}
-	
+
 	private ArrayList<Dataset> loadDatasets() throws IOException, ClassNotFoundException,
 	FileNotFoundException {
 		ArrayList<Dataset> datasets = new ArrayList<Dataset>();
@@ -74,10 +75,10 @@ public class Service {
 			objIn.close();
 			fileIn.close();
 		}
-		
+
 		return datasets;
 	}
-	
+
 	private ArrayList<Dataset> loadDatasets_DEBUG() throws IOException, ClassNotFoundException,
 	FileNotFoundException {
 		ArrayList<Dataset> datasets = new ArrayList<Dataset>();
@@ -92,7 +93,7 @@ public class Service {
 			objIn.close();
 			fileIn.close();
 		}
-		
+
 		return datasets;
 	}
 
@@ -103,11 +104,11 @@ public class Service {
 		Dimension ASGS2011 = (Dimension) objIn.readObject();
 		objIn.close();
 		fileIn.close();
-		
+
 		return ASGS2011;
-		
+
 	}
-	
+
 	private Dimension loadASGS_2011_DEBUG() throws IOException, ClassNotFoundException,
 	FileNotFoundException {
 		//InputStream fileIn = context.getResourceAsStream(RES_DIR+"ASGS_2011.ser");
@@ -116,9 +117,9 @@ public class Service {
 		Dimension ASGS2011 = (Dimension) objIn.readObject();
 		objIn.close();
 		fileIn.close();
-		
+
 		return ASGS2011;
-		
+
 	}
 
 	@GET
@@ -126,18 +127,27 @@ public class Service {
 	@Produces("text/html;charset=UTF-8;version=1")
 	public String query(@PathParam("query") String query) throws FileNotFoundException, IOException, ClassNotFoundException{
 
-		ArrayList<Dataset> datasets = loadDatasets();
-		Dimension ASGS2011 = loadASGS_2011();
-		//ArrayList<Dataset> datasets = loadDatasets_DEBUG();
-		//Dimension ASGS2011 = loadASGS_2011_DEBUG();
-		
+		ArrayList<Dataset> datasets;
+		Dimension ASGS2011;
+
+		if(LocalTest.debug){
+			datasets = loadDatasets_DEBUG();
+			ASGS2011 = loadASGS_2011_DEBUG();
+		}else{
+			datasets = loadDatasets();
+			ASGS2011  = loadASGS_2011();
+		}
+
 		SemanticParser semanticParser = new SemanticParser(query);
 		semanticParser.parseText();
-		
+
 		HashMap<String,String> queryInputs = semanticParser.getDimensions();	
-		//System.err.println(queryInputs);
+
+		if(LocalTest.debug)
+			System.out.println(queryInputs);
+
 		String region = queryInputs.get("region");
-		
+
 		queryInputs.remove("region");
 
 		// PARSE QUERY : list of dims and ranges - region separate
@@ -195,7 +205,7 @@ public class Service {
 				}
 			}
 		}
-		
+
 		//System.err.println(ds);
 
 		String regionCode = Utils.findValue(ASGS2011.getCodelist(), region);

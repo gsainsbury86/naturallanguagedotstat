@@ -237,7 +237,8 @@ pre {
 						$('#go')
 								.click(
 										function() {
-											var url = 'http://naturallanguagedotstat-gigeo.rhcloud.com/main/query/'
+											$('#result').text('Loading...');
+											var url = 'query/'
 													+ $('#query').val();
 											$.get(url, function(data) {
 												$("#result").text(data);
