@@ -118,7 +118,7 @@ public class Utils {
 	public static String findValue(HashMap<String, String> map,
 			String value) {
 		for(String key : map.keySet()){
-			if (map.get(key).equals(value)){
+			if (map.get(key).toLowerCase().equals(value.toLowerCase())){
 				return key;
 			}
 		}

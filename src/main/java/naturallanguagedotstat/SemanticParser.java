@@ -39,9 +39,9 @@ public class SemanticParser {
 	// the codeList HashMap is almost an inverse of the dimensions HashMap.
 	// this will ultimately come from either a fixed text file or from one of George's methods.
 	public void initializeCodeList(){		
-		codeList.put("males","measure");
-		codeList.put("females","measure");		
-		codeList.put("persons","measure");
+		codeList.put("males","Sex");
+		codeList.put("females","Sex");		
+		codeList.put("persons","Sex");
 
 		codeList.put("married","Registered Marital Status");
 		codeList.put("separated","Registered Marital Status");
@@ -155,9 +155,10 @@ public class SemanticParser {
 
 	private void setCoreDimensions(String location) {
 		dimensions.put("region", location ); 
+		dimensions.put("Selected Person Characteristics", "Total Persons"); 
 		
 		// set default values for dimensions.
-		dimensions.put("measure", "persons"); 
+		dimensions.put("Sex", "3"); 
 	};
 	
 	

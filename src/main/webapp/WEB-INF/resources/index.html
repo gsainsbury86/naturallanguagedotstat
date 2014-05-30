@@ -229,13 +229,18 @@ pre {
 	$(document)
 			.ready(
 					function() {
+						$("#query").keyup(function(event) {
+							if (event.keyCode == 13) {
+								$("#go").click();
+							}
+						});
 						$('#go')
 								.click(
 										function() {
 											var url = 'http://naturallanguagedotstat-gigeo.rhcloud.com/main/query/'
 													+ $('#query').val();
 											$.get(url, function(data) {
-												$("#result").html(data);
+												$("#result").text(data);
 											});
 										});
 					});
@@ -250,7 +255,7 @@ pre {
 			<section class='col-xs-12 col-sm-6 col-md-6'>
 				<section>
 					<h2>What would you like to know?</h2>
-					<input type="text" id="query" />
+					<input type="text" id="query" style="width: 437px;" />
 					<button id="go">Done</button>
 					<div id="result"></div>
 				</section>

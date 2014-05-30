@@ -35,6 +35,7 @@ import org.w3c.dom.NodeList;
 @Path("/main")
 public class Service {
 
+	private static final String local_webapp = "src/main/webapp/";
 	private static final String RES_DIR = "/WEB-INF/resources/";
 	private static final String serverName = "stat.abs.gov.au";
 	//private static Dimension ASGS2011;
@@ -76,7 +77,24 @@ public class Service {
 		
 		return datasets;
 	}
+	
+	private ArrayList<Dataset> loadDatasets_DEBUG() throws IOException, ClassNotFoundException,
+	FileNotFoundException {
+		ArrayList<Dataset> datasets = new ArrayList<Dataset>();
 
+		for(int i = 1; i <= 46; i++){
+			String dsNumber = Utils.intToString(i,2);
+			//InputStream fileIn = context.getResourceAsStream(RES_DIR+"ABS_CENSUS2011_B"+dsNumber+".ser");
+			FileInputStream fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"ABS_CENSUS2011_B"+dsNumber+".ser"));
+			ObjectInputStream objIn = new ObjectInputStream(fileIn);
+			Dataset ds = (Dataset) objIn.readObject();
+			datasets.add(ds);
+			objIn.close();
+			fileIn.close();
+		}
+		
+		return datasets;
+	}
 
 	private Dimension loadASGS_2011() throws IOException, ClassNotFoundException,
 	FileNotFoundException {
@@ -89,44 +107,37 @@ public class Service {
 		return ASGS2011;
 		
 	}
-
-	//	@GET
-	//	@Path("/search/{region}")
-	//	@Produces("text/html;charset=UTF-8;version=1")
-	//	public String search(@PathParam("region") String region){
-	//		String dsd = Utils.httpGET("http://"+serverName+"/restsdmx/sdmx.ashx/GetDataStructure/ABS_CENSUS2011_B01/ABS");
-	//
-	//		Document dsdDocument = Utils.XMLToDocument(dsd);
-	//
-	//		String regionCode = findASGS2011Code(dsdDocument, region);
-	//
-	//		String regionType = Utils.regionTypeForRegionCode(regionCode);
-	//
-	//		char stateCode = regionCode.charAt(0);
-	//
-	//		String urlToRead = "http://"+serverName+"/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B01/3.TT." + stateCode + "." + regionType + "." + regionCode +".A/ABS?startTime=2011&endTime=2011";
-	//
-	//		String data = Utils.httpGET(urlToRead);
-	//
-	//		Document dataDocument = Utils.XMLToDocument(data);
-	//
-	//		return findObsValue(dataDocument);
-	//
-	//
-	//	}
+	
+	private Dimension loadASGS_2011_DEBUG() throws IOException, ClassNotFoundException,
+	FileNotFoundException {
+		//InputStream fileIn = context.getResourceAsStream(RES_DIR+"ASGS_2011.ser");
+		FileInputStream fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"ASGS_2011.ser"));
+		ObjectInputStream objIn = new ObjectInputStream(fileIn);
+		Dimension ASGS2011 = (Dimension) objIn.readObject();
+		objIn.close();
+		fileIn.close();
+		
+		return ASGS2011;
+		
+	}
 
 	@GET
 	@Path("/query/{query}")
 	@Produces("text/html;charset=UTF-8;version=1")
 	public String query(@PathParam("query") String query) throws FileNotFoundException, IOException, ClassNotFoundException{
 
-		ArrayList<Dataset> datasets = loadDatasets();
-		Dimension ASGS2011 = loadASGS_2011();
+		//ArrayList<Dataset> datasets = loadDatasets();
+		//Dimension ASGS2011 = loadASGS_2011();
+		ArrayList<Dataset> datasets = loadDatasets_DEBUG();
+		Dimension ASGS2011 = loadASGS_2011_DEBUG();
 		
 		SemanticParser semanticParser = new SemanticParser(query);
+		semanticParser.parseText();
 		
-		HashMap<String,String> queryInputs = semanticParser.getDimensions();
+		HashMap<String,String> queryInputs = semanticParser.getDimensions();	
+		//System.err.println(queryInputs);
 		String region = queryInputs.get("region");
+		
 		queryInputs.remove("region");
 
 		// PARSE QUERY : list of dims and ranges - region separate
@@ -180,10 +191,12 @@ public class Service {
 		for(Dimension dim : ds.getDimensions()){
 			for(String dimKey : dimensionValues.keySet()){
 				if(dim.getName().equals(dimKey)){
-					url += dimensionValues.get(dimKey) + ".";
+					url += Utils.findValue(dim.getCodelist(),dimensionValues.get(dimKey)) + ".";
 				}
 			}
 		}
+		
+		//System.err.println(ds);
 
 		String regionCode = Utils.findValue(ASGS2011.getCodelist(), region);
 		String stateCode = regionCode.substring(0,1);

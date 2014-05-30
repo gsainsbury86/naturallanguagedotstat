@@ -11,7 +11,8 @@ public class LocalTest {
 
 		Service service = new Service();
 		
-		service.query(null);
+		//service.query("What is the population of Sandy Bay");
+		service.query("How many women in Sandy Bay are there");
 
 	}
 	
