@@ -126,10 +126,10 @@ public class Service {
 	@Produces("text/html;charset=UTF-8;version=1")
 	public String query(@PathParam("query") String query) throws FileNotFoundException, IOException, ClassNotFoundException{
 
-		//ArrayList<Dataset> datasets = loadDatasets();
-		//Dimension ASGS2011 = loadASGS_2011();
-		ArrayList<Dataset> datasets = loadDatasets_DEBUG();
-		Dimension ASGS2011 = loadASGS_2011_DEBUG();
+		ArrayList<Dataset> datasets = loadDatasets();
+		Dimension ASGS2011 = loadASGS_2011();
+		//ArrayList<Dataset> datasets = loadDatasets_DEBUG();
+		//Dimension ASGS2011 = loadASGS_2011_DEBUG();
 		
 		SemanticParser semanticParser = new SemanticParser(query);
 		semanticParser.parseText();
