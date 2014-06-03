@@ -50,6 +50,7 @@ public class Service {
 	@Path("/")
 	public String landing() throws FileNotFoundException, IOException, ClassNotFoundException{
 		InputStream fileIn = context.getResourceAsStream(RES_DIR+"index.html");
+		//		InputStream fileIn = this.getClass().getResourceAsStream(RES_DIR+"index.html");
 		InputStreamReader isr = new InputStreamReader(fileIn);
 		BufferedReader br = new BufferedReader(isr);
 		StringBuffer sb = new StringBuffer();
@@ -61,19 +62,17 @@ public class Service {
 
 	public ArrayList<Dataset> loadDatasets() throws IOException, ClassNotFoundException,
 	FileNotFoundException {
-		
-		
+
 		ArrayList<Dataset> datasets = new ArrayList<Dataset>();
 
 		for(int i = 1; i <= 46; i++){
 			String dsNumber = Utils.intToString(i,2);
-			
+
 			InputStream fileIn;
 			if(LocalTest.debug){
 				fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"ABS_CENSUS2011_B"+dsNumber+".ser"));
 			}else{
-				//fileIn = context.getResourceAsStream(RES_DIR+"ABS_CENSUS2011_B"+dsNumber+".ser");
-				fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"ABS_CENSUS2011_B"+dsNumber+".ser"));
+				fileIn = context.getResourceAsStream(RES_DIR+"ABS_CENSUS2011_B"+dsNumber+".ser");
 			}
 			ObjectInputStream objIn = new ObjectInputStream(fileIn);
 			Dataset ds = (Dataset) objIn.readObject();
@@ -85,14 +84,33 @@ public class Service {
 		return datasets;
 	}
 
+	public ArrayList<Dataset> loadDatasetsLight() throws IOException, ClassNotFoundException,
+	FileNotFoundException {
+
+		ArrayList<Dataset> datasets = new ArrayList<Dataset>();
+
+		InputStream fileIn;
+		if(LocalTest.debug){
+			fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"dataset_summaries.ser"));
+		}else{
+			fileIn = context.getResourceAsStream(RES_DIR+"dataset_summaries.ser");
+		}
+		ObjectInputStream objIn = new ObjectInputStream(fileIn);
+		datasets = (ArrayList<Dataset>) objIn.readObject();
+		objIn.close();
+		fileIn.close();
+
+		return datasets;
+	}
+
+
 	public Dimension loadASGS_2011() throws IOException, ClassNotFoundException,
 	FileNotFoundException {
 		InputStream fileIn;
 		if(LocalTest.debug){
 			fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"ASGS_2011.ser"));
 		}else{
-			//fileIn = context.getResourceAsStream(RES_DIR+"ASGS_2011.ser");
-			fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"ASGS_2011.ser"));
+			fileIn = context.getResourceAsStream(RES_DIR+"ASGS_2011.ser");
 		}
 		ObjectInputStream objIn = new ObjectInputStream(fileIn);
 		Dimension ASGS2011 = (Dimension) objIn.readObject();
@@ -111,7 +129,7 @@ public class Service {
 		ArrayList<Dataset> datasets;
 		Dimension ASGS2011;
 
-		datasets = loadDatasets();
+		datasets = loadDatasetsLight();
 		ASGS2011  = loadASGS_2011();
 
 		SemanticParser semanticParser = new SemanticParser(query);
@@ -131,6 +149,8 @@ public class Service {
 
 		Dataset dataset = Utils.findDatasetWithDimensionNames(datasets, dimensionNames);
 
+		dataset = loadDataset(dataset.getName());
+
 		String urlToRead = queryBuilder(dataset, ASGS2011, region, queryInputs);
 
 		System.out.println(urlToRead);
@@ -145,6 +165,22 @@ public class Service {
 
 		return resultString;
 
+	}
+
+	private Dataset loadDataset(String name) throws IOException, ClassNotFoundException {
+
+		InputStream fileIn;
+		if(LocalTest.debug){
+			fileIn = new FileInputStream(new File(local_webapp+RES_DIR+name+".ser"));
+		}else{
+			fileIn = context.getResourceAsStream(RES_DIR+name+".ser");
+		}
+		ObjectInputStream objIn = new ObjectInputStream(fileIn);
+		Dataset dataset = (Dataset) objIn.readObject();
+		objIn.close();
+		fileIn.close();
+
+		return dataset;
 	}
 
 	/**
