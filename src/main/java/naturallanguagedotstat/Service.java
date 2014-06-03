@@ -37,6 +37,7 @@ public class Service {
 
 	private static final String local_webapp = "src/main/webapp/";
 	private static final String RES_DIR = "/WEB-INF/resources/";
+	private static final String WEB_INF = "/WEB-INF/";
 	private static final String serverName = "stat.abs.gov.au";
 
 	@javax.ws.rs.core.Context 
@@ -49,7 +50,7 @@ public class Service {
 	@GET
 	@Path("/")
 	public String landing() throws FileNotFoundException, IOException, ClassNotFoundException{
-		InputStream fileIn = context.getResourceAsStream(RES_DIR+"index.html");
+		InputStream fileIn = context.getResourceAsStream(WEB_INF+"index.html");
 		//		InputStream fileIn = this.getClass().getResourceAsStream(RES_DIR+"index.html");
 		InputStreamReader isr = new InputStreamReader(fileIn);
 		BufferedReader br = new BufferedReader(isr);
