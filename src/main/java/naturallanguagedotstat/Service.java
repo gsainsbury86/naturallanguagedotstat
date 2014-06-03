@@ -72,7 +72,8 @@ public class Service {
 			if(LocalTest.debug){
 				fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"ABS_CENSUS2011_B"+dsNumber+".ser"));
 			}else{
-				fileIn = context.getResourceAsStream(RES_DIR+"ABS_CENSUS2011_B"+dsNumber+".ser");
+				//fileIn = context.getResourceAsStream(RES_DIR+"ABS_CENSUS2011_B"+dsNumber+".ser");
+				fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"ABS_CENSUS2011_B"+dsNumber+".ser"));
 			}
 			ObjectInputStream objIn = new ObjectInputStream(fileIn);
 			Dataset ds = (Dataset) objIn.readObject();
@@ -90,7 +91,8 @@ public class Service {
 		if(LocalTest.debug){
 			fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"ASGS_2011.ser"));
 		}else{
-			fileIn = context.getResourceAsStream(RES_DIR+"ASGS_2011.ser");
+			//fileIn = context.getResourceAsStream(RES_DIR+"ASGS_2011.ser");
+			fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"ASGS_2011.ser"));
 		}
 		ObjectInputStream objIn = new ObjectInputStream(fileIn);
 		Dimension ASGS2011 = (Dimension) objIn.readObject();
