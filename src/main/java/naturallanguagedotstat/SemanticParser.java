@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import naturallanguagedotstat.model.Dataset;
+import naturallanguagedotstat.model.Dimension;
+
 public class SemanticParser {
 	// public fields here
 	public HashMap<String, String> dimensions;
@@ -35,7 +38,16 @@ public class SemanticParser {
 	}
 
 
+/*
+ * 		
+		ArrayList<Dataset> datasets = Service.loadDatasets_DEBUG();
+		
+		for(Dimension dim : datasets.get(3).getDimensions()){
+			HashMap<String, String> map = dim.getCodelist();
+			System.out.println(dim.getName() + " - " + map);
+		}
 
+ */
 	// the codeList HashMap is almost an inverse of the dimensions HashMap.
 	// this will ultimately come from either a fixed text file or from one of George's methods.
 	public void initializeCodeList(){		
