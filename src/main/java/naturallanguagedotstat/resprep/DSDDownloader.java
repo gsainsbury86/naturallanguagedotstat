@@ -1,4 +1,4 @@
-package naturallanguagedotstat.utils;
+package naturallanguagedotstat.resprep;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,12 +6,12 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import naturallanguagedotstat.model.Dataset;
 import naturallanguagedotstat.model.Dimension;
+import naturallanguagedotstat.utils.Utils;
 
 import org.w3c.dom.Document;
 
@@ -28,7 +28,6 @@ public class DSDDownloader {
 	static String serverName = "stat.abs.gov.au";
 	static String datasetName = "ABS_CENSUS2011";
 	static ArrayList<Dataset> datasets;
-	private static Dimension ASGS2011;
 
 
 	public static void main(String[] args) throws IOException{

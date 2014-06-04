@@ -1,4 +1,4 @@
-package naturallanguagedotstat;
+package naturallanguagedotstat.parser;
 
 import java.util.ArrayList;
 import java.util.Collections;

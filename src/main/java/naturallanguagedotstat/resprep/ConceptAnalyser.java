@@ -1,4 +1,4 @@
-package naturallanguagedotstat.utils;
+package naturallanguagedotstat.resprep;
 
 import java.io.BufferedReader;
 import java.io.File;

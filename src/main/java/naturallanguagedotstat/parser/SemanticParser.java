@@ -1,25 +1,22 @@
-package naturallanguagedotstat;
+package naturallanguagedotstat.parser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import naturallanguagedotstat.model.Dataset;
-import naturallanguagedotstat.model.Dimension;
 
 public class SemanticParser {
 	// public fields here
 	public HashMap<String, String> dimensions;
 
-	private ArrayList<String> phrases; 
 	private HashMap<String, String> codeList;
 	private HashMap<String, String> synonyms;
 	
 	private GrammarParser grammarParser;
 
 	// constructor
-	SemanticParser (String str){
+	public SemanticParser (String str){
 		dimensions = new HashMap<String, String>();
 		codeList   = new HashMap<String, String>();
 		synonyms   = new HashMap<String, String>();
@@ -177,7 +174,7 @@ public class SemanticParser {
 		dimensions.put("region", location ); 
 		
 		// set default values for dimensions.
-		dimensions.put("Sex", "3"); 
+		dimensions.put("Sex", "persons"); 
 	};
 	
 	

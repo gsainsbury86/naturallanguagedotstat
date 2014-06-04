@@ -1,4 +1,4 @@
-package naturallanguagedotstat;
+package naturallanguagedotstat.parser;
 
 import java.util.ArrayList;
 
@@ -17,7 +17,7 @@ public class GrammarParser {
 
 
 	// Constructor
-	GrammarParser (String str){
+	public GrammarParser (String str){
 		inputText = str;
 		
 		splitTextIntoWords();

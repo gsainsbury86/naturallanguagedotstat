@@ -1,6 +1,6 @@
-package naturallanguagedotstat;
+package naturallanguagedotstat.parser;
 
-import java.util.ArrayList;
+import naturallanguagedotstat.test.TestModule;
 
 public class NaturalSearch {
 

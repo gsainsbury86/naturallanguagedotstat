@@ -24,6 +24,12 @@ import org.xml.sax.InputSource;
 
 public class Utils {
 
+	/**
+	 * Converts an XML String into a Document
+	 * 
+	 * @param xml the well-formatted XML String
+	 * @return a Document
+	 */
 	public static Document XMLToDocument(String xml) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();  
 		DocumentBuilder builder;  
@@ -68,6 +74,12 @@ public class Utils {
 		return result;
 	}	
 	
+	/**
+	 * returns the ASGS region type String for the given ASGS region code.
+	 * 
+	 * @param regionCode the region Code
+	 * @return the region Type
+	 */
 	public static String regionTypeForRegionCode(String regionCode) {
 		String regionType = "";
 
@@ -115,6 +127,13 @@ public class Utils {
 		return df.format(num);
 	}
 	
+	/**
+	 * Searches a map for the given value and returns the key
+	 * 
+	 * @param map the map
+	 * @param value the value to search
+	 * @return the key for that value
+	 */
 	public static String findValue(HashMap<String, String> map,
 			String value) {
 		for(String key : map.keySet()){
@@ -173,9 +192,7 @@ public class Utils {
 		Node node;
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			node = nodeList.item(i);
-			//if (){
 			dimensions.add(node.getAttributes().getNamedItem("codelist").getNodeValue());
-			//}
 		}
 		return dimensions;
 	}

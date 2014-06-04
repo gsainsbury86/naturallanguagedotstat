@@ -22,7 +22,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import naturallanguagedotstat.model.Dataset;
 import naturallanguagedotstat.model.Dimension;
-import naturallanguagedotstat.utils.LocalTest;
+import naturallanguagedotstat.parser.SemanticParser;
+import naturallanguagedotstat.test.LocalTest;
 import naturallanguagedotstat.utils.Utils;
 
 import org.w3c.dom.Document;
@@ -85,6 +86,7 @@ public class Service {
 		return datasets;
 	}
 
+	@SuppressWarnings("unchecked")
 	public ArrayList<Dataset> loadDatasetsLight() throws IOException, ClassNotFoundException,
 	FileNotFoundException {
 

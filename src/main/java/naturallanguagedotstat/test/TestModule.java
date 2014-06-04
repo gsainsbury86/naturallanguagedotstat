@@ -1,19 +1,19 @@
-package naturallanguagedotstat;
+package naturallanguagedotstat.test;
 
 import java.util.ArrayList;
-
+import naturallanguagedotstat.parser.*;
 
 public class TestModule {
 	// fields
 	boolean testResult;
 
 	// constructor
-	TestModule( ){
+	public TestModule( ){
 		testResult = false;
 	}
 	
 	// Runs all automated tests.
-	boolean runAllTests(){
+	public boolean runAllTests(){
 		boolean b = true;
 		b = b && testGrammarParser01(); 
 		b = b && testGrammarParser02();
