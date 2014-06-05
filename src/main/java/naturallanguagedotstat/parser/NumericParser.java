@@ -8,14 +8,14 @@ public class NumericParser {
 	// public fields	
 
 	// private fields	
-	private String inputText;
-	private String outputText;
+	public String inputText;
+	public String outputText;
+	public ArrayList<String> explicitNumbers; // (but still stored as Strings).
 	private ArrayList<String> segments; 
-	private ArrayList<String> explicitNumbers; // (but still stored as Strings).
 
 	
 	// Constructors
-	NumericParser (String str){
+	public NumericParser (String str){
 		inputText = str;
 		segments = new ArrayList<String>(); 
 		explicitNumbers= new ArrayList<String>(); 
@@ -155,7 +155,7 @@ public class NumericParser {
 	
 	private void splitTextIntoWords(){
 		String[] words;
-		words = inputText.split("[\\s?,-]+"); 	// delimit on: white space,commas,hyphens and question marks.
+		words = inputText.split("[\\s~?,-]+"); 	// delimit on: white space,tilde,comma,hyphen and question mark.
 		segments.clear();
 		Collections.addAll(segments, words); 		
 	};
