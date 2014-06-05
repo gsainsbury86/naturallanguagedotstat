@@ -153,6 +153,8 @@ public class Service {
 		Dataset dataset = Utils.findDatasetWithDimensionNames(datasets, dimensionNames);
 
 		dataset = loadDataset(dataset.getName());
+		
+		//TODO: make sure dimension value exists
 
 		String urlToRead = queryBuilder(dataset, ASGS2011, region, queryInputs);
 
