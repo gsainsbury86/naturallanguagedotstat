@@ -9,11 +9,13 @@ import naturallanguagedotstat.model.Dimension;
 
 public class LocalTest {
 
-	public static boolean debug = true;
+	public static boolean debug = false;
+	public static boolean localLoad = false;
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException{
 
 		debug = true;
+		localLoad = true;
 
 		Service service = new Service();
 		/*
@@ -56,7 +58,7 @@ public class LocalTest {
 		service.query("How many women aged 20-25 in Tasmania are labourers?"); //7486
 
 		 */
-		service.query("How many men aged 35-40 in Queanbeyan are in the agricultural sector?"); //43
+		service.query("How many 20-25 year old females in Tasmania are professionals??");
 
 
 	}

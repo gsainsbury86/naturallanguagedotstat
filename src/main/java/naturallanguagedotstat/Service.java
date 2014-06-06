@@ -76,7 +76,7 @@ public class Service {
 			String dsNumber = Utils.intToString(i,2);
 
 			InputStream fileIn;
-			if(LocalTest.debug){
+			if(LocalTest.localLoad){
 				fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"ABS_CENSUS2011_B"+dsNumber+".ser"));
 			}else{
 				fileIn = context.getResourceAsStream(RES_DIR+"ABS_CENSUS2011_B"+dsNumber+".ser");
@@ -98,7 +98,7 @@ public class Service {
 		ArrayList<Dataset> datasets = new ArrayList<Dataset>();
 
 		InputStream fileIn;
-		if(LocalTest.debug){
+		if(LocalTest.localLoad){
 			fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"dataset_summaries.ser"));
 		}else{
 			fileIn = context.getResourceAsStream(RES_DIR+"dataset_summaries.ser");
@@ -115,7 +115,7 @@ public class Service {
 	public Dimension loadASGS_2011() throws IOException, ClassNotFoundException,
 	FileNotFoundException {
 		InputStream fileIn;
-		if(LocalTest.debug){
+		if(LocalTest.localLoad){
 			fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"ASGS_2011.ser"));
 		}else{
 			fileIn = context.getResourceAsStream(RES_DIR+"ASGS_2011.ser");
@@ -144,6 +144,8 @@ public class Service {
 		semanticParser.parseText();
 
 		HashMap<String,String> queryInputs = semanticParser.getDimensions();	
+		
+		System.out.println(queryInputs);
 
 		String region = queryInputs.get("region");
 		queryInputs.remove("region");
@@ -156,20 +158,21 @@ public class Service {
 			System.out.println(dataset.getName());
 
 		dataset = loadDataset(dataset.getName());
-		
-		
-		
+
+
+
 		if(queryInputs.get("Age") != null){
 			optimizeAgeCodeList(queryInputs, dataset);
 			if(LocalTest.debug)
 				System.out.println(queryInputs);
 		};
-		
-		
+
+
 		//TODO: make sure dimension value exists
 		String urlToRead = queryBuilder(dataset, ASGS2011, region, queryInputs);
 
-		System.out.println("URLToRead is "+urlToRead);
+		if(LocalTest.debug)
+			System.out.println("URLToRead is "+urlToRead);
 
 		String data = Utils.httpGET(urlToRead);
 
@@ -177,7 +180,8 @@ public class Service {
 
 		String resultString = findObsValue(dataDocument);
 
-		System.out.println(resultString);
+		if(LocalTest.debug)
+			System.out.println(resultString);
 
 		return resultString;
 
@@ -186,45 +190,45 @@ public class Service {
 	private void optimizeAgeCodeList(HashMap<String, String> queryInputs, Dataset dataset) {
 		if(queryInputs.get("Age")==null){return;};
 		if(queryInputs.get("Age")=="Total all ages"){return;}
-		
-		
+
+
 		NumericParser ageQueryParser = new NumericParser(queryInputs.get("Age") );
 		ageQueryParser.parseText();
-			
+
 		int a0 = Integer.parseInt(ageQueryParser.explicitNumbers.get(0) );
 		int a1 = (ageQueryParser.explicitNumbers.size() >1) 
-					? Integer.parseInt(ageQueryParser.explicitNumbers.get(1) ) : -1;
-		
-		
-					
-		HashMap<String, String> ageCodeList = null;
-		for(Dimension dim : dataset.getDimensions()){
-			if(dim.getName().equals("Age")){
-				ageCodeList = dim.getCodelist();
-			};
-		};
+				? Integer.parseInt(ageQueryParser.explicitNumbers.get(1) ) : -1;
 
-		List<String> ageCodeListDescriptions = new ArrayList<String>(ageCodeList.values());
 
-		HashMap< String, Double> matches = new HashMap< String, Double>();
-		
-		Double overlapScore;
-		for (String descr: ageCodeListDescriptions){
-			NumericParser ageDescriptionParser = new NumericParser(descr);
-			ageDescriptionParser.parseText();
-				
-			int b0 = (ageDescriptionParser.explicitNumbers.size() >0) 
-					? Integer.parseInt(ageDescriptionParser.explicitNumbers.get(0) ) : -1;
 
-			int b1 = (ageDescriptionParser.explicitNumbers.size() >1) 
-					? Integer.parseInt(ageDescriptionParser.explicitNumbers.get(1) ) : -1;
-						
-			overlapScore =  getOverlapScore(a0, a1, b0, b1);
-			if(overlapScore > 0 ){matches.put(descr, overlapScore);}
-			ageDescriptionParser = null;
-		};
-		
-		queryInputs.put("Age", getKeyForMaxValue (matches));
+				HashMap<String, String> ageCodeList = null;
+				for(Dimension dim : dataset.getDimensions()){
+					if(dim.getName().equals("Age")){
+						ageCodeList = dim.getCodelist();
+					};
+				};
+
+				List<String> ageCodeListDescriptions = new ArrayList<String>(ageCodeList.values());
+
+				HashMap< String, Double> matches = new HashMap< String, Double>();
+
+				Double overlapScore;
+				for (String descr: ageCodeListDescriptions){
+					NumericParser ageDescriptionParser = new NumericParser(descr);
+					ageDescriptionParser.parseText();
+
+					int b0 = (ageDescriptionParser.explicitNumbers.size() >0) 
+							? Integer.parseInt(ageDescriptionParser.explicitNumbers.get(0) ) : -1;
+
+							int b1 = (ageDescriptionParser.explicitNumbers.size() >1) 
+									? Integer.parseInt(ageDescriptionParser.explicitNumbers.get(1) ) : -1;
+
+									overlapScore =  getOverlapScore(a0, a1, b0, b1);
+									if(overlapScore > 0 ){matches.put(descr, overlapScore);}
+									ageDescriptionParser = null;
+				};
+
+				queryInputs.put("Age", getKeyForMaxValue (matches));
 	}
 
 	private Double getOverlapScore(int a0, int a1, int b0, int b1) {
@@ -233,7 +237,7 @@ public class Service {
 				return 1.00;
 			};
 		};
-				
+
 
 		if(b1 != -1){
 			if(b0 <= a0 && a0 <= b1){
@@ -253,17 +257,17 @@ public class Service {
 				return Math.min( 1.0* (a1-a0)/(b1-b0), 1.0* (a1-a0)/(a1-a0) );
 			};
 		};
-		
+
 		// reutrn any negative value to signify a null result.
 		return -1.00;
 	};
 
-	
-	
+
+
 	private Dataset loadDataset(String name) throws IOException, ClassNotFoundException {
 
 		InputStream fileIn;
-		if(LocalTest.debug){
+		if(LocalTest.localLoad){
 			fileIn = new FileInputStream(new File(local_webapp+RES_DIR+name+".ser"));
 		}else{
 			fileIn = context.getResourceAsStream(RES_DIR+name+".ser");
@@ -326,23 +330,23 @@ public class Service {
 		Node node = nodeList.item(0);
 		return node.getAttributes().getNamedItem("value").getNodeValue();
 	}
-	
-	
-	
-	
+
+
+
+
 	// ........................................................................................
 
 	private String getKeyForMaxValue (HashMap< String, Double> map){
 		double maxValue = -9999999;
 		String keyForMaxValue = null;
-		
+
 		for (String key : map.keySet()) {
-		    if(map.get(key) > maxValue){keyForMaxValue = key; maxValue = map.get(key);};
+			if(map.get(key) > maxValue){keyForMaxValue = key; maxValue = map.get(key);};
 		};
 		return keyForMaxValue;
 	};
-	
 
-	
+
+
 
 }

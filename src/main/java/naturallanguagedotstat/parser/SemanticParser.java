@@ -171,7 +171,7 @@ public class SemanticParser {
 		synonyms.put("recreation","Arts and recreation services");
 
 		//B45
-		synonyms.put("managers","Mangers");
+		synonyms.put("managers","Managers");
 		synonyms.put("professionals","Professionals");
 		synonyms.put("technicians","Technicians and trades workers");
 		synonyms.put("community","Community and personal service  workers");
