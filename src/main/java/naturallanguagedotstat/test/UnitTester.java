@@ -34,6 +34,7 @@ public class UnitTester {
 		LocalTest.debug = false;
 
 		for(int i = 0; i < TEST_QUERIES.length; i++){
+			System.out.println("Testing: ("+i+ "/"+TEST_QUERIES.length +"): "+ TEST_QUERIES[i]);
 			collector.checkThat(TEST_QUERIES[i], Integer.parseInt(service.query(TEST_QUERIES[i])), is(TEST_RESULTS[i]));
 		}
 	}
@@ -180,7 +181,7 @@ public class UnitTester {
 		402, //"How many females aged 20 to 25 in Tasmania are Managers?", 
 		1190, //"How many 20-25 year old females in Tasmania are professionals?", 
 		705, //"How many 20-25 year old women in Tasmania are technicians?", 
-		18164, //"How many women aged 20-25 in Tasmania are community workers?", 
-		7486 //"How many women aged 20-25 in Tasmania are labourers?" 
+		2166, //"How many women aged 20-25 in Tasmania are community workers?", 
+		711 //"How many women aged 20-25 in Tasmania are labourers?" 
 	};
 }

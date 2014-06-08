@@ -49,9 +49,9 @@ public class SemanticParser {
 	// this will ultimately come from either a fixed text file or from one of George's methods.
 	public void initializeCodeList(){
 		
-		codeList.put("males","Sex");
-		codeList.put("females","Sex");		
-		codeList.put("persons","Sex");
+		codeList.put("Males","Sex");
+		codeList.put("Females","Sex");		
+		codeList.put("Persons","Sex");
 		
 		codeList.put("married(a)","Registered Marital Status");
 		codeList.put("separated","Registered Marital Status");
@@ -94,11 +94,11 @@ public class SemanticParser {
 	// Many of these items cover the noun -> adjective transformation.
 	public void initializeSynonyms(){		
 		// .put("synonym", "rootWord");
-		synonyms.put("people","persons");
-		synonyms.put("female","females");
-		synonyms.put("women","females");
-		synonyms.put("male","males");
-		synonyms.put("men","males");
+		synonyms.put("people","Persons");
+		synonyms.put("female","Females");
+		synonyms.put("women","Females");
+		synonyms.put("male","Males");
+		synonyms.put("men","Males");
 
 		synonyms.put("aged","Age");
 		synonyms.put("year","Age");
@@ -186,14 +186,26 @@ public class SemanticParser {
 
 	};
 
-
+	//Returns the location of the first number in an array of Strings
+	int getLocationOfNumber(String[] words){
+		for (int i=0; i< words.length; i++) {
+			  if(isNumber(words[i] )) {return i;};
+		};	
+		return -1;
+	}
+	
 	private String getNumericString(String[] someWords){
-		for(String word:someWords){
-			if(word.contains("~") || word.contains("+") || isaNumber(word) ){
-				return word;
-			}
+		String str = new String();
+		
+		int j= getLocationOfNumber (someWords);
+		if(j==-1) return str;
+		str = someWords[j-1] + " " + someWords[j];
+
+		if (someWords[j-1].equals("∈") ) {
+			str = str + " " + someWords[j+1];
 		};
-		return null;
+		
+		return str;
 	}
 	
 	
@@ -207,14 +219,15 @@ public class SemanticParser {
 			
 			// (Note that this code block currently assumes that all numeric data with str corresponds to the age dimension)
 			numericalString = getNumericString(words);
-			if(numericalString != null ){
-				dimensions.put("Age", numericalString ); 
+			if(numericalString.length() > 0){
+				dimensions.put("Age", numericalString ); 		
 			};
 			
 			// check for all other dimensions
 			for(String word: words){
-				baseWord = (synonyms.get(word) == null ) ? word : synonyms.get(word);
+				baseWord = (synonyms.get(word.toLowerCase()) == null ) ? word : synonyms.get(word.toLowerCase());
 				if(codeList.get(baseWord) != null){
+					// System.out.println("baseWord, word = "+ baseWord+","+word);
 					dimensions.put(codeList.get(baseWord), baseWord);
 				};
 			};			
@@ -227,7 +240,7 @@ public class SemanticParser {
 
 	}
 	
-	private boolean isaNumber(String aString){
+	private boolean isNumber(String aString){
 		try {
 	        Integer.parseInt( aString );
 	        return true;
@@ -242,6 +255,7 @@ public class SemanticParser {
 		grammarParser.parseText();
 		setCoreDimensions(grammarParser.npObjects.get(0)); //assumes that npObjects has only 1 item in it.
 		identifyDimensions(grammarParser.npSubjects);
+		// printOutput();
 	}
 
 

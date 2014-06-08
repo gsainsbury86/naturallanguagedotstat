@@ -7,7 +7,7 @@ public class GrammarParser {
 	public String inputText;
 	
 	public String[] words;
-	public String[] grammarType;
+	public String[] grammarTypes;
 	
 	
 	public ArrayList<String> npSubjects; 
@@ -18,12 +18,12 @@ public class GrammarParser {
 
 	// Constructor
 	public GrammarParser (String str){
+		npSubjects  = new ArrayList<String>(); 
+		npObjects   = new ArrayList<String>(); 
+
 		inputText = str;
-		
 		splitTextIntoWords();
-		grammarType = new String[words.length];  
-		npSubjects = new ArrayList<String>(); 
-		npObjects = new ArrayList<String>(); 
+		grammarTypes = new String[words.length];  
 	}		
 		
 
@@ -42,7 +42,7 @@ public class GrammarParser {
 	//Returns the location of the first occurrence of a word with a grammarType of aType 
 	int getLocationOfGrammarType(String aType){
 		for (int i=0; i< words.length; i++) {
-			  if(grammarType[i].equals(aType) ) {return i;};
+			  if(grammarTypes[i].equals(aType) ) {return i;};
 		};	
 		return -1;
 	}
@@ -53,7 +53,7 @@ public class GrammarParser {
 	int getLocationOfPreviousIdentifiedType(int iMax){
 		if (iMax != -1){
 			for (int i=iMax; i>=0; i--) {
-				  if(grammarType[i] != "_undefined" ) {return i;};  //if(grammarTypes[i] != null && !grammarTypes[i].isEmpty() ) {return i;};
+				  if(grammarTypes[i] != "_undefined" ) {return i;};  //if(grammarTypes[i] != null && !grammarTypes[i].isEmpty() ) {return i;};
 			};
 		}
 		return -1;
@@ -128,8 +128,8 @@ public class GrammarParser {
 		for (int i=0; i< npSubjects.size(); i++) {
 			s1 = npSubjects.get(i);
 			NumericParser numericParser = new NumericParser(s1);
-			numericParser.parseText();			
-			s2 = numericParser.getOutput();	
+
+			s2 = numericParser.getOutputString();	
 
 			newNPsubjectList.add(s2);
 			numericParser = null;
@@ -144,17 +144,18 @@ public class GrammarParser {
 	
 	
 	public void parseText(){
-		for (int i=0; i< words.length; i++) {grammarType[i] = "_undefined"; }; // Possibly unnecessary line.
+		for (int i=0; i< words.length; i++) {grammarTypes[i] = "_undefined"; }; // Possibly unnecessary line.
 		identifyAuxiliaryTerms();
 		identifyNounPhrases();
 		numericallyNormalizePhrases();
+		// printOutput();
 	}
 	
 
 	public boolean queryContainsType( String aType){
 		boolean b = false;
 		for (int i=0; i< words.length; i++) {
-			if(grammarType[i] == aType){
+			if(grammarTypes[i] == aType){
 				b = true;
 			}; 
 		};
@@ -170,7 +171,7 @@ public class GrammarParser {
    		if(showDetailedOutput){
    			StringBuilder sb = new StringBuilder();
    			for (int i=0; i< words.length; i++) {
-   				sb.append(grammarType[i]); 
+   				sb.append(grammarTypes[i]); 
    				sb.append(":");
    				sb.append(words[i]);
    				sb.append("\n");
@@ -179,8 +180,8 @@ public class GrammarParser {
    			System.out.println("Detailed output of grammarParser\n"+outputText);
    		};
 	
-		System.out.println("\nSubjectText: \n" + convertArrayListToString(npSubjects) );
-		System.out.println("\nObjectText: \n"  + convertArrayListToString(npObjects) );
+		System.out.println("SubjectText: \n" + convertArrayListToString(npSubjects) );
+		System.out.println("ObjectText: \n"  + convertArrayListToString(npObjects) );
 	}
 	
 	
@@ -194,7 +195,7 @@ public class GrammarParser {
 	// Tags all occurrences of the word aWord with a grammarType of aType.
 	private void tagWordWithGrammarType(String aWord, String aType) {
 		for (int i=0; i< words.length; i++) {
-			  if(words[i].equalsIgnoreCase(aWord) ) grammarType[i]=aType;
+			  if(words[i].equalsIgnoreCase(aWord) ) grammarTypes[i]=aType;
 		  };
 	}
 	
@@ -203,17 +204,23 @@ public class GrammarParser {
 	// that are not yet tagged, (so up until but not including the next tagged word) with the grammarType aType.
 	private void tagAllWordsAfterGrammarType(String searchType, String aType){
 		int inx;
-		String str="";
+		String str=new String();
 		
 		inx = getLocationOfGrammarType(searchType);
 		if (inx == -1) return;
+
+		
 		inx++;
-		while(inx < words.length && grammarType[inx].equals("_undefined") ){
-			grammarType[inx] = aType;
+		while(inx < words.length && grammarTypes[inx].equals("_undefined") ){
+			grammarTypes[inx] = aType;
 			str = (str.equals("")) ? words[inx] : str + " " + words[inx];
 			inx++;
 		};
-		updateNPfields(aType, str);
+		
+		if (!str.equals("")) {
+			updateNPfields(aType, str);
+		};
+
 		return;
 	};	
 	
@@ -222,23 +229,28 @@ public class GrammarParser {
 	// that are not yet tagged, (so up until but not including the next tagged word) with the grammarType aType.
 	private void tagAllWordsBeforeGrammarType(String searchType, String aType){
 		int inx;
-		String str="";
+		String str = new String();
 		
 		inx = getLocationOfGrammarType(searchType);
 		if (inx == -1) return;
 		inx--;
-		while(inx >= 0 && grammarType[inx].equals("_undefined") ){
-			grammarType[inx] = aType;
+		while(inx >= 0 && grammarTypes[inx].equals("_undefined") ){
+			grammarTypes[inx] = aType;
 			str = (str.equals("")) ? words[inx] : words[inx] + " " + str;
 			inx--;
 		};
-		updateNPfields(aType, str);
+
+		if (!str.equals("")) {
+			updateNPfields(aType, str);
+		};
+
 		return;
 	};
 	
 	
 	private void updateNPfields(String aType, String str){
-		if(str.length() >1) {
+		if(str.length() >0 ) {
+			
 			if(aType=="NP.subj"){
 				npSubjects.add(str);
 			}

@@ -145,7 +145,8 @@ public class Service {
 
 		HashMap<String,String> queryInputs = semanticParser.getDimensions();	
 		
-		System.out.println(queryInputs);
+		if(LocalTest.debug)
+			System.out.println(queryInputs);
 
 		String region = queryInputs.get("region");
 		queryInputs.remove("region");
@@ -163,8 +164,7 @@ public class Service {
 
 		if(queryInputs.get("Age") != null){
 			optimizeAgeCodeList(queryInputs, dataset);
-			if(LocalTest.debug)
-				System.out.println(queryInputs);
+			// if(LocalTest.debug) System.out.println(queryInputs);
 		};
 
 
@@ -186,81 +186,6 @@ public class Service {
 		return resultString;
 
 	}
-
-	private void optimizeAgeCodeList(HashMap<String, String> queryInputs, Dataset dataset) {
-		if(queryInputs.get("Age")==null){return;};
-		if(queryInputs.get("Age")=="Total all ages"){return;}
-
-
-		NumericParser ageQueryParser = new NumericParser(queryInputs.get("Age") );
-		ageQueryParser.parseText();
-
-		int a0 = Integer.parseInt(ageQueryParser.explicitNumbers.get(0) );
-		int a1 = (ageQueryParser.explicitNumbers.size() >1) 
-				? Integer.parseInt(ageQueryParser.explicitNumbers.get(1) ) : -1;
-
-
-
-				HashMap<String, String> ageCodeList = null;
-				for(Dimension dim : dataset.getDimensions()){
-					if(dim.getName().equals("Age")){
-						ageCodeList = dim.getCodelist();
-					};
-				};
-
-				List<String> ageCodeListDescriptions = new ArrayList<String>(ageCodeList.values());
-
-				HashMap< String, Double> matches = new HashMap< String, Double>();
-
-				Double overlapScore;
-				for (String descr: ageCodeListDescriptions){
-					NumericParser ageDescriptionParser = new NumericParser(descr);
-					ageDescriptionParser.parseText();
-
-					int b0 = (ageDescriptionParser.explicitNumbers.size() >0) 
-							? Integer.parseInt(ageDescriptionParser.explicitNumbers.get(0) ) : -1;
-
-							int b1 = (ageDescriptionParser.explicitNumbers.size() >1) 
-									? Integer.parseInt(ageDescriptionParser.explicitNumbers.get(1) ) : -1;
-
-									overlapScore =  getOverlapScore(a0, a1, b0, b1);
-									if(overlapScore > 0 ){matches.put(descr, overlapScore);}
-									ageDescriptionParser = null;
-				};
-
-				queryInputs.put("Age", getKeyForMaxValue (matches));
-	}
-
-	private Double getOverlapScore(int a0, int a1, int b0, int b1) {
-		if(a1 ==-1  && b1 == -1){
-			if(a0==b0){
-				return 1.00;
-			};
-		};
-
-
-		if(b1 != -1){
-			if(b0 <= a0 && a0 <= b1){
-				return Math.min( 1.0 * (b1-a0)/(b1-b0), 1.0* (b1-a0)/(a1-a0) );
-			};
-		};
-
-
-		if(a1 != -1){
-			if(a0 <= b0 && b0 <= a1){
-				return Math.min(1.0*  (a1-b0)/(b1-b0), 1.0* (a1-b0)/(a1-a0) ) ;
-			};
-		};
-
-		if(a1 !=-1  && b1 !=-1 ){
-			if(b0 <= a0 && a1 <= b1){
-				return Math.min( 1.0* (a1-a0)/(b1-b0), 1.0* (a1-a0)/(a1-a0) );
-			};
-		};
-
-		// reutrn any negative value to signify a null result.
-		return -1.00;
-	};
 
 
 
@@ -347,6 +272,80 @@ public class Service {
 	};
 
 
+
+	private void optimizeAgeCodeList(HashMap<String, String> queryInputs, Dataset dataset) {
+		if(queryInputs.get("Age")==null){return;};
+		if(queryInputs.get("Age")=="Total all ages"){return;}
+
+
+		NumericParser ageQueryParser = new NumericParser(queryInputs.get("Age") );
+
+		int a0 = Integer.parseInt(ageQueryParser.getExplicitNumbers().get(0) );
+		int a1 = (ageQueryParser.getExplicitNumbers().size() >1) 
+				? Integer.parseInt(ageQueryParser.getExplicitNumbers().get(1) ) : -1;
+
+
+
+		HashMap<String, String> ageCodeList = null;
+		for(Dimension dim : dataset.getDimensions()){
+			if(dim.getName().equals("Age")){
+				ageCodeList = dim.getCodelist();
+			};
+		};
+
+		List<String> ageCodeListDescriptions = new ArrayList<String>(ageCodeList.values());
+
+		HashMap< String, Double> matches = new HashMap< String, Double>();
+
+		Double overlapScore;
+		for (String descr: ageCodeListDescriptions){
+			NumericParser ageDescriptionParser = new NumericParser(descr);
+			// ageDescriptionParser.parseText();
+
+			int b0 = (ageDescriptionParser.getExplicitNumbers().size() >0) 
+					? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(0) ) : -1;
+
+			int b1 = (ageDescriptionParser.getExplicitNumbers().size() >1) 
+					? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) ) : -1;
+
+			overlapScore =  getOverlapScore(a0, a1, b0, b1);
+			if(overlapScore > 0 ){matches.put(descr, overlapScore);}
+			ageDescriptionParser = null;
+		};
+
+		queryInputs.put("Age", getKeyForMaxValue (matches));
+	}
+
+	private Double getOverlapScore(int a0, int a1, int b0, int b1) {
+		if(a1 ==-1  && b1 == -1){
+			if(a0==b0){
+				return 1.00;
+			};
+		};
+
+
+		if(b1 != -1){
+			if(b0 <= a0 && a0 <= b1){
+				return Math.min( 1.0 * (b1-a0)/(b1-b0), 1.0* (b1-a0)/(a1-a0) );
+			};
+		};
+
+
+		if(a1 != -1){
+			if(a0 <= b0 && b0 <= a1){
+				return Math.min(1.0*  (a1-b0)/(b1-b0), 1.0* (a1-b0)/(a1-a0) ) ;
+			};
+		};
+
+		if(a1 !=-1  && b1 !=-1 ){
+			if(b0 <= a0 && a1 <= b1){
+				return Math.min( 1.0* (a1-a0)/(b1-b0), 1.0* (a1-a0)/(a1-a0) );
+			};
+		};
+
+		// reutrn any negative value to signify a null result.
+		return -1.00;
+	};
 
 
 }

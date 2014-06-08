@@ -1,113 +1,145 @@
 package naturallanguagedotstat.parser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 
 public class NumericParser {
-	// public fields	
+	public enum Comparator {
+	    equals,
+	    lessThan,
+	    lessThanOrEqualTo,
+	    greaterThan,
+	    greaterThanOrEqualTo,
+	    between
+	};
 
+	// properties
+	private ArrayList<String> explicitNumbers; // note the numbers are still currently stored as Strings.
+	private Comparator comparator;
+	private String outputString;
+	
+	
 	// private fields	
-	public String inputText;
-	public String outputText;
-	public ArrayList<String> explicitNumbers; // (but still stored as Strings).
-	private ArrayList<String> segments; 
+	private String inputString;
+	private ArrayList<String> inputWords; 
+	private ArrayList<String> outputWords; 
 
 	
 	// Constructors
 	public NumericParser (String str){
-		inputText = str;
-		segments = new ArrayList<String>(); 
-		explicitNumbers= new ArrayList<String>(); 
-
+		inputString = null;
+		inputWords = new ArrayList<String>();
+		outputWords = new ArrayList<String>();
+		
+		
+		inputString = str;
+		inputWords = splitTextIntoWords(inputString);
+		explicitNumbers = extractExplicitNumbers(inputWords);
+		identifyComparator();
+		outputString = createStandardizedString();
 	}		
 
-	
-	// Methods (in alphabetic order, hopefully!)
 
-	private void createOutputText(){
-		StringBuilder sb = new StringBuilder();
-		for (int i =0; i<segments.size(); i++){
-			if(!isaNumber(segments.get(i)) ){
-				if(i==0){
-					sb.append(segments.get(i));
-				} else {
-					sb.append(" ");
-					sb.append(segments.get(i));
-				};
-			};
-		};
-		
-		if(explicitNumbers.size()>0){
-			sb.append(" ");
-			sb.append(getNumericRange() );			
-		};
-		
-		outputText = sb.toString();
-	}
-	
-	
-	public String getOutput(){
-		return outputText;
-	}
-	
-	
-	public String getNumericRange(){
-		
-		Collections.sort(explicitNumbers);
-		StringBuilder sb = new StringBuilder();
-		
-		if (explicitNumbers.size() ==1 ) {
-			sb.append(explicitNumbers.get(0) );
-		};
-		
-		if (explicitNumbers.size() == 2) {
-			sb.append(explicitNumbers.get(0) );
-			if(explicitNumbers.get(1).equals("9999") ){
-				sb.append("+"); // This is open-ended interval character				
+	private String createStandardizedString(){
+		String str = new String();
+		boolean previousNumbersFound = false;
+		for (int i = 0; i< inputWords.size(); i++ ){
+			if(isNumber(inputWords.get(i) ) ){
+				if( !previousNumbersFound){
+					outputWords.add(comparatorToString(comparator));
+					outputWords.add(explicitNumbers.get(0));
+					if(comparator == Comparator.between){
+						outputWords.add(explicitNumbers.get(1));
+					};
+					previousNumbersFound = true;
+				}
 			} else {
-				sb.append("~"); // This is the interval notation character
-				sb.append(explicitNumbers.get(1) );				
-			}
-		};		
-		//System.out.println( sb.toString() );
-		return sb.toString();
-	}
-
-	
-	private void identifyAuxiliaryWords(){
-		processAuxiliaryWord("and",		true, false, false);
-		processAuxiliaryWord("to",		true, false, false);
-		processAuxiliaryWord("from",	true, false, false);
-		processAuxiliaryWord("between",	true, false, false);
-		processAuxiliaryWord("than",	true, false, false);
-		
-		processAuxiliaryWord("under",	true, true, false);
-		processAuxiliaryWord("below",	true, true, false);
-		processAuxiliaryWord("less",	true, true, false);
-		
-		processAuxiliaryWord("over",	true, false, true);
-		processAuxiliaryWord("above",	true, false, true);
-		processAuxiliaryWord("more",	true, false, true);
-	
-		processAuxiliaryWord("younger",	false, true, false);
-		processAuxiliaryWord("older",	false, false, true);
-		
-		Collections.sort(explicitNumbers);
-	}
-	
-	
-	// Test if a string aString directly represents a number.	
-	private void identifyNumbers(){
-		for (String segment:segments) {
-			if(isaNumber(segment) ){
-				explicitNumbers.add(segment);
+				outputWords.add(inputWords.get(i) );
 			};
+		};		
+		
+		for (int j=0; j< outputWords.size(); j++ ){
+			str += outputWords.get(j) + " ";
 		};
+		return str;
 	};
 	
+
+	private String comparatorToString(Comparator comparator){
+		String str = null;
+		switch(comparator){
+			case equals: 				str = "="; break;
+			case lessThan: 				str = "<"; break;
+			case greaterThan: 			str = "="; break;
+			case lessThanOrEqualTo: 	str = "≤"; break;
+			case greaterThanOrEqualTo: 	str = "≥"; break;
+			case between: 				str = "∈"; 
+		}
+		
+		return str;
+	}
 	
-	private boolean isaNumber(String aString)
+	
+	
+	// Note the numbers are still currently stored as Strings.
+	public ArrayList<String> getExplicitNumbers(){
+		return explicitNumbers;
+	}
+
+	
+	public Comparator getComparator(){
+		return comparator;
+	}
+
+
+	public String getOutputString(){
+		return outputString;
+	}
+
+	
+	// returns true iff no numbers are found.
+	public boolean isEmpty(){
+		return  (explicitNumbers.size() == 0);
+	}
+
+	
+	// returns true iff the mathematical comparator is Equals.
+	public boolean isSingleValued(){
+		// Note that this is different to explicitNumbers.size()==1 as comparator might imply an open-interval.
+		return  (comparator == Comparator.equals);
+		
+	}
+	
+	// splits aString into an ArrayList of separate words.
+	private ArrayList<String> splitTextIntoWords(String aString){
+		String[] words;
+		
+		words = aString.split("[\\s?,-]+"); 	// delimit on: white space,commas, hyphens and question marks.
+		
+		ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(words));
+		// Collections.addAll(arrayList, words);
+		return arrayList;
+	};
+
+	
+	// Extracts all explicit numbers from an ArrayList of strings.	
+	private ArrayList<String> extractExplicitNumbers(ArrayList<String> strings){
+		ArrayList<String >arrayList = new ArrayList<String>();
+		for (String str:strings) {
+			if(isNumber(str) ){
+				arrayList.add(str);
+			};
+		};
+		
+		Collections.sort(arrayList);
+		return arrayList;
+	};
+
+	
+	// returns true only if aString could be definitively and unambiguously converted to an integer.
+	private boolean isNumber(String aString)
 	{
 		try {
 	        Integer.parseInt( aString );
@@ -116,49 +148,55 @@ public class NumericParser {
 	    catch( Exception e ) {
 	        return false;
 	    }
-	}
+	};
 
 	
-	// Identifies auxiliary numeric words associated implicit ranges.
-	private void processAuxiliaryWord(String aWord, boolean deleteWord, boolean setMinimum, boolean setMaximum){
-		if(explicitNumbers.size() == 0){return;};
+	// defines the comparator operator based on the existence of key auxiliary words
+	private void identifyComparator(){
 		
-		if( !segments.contains(aWord) ){return;};
+		// default value for comparator is <equals>.
+		if(!explicitNumbers.isEmpty() ){ comparator = Comparator.equals;};
+
+		String[] greaterThanWords = {"greater", "over", "above", "more"}; 
+		setComparatorWithTheseWords(greaterThanWords, Comparator.greaterThan, true);
 		
-		if(deleteWord){
-			segments.remove(aWord);
+		String[] lessThanWords = {"smaller", "under", "below", "less"};
+		setComparatorWithTheseWords(lessThanWords, Comparator.lessThan, true);
+
+		String[] inWords = {"between", "to", "from"};
+		setComparatorWithTheseWords(inWords, Comparator.between, true);
+		
+		// the reason why we don't want to delete these words as they also help indicate the Dimension,
+		// especially if it is not explicitly identified in the string.
+		String[] greaterThanWords2 = {"older"}; 
+		setComparatorWithTheseWords(greaterThanWords2, Comparator.greaterThan, false);
+
+		String[] lessThanWords2 = {"younger"};
+		setComparatorWithTheseWords(lessThanWords2, Comparator.lessThan, false);
+		
+		// insert code to do greaterThanOrEqualTo, and lessThanOrEqualTo...
+
+		
+		if(explicitNumbers.size() ==2){
+			comparator = Comparator.between;
 		};
+	}
+	
+	
+	// Sets the comparator based on the existence of key auxiliary words
+	private void setComparatorWithTheseWords(String[] auxiliaryWords, Comparator comparator, boolean doDelete){
+		if(explicitNumbers.isEmpty() ){return;}; 
+		if(auxiliaryWords.length == 0) {return;};
 		
-		// this is when the phrase implicitly defines an interval.
-		if(explicitNumbers.size() ==1){
-			if(setMinimum){
-				explicitNumbers.add("0"); //if the lower bound is not explicitly stated, we assume it is zero.
+		for(String word:auxiliaryWords){
+			if(inputWords.contains(word) ){
+				this.comparator = comparator;
+				if(doDelete) {
+					inputWords.remove(word);
+				};
 			};
-
-			if(setMaximum){
-				explicitNumbers.add("9999"); //if the lower bound is not explicitly stated, we notationally set it to 9999.
-			};			
 		};
-		
-
 	};	
 	
-
-	// main method
-	public void parseText(){
-		splitTextIntoWords();
-		identifyNumbers();
-		identifyAuxiliaryWords();
-		createOutputText();
-	}
-
 	
-	private void splitTextIntoWords(){
-		String[] words;
-		words = inputText.split("[\\s~?,-]+"); 	// delimit on: white space,tilde,comma,hyphen and question mark.
-		segments.clear();
-		Collections.addAll(segments, words); 		
-	};
-	
-
 }
