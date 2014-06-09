@@ -21,13 +21,19 @@ public class LocalTest {
 		
 		/* The following queries fail for various reasons.
 		// service.query("How many men in Goulburn are from India?"); // 30  //Can't do this type yet, where it does not require an Age dimension.....
+		// service.query("How many women in Braidwood aged 25-30 are divorced"); //150
+		// "What is the female population of Sandy Bay aged 20-24?"
+		// "What is the population of Sandy Bay women aged 20-24?"
 		 */
 
 		
 		/* The following queries are correct and now should be moved to UnitTester 
+		service.query("How many women in Braidwood are divorced"); //150
+		service.query("How many women aged 25-30 in Braidwood are divorced"); //3
 
 		 */
-		service.query("How many women in Braidwood are divorced"); //150
+
+		service.query("How many women aged 25-30 in Braidwood are divorced"); //150
 	}
 
 }

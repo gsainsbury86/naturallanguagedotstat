@@ -17,7 +17,6 @@ public class TestModule {
 	public boolean runAllTests() throws IOException, ClassNotFoundException{
 		boolean b = true;
 		b = b && testGrammarParser01(); 
-		b = b && testGrammarParser02();
 		b = b && testNumericParser01(); 
 		b = b && testSemanticParser01(); 
 		return b;
@@ -62,14 +61,10 @@ public class TestModule {
 			{"Sandy Bay's female population aged 20-24 years?","Sandy Bay"}
 		};
 
-		// The following queries fail.. ;(
-		// "What is the female population of Sandy Bay aged 20-24?"
-		// "What is the population of Sandy Bay women aged 20-24?"
-		
 		for (int i=0; i< testQueries.length; i++) {
 			GrammarParser grammarParser = new GrammarParser(testQueries[i][0]);
 			grammarParser.parseText();
-			testQueryValue = grammarParser.convertArrayListToString(grammarParser.npObjects);
+			testQueryValue = grammarParser.npObjects.get(0);
 			testResult = testResult && (testQueryValue.equals(testQueries[i][1]) );
 			if(!testResult) {
 				grammarParser.printOutput();
@@ -81,45 +76,7 @@ public class TestModule {
 		return testResult;
 	}
 
-	// For all these queries the grammar parser must correctly identify the NP.subj.
-	boolean testGrammarParser02(){
-		boolean testResult = true; //Assumes true until a test fails.
-		String testQueryValue;
-		
-		String[][] testQueries = {		
-			{"What is the population of Sandy Bay?","population"},
-			{"How many people live in Sandy Bay?","people"},
-			{"Population of Sandy Bay?","Population"},
-			{"In Sandy Bay, how many people are there?","people"},
-			{"What is Sandy Bay's population?","population"},
-			{"Sandy Bay's population?","population"},
-			
-			{"What is the female population of Sandy Bay?","female population"},
-			{"How many males live in Sandy Bay?","males"},
-			{"How many men live in Sandy Bay?","men"},
-			{"How many women in Sandy Bay are there?","women"},
-			{"Female population of Sandy Bay?","Female population"},
-			{"In Sandy Bay, how many men are there?","men"},
-			{"What is Sandy Bay's female population?","female population"},
-			{"Sandy Bay's male population?","male population"},
 
-			{"What is the population of women in Sandy Bay?","women\npopulation"},
-		};
-		
-		for (int i=0; i< testQueries.length; i++) {
-			GrammarParser grammarParser = new GrammarParser(testQueries[i][0]);
-			grammarParser.parseText();
-			testQueryValue = grammarParser.convertArrayListToString(grammarParser.npSubjects);
-			testResult = testResult && (testQueryValue.equals(testQueries[i][1]) );
-			if(!testResult) {				
-				grammarParser.printOutput();
-				System.out.println("testGM002.UnitTest #"+i+":failed!\n Input:"+ testQueries[i][1]+"\n TestResult: "+ testQueryValue+"\n\n\n"); 
-			};
-			grammarParser = null;			
-		};
-		
-		return testResult;
-	}
 	
 	// For all these queries the grammar parser must correctly identify the NP.subj.
 	boolean testNumericParser01(){
