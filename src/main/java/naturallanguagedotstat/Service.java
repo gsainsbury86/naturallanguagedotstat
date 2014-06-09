@@ -150,11 +150,12 @@ public class Service {
 
 		String region = queryInputs.get("region");
 		queryInputs.remove("region");
-
+		
 		ArrayList<String> dimensionNames = new ArrayList<String>();
 		dimensionNames.addAll(queryInputs.keySet());
-
+		
 		Dataset dataset = Utils.findDatasetWithDimensionNames(datasets, dimensionNames);
+
 		if(LocalTest.debug)
 			System.out.println(dataset.getName());
 
@@ -167,6 +168,8 @@ public class Service {
 			// if(LocalTest.debug) System.out.println(queryInputs);
 		};
 
+		if(LocalTest.debug)
+			System.out.println(queryInputs);
 
 		//TODO: make sure dimension value exists
 		String urlToRead = queryBuilder(dataset, ASGS2011, region, queryInputs);
@@ -300,7 +303,6 @@ public class Service {
 		Double overlapScore;
 		for (String descr: ageCodeListDescriptions){
 			NumericParser ageDescriptionParser = new NumericParser(descr);
-			// ageDescriptionParser.parseText();
 
 			int b0 = (ageDescriptionParser.getExplicitNumbers().size() >0) 
 					? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(0) ) : -1;
@@ -326,20 +328,20 @@ public class Service {
 
 		if(b1 != -1){
 			if(b0 <= a0 && a0 <= b1){
-				return Math.min( 1.0 * (b1-a0)/(b1-b0), 1.0* (b1-a0)/(a1-a0) );
+				return Math.min( 1.0 * (b1-a0+1)/(b1-b0+1), 1.0* (b1-a0+1)/(a1-a0+1) );
 			};
 		};
 
 
 		if(a1 != -1){
 			if(a0 <= b0 && b0 <= a1){
-				return Math.min(1.0*  (a1-b0)/(b1-b0), 1.0* (a1-b0)/(a1-a0) ) ;
+				return Math.min(1.0*  (a1-b0+1)/(b1-b0+1), 1.0* (a1-b0+1)/(a1-a0+1) ) ;
 			};
 		};
 
 		if(a1 !=-1  && b1 !=-1 ){
 			if(b0 <= a0 && a1 <= b1){
-				return Math.min( 1.0* (a1-a0)/(b1-b0), 1.0* (a1-a0)/(a1-a0) );
+				return Math.min( 1.0* (a1-a0+1)/(b1-b0+1), 1.0* (a1-a0+1)/(a1-a0+1) );
 			};
 		};
 

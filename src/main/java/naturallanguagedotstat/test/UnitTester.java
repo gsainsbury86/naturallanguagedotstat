@@ -71,7 +71,7 @@ public class UnitTester {
 		"What is Sandy Bay's female population?",
 		"Sandy Bay's female population?",
 
-		"What is the female 20-24 population of Sandy Bay?",
+		"What is the female 15-19 population of Sandy Bay?",
 		"What is the female population aged 20-24 of Sandy Bay?",
 		"What is the population of women aged between 20 and 24 in Sandy Bay?",				
 		"How many 20-24 year old females live in Sandy Bay?",
@@ -115,7 +115,15 @@ public class UnitTester {
 		"How many 20-25 year old females in Tasmania are professionals?", 
 		"How many 20-25 year old women in Tasmania are technicians?", 
 		"How many women aged 20-25 in Tasmania are community workers?", 
-		"How many women aged 20-25 in Tasmania are labourers?" 
+		"How many women aged 20-25 in Tasmania are labourers?", 
+		
+		"How many women are aged 15-20 in Tasmania?",
+		"How many women aged 18-19 in Tasmania are community workers?",
+		"How many men aged 20-25 did volunteer work in Goulburn?",
+		"How many people 15-24 have a diploma in Goulburn",
+		"How many women 25-34 in Goulburn have a postgraduate degree",
+		"How many 35-44 year old men in Goulburn have a bachelors degree "
+
 	};
 
 	private static final int[] TEST_RESULTS = {		
@@ -138,7 +146,7 @@ public class UnitTester {
 		5696, //"What is Sandy Bay's female population?",
 		5696, //"Sandy Bay's female population?",
 
-		745, //"What is the female 20-24 population of Sandy Bay?",
+		355, //"What is the female 15-19 population of Sandy Bay?",  // this agegroup metadata has an extra space at the end!
 		745, //"What is the female population aged 20-24 of Sandy Bay?",
 		745, //"What is the population of women aged between 20 and 24 in Sandy Bay?",				
 		745, //"How many 20-24 year old females live in Sandy Bay?",
@@ -182,6 +190,14 @@ public class UnitTester {
 		1190, //"How many 20-25 year old females in Tasmania are professionals?", 
 		705, //"How many 20-25 year old women in Tasmania are technicians?", 
 		2166, //"How many women aged 20-25 in Tasmania are community workers?", 
-		711 //"How many women aged 20-25 in Tasmania are labourers?" 
+		711, //"How many women aged 20-25 in Tasmania are labourers?" 
+		
+		15846,  // service.query("How many women are aged 15-20 in Tasmania?");
+		1552, // service.query("How many women aged 18-19 in Tasmania are community workers?"); 
+		73, // service.query("How many men aged 20-25 did volunteer work in Goulburn?"); 
+		5, //service.query("How many people 15-24 have a diploma in Goulburn");
+		14,// service.query("How many women 25-34 in Goulburn have a postgraduate degree");
+		90 // service.query("How many 35-44 year old men in Goulburn have a bachelors degree ");
+
 	};
 }

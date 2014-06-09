@@ -1,29 +1,39 @@
 package naturallanguagedotstat.parser;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import naturallanguagedotstat.Service;
+import naturallanguagedotstat.model.Dataset;
+import naturallanguagedotstat.model.Dimension;
 
 
 public class SemanticParser {
 	// public fields here
 	public HashMap<String, String> dimensions;
 
+	private HashMap<String, String> flatCodeList;
 	private HashMap<String, String> codeList;
 	private HashMap<String, String> synonyms;
 	
 	private GrammarParser grammarParser;
 
 	// constructor
-	public SemanticParser (String str){
+	public SemanticParser (String str) throws IOException, ClassNotFoundException{
+		flatCodeList = new HashMap<String, String>();
 		dimensions = new HashMap<String, String>();
 		codeList   = new HashMap<String, String>();
 		synonyms   = new HashMap<String, String>();
 		grammarParser = new GrammarParser(str);
 
 		initializeSynonyms();
-		initializeCodeList();
+		createFlatCodeList(); // replaces initializeCodeList();	
+		
+		// System.out.println(flatCodeList.get("India") );
+
 	}		
 	
 	
@@ -34,86 +44,71 @@ public class SemanticParser {
 		return dimensions;
 	}
 
-
-/*
- * 		
-		ArrayList<Dataset> datasets = Service.loadDatasets_DEBUG();
-		
-		for(Dimension dim : datasets.get(3).getDimensions()){
-			HashMap<String, String> map = dim.getCodelist();
-			System.out.println(dim.getName() + " - " + map);
-		}
-
- */
-	// the codeList HashMap is almost an inverse of the dimensions HashMap.
-	// this will ultimately come from either a fixed text file or from one of George's methods.
-	public void initializeCodeList(){
-		
-		codeList.put("Males","Sex");
-		codeList.put("Females","Sex");		
-		codeList.put("Persons","Sex");
-		
-		codeList.put("married(a)","Registered Marital Status");
-		codeList.put("separated","Registered Marital Status");
-		codeList.put("divorced","Registered Marital Status");
-		codeList.put("widowed","Registered Marital Status");
-
-		codeList.put("Married in a registered marriage","Social Marital Status");
-		codeList.put("Married in a de facto marriage(b)","Social Marital Status");
-			
-		codeList.put("Indigenous(a)","Indigenous Status");
-
-		codeList.put("Managers", "Occupation");
-		codeList.put("Professionals", "Occupation");
-		codeList.put("Technicians and trades workers", "Occupation");
-		codeList.put("Community and personal service  workers", "Occupation");
-		codeList.put("Clerical and administrative workers", "Occupation");
-		codeList.put("Sales workers", "Occupation");
-		codeList.put("Machinery operators and drivers", "Occupation");
-		codeList.put("Labourers","Occupation");
-
+	private void createFlatCodeList() throws IOException, ClassNotFoundException{
+		Service service = new Service();
+		boolean getData;
+		ArrayList<Dataset>  datasets = service.loadDatasets();
+		for(int i=0;i<46;i++){
+			for(Dimension dim : datasets.get(i).getDimensions() ){
+				HashMap<String, String> map = dim.getCodelist();
+				getData = (dim.getName().equals("Age")  || dim.getName().equals("Region") || dim.getName().equals("Region Type") || dim.getName().equals("State") )? false : true;
+				if (getData) {
+					for(String key : map.keySet() ){
+						flatCodeList.put(map.get(key), dim.getName() );
+					}
+				}
+			}
+		};
+	}
 	
-		codeList.put("Agriculture, forestry and fishing","Industry of Employment");
-		codeList.put("Mining","Industry of Employment");
-		codeList.put("Manufacturing","Industry of Employment");
-		codeList.put("Electricity, gas, water and waste services","Industry of Employment");
-		codeList.put("Construction","Industry of Employment");
-		codeList.put("Wholesale trade","Industry of Employment");
-		codeList.put("Retail trade","Industry of Employment");
-		codeList.put("Accommodation and food services","Industry of Employment");
-		codeList.put("Information media and telecommunications","Industry of Employment");
-		codeList.put("Rental, hiring and real estate services","Industry of Employment");
-		codeList.put("Professional, scientific and technical services","Industry of Employment");
-		codeList.put("Administrative and support services","Industry of Employment");
-		codeList.put("Public administration and safety","Industry of Employment");
-		codeList.put("Education and training","Industry of Employment");
-		codeList.put("Arts and recreation services","Industry of Employment");
-	};
 
 	// This will ultimately come from a text file.
-	// Many of these items cover the noun -> adjective transformation.
-	public void initializeSynonyms(){		
-		// .put("synonym", "rootWord");
-		synonyms.put("people","Persons");
-		synonyms.put("female","Females");
-		synonyms.put("women","Females");
-		synonyms.put("male","Males");
-		synonyms.put("men","Males");
+	// These mappings include:
+	// 		* noun -> adjective , 
+	// 		* singlualr -> generic plural, 
+	// 		* abbreviations -> full, 
+	// 		* component -> part of a group, 
 
+	public void initializeSynonyms(){		
+		
+		
+		/*
+
+		// Eventually do synonyms to confirm identity of Dimensions.
+		// However, currently we identify synonyms based purely on the identification of codelists.
+		  
 		synonyms.put("aged","Age");
 		synonyms.put("year","Age");
 		synonyms.put("years","Age");
 		synonyms.put("old","Age");
 		synonyms.put("older","Age");
 		synonyms.put("younger","Age");
+		
+		synonyms.put("born","Country of Birth of Person");
+		synonyms.put("birth","Country of Birth of Person");
 
+		 */
+
+		// .put("synonym", "rootWord");
+		synonyms.put("people","Persons");
+		synonyms.put("female","Females");
+		synonyms.put("females","Females");
+		synonyms.put("women","Females");
+		synonyms.put("male","Males");
+		synonyms.put("males","Males");
+		synonyms.put("men","Males");
+
+		
 		//B05
-		synonyms.put("married","married(a)");
-		synonyms.put("marriages","married(a)");
-		synonyms.put("widows","widowed");
-		synonyms.put("widowers","widowed");
-		synonyms.put("separations","separated");
-		synonyms.put("divorces","divorced");
+		synonyms.put("married","Married(a)" ) ;
+		synonyms.put("marriages","Married(a)" );
+		synonyms.put("widowed","Widowed" );
+		synonyms.put("widows","Widowed" );
+		synonyms.put("widowers","Widowed" );
+		synonyms.put("separated","Separated" );
+		synonyms.put("separations","Separated" );
+		synonyms.put("divorces","Divorced" );
+		synonyms.put("divorced","Divorced" );
 		
 		//B06
 		synonyms.put("registered","Married in a registered marriage");
@@ -122,6 +117,30 @@ public class SemanticParser {
 
 		//B07
 		synonyms.put("indigenous","Indigenous(a)");
+		
+		//B09
+		synonyms.put("China","China (excl. SARs and Taiwan)(b)");
+
+		synonyms.put("Yugoslavia","Former Yugoslav Republic of Macedonia (FYROM)");
+		synonyms.put("Hong","Hong Kong (SAR of China)(b)");
+		synonyms.put("Kong","Hong Kong (SAR of China)(b)");
+		synonyms.put("Korea","Korea, Republic of (South)");
+		// synonyms.put("China","South Eastern Europe, nfd(c)");
+		synonyms.put("Kingdom","United Kingdom, Channel Islands and Isle of Man(d)");
+		synonyms.put("UK","United Kingdom, Channel Islands and Isle of Man(d)");
+		synonyms.put("USA","United States of America");
+		synonyms.put("America","United States of America");
+		
+		//B19
+		synonyms.put("volunteer","Volunteer");
+		synonyms.put("voluntary","Volunteer");
+
+		//B40
+		synonyms.put("postgraduate","Postgraduate Degree Level");
+		synonyms.put("postgraduates","Postgraduate Degree Level");
+		synonyms.put("diploma","Graduate Diploma and Graduate Certificate Level");
+		synonyms.put("bachelor","Bachelor Degree Level");
+		synonyms.put("bachelors","Bachelor Degree Level");
 		
 		//B43
 		synonyms.put("agriculture","Agriculture, forestry and fishing");
@@ -144,7 +163,7 @@ public class SemanticParser {
 		synonyms.put("postal","Transport, postal and warehousing");
 		synonyms.put("warehousing","Transport, postal and warehousing");
 		synonyms.put("technology","Information media and telecommunications");
-		synonyms.put("computing","Information media and telecommunications");
+		synonyms.put("computing","Information media and telecommunications"); 
 		synonyms.put("information","Information media and telecommunications");
 		synonyms.put("ICT","Information media and telecommunications");
 		synonyms.put("IT","Information media and telecommunications");
@@ -226,9 +245,8 @@ public class SemanticParser {
 			// check for all other dimensions
 			for(String word: words){
 				baseWord = (synonyms.get(word.toLowerCase()) == null ) ? word : synonyms.get(word.toLowerCase());
-				if(codeList.get(baseWord) != null){
-					// System.out.println("baseWord, word = "+ baseWord+","+word);
-					dimensions.put(codeList.get(baseWord), baseWord);
+				if(flatCodeList.get(baseWord) != null){
+					dimensions.put(flatCodeList.get(baseWord), baseWord);
 				};
 			};			
 		};
@@ -255,7 +273,6 @@ public class SemanticParser {
 		grammarParser.parseText();
 		setCoreDimensions(grammarParser.npObjects.get(0)); //assumes that npObjects has only 1 item in it.
 		identifyDimensions(grammarParser.npSubjects);
-		// printOutput();
 	}
 
 
@@ -267,15 +284,4 @@ public class SemanticParser {
 		dimensions.put("Sex", "persons"); 
 	};
 	
-	
-	// Prints the HashMap dimension .
-	// only used for debugging and testing purposes.
-	public void printOutput() {
-		System.out.println("\nContents of the dimension HashMap are... ");
-		Iterator iter = dimensions.entrySet().iterator();
-		while (iter.hasNext()) {
-			Map.Entry mEntry = (Map.Entry) iter.next();
-			System.out.println(mEntry.getKey() + " : " + mEntry.getValue());			
-		};
-	};
 }

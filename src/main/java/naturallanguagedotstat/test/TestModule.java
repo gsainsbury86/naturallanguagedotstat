@@ -1,5 +1,6 @@
 package naturallanguagedotstat.test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import naturallanguagedotstat.parser.*;
 
@@ -13,7 +14,7 @@ public class TestModule {
 	}
 	
 	// Runs all automated tests.
-	public boolean runAllTests(){
+	public boolean runAllTests() throws IOException, ClassNotFoundException{
 		boolean b = true;
 		b = b && testGrammarParser01(); 
 		b = b && testGrammarParser02();
@@ -178,7 +179,7 @@ public class TestModule {
 		return testResult;
 	}
 	
-	boolean testSemanticParser01(){
+	boolean testSemanticParser01() throws IOException, ClassNotFoundException{
 		String[][] testQueries = {		
 				{"What is Sandy Bay's 24 year old female population ?","24", "females"},
 				{"In Sandy Bay, how many females are 24?","24","females"},				
@@ -214,7 +215,6 @@ public class TestModule {
 			
 			testResult = testResult && testQueryValue1.equals(testQueries[i][1]) && testQueryValue2.equals(testQueries[i][2]);
 			if(!testResult) {				
-				semanticParser.printOutput();
 				System.out.println(
 						"testSemanticParser.UnitTest #"+i+":failed!\n Input:"
 						+ testQueries[i][0]

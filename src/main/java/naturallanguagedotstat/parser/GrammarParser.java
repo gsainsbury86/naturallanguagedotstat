@@ -92,6 +92,9 @@ public class GrammarParser {
 		// identify domain-specific verbs. This list might grow to several dozen!
 		tagWordWithGrammarType("live", "v");		// verb
 		tagWordWithGrammarType("lives", "v");	
+		tagWordWithGrammarType("do", "v");	
+		tagWordWithGrammarType("did", "v");	
+		tagWordWithGrammarType("have", "v");	
 	}
 	
 
@@ -110,7 +113,9 @@ public class GrammarParser {
 		tagAllWordsBeforeGrammarType("prep.in", "NP.subj");	// subject Noun Phrase
 		tagAllWordsBeforeGrammarType("prep.of", "NP.subj");	// subject Noun Phrase
 		tagAllWordsBeforeGrammarType("v", "NP.subj");
+		tagAllWordsAfterGrammarType("v", "NP.subj");
 		tagAllWordsAfterGrammarType("art.def", "NP.subj");
+		tagAllWordsAfterGrammarType("art.indef", "NP.subj");
 		tagAllWordsAfterGrammarType("NP.gen", "NP.subj");		
 		tagAllWordsAfterGrammarType("v.be", "NP.subj"); 
 		tagAllWordsAfterGrammarType("adj.int", "NP.subj");
@@ -166,7 +171,7 @@ public class GrammarParser {
 	// This method outputs key fields relating to the grammar of userQuery.
 	// only used for debugging and testing purposes.
 	public void printOutput() {
-		boolean showDetailedOutput = false;
+		boolean showDetailedOutput = true;
 		
    		if(showDetailedOutput){
    			StringBuilder sb = new StringBuilder();

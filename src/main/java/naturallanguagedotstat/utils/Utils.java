@@ -137,7 +137,8 @@ public class Utils {
 	public static String findValue(HashMap<String, String> map,
 			String value) {
 		for(String key : map.keySet()){
-			if (map.get(key).trim().toLowerCase().equals(value.toLowerCase())){
+			// if (map.get(key).trim().toLowerCase().equals(value.toLowerCase())){  
+			if (map.get(key).toLowerCase().equals(value.toLowerCase())){
 				return key;
 			}
 		}
@@ -230,7 +231,7 @@ public class Utils {
 	
 	public static Dataset findDatasetWithDimensionNames(ArrayList<Dataset> datasets, ArrayList<String> dimensionNames){
 		ArrayList<Dataset> datasetsWithDimensions = findDatasetsWithDimensionNames(datasets, dimensionNames);
-				
+
 		Dataset toReturn = null;
 		for(Dataset ds : datasetsWithDimensions){
 			if(toReturn == null){
@@ -239,10 +240,8 @@ public class Utils {
 			if(ds.getDimensions().size() < toReturn.getDimensions().size()){
 				toReturn = ds;
 			}
-		}
-		
+		};
 		return toReturn;
-		
 	}
 
 

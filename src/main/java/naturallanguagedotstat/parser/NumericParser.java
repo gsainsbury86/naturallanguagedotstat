@@ -15,7 +15,7 @@ public class NumericParser {
 	    between
 	};
 
-	// properties
+	// properties with getters and/or setters
 	private ArrayList<String> explicitNumbers; // note the numbers are still currently stored as Strings.
 	private Comparator comparator;
 	private String outputString;
