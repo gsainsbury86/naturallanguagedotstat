@@ -47,7 +47,7 @@ public class LocalTest {
 		 *
 		 */
 		
-		service.query("How many women were in Goulburn in the labour force?"); //4722		
+		service.query("How many women have a bachelor degree in Capital Region?"); //4722		
 
 	}
 

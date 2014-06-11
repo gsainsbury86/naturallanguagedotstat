@@ -17,7 +17,7 @@ public class SemanticParser {
 
 	private HashMap<String, String> flatCodeList;
 	private HashMap<String, String> synonyms;
-	
+
 	private GrammarParser grammarParser;
 
 	// constructor
@@ -30,11 +30,11 @@ public class SemanticParser {
 		initializeSynonyms();
 		createFlatCodeList(datasets); 
 	}		
-	
-	
+
+
 
 	// methods (in alphabetical order - hopefully)
-	
+
 	public HashMap<String, String> getDimensions() {
 		return dimensions;
 	}
@@ -44,15 +44,16 @@ public class SemanticParser {
 		for(Dataset dataset : datasets){
 			for(Dimension dim : dataset.getDimensions() ){
 				HashMap<String, String> map = dim.getCodelist();
-				if (!(dim.getName().equals("Age")  && map != null)) {
-					for(String key : map.keySet() ){
+				if (!dim.getName().equals("Age")  && map != null) {
+					System.out.println(dim.getName() +  " "  + map);
+					for(String key : map.keySet()){
 						flatCodeList.put(map.get(key), dim.getName() );
 					}
 				}
 			}
 		};
 	}
-	
+
 
 	// This will ultimately come from a text file.
 	// These mappings include:
@@ -62,20 +63,20 @@ public class SemanticParser {
 	// 		* component -> part of a group, 
 
 	public void initializeSynonyms(){		
-		
-		
+
+
 		/*
 
 		// Eventually do synonyms to confirm identity of Dimensions.
 		// However, currently we identify synonyms based purely on the identification of codelists.
-		  
+
 		synonyms.put("aged","Age");
 		synonyms.put("year","Age");
 		synonyms.put("years","Age");
 		synonyms.put("old","Age");
 		synonyms.put("older","Age");
 		synonyms.put("younger","Age");
-		
+
 		synonyms.put("born","Country of Birth of Person");
 		synonyms.put("birth","Country of Birth of Person");
 
@@ -92,7 +93,7 @@ public class SemanticParser {
 		synonyms.put("at home on Census night","Counted at home on Census Night" ) ;
 		synonyms.put("same Statistical Area Level 2","Same Statistical Area Level 2 (SA2)" ) ;
 		synonyms.put("same SA2","Same Statistical Area Level 2 (SA2)" ) ;
-		
+
 		//B05
 		synonyms.put("married","Married(a)" ) ;
 		synonyms.put("marriages","Married(a)" );
@@ -100,7 +101,7 @@ public class SemanticParser {
 		synonyms.put("widowers","Widowed" );
 		synonyms.put("separations","Separated" );
 		synonyms.put("divorces","Divorced" );
-		
+
 		//B06
 		synonyms.put("registered marriage","Married in a registered marriage");
 		synonyms.put("de facto","Married in a de facto marriage(b)");
@@ -109,7 +110,7 @@ public class SemanticParser {
 		synonyms.put("indigenous","Indigenous(a)");
 		synonyms.put("non indigenous","Non-Indigenous");
 
-		
+
 		//B09
 		synonyms.put("China","China (excl. SARs and Taiwan)(b)");
 		synonyms.put("Yugoslavia","Former Yugoslav Republic of Macedonia (FYROM)");
@@ -121,14 +122,14 @@ public class SemanticParser {
 		synonyms.put("US","United States of America");
 		synonyms.put("United States","United States of America");
 		synonyms.put("America","United States of America");
-		
+
 		//B13
 		synonyms.put("speak only English","Speaks English only");  // note that the word "English" is in B13 and B09
 		synonyms.put("speak English","Speaks English only");
 		synonyms.put("speak another language","Speaks other language total");
 		synonyms.put("speak Chinese","Chinese languages total");
 		synonyms.put("speak Iranian","Iranic Languages total");
-		
+
 		//B14
 		synonyms.put("Buddhist","Buddhism");
 		synonyms.put("Buddhists","Buddhism");
@@ -158,7 +159,7 @@ public class SemanticParser {
 		synonyms.put("Aboriginal religions","Australian Aboriginal Traditional Religions");
 		synonyms.put("Aboriginal traditional religions","Australian Aboriginal Traditional Religions");
 		synonyms.put("no religion","No religion(b)");
-		
+
 		//B16
 		synonyms.put("year 12","Year 12 or equivalent");
 		synonyms.put("grade 12","Year 12 or equivalent");
@@ -170,7 +171,7 @@ public class SemanticParser {
 		synonyms.put("grade 9","Year 9 or equivalent");
 		synonyms.put("year 8","Year 8 or below");
 		synonyms.put("grade 8","Year 8 or below");
-		
+
 		//B18
 		synonyms.put("need assistance","Has need for assistance");
 		synonyms.put("needs assistance","Has need for assistance");
@@ -180,7 +181,7 @@ public class SemanticParser {
 		synonyms.put("do not have need for assistance","Does not have need for assistance");
 		synonyms.put("does not need assistance","Does not have need for assistance");
 		synonyms.put("do not need assistance","Does not have need for assistance");
-		
+
 		//B19
 		synonyms.put("voluntary work","Volunteer");
 		synonyms.put("volunteered","Volunteer");
@@ -192,7 +193,7 @@ public class SemanticParser {
 		//B21
 		synonyms.put("provided unpaid assistance","Provided unpaid assistance");
 		synonyms.put("not provide unpaid assistance","No unpaid assistance provided");
-		
+
 		//B40
 		synonyms.put("postgraduate","Postgraduate Degree Level");
 		synonyms.put("post graduate","Postgraduate Degree Level");
@@ -218,7 +219,7 @@ public class SemanticParser {
 		// synonyms.put("agriculture","Employed, away from work(b)");
 		synonyms.put("labour force","Total labour force");
 
-		
+
 		//B43
 		synonyms.put("agriculture","Agriculture, forestry and fishing");
 		synonyms.put("agricultural","Agriculture, forestry and fishing");
@@ -291,27 +292,27 @@ public class SemanticParser {
 		String substr = " "+ aSubstr.toLowerCase()+" ";
 		return phrase.contains(substr);   
 	}
-	
+
 	private void matchSynonymsOfCodeList(String str){
 		String baseWord = new String();
 		for (String keyWord : synonyms.keySet() ) {
-		    if(wholeWordContains(str, keyWord)  ){ 
-		    	baseWord = synonyms.get(keyWord) ; 
+			if(wholeWordContains(str, keyWord)  ){ 
+				baseWord = synonyms.get(keyWord) ; 
 				dimensions.put(flatCodeList.get(baseWord), baseWord);
-		    	//System.out.println("Synonyms: "+flatCodeList.get(baseWord)+" <-- " + baseWord+"<--"+keyWord);
-		    };
+				//System.out.println("Synonyms: "+flatCodeList.get(baseWord)+" <-- " + baseWord+"<--"+keyWord);
+			};
 		};		
 	}
-	
+
 
 	private void matchCodeList(String str){
 		String baseWord = new String();
 		for (String keyWord : flatCodeList.keySet() ) {
-		    if(wholeWordContains(str, keyWord)  ){ 
+			if(wholeWordContains(str, keyWord)  ){ 
 				baseWord = keyWord ; 
 				dimensions.put(flatCodeList.get(baseWord), baseWord);
-		    	//System.out.println("Codelist: "+flatCodeList.get(baseWord)+":" + baseWord);
-		    };
+				//System.out.println("Codelist: "+flatCodeList.get(baseWord)+":" + baseWord);
+			};
 		};
 
 	}
@@ -319,7 +320,7 @@ public class SemanticParser {
 	public void identifyDimensions(ArrayList<String> phrases){
 		String[] words;
 		String numericalString;
-		
+
 		for(String phrase: phrases){
 			words = phrase.split("[\\s]+"); 
 
@@ -333,32 +334,32 @@ public class SemanticParser {
 			matchSynonymsOfCodeList(phrase);
 			matchCodeList(phrase);
 		};
-		
 
-		
+
+
 	}
-	
+
 	private boolean isNumber(String aString){
 		try {
-	        Integer.parseInt( aString );
-	        return true;
-	    }
-	    catch( Exception e ) {
-	        return false;
-	    }
+			Integer.parseInt( aString );
+			return true;
+		}
+		catch( Exception e ) {
+			return false;
+		}
 	}
 
 	//Returns the location of the first number in an array of Strings
 	int getLocationOfNumber(String[] words){
 		for (int i=0; i< words.length; i++) {
-			  if(isNumber(words[i] )) {return i;};
+			if(isNumber(words[i] )) {return i;};
 		};	
 		return -1;
 	}
-	
+
 	private String getNumericString(String[] someWords){
 		String str = new String();
-		
+
 		int j= getLocationOfNumber (someWords);
 		if(j==-1) return str;
 		str = someWords[j-1] + " " + someWords[j];
@@ -366,20 +367,20 @@ public class SemanticParser {
 		if (someWords[j-1].equals("∈") ) {
 			str = str + " " + someWords[j+1];
 		};
-		
+
 		return str;
 	}
-	
-	
+
+
 	public void parseText(){
 		grammarParser.parseText();
 		if (grammarParser.npObjects.size() >0){
 			dimensions.put("region", grammarParser.npObjects.get(0) ); 	//assumes that npObjects has only 1 item in it.
 		};
-		
+
 		identifyDimensions(grammarParser.npSubjects);
 		cleanUpDimensions();
-		
+
 	}
 
 	private void cleanUpDimensions(){
@@ -389,17 +390,17 @@ public class SemanticParser {
 		if(dimensions.get("Ancestry") != null ){
 			dimensions.remove("Ancestry");
 		};
-		
+
 		if(dimensions.get("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)") != null ){
 			dimensions.remove("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)");
 		};
 		// .......................................................................
-		
-		
-		
+
+
+
 		dimensions.remove("Selected Person Characteristics"); // This eliminates Statistical Collections that are merely summaries of other ones.
 
-		
+
 		if(dimensions.get("Sex") != null && dimensions.get("Sex").equals("Persons")){
 			dimensions.remove("Sex");
 		};
@@ -410,7 +411,7 @@ public class SemanticParser {
 		if(dimensions.size() <= 2 ){
 			if(dimensions.get("Sex") == null) {dimensions.put("Sex","Persons");};
 		};
-		
+
 		if(dimensions.size() <= 2 ){
 			if(dimensions.get("Age") == null) {dimensions.put("Age","Total all ages");};
 		};
