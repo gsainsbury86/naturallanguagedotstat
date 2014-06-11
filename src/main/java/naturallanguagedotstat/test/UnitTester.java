@@ -32,7 +32,7 @@ public class UnitTester {
 		LocalTest.debug = false;
 
 		for(int i = 0; i < TEST_QUERIES.length; i++){
-			System.out.println("Testing: ("+i+ "/"+TEST_QUERIES.length +"): "+ TEST_QUERIES[i]);
+			System.out.println("Testing: ("+i+1+ "/"+TEST_QUERIES.length +"): "+ TEST_QUERIES[i]);
 			collector.checkThat(TEST_QUERIES[i], Integer.parseInt(service.query(TEST_QUERIES[i])), is(TEST_RESULTS[i]));
 		}
 	}

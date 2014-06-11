@@ -113,7 +113,7 @@ public class Service {
 
 		String resultString = Utils.findObsValue(dataDocument);
 		
-		return resultString + "<br><br>" + "<br>" + urlToRead;
+		return resultString;// + "<br><br>" + "<br>" + urlToRead;
 
 	}
 }
