@@ -32,6 +32,15 @@ public class GrammarParser {
 
 		
 	//Returns the location of the first occurrence of a word with a grammarType of aType 
+	private ArrayList<Integer> getLocationsOfGrammarType(String aType){
+		ArrayList<Integer> locations = new ArrayList<Integer> ();
+		for (int i=0; i< words.length; i++) {
+			  if(grammarTypes[i].equals(aType) ) {locations.add(i) ;};
+		};	
+		return locations;
+	}
+
+	//Returns the location of the first occurrence of a word with a grammarType of aType 
 	int getLocationOfGrammarType(String aType){
 		for (int i=0; i< words.length; i++) {
 			  if(grammarTypes[i].equals(aType) ) {return i;};
@@ -42,6 +51,22 @@ public class GrammarParser {
 	
 	// Identifies core prepositions, interrogatives, articles and some verbs.
 	private void identifyAuxiliaryTerms(){
+
+		
+		// identify multiple occurrences of the word 'in' which would lead to ambiguous identification of NP.obj
+		for (int i=1; i< words.length; i++) {
+			  if(words[i-1].equals("in") && words[i].equals("the")  ) {
+				words[i-1] = "_in_";
+				grammarTypes[i-1] = "prep";
+			 };
+		 };
+
+		 for (int i=1; i< words.length; i++) {
+			  if(words[i-1].equals("born") && words[i].equals("in")  ) {
+				words[i] = "_in_";
+				grammarTypes[i] = "prep";
+			 };
+		 };
 		
 		// Identify a small countable number of specific auxiliary non-NP words
 		tagWordWithGrammarType("of", "prep.of");		//  preposition "in"
@@ -52,17 +77,25 @@ public class GrammarParser {
 		tagWordWithGrammarType("many", "adj.int");		// interrogative adjective
 		tagWordWithGrammarType("is", "v.be");			// the verb "to be"
 		tagWordWithGrammarType("are", "v.be");	
+		tagWordWithGrammarType("were", "v.be");	
 		tagWordWithGrammarType("the", "art.def");		// definite article
 		tagWordWithGrammarType("a", "art.indef");		// indefinite article
 		tagWordWithGrammarType("'s", "NP.gen");			// NP.genitive
+
+		tagWordWithGrammarType("only", "adv");			// adverb
+						
+		tagWordWithGrammarType("do", "v.aux");			// auxiliary verbs
+		tagWordWithGrammarType("did", "v.aux");	
+		tagWordWithGrammarType("will", "v.aux");	
+		tagWordWithGrammarType("can", "v.aux");	
+		tagWordWithGrammarType("have", "v.aux");	
 		
-				
 		// identify domain-specific verbs. This list might grow to several dozen!
 		tagWordWithGrammarType("live", "v");		// verb
 		tagWordWithGrammarType("lives", "v");	
-		tagWordWithGrammarType("do", "v");	
-		tagWordWithGrammarType("did", "v");	
-		tagWordWithGrammarType("have", "v");	
+		tagWordWithGrammarType("work", "v");	
+		tagWordWithGrammarType("works", "v");	
+		tagWordWithGrammarType("born", "v");	
 	}
 	
 
@@ -112,7 +145,7 @@ public class GrammarParser {
 		identifyAuxiliaryTerms();
 		identifyNounPhrases();
 		numericallyNormalizePhrases();
-		//printOutput();
+		// printOutput();
 	}
 	
 
@@ -130,7 +163,7 @@ public class GrammarParser {
 	// This method outputs key fields relating to the grammar of userQuery.
 	// only used for debugging and testing purposes.
 	public void printOutput() {
-		boolean showDetailedOutput = false;
+		boolean showDetailedOutput = true;
 		
    		if(showDetailedOutput){
    			StringBuilder sb = new StringBuilder();
@@ -158,7 +191,8 @@ public class GrammarParser {
 	// Tags all occurrences of the word aWord with a grammarType of aType.
 	private void tagWordWithGrammarType(String aWord, String aType) {
 		for (int i=0; i< words.length; i++) {
-			  if(words[i].equalsIgnoreCase(aWord) ) grammarTypes[i]=aType;
+			  if(words[i].equalsIgnoreCase(aWord) ) 
+				  grammarTypes[i]=aType;
 		  };
 	}
 	
@@ -192,7 +226,6 @@ public class GrammarParser {
 		inx = getLocationOfGrammarType(searchType);
 		if (inx == -1) return;
 
-		
 		inx++;
 		while(inx < words.length && grammarTypes[inx].equals("") ){
 			grammarTypes[inx] = aType;

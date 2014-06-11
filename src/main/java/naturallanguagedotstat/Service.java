@@ -145,8 +145,7 @@ public class Service {
 
 		HashMap<String,String> queryInputs = semanticParser.getDimensions();	
 		
-		if(LocalTest.debug)
-			System.out.println(queryInputs);
+		// if(LocalTest.debug) {System.out.println(queryInputs);};
 
 		String region = queryInputs.get("region");
 		queryInputs.remove("region");
@@ -156,17 +155,37 @@ public class Service {
 		
 		Dataset dataset = Utils.findDatasetWithDimensionNames(datasets, dimensionNames);
 
-		if(LocalTest.debug)
-			System.out.println(dataset.getName());
-
 		dataset = loadDataset(dataset.getName());
 
+		//if(LocalTest.debug) System.out.println(dataset.getDimensions() );
 
-
+		// find optimal age bracket for Age dimension.
 		if(queryInputs.get("Age") != null){
 			optimizeAgeCodeList(queryInputs, dataset);
 			// if(LocalTest.debug) System.out.println(queryInputs);
 		};
+		
+		
+		// set default values for dimensions that have missing codelists.
+		for(Dimension dim : dataset.getDimensions()){
+			if(dim.getName().equals("Age") && queryInputs.get("Age") == null){
+				queryInputs.put("Age", "Total all ages");
+				if(dataset.getName().equals("ABS_CENSUS2011_B20")  
+						|| dataset.getName().equals("ABS_CENSUS2011_B21")  
+						|| dataset.getName().equals("ABS_CENSUS2011_B40") 
+						|| dataset.getName().equals("ABS_CENSUS2011_B42") 
+						){
+					queryInputs.put("Age", "15 years and over");
+				};
+			};
+
+			if(dim.getName().equals("Sex") && queryInputs.get("Sex") == null){
+				queryInputs.put("Sex", "Persons");
+				//System.out.println("setting default Sex to : Persons");
+			};
+		};
+
+
 
 		if(LocalTest.debug)
 			System.out.println(queryInputs);
@@ -319,6 +338,10 @@ public class Service {
 	}
 
 	private Double getOverlapScore(int a0, int a1, int b0, int b1) {
+		if(b1 == -1){
+			return 0.00; 
+		};
+		
 		if(a1 ==-1  && b1 == -1){
 			if(a0==b0){
 				return 1.00;

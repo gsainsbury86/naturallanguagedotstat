@@ -19,21 +19,36 @@ public class LocalTest {
 
 		Service service = new Service();
 		
-		/* The following queries fail for various reasons.
-		// service.query("How many men in Goulburn are from India?"); // 30  //Can't do this type yet, where it does not require an Age dimension.....
-		// service.query("How many women in Braidwood aged 25-30 are divorced"); //150
-		// "What is the female population of Sandy Bay aged 20-24?"
-		// "What is the population of Sandy Bay women aged 20-24?"
+		/* The following queries fail for various as it does not successfully identify the region....
+		service.query("How many women in Braidwood aged 25-30 are divorced"); //150
+		service.query("What is the female population of Sandy Bay aged 20-24?");
+		service.query("What is the population of Sandy Bay women aged 20-24?");
+
+		service.query("How many people aged 20-25 do not have need assistance in Australia?");
+		service.query("How many women aged 45-50 did voluntary work in New South Wales?"); //102622
+
+		service.query("How many people aged 35-40 in Goulburn were employed in total?"); //2047  //can't have the word total in it.
+		service.query("How many people in Goulburn were employed part time?"); 
+
 		 */
 
 		
 		/* The following queries are correct and now should be moved to UnitTester 
-		service.query("How many women in Braidwood are divorced"); //150
-		service.query("How many women aged 25-30 in Braidwood are divorced"); //3
 
+		service.query("How many people aged 35-40 in Goulburn were employed?"); //2047  
+		service.query("How many people aged 35-40 in Goulburn were in employment?"); //2047
+
+		service.query("How many men in Goulburn were in full time employment?");	//3726
+		service.query("How many men in Goulburn were full-time employed?");	//3726 
+		service.query("How many women in Goulburn were in the labour force?"); //4722
+		service.query("How many people in Goulburn were in employment?"); //9362
+		service.query("How many people in Goulburn were in part time employment?"); //2821
+		service.query("How many women were in Goulburn in the labour force?"); //4722
+		 *
 		 */
+		
+		service.query("How many women were in Goulburn in the labour force?"); //4722		
 
-		service.query("How many women aged 25-30 in Braidwood are divorced"); //150
 	}
 
 }
