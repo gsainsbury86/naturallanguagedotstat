@@ -45,7 +45,6 @@ public class SemanticParser {
 			for(Dimension dim : dataset.getDimensions() ){
 				HashMap<String, String> map = dim.getCodelist();
 				if (!dim.getName().equals("Age")  && map != null) {
-					System.out.println(dim.getName() +  " "  + map);
 					for(String key : map.keySet()){
 						flatCodeList.put(map.get(key), dim.getName() );
 					}

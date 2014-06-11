@@ -200,7 +200,7 @@ public class Service {
 		if(LocalTest.debug)
 			System.out.println(resultString);
 
-		return resultString;
+		return resultString + "\n" + queryInputs + "\n" + urlToRead;
 
 	}
 
