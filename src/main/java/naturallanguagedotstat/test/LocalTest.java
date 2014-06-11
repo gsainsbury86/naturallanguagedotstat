@@ -47,7 +47,7 @@ public class LocalTest {
 		 *
 		 */
 		
-		service.query("How many women have a bachelor degree in Capital Region?"); //4722		
+		System.out.println(service.query("How many women have a bachelor degree in Capital Region?")); //4722		
 
 	}
 

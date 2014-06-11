@@ -199,8 +199,10 @@ public class Service {
 
 		if(LocalTest.debug)
 			System.out.println(resultString);
+		
+ 		queryInputs.put("Region",region);
 
-		return resultString + "\n" + region + "\n" + queryInputs + "\n" + urlToRead;
+		return resultString + "<br><br>" + queryInputs + "<br>" + urlToRead;
 
 	}
 
