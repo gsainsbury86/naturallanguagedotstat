@@ -116,7 +116,4 @@ public class Service {
 		return resultString + "<br><br>" + "<br>" + urlToRead;
 
 	}
-
-
-
 }
