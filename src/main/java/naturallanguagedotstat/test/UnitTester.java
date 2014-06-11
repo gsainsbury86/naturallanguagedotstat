@@ -1,6 +1,6 @@
 package naturallanguagedotstat.test;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,8 +10,6 @@ import naturallanguagedotstat.Service;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
-
-import static org.hamcrest.CoreMatchers.*;
 
 
 public class UnitTester {

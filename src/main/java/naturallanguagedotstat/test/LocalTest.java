@@ -1,11 +1,8 @@
 package naturallanguagedotstat.test;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import naturallanguagedotstat.Service;
-import naturallanguagedotstat.model.Dataset;
-import naturallanguagedotstat.model.Dimension;
 
 public class LocalTest {
 

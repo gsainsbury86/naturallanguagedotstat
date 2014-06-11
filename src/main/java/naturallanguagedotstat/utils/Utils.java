@@ -10,6 +10,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -199,7 +201,7 @@ public class Utils {
 	}
 	
 	public static ArrayList<Dataset> findDatasetsWithDimensionName(ArrayList<Dataset> datasets, String dimensionName){
-		ArrayList<String> listOfOne = new ArrayList<String>();
+		HashSet<String> listOfOne = new HashSet<String>();
 		listOfOne.add(dimensionName);
 		return findDatasetsWithDimensionNames(datasets, listOfOne);
 	}
@@ -207,30 +209,30 @@ public class Utils {
 	/**
 	 * Find a list of Datasets which contain the given dimensions (by name).
 	 *  
-	 * @param dimensionNames an ArrayList of Strings with names of Dimensions
+	 * @param set an ArrayList of Strings with names of Dimensions
 	 * @return an ArrayList of Dimension objects
 	 */
-	public static ArrayList<Dataset> findDatasetsWithDimensionNames(ArrayList<Dataset> datasets, ArrayList<String> dimensionNames){
+	public static ArrayList<Dataset> findDatasetsWithDimensionNames(ArrayList<Dataset> datasets, Set<String> set){
 		ArrayList<Dataset> toReturn = new ArrayList<Dataset>();
 
 		for(Dataset dataset : datasets){
 			int c = 0;
 			for(Dimension dimension : dataset.getDimensions()){
-				for(String dimensionName : dimensionNames){
+				for(String dimensionName : set){
 					if(dimension.getName().equals(dimensionName)){
 						c++;
 					}
 				}
 			}
-			if(c == dimensionNames.size()){
+			if(c == set.size()){
 				toReturn.add(dataset);
 			}
 		}
 		return toReturn;
 	}
 	
-	public static Dataset findDatasetWithDimensionNames(ArrayList<Dataset> datasets, ArrayList<String> dimensionNames){
-		ArrayList<Dataset> datasetsWithDimensions = findDatasetsWithDimensionNames(datasets, dimensionNames);
+	public static Dataset findDatasetWithDimensionNames(ArrayList<Dataset> datasets, Set<String> set){
+		ArrayList<Dataset> datasetsWithDimensions = findDatasetsWithDimensionNames(datasets, set);
 
 		Dataset toReturn = null;
 		for(Dataset ds : datasetsWithDimensions){
@@ -244,6 +246,10 @@ public class Utils {
 		return toReturn;
 	}
 
-
+	public static String findObsValue(Document document) {
+		NodeList nodeList = document.getElementsByTagName("ObsValue");
+		Node node = nodeList.item(0);
+		return node.getAttributes().getNamedItem("value").getNodeValue();
+	}
 
 }

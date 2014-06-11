@@ -3,10 +3,7 @@ package naturallanguagedotstat.parser;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
-import naturallanguagedotstat.Service;
 import naturallanguagedotstat.model.Dataset;
 import naturallanguagedotstat.model.Dimension;
 
