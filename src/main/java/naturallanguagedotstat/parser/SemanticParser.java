@@ -40,7 +40,6 @@ public class SemanticParser {
 	}
 
 	private void createFlatCodeList(ArrayList<Dataset> datasets) throws IOException, ClassNotFoundException{
-		Service service = new Service();
 		boolean getData;
 		for(int i=0;i<46;i++){
 			for(Dimension dim : datasets.get(i).getDimensions() ){

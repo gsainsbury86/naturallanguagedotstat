@@ -61,6 +61,9 @@ public class DSDDownloader {
 
 			for(String dimName : dimensionNameList){
 				HashMap<String,String> map = Utils.findCodeLists(doc, dimName);
+				if(dimName.endsWith("ASGS_2011") || dimName.endsWith("FREQUENCY") || dimName.endsWith("STATE") || dimName.endsWith("REGIONTYPE")){
+					map = null;
+				}
 				String dimLabel = Utils.findDimLabel(doc, dimName);
 				Dimension dim = new Dimension(dimLabel,dimName, map);
 				dimensions.add(dim);
