@@ -21,14 +21,14 @@ public class SemanticParser {
 	private GrammarParser grammarParser;
 
 	// constructor
-	public SemanticParser (String str) throws IOException, ClassNotFoundException{
+	public SemanticParser (String str, ArrayList<Dataset> datasets) throws IOException, ClassNotFoundException{
 		flatCodeList = new HashMap<String, String>();
 		dimensions = new HashMap<String, String>();
 		synonyms   = new HashMap<String, String>();
 		grammarParser = new GrammarParser(str);
 
 		initializeSynonyms();
-		createFlatCodeList(); 
+		createFlatCodeList(datasets); 
 	}		
 	
 	
@@ -39,10 +39,9 @@ public class SemanticParser {
 		return dimensions;
 	}
 
-	private void createFlatCodeList() throws IOException, ClassNotFoundException{
+	private void createFlatCodeList(ArrayList<Dataset> datasets) throws IOException, ClassNotFoundException{
 		Service service = new Service();
 		boolean getData;
-		ArrayList<Dataset>  datasets = service.loadDatasets();
 		for(int i=0;i<46;i++){
 			for(Dimension dim : datasets.get(i).getDimensions() ){
 				HashMap<String, String> map = dim.getCodelist();

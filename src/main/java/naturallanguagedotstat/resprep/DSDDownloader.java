@@ -60,8 +60,7 @@ public class DSDDownloader {
 			ArrayList<Dimension> dimensions = new ArrayList<Dimension>();
 
 			for(String dimName : dimensionNameList){
-//				HashMap<String,String> map = Utils.findCodeLists(doc, dimName);
-				HashMap<String, String> map = null;
+				HashMap<String,String> map = Utils.findCodeLists(doc, dimName);
 				String dimLabel = Utils.findDimLabel(doc, dimName);
 				Dimension dim = new Dimension(dimLabel,dimName, map);
 				dimensions.add(dim);
@@ -71,7 +70,7 @@ public class DSDDownloader {
 			datasets.add(dataset);
 		}
 		
-		FileOutputStream fileOut = new FileOutputStream(RESOURCES+"/dataset_summaries.ser");
+		FileOutputStream fileOut = new FileOutputStream(RESOURCES+"/datasets.ser");
 		ObjectOutputStream out = new ObjectOutputStream(fileOut);
 		out.writeObject(datasets);
 		out.close();
