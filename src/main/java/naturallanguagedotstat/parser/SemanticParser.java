@@ -40,12 +40,11 @@ public class SemanticParser {
 	}
 
 	private void createFlatCodeList(ArrayList<Dataset> datasets) throws IOException, ClassNotFoundException{
-		boolean getData;
-		for(int i=0;i<46;i++){
-			for(Dimension dim : datasets.get(i).getDimensions() ){
+		//for(int i=0;i<46;i++){
+		for(Dataset dataset : datasets){
+			for(Dimension dim : dataset.getDimensions() ){
 				HashMap<String, String> map = dim.getCodelist();
-				getData = (dim.getName().equals("Age")  || dim.getName().equals("Region") || dim.getName().equals("Region Type") || dim.getName().equals("State") )? false : true;
-				if (getData) {
+				if (!(dim.getName().equals("Age")  && map != null)) {
 					for(String key : map.keySet() ){
 						flatCodeList.put(map.get(key), dim.getName() );
 					}
