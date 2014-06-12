@@ -45,11 +45,16 @@ div.container {
 		sans-serif;
 }
 
+#url {
+margin-top: 20px;
+}
+
 #result {
 	color: #404040;
 	font-size: 36px;
 	line-height: 1.4;
 }
+
 
 input {
 	color: #404040;
@@ -75,6 +80,7 @@ input {
 			$.getJSON(url, function(data, status, jqXHR){
 				$("#result").text(data.result);
 				$("#url").text(data.url);
+				$('#map').text();
 				$.each(data, function(index) {
 					if(index != 'result' && index != 'url'){
 						$("#map").append(index + " : " + data[index] + '<br>');
@@ -92,9 +98,10 @@ input {
 		<h2>What would you like to know?</h2>
 		<input type="text" id="query" />
 		<button id="go" class="mybutton">Search</button>
-		<div id="url"></div>
-		<div id="map"></div>
 		<div id="result"></div>
+		<div id="map"></div>
+		<div id="url"></div>
+
 	</div>
 
 </body>

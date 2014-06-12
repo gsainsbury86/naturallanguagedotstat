@@ -120,7 +120,7 @@ public class Service {
 		JsonObjectBuilder builder = Json.createObjectBuilder();
 		builder.add("result", resultString);
 		builder.add("url", urlToRead);
-		builder.add("region",queryBuilder.getRegion());
+		builder.add("Region",queryBuilder.getRegion());
 		for(String key : queryBuilder.getQueryInputs().keySet()){
 			for(String dimValue : queryBuilder.getQueryInputs().get(key)){
 				builder.add(key, dimValue);
