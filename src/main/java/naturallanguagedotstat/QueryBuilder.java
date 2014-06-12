@@ -3,6 +3,7 @@ package naturallanguagedotstat;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import naturallanguagedotstat.model.Dataset;
@@ -15,16 +16,16 @@ public class QueryBuilder {
 
 	private static final String SEX = "Sex";
 	private static final String AGE = "Age";
-	
+
 	//TODO: Make static once we fix one-time loading
 	private ArrayList<Dataset> datasets;
 	private Dimension ASGS2011;
-	
+
 	private String query;
 	private String region;
-	private HashMap<String, String> queryInputs;
+	private HashMap<String, ArrayList<String>> queryInputs;
 	private String restfulURL;
-	
+
 	public QueryBuilder(String query, ArrayList<Dataset> datasets, Dimension ASGS2011) {
 		this.query = query;
 		this.datasets = datasets;
@@ -37,51 +38,58 @@ public class QueryBuilder {
 		semanticParser.parseText();
 
 		queryInputs = semanticParser.getDimensions();	
-		
-		region = queryInputs.get("region");
+
+		region = queryInputs.get("region").get(0);
 		queryInputs.remove("region");
-		
+
 		Dataset dataset = findBestMatchDatasetForDimensionNames();
 
 		if(queryInputs.containsKey(AGE)){
 			optimizeAgeCodeList(queryInputs, dataset);
 		};
-		
+
 		setDefaultsForMissingDimensions(queryInputs, dataset);
-		
+
 		restfulURL = generateURL(dataset);
+		//TODO: Return more details in some new object
 		return restfulURL;
 
-	
+
 	}
 
 	private void setDefaultsForMissingDimensions(
-			HashMap<String, String> queryInputs, Dataset dataset) {
+			HashMap<String, ArrayList<String>> queryInputs2, Dataset dataset) {
 		for(Dimension dim : dataset.getDimensions()){
-			if(dim.getName().equals(AGE) && queryInputs.get(AGE) == null){
-				queryInputs.put(AGE, "Total all ages");
+			if(dim.getName().equals(AGE) && queryInputs2.get(AGE) == null){
+				ArrayList<String> list = new ArrayList<String>();
+				list.add("Total all ages");
+				queryInputs2.put(AGE, list);
 				if(dataset.getName().equals("ABS_CENSUS2011_B20")  
 						|| dataset.getName().equals("ABS_CENSUS2011_B21")  
 						|| dataset.getName().equals("ABS_CENSUS2011_B40") 
 						|| dataset.getName().equals("ABS_CENSUS2011_B42") 
 						){
-					queryInputs.put(AGE, "15 years and over");
+					ArrayList<String> list2 = new ArrayList<String>();
+					list2.add("15 years and over");
+					queryInputs2.put(AGE, list2);
 				};
 			};
 
-			if(dim.getName().equals(SEX) && queryInputs.get(SEX) == null){
-				queryInputs.put(SEX, "Persons");
+			if(dim.getName().equals(SEX) && queryInputs2.get(SEX) == null){
+				ArrayList<String> list3 = new ArrayList<String>();
+				list3.add("Persons");
+				queryInputs2.put(SEX, list3);
 				//System.out.println("setting default Sex to : Persons");
 			};
 		};
 	}
-	
-	private void optimizeAgeCodeList(HashMap<String, String> queryInputs, Dataset dataset) {
-		if(!queryInputs.containsKey(AGE)){return;};
-		if(queryInputs.get(AGE).equals("Total all ages")){return;}
+
+	private void optimizeAgeCodeList(HashMap<String, ArrayList<String>> queryInputs2, Dataset dataset) {
+		if(!queryInputs2.containsKey(AGE)){return;};
+		if(queryInputs2.get(AGE).get(0).equals("Total all ages")){return;}
 
 
-		NumericParser ageQueryParser = new NumericParser(queryInputs.get(AGE) );
+		NumericParser ageQueryParser = new NumericParser(queryInputs2.get(AGE).get(0) );
 
 		int a0 = Integer.parseInt(ageQueryParser.getExplicitNumbers().get(0) );
 		int a1 = (ageQueryParser.getExplicitNumbers().size() >1) 
@@ -89,40 +97,44 @@ public class QueryBuilder {
 
 
 
-		HashMap<String, String> ageCodeList = null;
-		for(Dimension dim : dataset.getDimensions()){
-			if(dim.getName().equals(AGE)){
-				ageCodeList = dim.getCodelist();
-			};
-		};
+				HashMap<String, String> ageCodeList = null;
+				for(Dimension dim : dataset.getDimensions()){
+					if(dim.getName().equals(AGE)){
+						ageCodeList = dim.getCodelist();
+					};
+				};
 
-		List<String> ageCodeListDescriptions = new ArrayList<String>(ageCodeList.values());
+				List<String> ageCodeListDescriptions = new ArrayList<String>(ageCodeList.values());
 
-		HashMap< String, Double> matches = new HashMap< String, Double>();
+				HashMap< String, Double> matches = new HashMap< String, Double>();
 
-		Double overlapScore;
-		for (String descr: ageCodeListDescriptions){
-			NumericParser ageDescriptionParser = new NumericParser(descr);
+				Double overlapScore;
+				for (String descr: ageCodeListDescriptions){
+					NumericParser ageDescriptionParser = new NumericParser(descr);
 
-			int b0 = (ageDescriptionParser.getExplicitNumbers().size() >0) 
-					? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(0) ) : -1;
+					int b0 = (ageDescriptionParser.getExplicitNumbers().size() >0) 
+							? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(0) ) : -1;
 
-			int b1 = (ageDescriptionParser.getExplicitNumbers().size() >1) 
-					? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) ) : -1;
+							int b1 = (ageDescriptionParser.getExplicitNumbers().size() >1) 
+									? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) ) : -1;
 
-			overlapScore =  getOverlapScore(a0, a1, b0, b1);
-			if(overlapScore > 0 ){matches.put(descr, overlapScore);}
-			ageDescriptionParser = null;
-		};
+									overlapScore =  getOverlapScore(a0, a1, b0, b1);
+									if(overlapScore > 0 ){matches.put(descr, overlapScore);}
+									ageDescriptionParser = null;
+				};
 
-		queryInputs.put(AGE, getKeyForMaxValue (matches));
+				
+				ArrayList<String> list = new ArrayList<String>();
+				list.add(getKeyForMaxValue (matches));
+				
+				queryInputs2.put(AGE, list);
 	}
 
 	private Double getOverlapScore(int a0, int a1, int b0, int b1) {
 		if(b1 == -1){
 			return 0.00; 
 		};
-		
+
 		if(a1 ==-1  && b1 == -1){
 			if(a0==b0){
 				return 1.00;
@@ -174,7 +186,8 @@ public class QueryBuilder {
 		for(Dimension dim : ds.getDimensions()){
 			for(String dimKey : queryInputs.keySet()){
 				if(dim.getName().equals(dimKey)){
-					url += Utils.findValue(dim.getCodelist(),queryInputs.get(dimKey)) + ".";
+					//TODO: Loop over all in queryInputs
+					url += Utils.findValue(dim.getCodelist(),queryInputs.get(dimKey).get(0)) + ".";
 				}
 			}
 		}
@@ -192,7 +205,7 @@ public class QueryBuilder {
 
 		return url;
 	}
-	
+
 	// ........................................................................................
 
 	private String getKeyForMaxValue (HashMap< String, Double> map){
@@ -204,7 +217,7 @@ public class QueryBuilder {
 		};
 		return keyForMaxValue;
 	};
-	
+
 	/**
 	 * Find a list of Datasets which contain the given dimensions (by name).
 	 *  
@@ -229,7 +242,7 @@ public class QueryBuilder {
 		}
 		return toReturn;
 	}
-	
+
 	public Dataset findBestMatchDatasetForDimensionNames(){
 		ArrayList<Dataset> datasetsWithDimensions = findDatasetsWithDimensionNames();
 
@@ -278,7 +291,7 @@ public class QueryBuilder {
 		}
 		return regionType;
 	}
-	
-	
+
+
 
 }

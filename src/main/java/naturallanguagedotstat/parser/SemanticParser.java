@@ -3,6 +3,7 @@ package naturallanguagedotstat.parser;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import naturallanguagedotstat.model.Dataset;
 import naturallanguagedotstat.model.Dimension;
@@ -34,9 +35,18 @@ public class SemanticParser {
 
 
 	// methods (in alphabetical order - hopefully)
+	//TODO: Change dimensions field so that it is HashMap<String, ArrayList<String>> 
+	public HashMap<String, ArrayList<String>> getDimensions() {
 
-	public HashMap<String, String> getDimensions() {
-		return dimensions;
+		HashMap<String, ArrayList<String>> toReturn = new HashMap<String, ArrayList<String>>();
+		
+		for(String key : dimensions.keySet()){
+			ArrayList<String> list = new ArrayList<String>();
+			list.add(dimensions.get(key));
+			toReturn.put(key,list);
+		}
+		
+		return toReturn;
 	}
 
 	private void createFlatCodeList(ArrayList<Dataset> datasets) throws IOException, ClassNotFoundException{
