@@ -4,12 +4,18 @@ import static org.hamcrest.CoreMatchers.is;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.StringReader;
+
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 
 import naturallanguagedotstat.Service;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
+
 
 
 public class UnitTester {
@@ -24,7 +30,7 @@ public class UnitTester {
 		service = new Service();
 	}
 
- 	@Test
+	@Test
 	public void testQueries()
 			throws FileNotFoundException, IOException, ClassNotFoundException {
 
@@ -33,21 +39,27 @@ public class UnitTester {
 
 		for(int i = 0; i < TEST_QUERIES.length; i++){
 			System.out.println("Testing: ("+(i+1)+ "/"+TEST_QUERIES.length +"): "+ TEST_QUERIES[i]);
-			collector.checkThat(TEST_QUERIES[i], Integer.parseInt(service.query(TEST_QUERIES[i])), is(TEST_RESULTS[i]));
+
+			JsonReader jsonReader = Json.createReader(new StringReader((String) service.query(TEST_QUERIES[i]).getEntity()));
+			JsonObject object = jsonReader.readObject();
+			jsonReader.close();
+
+			collector.checkThat(TEST_QUERIES[i], Integer.parseInt(
+					(object.getString("result"))), is(TEST_RESULTS[i]));
 		}
 	}
-	
-//	@Test
-//	public void testQueries()
-//			throws FileNotFoundException, IOException, ClassNotFoundException {
-//
-//		LocalTest.localLoad = true;
-//		LocalTest.debug = false;
-//
-//		for(int i = 0; i < TEST_QUERIES.length; i++){
-//			assertEquals(TEST_QUERIES[i],Integer.parseInt(service.query(TEST_QUERIES[i])), TEST_RESULTS[i]);
-//		}
-//	}
+
+	//	@Test
+	//	public void testQueries()
+	//			throws FileNotFoundException, IOException, ClassNotFoundException {
+	//
+	//		LocalTest.localLoad = true;
+	//		LocalTest.debug = false;
+	//
+	//		for(int i = 0; i < TEST_QUERIES.length; i++){
+	//			assertEquals(TEST_QUERIES[i],Integer.parseInt(service.query(TEST_QUERIES[i])), TEST_RESULTS[i]);
+	//		}
+	//	}
 
 	private static final String[] TEST_QUERIES = {
 		"What is the population of Australia?",
@@ -114,7 +126,7 @@ public class UnitTester {
 		"How many 20-25 year old women in Tasmania are technicians?", 
 		"How many women aged 20-25 in Tasmania are community workers?", 
 		"How many women aged 20-25 in Tasmania are labourers?", 
-		
+
 		"How many women are aged 15-20 in Tasmania?",
 		"How many women aged 18-19 in Tasmania are community workers?",
 		"How many men aged 20-25 did volunteer work in Goulburn?",
@@ -151,17 +163,17 @@ public class UnitTester {
 		//B19
 		"How many women aged 45-50 did volunteer work in New South Wales?",
 		"How many women aged 45-50 did volunteer work in New South Wales?",
-		
+
 		//B21
 		"How many women aged 15-19 provided unpaid assistance in Australia?",
 		"How many women provided unpaid assistance in Australia?",
-		
+
 		//B40
 		"How many women 25-34 in Goulburn have a postgraduate degree",
 		"How many women in Capital Region have a graduate diploma?",
 		"How many women have a bachelor degree in Capital Region?"
 
-		
+
 	};
 
 	private static final int[] TEST_RESULTS = {		
@@ -229,7 +241,7 @@ public class UnitTester {
 		705, //"How many 20-25 year old women in Tasmania are technicians?", 
 		2166, //"How many women aged 20-25 in Tasmania are community workers?", 
 		711, //"How many women aged 20-25 in Tasmania are labourers?" 
-		
+
 		15846,  // service.query("How many women are aged 15-20 in Tasmania?");
 		1552, // service.query("How many women aged 18-19 in Tasmania are community workers?"); 
 		73, // service.query("How many men aged 20-25 did volunteer work in Goulburn?"); 
@@ -266,16 +278,16 @@ public class UnitTester {
 		//B19
 		102622,	// service.query("How many women aged 45-50 did volunteer work in New South Wales?"); //102622
 		102622,	// service.query("How many women aged 45-50 did volunteer work in New South Wales?"); //102622
-		
+
 		//B21
 		32277,	// service.query("How many women aged 15-19 provided unpaid assistance in Australia?"); //32277
 		1160621,	// service.query("How many women provided unpaid assistance in Australia?"); //1160621
-		
+
 		//B40
 		14,	//	service.query("How many women 25-34 in Goulburn have a postgraduate degree");
 		1963,	// service.query("How many women in Capital Region have a graduate diploma?"); // 1963
 		9773	// service.query("How many women have a bachelor degree in Capital Region?"); // 9773
 
-		
+
 	};
 }

@@ -10,11 +10,15 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -98,12 +102,12 @@ public class Service {
 
 	@GET
 	@Path("/query/{query}")
-	@Produces("text/html;charset=UTF-8;version=1")
-	public String query(@PathParam("query") String query) throws FileNotFoundException, IOException, ClassNotFoundException{
+	@Produces("application/json")
+	public Response query(@PathParam("query") String query) throws FileNotFoundException, IOException, ClassNotFoundException{
 
 		ArrayList<Dataset> datasets = loadDatasets();
 		Dimension ASGS2011 = loadASGS_2011();
-		
+
 		QueryBuilder queryBuilder = new QueryBuilder(query, datasets, ASGS2011);
 		String urlToRead = queryBuilder.build();
 
@@ -112,8 +116,19 @@ public class Service {
 		Document dataDocument = Utils.XMLToDocument(data);
 
 		String resultString = Utils.findObsValue(dataDocument);
-		
-		return resultString;// + "<br><br>" + "<br>" + urlToRead;
+
+		JsonObjectBuilder builder = Json.createObjectBuilder();
+		builder.add("result", resultString);
+		builder.add("url", urlToRead);
+		builder.add("region",queryBuilder.getRegion());
+		for(String key : queryBuilder.getQueryInputs().keySet()){
+			for(String dimValue : queryBuilder.getQueryInputs().get(key)){
+				builder.add(key, dimValue);
+			}
+		}
+		JsonObject myObject = builder.build();
+
+		return Response.status(200).entity(myObject.toString()).build();// + "<br><br>" + "<br>" + urlToRead;
 
 	}
 }

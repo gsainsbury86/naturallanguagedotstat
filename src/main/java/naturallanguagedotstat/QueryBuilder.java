@@ -24,6 +24,14 @@ public class QueryBuilder {
 	private String query;
 	private String region;
 	private HashMap<String, ArrayList<String>> queryInputs;
+	public String getRegion() {
+		return region;
+	}
+
+	public HashMap<String, ArrayList<String>> getQueryInputs() {
+		return queryInputs;
+	}
+
 	private String restfulURL;
 
 	public QueryBuilder(String query, ArrayList<Dataset> datasets, Dimension ASGS2011) {
