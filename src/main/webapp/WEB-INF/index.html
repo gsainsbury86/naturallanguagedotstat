@@ -80,7 +80,7 @@ input {
 			$.getJSON(url, function(data, status, jqXHR){
 				$("#result").text(data.result);
 				$("#url").text(data.url);
-				$('#map').text();
+				$('#map').text(' ');
 				$.each(data, function(index) {
 					if(index != 'result' && index != 'url'){
 						$("#map").append(index + " : " + data[index] + '<br>');
