@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 import naturallanguagedotstat.model.Dataset;
@@ -17,6 +18,7 @@ public class QueryBuilder {
 	private static final String SEX = "Sex";
 	private static final String AGE = "Age";
 
+	private boolean doAggregateAges;
 	//TODO: Make static once we fix one-time loading
 	private ArrayList<Dataset> datasets;
 	private Dimension ASGS2011;
@@ -38,6 +40,8 @@ public class QueryBuilder {
 		this.query = query;
 		this.datasets = datasets;
 		this.ASGS2011 = ASGS2011;
+		
+		doAggregateAges = false;
 	}
 
 	public String build() throws IOException, ClassNotFoundException {
@@ -53,7 +57,7 @@ public class QueryBuilder {
 		Dataset dataset = findBestMatchDatasetForDimensionNames();
 
 		if(queryInputs.containsKey(AGE)){
-			optimizeAgeCodeList(queryInputs, dataset);
+			getBestAgeCodeLists(queryInputs, dataset);
 		};
 
 		setDefaultsForMissingDimensions(queryInputs, dataset);
@@ -92,12 +96,13 @@ public class QueryBuilder {
 		};
 	}
 
-	private void optimizeAgeCodeList(HashMap<String, ArrayList<String>> queryInputs2, Dataset dataset) {
+	private void getBestAgeCodeLists(HashMap<String, ArrayList<String>> queryInputs2, Dataset dataset) {
 		if(!queryInputs2.containsKey(AGE)){return;};
 		if(queryInputs2.get(AGE).get(0).equals("Total all ages")){return;}
 
-		NumericParser ageQueryParser = new NumericParser(queryInputs2.get(AGE).get(0) );
 
+		NumericParser ageQueryParser = new NumericParser(queryInputs2.get(AGE).get(0) );
+		// System.out.println( ageQueryParser.getExplicitNumbers() );
 		int a0 = Integer.parseInt(ageQueryParser.getExplicitNumbers().get(0) );
 		int a1 = (ageQueryParser.getExplicitNumbers().size() >1) 
 				? Integer.parseInt(ageQueryParser.getExplicitNumbers().get(1) ) : -1;
@@ -113,8 +118,6 @@ public class QueryBuilder {
 
 		HashMap< String, Double> matches = new HashMap< String, Double>();
 
-		boolean codeListHasSingleValues = dataset.getName().equals("ABS_CENSUS2011_B04");
-		
 		Double overlapScore;
 		for (String descr: ageCodeListDescriptions){
 			NumericParser ageDescriptionParser = new NumericParser(descr);
@@ -123,48 +126,99 @@ public class QueryBuilder {
 					? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(0) ) : -1;
 
 			int b1 = (ageDescriptionParser.getExplicitNumbers().size() >1) 
-						? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) ) : -1;
+							? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) ) : -1;
 
-			overlapScore =  getOverlapScore(a0, a1, b0, b1);
-			if(overlapScore > 0 ){matches.put(descr, overlapScore);}
-					ageDescriptionParser = null;
-		};
+			if(ageDescriptionParser.getExplicitNumbers().size() >1){
+				String comparatorDescriptor = ageDescriptionParser.comparatorAsString (ageDescriptionParser.getComparator() );
+
+				if (comparatorDescriptor.equals("∈") )
+					b1 = Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) );
+				
+				if (comparatorDescriptor.equals(">") )
+					b1 = 999;
+				
+				if (comparatorDescriptor.equals("<") ){
+					b1 = b0;
+					b0 = 0;
+				};
+			}
 
 		
+			overlapScore =  getOverlapScore(a0, a1, b0, b1);
+			matches.put(descr, overlapScore);
+			ageDescriptionParser = null;
+		};
+
 		ArrayList<String> list = new ArrayList<String>();
-		list.add(getKeyForMaxValue (matches));
-				
+		Double scoreMax = matches.get(getKeyForMaxValue(matches) );
+
+		double epsilon = 0.000001;
+		for (String descr: ageCodeListDescriptions){
+			if(Math.abs(matches.get(descr) - scoreMax ) < epsilon ){
+				list.add(descr);
+			}
+		}
+
+		// Treat B04 differently as it is the only dataset with hierarchical age ranges.
+		if(doAggregateAges && dataset.getName().equals("ABS_CENSUS2011_B04")){
+		    for (Iterator<String> iter = list.iterator(); iter.hasNext();) {
+		        String s = iter.next();
+			    if (!isNumber(s) ) 
+			       iter.remove();
+		    };
+		};
+			
+		System.out.println("Matched AGE intervals are:" + list);
 		queryInputs2.put(AGE, list);
 	}
 
+	private boolean isNumber(String aString)
+	{
+		try {
+	        Integer.parseInt( aString );
+	        return true;
+	    }
+	    catch( Exception e ) {
+	        return false;
+	    }
+	};
+	
 	private Double getOverlapScore(int a0, int a1, int b0, int b1) {
-		if(b1 == -1){
-			return 0.00; 
-		};
-
+		//if both query and codelist are null
+		if (a0==-1 || b0 ==-1) 
+			return -1.0;
+		
+		//if both query and codelist are single-valued
 		if(a1 ==-1  && b1 == -1){
 			if(a0==b0){
-				return 1.00;
+				return +1.0; //perfect complete match
 			};
 		};
 
-
-		if(b1 != -1){
+		//query is single-valued and codelist is an interval
+		if(a1 == -1 && b1 != -1){
 			if(b0 <= a0 && a0 <= b1){
-				return Math.min( 1.0 * (b1-a0+1)/(b1-b0+1), 1.0* (b1-a0+1)/(a1-a0+1) );
+				return +1.0 /(b1-b0+1);
 			};
 		};
 
-
-		if(a1 != -1){
+		//if query is an interval, and codelist is single-valued
+		if(a1 != -1 && b1==-1){
+			if (!doAggregateAges)
+				return -1.0;
+			
 			if(a0 <= b0 && b0 <= a1){
-				return Math.min(1.0*  (a1-b0+1)/(b1-b0+1), 1.0* (a1-b0+1)/(a1-a0+1) ) ;
+				return +1.0; //perfect element match .
 			};
 		};
 
+		//if query and codelist are both intervals
 		if(a1 !=-1  && b1 !=-1 ){
-			if(b0 <= a0 && a1 <= b1){
-				return Math.min( 1.0* (a1-a0+1)/(b1-b0+1), 1.0* (a1-a0+1)/(a1-a0+1) );
+			if(a0 <= b0 && b0 <= a1){
+				return 1.0* (a1-b0+1) / Math.max(a1-a0+1, b1-b0+1);
+			};
+			if(b0 <= a0 && a0 <= b1){
+				return 1.0* (b1-a0+1) / Math.max(a1-a0+1, b1-b0+1);
 			};
 		};
 

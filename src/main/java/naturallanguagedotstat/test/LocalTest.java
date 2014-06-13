@@ -44,7 +44,7 @@ public class LocalTest {
 
 		 */
 
-		System.out.println( getQueryResult("How many women aged 20-25 in Tasmania are labourers?"));	// 711
+		System.out.println( getQueryResult("what is the female population aged 20-24 of Sandy Bay?"));
 
 
 	}

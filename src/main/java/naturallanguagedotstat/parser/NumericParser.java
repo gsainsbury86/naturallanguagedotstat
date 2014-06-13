@@ -72,7 +72,7 @@ public class NumericParser {
 		switch(comparator){
 			case equals: 				str = "="; break;
 			case lessThan: 				str = "<"; break;
-			case greaterThan: 			str = "="; break;
+			case greaterThan: 			str = ">"; break;
 			case lessThanOrEqualTo: 	str = "≤"; break;
 			case greaterThanOrEqualTo: 	str = "≥"; break;
 			case between: 				str = "∈"; 
@@ -133,7 +133,7 @@ public class NumericParser {
 			};
 		};
 		
-		Collections.sort(arrayList);
+		// Collections.sort(arrayList);
 		return arrayList;
 	};
 

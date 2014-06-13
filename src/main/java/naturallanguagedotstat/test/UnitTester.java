@@ -181,8 +181,6 @@ public class UnitTester {
 		"How many 20-25 year old women in Tasmania are technicians?", 
 		"How many women aged 20-25 in Tasmania are community workers?", 
 		"How many women aged 20-25 in Tasmania are labourers?"
-
-
 	};
 
 	private static final int[] TEST_RESULTS = {	
@@ -282,9 +280,10 @@ public class UnitTester {
 		9773,	// 	"How many women have a bachelor degree in Capital Region?"); // 9773
 		5, 		//	"How many people 15-24 have a diploma in Goulburn");
 		14,		// 	"How many women 25-34 in Goulburn have a postgraduate degree");
-		90, 	// 	"How many 35-44 year old men in Goulburn have a bachelors degree ");		System.out.println( getQueryResult("How many people aged 35-40 in Goulburn were employed?")); //2047  
+		90, 	// 	"How many 35-44 year old men in Goulburn have a bachelors degree ");		
 
 		//B42
+		2047, 	// "How many people aged 35-40 in Goulburn were employed?")); //2047  
 		2047,	// "How many people aged 35-40 in Goulburn were in employment?")); //2047
 		3726,	// "How many men in Goulburn were in full time employment?"));	//3726
 		3726, 	// "How many men in Goulburn were full-time employed?"));	//3726 

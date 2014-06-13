@@ -309,7 +309,6 @@ public class SemanticParser {
 			if(wholeWordContains(str, keyWord)  ){ 
 				baseWord = synonyms.get(keyWord) ; 
 				dimensions.put(flatCodeList.get(baseWord), baseWord);
-				//System.out.println("Synonyms: "+flatCodeList.get(baseWord)+" <-- " + baseWord+"<--"+keyWord);
 			};
 		};		
 	}
@@ -321,7 +320,6 @@ public class SemanticParser {
 			if(wholeWordContains(str, keyWord)  ){ 
 				baseWord = keyWord ; 
 				dimensions.put(flatCodeList.get(baseWord), baseWord);
-				//System.out.println("Codelist: "+flatCodeList.get(baseWord)+":" + baseWord);
 			};
 		};
 
