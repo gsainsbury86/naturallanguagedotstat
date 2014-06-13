@@ -375,7 +375,7 @@ public class SemanticParser {
 		if(j==-1) return str;
 		str = someWords[j-1] + " " + someWords[j];
 
-		if (someWords[j-1].equals("‚àà") ) {
+		if (someWords[j-1].equals("∈") ) {
 			str = str + " " + someWords[j+1];
 		};
 

@@ -1,6 +1,17 @@
 package naturallanguagedotstat.test;
 
+import static org.hamcrest.CoreMatchers.is;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.StringReader;
+
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+
+import org.junit.Test;
+import org.junit.rules.ErrorCollector;
 
 import naturallanguagedotstat.Service;
 
@@ -15,7 +26,7 @@ public class LocalTest {
 		localLoad = true;
 
 		Service service = new Service();
-		
+
 		/* The following queries fail for various as it does not successfully identify the region....
 		service.query("How many women in Braidwood aged 25-30 are divorced"); //150
 		service.query("What is the female population of Sandy Bay aged 20-24?");
@@ -29,7 +40,7 @@ public class LocalTest {
 
 		 */
 
-		
+
 		/* The following queries are correct and now should be moved to UnitTester 
 
 		service.query("How many people aged 35-40 in Goulburn were employed?"); //2047  
@@ -43,8 +54,19 @@ public class LocalTest {
 		service.query("How many women were in Goulburn in the labour force?"); //4722
 		 *
 		 */
-		
-		System.out.println(service.query("How many women have a bachelor degree in Capital Region?")); //4722		
+
+
+		LocalTest.localLoad = true;
+		LocalTest.debug = true;
+
+
+		JsonReader jsonReader = Json.createReader(new StringReader((String) service.query("What is the female 15-19 population of Sandy Bay?").getEntity()));
+		JsonObject object = jsonReader.readObject();
+		jsonReader.close();
+
+		System.out.println(Integer.parseInt((object.getString("result"))));
+
+
 
 	}
 

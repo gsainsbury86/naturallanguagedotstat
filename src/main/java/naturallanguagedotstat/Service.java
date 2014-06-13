@@ -110,7 +110,7 @@ public class Service {
 
 		QueryBuilder queryBuilder = new QueryBuilder(query, datasets, ASGS2011);
 		String urlToRead = queryBuilder.build();
-
+		
 		String data = Utils.httpGET(urlToRead);
 
 		Document dataDocument = Utils.XMLToDocument(data);
