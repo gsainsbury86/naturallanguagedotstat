@@ -99,6 +99,7 @@ public class SemanticParser {
 
 		//B03
 		synonyms.put("at home on Census night","Counted at home on Census Night" ) ;
+		synonyms.put("at home on the night","Counted at home on Census Night" ) ;
 		synonyms.put("same Statistical Area Level 2","Same Statistical Area Level 2 (SA2)" ) ;
 		synonyms.put("same SA2","Same Statistical Area Level 2 (SA2)" ) ;
 
@@ -221,9 +222,11 @@ public class SemanticParser {
 		synonyms.put("employed full time","Full-time(a)");
 		synonyms.put("full time employed","Full-time(a)");
 		synonyms.put("full time employment","Full-time(a)");
+		synonyms.put("full time employees","Full-time(a)");
 		synonyms.put("employed part time","Part-time");
 		synonyms.put("part time employed","Part-time");
 		synonyms.put("part time employment","Part-time");
+		synonyms.put("part time employees","Part-time");
 		// synonyms.put("agriculture","Employed, away from work(b)");
 		synonyms.put("labour force","Total labour force");
 
@@ -372,7 +375,7 @@ public class SemanticParser {
 		if(j==-1) return str;
 		str = someWords[j-1] + " " + someWords[j];
 
-		if (someWords[j-1].equals("∈") ) {
+		if (someWords[j-1].equals("‚àà") ) {
 			str = str + " " + someWords[j+1];
 		};
 
@@ -393,35 +396,43 @@ public class SemanticParser {
 
 	private void cleanUpDimensions(){
 
-		// .......................................................................
-		// only temporary until we find a way to solve these ambiguities!
-		if(dimensions.get("Ancestry") != null ){
-			dimensions.remove("Ancestry");
-		};
-
-		if(dimensions.get("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)") != null ){
-			dimensions.remove("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)");
-		};
-		// .......................................................................
-
-
 
 		dimensions.remove("Selected Person Characteristics"); // This eliminates Statistical Collections that are merely summaries of other ones.
 
+		if(dimensions.containsKey("Ancestry") ){
+			dimensions.remove("Ancestry");
+		};
 
-		if(dimensions.get("Sex") != null && dimensions.get("Sex").equals("Persons")){
+		if(dimensions.containsKey("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)") ){
+			dimensions.remove("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)");
+		};
+
+		int c = (dimensions.containsKey("region")) ? 1 : 0;
+		
+		// if query only has <Country of Birth of Person> currently make sure it chooses B09 and not B10;
+		if(dimensions.containsKey("Country of Birth of Person") && dimensions.size() == c){
+			dimensions.put("Age","Total all ages");
+		};
+
+		// if query only has <region>, make sure it chooses B04;
+		if(dimensions.size() == c ){
+			dimensions.put("Sex","Persons");
+			dimensions.put("Age","Total all ages");
+		};
+
+		// if query only has <Sex> and <Region>, make sure it chooses B04;
+		if(dimensions.size() == c+1  && dimensions.containsKey("Sex")){
+			dimensions.put("Age","Total all ages");
+		};
+
+		
+		// the word "persons" is often used as a generic grammar term and not as a direct semantic indicator of sum of males+females.
+		if(dimensions.containsKey("Place of Usual Residence on Census Night")  && dimensions.containsKey("Sex") ){
 			dimensions.remove("Sex");
 		};
-
-		if(dimensions.get("region") == null) {dimensions.put("region","Australia");};
-
-		// if dimensions only has a region and no (remaining) other dimensions, insert some default key-values.
-		if(dimensions.size() <= 2 ){
-			if(dimensions.get("Sex") == null) {dimensions.put("Sex","Persons");};
-		};
-
-		if(dimensions.size() <= 2 ){
-			if(dimensions.get("Age") == null) {dimensions.put("Age","Total all ages");};
-		};
+		
+		// if query does not have <Region>, set it to the default value of "Australia";
+		if(!dimensions.containsKey("region") ) {dimensions.put("region","Australia");};
+	
 	}
 }
