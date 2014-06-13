@@ -168,7 +168,7 @@ public class QueryBuilder {
 		    };
 		};
 			
-		System.out.println("Matched AGE intervals are:" + list);
+		// System.out.println("Matched AGE intervals are:" + list);
 		queryInputs2.put(AGE, list);
 	}
 
