@@ -66,7 +66,9 @@ public class UnitTester {
 		//B03
 		"How many people aged 18-20 were at home on Census night in Goulburn?",	
 		"How many people were at home on Census night in Goulburn?",	
+		"how many men were at home on the night of the Census in Goulburn",
 
+		
 		//B04
 		"What is the population of Australia?",
 		"What is the population of Sandy Bay?",
@@ -154,6 +156,16 @@ public class UnitTester {
 		"How many women 25-34 in Goulburn have a postgraduate degree",
 		"How many 35-44 year old men in Goulburn have a bachelors degree ",
 
+		//B42
+		"How many people aged 35-40 in Goulburn were employed?",
+		"How many people aged 35-40 in Goulburn were in employment?",
+		"How many men in Goulburn were in full time employment?",
+		"How many men in Goulburn were full-time employed?",
+		"How many women in Goulburn were in the labour force?",
+		"How many people in Goulburn were in employment?",
+		"How many people in Goulburn were in part time employment?",
+		"How many women were in Goulburn in the labour force?",
+
 		//B43
 		"How many men aged 35-40 in Queanbeyan are in the agricultural sector?", 
 		"How many men aged 35-40 in Queanbeyan are in the mining sector?", 
@@ -168,7 +180,7 @@ public class UnitTester {
 		"How many 20-25 year old females in Tasmania are professionals?", 
 		"How many 20-25 year old women in Tasmania are technicians?", 
 		"How many women aged 20-25 in Tasmania are community workers?", 
-		"How many women aged 20-25 in Tasmania are labourers?", 
+		"How many women aged 20-25 in Tasmania are labourers?"
 
 
 	};
@@ -176,7 +188,9 @@ public class UnitTester {
 	private static final int[] TEST_RESULTS = {	
 		
 		//B03
-		2497,	//service.query("How many persons aged 18-20 were at home on Census night in Goulburn?" ); //		
+		2497, 	// "How many people aged 18-20 were at home on Census night in Goulburn?",	
+		20430, 	//	"How many people were at home on Census night in Goulburn?",	
+		10760, 	//	"how many men were at home on the night of the Census in Goulburn",
 
 		//B04
 		21507719, //"What is the population of Australia?"
@@ -233,58 +247,67 @@ public class UnitTester {
 		22, 	//"How many indigenous males are there in Braidwood?", 
 
 		//B09
-		56674, 	//service.query("How many women in Australia were born in Germany?"); // 
-		45, 	// service.query("How many people in Goulburn were born in China?"); // 45
-		14,		// service.query("How many men born in the US are in Goulburn?"); // 14
-		30, 	//service.query("How many men in Goulburn are from India?"); // 30  
+		56674, 	//	"How many women in Australia were born in Germany?"); // 
+		45, 	// "How many people in Goulburn were born in China?"); // 45
+		14,		// "How many men born in the US are in Goulburn?"); // 14
+		30, 	//	"How many men in Goulburn are from India?"); // 30  
 
 		//B13
-		9,		//service.query("How many people speak Iranian in Goulburn?"); //9
-		16,		// service.query("In Goulburn, how many men speak Cantonese?");
-		9979,	//service.query("How many women in Goulburn only speak English?"); //9979
-		139945,	// service.query("How many women speak Arabic in Australia?"); //139945
-		139945,	// service.query("How many women speak Arabic?"); //139945
+		9,		//	"How many people speak Iranian in Goulburn?"); //9
+		16,		// 	"In Goulburn, how many men speak Cantonese?");
+		9979,	//	"How many women in Goulburn only speak English?"); //9979
+		139945,	// 	"How many women speak Arabic in Australia?"); //139945
+		139945,	// 	"How many women speak Arabic?"); //139945
 
 		//B14
-		20,		//service.query("How many men in Goulburn are muslims?"); // 20
-		61,		// service.query("How many Pentecostal men are there in Goulburn?"); //61
-		26,		// service.query("How many mormons in Goulburn?"); //26
-		1216,	// service.query("How many women in Goulburn have no religion?"); //1216
-		84,		// service.query("How many women follow Buddhism in Goulburn?"); //84
+		20,		//	"How many men in Goulburn are muslims?"); // 20
+		61,		// 	"How many Pentecostal men are there in Goulburn?"); //61
+		26,		// 	"How many mormons in Goulburn?"); //26
+		1216,	// 	"How many women in Goulburn have no religion?"); //1216
+		84,		// 	"How many women follow Buddhism in Goulburn?"); //84
 
 		//B18
-		20107,	// service.query("How many people aged 20-25 need assistance in Australia?"); //20107
+		20107,	// 	"How many people aged 20-25 need assistance in Australia?"); //20107
 
 		//B19
-		102622,	// service.query("How many women aged 45-50 did volunteer work in New South Wales?"); //102622
-		73, 	// service.query("How many men aged 20-25 did volunteer work in Goulburn?"); 
+		102622,	// 	"How many women aged 45-50 did volunteer work in New South Wales?"); //102622
+		73, 	// 	"How many men aged 20-25 did volunteer work in Goulburn?"); 
 
 		//B21
-		32277,		// service.query("How many women aged 15-19 provided unpaid assistance in Australia?"); //32277
-		1160621,	// service.query("How many women provided unpaid assistance in Australia?"); //1160621
+		32277,		//	"How many women aged 15-19 provided unpaid assistance in Australia?"); //32277
+		1160621,	// "How many women provided unpaid assistance in Australia?"); //1160621
 
 		//B40
-		1963,	// service.query("How many women in Capital Region have a graduate diploma?"); // 1963
-		9773,	// service.query("How many women have a bachelor degree in Capital Region?"); // 9773
-		5, 		//service.query("How many people 15-24 have a diploma in Goulburn");
-		14,		// service.query("How many women 25-34 in Goulburn have a postgraduate degree");
-		90, 	// service.query("How many 35-44 year old men in Goulburn have a bachelors degree ");
+		1963,	// 	"How many women in Capital Region have a graduate diploma?"); // 1963
+		9773,	// 	"How many women have a bachelor degree in Capital Region?"); // 9773
+		5, 		//	"How many people 15-24 have a diploma in Goulburn");
+		14,		// 	"How many women 25-34 in Goulburn have a postgraduate degree");
+		90, 	// 	"How many 35-44 year old men in Goulburn have a bachelors degree ");		System.out.println( getQueryResult("How many people aged 35-40 in Goulburn were employed?")); //2047  
+
+		//B42
+		2047,	// "How many people aged 35-40 in Goulburn were in employment?")); //2047
+		3726,	// "How many men in Goulburn were in full time employment?"));	//3726
+		3726, 	// "How many men in Goulburn were full-time employed?"));	//3726 
+		4722,	// "How many women in Goulburn were in the labour force?")); //4722
+		9362,	// "How many people in Goulburn were in employment?")); //9362
+		2821,	// "How many people in Goulburn were in part time employment?")); //2821
+		4722,	//	"How many women were in Goulburn in the labour force?")); //4722
 
 		//B43
-		43, 	//"How many men aged 35-40 in Queanbeyan are in the agricultural sector?", 
-		11, 	//"How many men aged 35-40 in Queanbeyan are in the mining sector?", 
-		275, 	//"How many men from the manufacturing industry in Queanbeyan are aged 35-40?", 
-		79, 	//"How many men from the utilities industry in Queanbeyan are aged 35-40?", 
-		567, 	//"How many men from the construction industry in Queanbeyan are aged 35-40?", 
-		1552, 	// service.query("How many women aged 18-19 in Tasmania are community workers?"); 
+		43, 	//	"How many men aged 35-40 in Queanbeyan are in the agricultural sector?", 
+		11, 	//	"How many men aged 35-40 in Queanbeyan are in the mining sector?", 
+		275, 	//	"How many men from the manufacturing industry in Queanbeyan are aged 35-40?", 
+		79, 	//	"How many men from the utilities industry in Queanbeyan are aged 35-40?", 
+		567, 	//	"How many men from the construction industry in Queanbeyan are aged 35-40?", 
+		1552, 	//	"How many women aged 18-19 in Tasmania are community workers?"); 
 		
 		//B45
-		39, 	//"How many men aged 35-40 in Braidwood are managers?", 
-		402, 	//"How many females aged 20 to 25 in Tasmania are Managers?", 
-		1190, 	//"How many 20-25 year old females in Tasmania are professionals?", 
-		705, 	//"How many 20-25 year old women in Tasmania are technicians?", 
-		2166, 	//"How many women aged 20-25 in Tasmania are community workers?", 
-		711 	//"How many women aged 20-25 in Tasmania are labourers?" 
+		39, 	//	"How many men aged 35-40 in Braidwood are managers?", 
+		402, 	//	"How many females aged 20 to 25 in Tasmania are Managers?", 
+		1190, 	//	"How many 20-25 year old females in Tasmania are professionals?", 
+		705, 	//	"How many 20-25 year old women in Tasmania are technicians?", 
+		2166, 	//	"How many women aged 20-25 in Tasmania are community workers?", 
+		711 	//	"How many women aged 20-25 in Tasmania are labourers?" 
 
 	};
 }

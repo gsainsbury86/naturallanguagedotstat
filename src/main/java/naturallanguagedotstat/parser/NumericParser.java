@@ -48,7 +48,7 @@ public class NumericParser {
 		for (int i = 0; i< inputWords.size(); i++ ){
 			if(isNumber(inputWords.get(i) ) ){
 				if( !previousNumbersFound){
-					outputWords.add(comparatorToString(comparator));
+					outputWords.add(comparatorAsString(comparator));
 					outputWords.add(explicitNumbers.get(0));
 					if(comparator == Comparator.between){
 						outputWords.add(explicitNumbers.get(1));
@@ -67,7 +67,7 @@ public class NumericParser {
 	};
 	
 
-	private String comparatorToString(Comparator comparator){
+	public String comparatorAsString(Comparator comparator){
 		String str = null;
 		switch(comparator){
 			case equals: 				str = "="; break;

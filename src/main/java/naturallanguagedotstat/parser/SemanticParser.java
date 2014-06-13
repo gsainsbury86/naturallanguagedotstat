@@ -227,7 +227,6 @@ public class SemanticParser {
 		synonyms.put("part time employed","Part-time");
 		synonyms.put("part time employment","Part-time");
 		synonyms.put("part time employees","Part-time");
-		// synonyms.put("agriculture","Employed, away from work(b)");
 		synonyms.put("labour force","Total labour force");
 
 
@@ -425,6 +424,10 @@ public class SemanticParser {
 			dimensions.put("Age","Total all ages");
 		};
 
+		// if query only has <Age> and <Region>, make sure it chooses B04;
+		if(dimensions.size() == c+1  && dimensions.containsKey("Age")){
+			dimensions.put("Sex","persons");
+		};
 		
 		// the word "persons" is often used as a generic grammar term and not as a direct semantic indicator of sum of males+females.
 		if(dimensions.containsKey("Place of Usual Residence on Census Night")  && dimensions.containsKey("Sex") ){

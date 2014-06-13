@@ -42,23 +42,9 @@ public class LocalTest {
 
 		/* The following queries are correct and now should be moved to UnitTester 
 
-		//B03
-		System.out.println( getQueryResult("How many people aged 18-20 were at home on Census night in Goulburn?") ); //2497
-		System.out.println( getQueryResult("How many men were at home on Census night in Goulburn?"));	// 20430
-
-		//B42
-		System.out.println( getQueryResult("How many people aged 35-40 in Goulburn were employed?")); //2047  
-		System.out.println( getQueryResult("How many people aged 35-40 in Goulburn were in employment?")); //2047
-		System.out.println( getQueryResult("How many men in Goulburn were in full time employment?"));	//3726
-		System.out.println( getQueryResult("How many men in Goulburn were full-time employed?"));	//3726 
-		System.out.println( getQueryResult("How many women in Goulburn were in the labour force?")); //4722
-		System.out.println( getQueryResult("How many people in Goulburn were in employment?")); //9362
-		System.out.println( getQueryResult("How many people in Goulburn were in part time employment?")); //2821
-		System.out.println( getQueryResult("How many women were in Goulburn in the labour force?")); //4722
-
 		 */
 
-		System.out.println( getQueryResult("How many men were at home on Census night in Goulburn?"));	// 20430
+		System.out.println( getQueryResult("How many women aged 20-25 in Tasmania are labourers?"));	// 711
 
 
 	}

@@ -96,46 +96,45 @@ public class QueryBuilder {
 		if(!queryInputs2.containsKey(AGE)){return;};
 		if(queryInputs2.get(AGE).get(0).equals("Total all ages")){return;}
 
-
 		NumericParser ageQueryParser = new NumericParser(queryInputs2.get(AGE).get(0) );
 
 		int a0 = Integer.parseInt(ageQueryParser.getExplicitNumbers().get(0) );
 		int a1 = (ageQueryParser.getExplicitNumbers().size() >1) 
 				? Integer.parseInt(ageQueryParser.getExplicitNumbers().get(1) ) : -1;
 
+		HashMap<String, String> ageCodeList = null;
+		for(Dimension dim : dataset.getDimensions()){
+			if(dim.getName().equals(AGE)){
+				ageCodeList = dim.getCodelist();
+			};
+		};
 
+		List<String> ageCodeListDescriptions = new ArrayList<String>(ageCodeList.values());
 
-				HashMap<String, String> ageCodeList = null;
-				for(Dimension dim : dataset.getDimensions()){
-					if(dim.getName().equals(AGE)){
-						ageCodeList = dim.getCodelist();
-					};
-				};
+		HashMap< String, Double> matches = new HashMap< String, Double>();
 
-				List<String> ageCodeListDescriptions = new ArrayList<String>(ageCodeList.values());
+		boolean codeListHasSingleValues = dataset.getName().equals("ABS_CENSUS2011_B04");
+		
+		Double overlapScore;
+		for (String descr: ageCodeListDescriptions){
+			NumericParser ageDescriptionParser = new NumericParser(descr);
 
-				HashMap< String, Double> matches = new HashMap< String, Double>();
+			int b0 = (ageDescriptionParser.getExplicitNumbers().size() >0) 
+					? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(0) ) : -1;
 
-				Double overlapScore;
-				for (String descr: ageCodeListDescriptions){
-					NumericParser ageDescriptionParser = new NumericParser(descr);
+			int b1 = (ageDescriptionParser.getExplicitNumbers().size() >1) 
+						? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) ) : -1;
 
-					int b0 = (ageDescriptionParser.getExplicitNumbers().size() >0) 
-							? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(0) ) : -1;
+			overlapScore =  getOverlapScore(a0, a1, b0, b1);
+			if(overlapScore > 0 ){matches.put(descr, overlapScore);}
+					ageDescriptionParser = null;
+		};
 
-							int b1 = (ageDescriptionParser.getExplicitNumbers().size() >1) 
-									? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) ) : -1;
-
-									overlapScore =  getOverlapScore(a0, a1, b0, b1);
-									if(overlapScore > 0 ){matches.put(descr, overlapScore);}
-									ageDescriptionParser = null;
-				};
-
+		
+		ArrayList<String> list = new ArrayList<String>();
+		list.add(getKeyForMaxValue (matches));
 				
-				ArrayList<String> list = new ArrayList<String>();
-				list.add(getKeyForMaxValue (matches));
-				
-				queryInputs2.put(AGE, list);
+		queryInputs2.put(AGE, list);
 	}
 
 	private Double getOverlapScore(int a0, int a1, int b0, int b1) {
