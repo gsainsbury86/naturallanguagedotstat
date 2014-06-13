@@ -73,9 +73,10 @@ public class QueryBuilder {
 				list.add("Total all ages");
 				queryInputs2.put(AGE, list);
 				if(dataset.getName().equals("ABS_CENSUS2011_B20")  
-						|| dataset.getName().equals("ABS_CENSUS2011_B21")  
-						|| dataset.getName().equals("ABS_CENSUS2011_B40") 
-						|| dataset.getName().equals("ABS_CENSUS2011_B42") 
+				|| dataset.getName().equals("ABS_CENSUS2011_B21")  
+				|| dataset.getName().equals("ABS_CENSUS2011_B40") 
+				|| dataset.getName().equals("ABS_CENSUS2011_B42") 
+				|| dataset.getName().equals("ABS_CENSUS2011_B43") 
 						){
 					ArrayList<String> list2 = new ArrayList<String>();
 					list2.add("15 years and over");
@@ -87,7 +88,6 @@ public class QueryBuilder {
 				ArrayList<String> list3 = new ArrayList<String>();
 				list3.add("Persons");
 				queryInputs2.put(SEX, list3);
-				//System.out.println("setting default Sex to : Persons");
 			};
 		};
 	}

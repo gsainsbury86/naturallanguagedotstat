@@ -56,14 +56,14 @@ public class GrammarParser {
 		// identify multiple occurrences of the word 'in' which would lead to ambiguous identification of NP.obj
 		for (int i=1; i< words.length; i++) {
 			  if(words[i-1].equals("in") && words[i].equals("the")  ) {
-				words[i-1] = "_in_";
+				words[i-1] = "in_";
 				grammarTypes[i-1] = "prep";
 			 };
 		 };
 
 		 for (int i=1; i< words.length; i++) {
 			  if(words[i-1].equals("born") && words[i].equals("in")  ) {
-				words[i] = "_in_";
+				words[i] = "_in";
 				grammarTypes[i] = "prep";
 			 };
 		 };

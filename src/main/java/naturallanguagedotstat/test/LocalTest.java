@@ -25,7 +25,6 @@ public class LocalTest {
 		debug = true;
 		localLoad = true;
 
-		Service service = new Service();
 
 		/* The following queries fail for various as it does not successfully identify the region....
 		service.query("How many women in Braidwood aged 25-30 are divorced"); //150
@@ -43,31 +42,35 @@ public class LocalTest {
 
 		/* The following queries are correct and now should be moved to UnitTester 
 
-		service.query("How many people aged 35-40 in Goulburn were employed?"); //2047  
-		service.query("How many people aged 35-40 in Goulburn were in employment?"); //2047
+		//B03
+		System.out.println( getQueryResult("How many people aged 18-20 were at home on Census night in Goulburn?") ); //2497
+		System.out.println( getQueryResult("How many men were at home on Census night in Goulburn?"));	// 20430
 
-		service.query("How many men in Goulburn were in full time employment?");	//3726
-		service.query("How many men in Goulburn were full-time employed?");	//3726 
-		service.query("How many women in Goulburn were in the labour force?"); //4722
-		service.query("How many people in Goulburn were in employment?"); //9362
-		service.query("How many people in Goulburn were in part time employment?"); //2821
-		service.query("How many women were in Goulburn in the labour force?"); //4722
-		 *
+		//B42
+		System.out.println( getQueryResult("How many people aged 35-40 in Goulburn were employed?")); //2047  
+		System.out.println( getQueryResult("How many people aged 35-40 in Goulburn were in employment?")); //2047
+		System.out.println( getQueryResult("How many men in Goulburn were in full time employment?"));	//3726
+		System.out.println( getQueryResult("How many men in Goulburn were full-time employed?"));	//3726 
+		System.out.println( getQueryResult("How many women in Goulburn were in the labour force?")); //4722
+		System.out.println( getQueryResult("How many people in Goulburn were in employment?")); //9362
+		System.out.println( getQueryResult("How many people in Goulburn were in part time employment?")); //2821
+		System.out.println( getQueryResult("How many women were in Goulburn in the labour force?")); //4722
+
 		 */
 
-
-		LocalTest.localLoad = true;
-		LocalTest.debug = true;
+		System.out.println( getQueryResult("How many men were at home on Census night in Goulburn?"));	// 20430
 
 
-		JsonReader jsonReader = Json.createReader(new StringReader((String) service.query("What is the female 15-19 population of Sandy Bay?").getEntity()));
+	}
+	
+	public static String getQueryResult( String str) throws IOException, ClassNotFoundException{
+		Service service = new Service();
+
+		JsonReader jsonReader = Json.createReader(new StringReader((String) service.query(str).getEntity()));
 		JsonObject object = jsonReader.readObject();
 		jsonReader.close();
-
-		System.out.println(Integer.parseInt((object.getString("result"))));
-
-
-
+		
+		return  object.getString("result");
 	}
 
 }
