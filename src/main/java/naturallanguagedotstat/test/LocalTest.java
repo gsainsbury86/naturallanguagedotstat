@@ -27,24 +27,21 @@ public class LocalTest {
 
 
 		/* The following queries fail for various as it does not successfully identify the region....
-		service.query("What is the female population of Sandy Bay aged 20-24?");
-		service.query("What is the population of Sandy Bay women aged 20-24?");
 
-		service.query("How many people aged 20-25 do not have need assistance in Australia?");
-		service.query("How many women aged 45-50 did voluntary work in New South Wales?"); //102622
+		System.out.println(getQueryResult("What is the population of Sandy Bay women aged 20-24?") );
+		System.out.println(getQueryResult("How many women aged 45-50 did voluntary work in New South Wales?") ); //102622
+		System.out.println(getQueryResult("How many women aged 45-50 did volunteer work in New South Wales?") );
+		System.out.println(getQueryResult("How many people aged 35-40 in Goulburn were employed in total?") ); //2047  //can't have the word total in it.
+		System.out.println(getQueryResult("How many men in Goulburn were full-time employed?") ); 
+		*/
 
-		service.query("How many people aged 35-40 in Goulburn were employed in total?"); //2047  //can't have the word total in it.
-		service.query("How many people in Goulburn were employed part time?"); 
+
+		/* 
+		// The following queries are correct and now should be moved to UnitTester 
 		 */
 
 
-		/* The following queries are correct and now should be moved to UnitTester 
-		System.out.println(getQueryResult("How many women in Braidwood aged 25-30 are divorced") ); //3
-		System.out.println(getQueryResult("What is the female population of Sandy Bay aged 20-24?") ); //747
-		System.out.println(getQueryResult("What is the population of Tasmania born in vietnam") ); //267
-		System.out.println(getQueryResult("How many women in Braidwood aged 25-30 are divorced") ); //3
 
-		 */
 
 		
 

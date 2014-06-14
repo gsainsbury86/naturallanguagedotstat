@@ -97,7 +97,6 @@ public class GrammarParser {
 		tagWordWithGrammarType("works", "v");	
 		tagWordWithGrammarType("worked", "v");	
 		tagWordWithGrammarType("working", "v");	
-		tagWordWithGrammarType("employed", "v");	
 		tagWordWithGrammarType("born", "v");	
 		tagWordWithGrammarType("studied", "v");	
 		tagWordWithGrammarType("studying", "v");	

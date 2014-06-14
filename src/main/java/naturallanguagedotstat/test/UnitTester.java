@@ -87,6 +87,7 @@ public class UnitTester {
 		"What is Sandy Bay's female population?",
 		"Sandy Bay's female population?",
 		"What is the female 15-19 population of Sandy Bay?",
+		"What is the female population of Sandy Bay aged 20-24?",
 		"What is the female population aged 20-24 of Sandy Bay?",
 		"What is the population of women aged between 20 and 24 in Sandy Bay?",				
 		"How many 20-24 year old females live in Sandy Bay?",
@@ -109,6 +110,8 @@ public class UnitTester {
 		"How many widowed women are in Braidwood?",
 		"How many women in Braidwood are married?", 
 		"How many women in Braidwood are divorced?", 
+		"How many women in Braidwood aged 25-30 are divorced",
+
 
 		//B06
 		"How many females have a de facto relationship in Braidwood?", 
@@ -119,6 +122,7 @@ public class UnitTester {
 		"How many indigenous males are there in Braidwood?", 
 
 		//B09
+		"What is the population of Tasmania born in vietnam",
 		"How many women in Australia were born in Germany?",
 		"How many people in Goulburn were born in China?",
 		"How many men born in the US are in Goulburn?",
@@ -142,8 +146,8 @@ public class UnitTester {
 		"How many people aged 20-25 need assistance in Australia?",
 
 		//B19
-		"How many women aged 45-50 did volunteer work in New South Wales?",
-		"How many men aged 20-25 did volunteer work in Goulburn?",
+		"How many women aged 45-50 in New South Wales did volunteer work?",
+		"How many men aged 20-25 in Goulburn did volunteer work?",
 
 		//B21
 		"How many women aged 15-19 provided unpaid assistance in Australia?",
@@ -157,24 +161,30 @@ public class UnitTester {
 		"How many 35-44 year old men in Goulburn have a bachelors degree ",
 
 		//B41
-		"How many women aged 25-30 in Goulburn have studied science ?",
-		"How many women in Goulburn have studied information technology?",
+		"How many women aged 25-30 in Goulburn have studied science?",
 		"How many women in Goulburn have an engineering degree?",
 		"How many men aged 65-80 in Goulburn have studied architecture?",
-		"How many men in Goulburn have studied agriculture?",
 		"How many men in Goulburn have a commerce degree?",
 		
 		//B42
 		"How many people aged 35-40 in Goulburn were employed?",
 		"How many people aged 35-40 in Goulburn were in employment?",
 		"How many men in Goulburn were in full time employment?",
-		"How many men in Goulburn were full-time employed?",
 		"How many women in Goulburn were in the labour force?",
 		"How many people in Goulburn were in employment?",
 		"How many people in Goulburn were in part time employment?",
 		"How many women were in Goulburn in the labour force?",
+		"How many people in Goulburn were part time employment?", 
+		"How many people in Goulburn were employed part time?", 
+
 
 		//B43
+		"How many men aged 35-40 in Queanbeyan work in agriculture?",
+		"How many men aged 35-40 in Queanbeyan work in mining?",
+		"How many men aged 35-40 in Queanbeyan work in manufacturing?",
+		"How many men aged 35-40 in Queanbeyan work in utilities?",
+		"How many men aged 35-40 in Queanbeyan work in construction?",
+
 		"How many men aged 35-40 in Queanbeyan are in the agricultural sector?", 
 		"How many men aged 35-40 in Queanbeyan are in the mining sector?", 
 		"How many men from the manufacturing industry in Queanbeyan are aged 35-40?", 
@@ -219,6 +229,7 @@ public class UnitTester {
 		5696, //"Sandy Bay's female population?",
 
 		355, //"What is the female 15-19 population of Sandy Bay?",  // this agegroup metadata has an extra space at the end!
+		745, // "What is the female population of Sandy Bay aged 20-24?") ); //745
 		745, //"What is the female population aged 20-24 of Sandy Bay?",
 		745, //"What is the population of women aged between 20 and 24 in Sandy Bay?",				
 		745, //"How many 20-24 year old females live in Sandy Bay?",
@@ -236,13 +247,14 @@ public class UnitTester {
 		60, //"How many married 25-30 women are in Braidwood?", 
 		60, //"How many females married in Braidwood are 25-30?", 
 		60, //"How many married females in Braidwood are between 25 and 30 years old?", 
-
 		704, //"How many married women are in Braidwood?", 
 		51, //"How many women are separated in Braidwood?", 
 		150, //"How many women are divorced in Braidwood?", 
 		145, //"How many widowed women are in Braidwood?", 
 		704, //"How many women in Braidwood are married?", 
 		150, //"How many women in Braidwood are divorced?", 
+		3,	// "How many women in Braidwood aged 25-30 are divorced"
+
 
 		//B06
 		133, 	//"How many females have a de facto relationship in Braidwood?", 
@@ -253,6 +265,7 @@ public class UnitTester {
 		22, 	//"How many indigenous males are there in Braidwood?", 
 
 		//B09
+		267, 	// "What is the population of Tasmania born in vietnam") ); //267
 		56674, 	//	"How many women in Australia were born in Germany?"); // 
 		45, 	// "How many people in Goulburn were born in China?"); // 45
 		14,		// "How many men born in the US are in Goulburn?"); // 14
@@ -275,9 +288,10 @@ public class UnitTester {
 		//B18
 		20107,	// 	"How many people aged 20-25 need assistance in Australia?"); //20107
 
+
 		//B19
-		102622,	// 	"How many women aged 45-50 did volunteer work in New South Wales?"); //102622
-		73, 	// 	"How many men aged 20-25 did volunteer work in Goulburn?"); 
+		102622,	// 	"How many women aged 45-50 in New South Wales did volunteer work?"); //102622
+		73, 	// 	"How many men aged 20-25 in Goulburn did volunteer work?"); 
 
 		//B21
 		32277,		//	"How many women aged 15-19 provided unpaid assistance in Australia?"); //32277
@@ -292,23 +306,28 @@ public class UnitTester {
 
 		//B41
 		6, 		// "How many women aged 25-30 in Goulburn have studied science ?")); //6
-		48,		// "How many women in Goulburn have studied information technology?")); //48
 		53,		// "How many women in Goulburn have an engineering degree?")); // 53
 		50,		// "How many men aged 65-80 in Goulburn have studied architecture?")); // 50
-		180,	//	"How many men in Goulburn have studied agriculture?")); // 180
 		404,	// "How many men in Goulburn have a commerce degree?")); // 404
 
 		//B42
 		2047, 	// "How many people aged 35-40 in Goulburn were employed?")); //2047  
 		2047,	// "How many people aged 35-40 in Goulburn were in employment?")); //2047
 		3726,	// "How many men in Goulburn were in full time employment?"));	//3726
-		3726, 	// "How many men in Goulburn were full-time employed?"));	//3726 
 		4722,	// "How many women in Goulburn were in the labour force?")); //4722
 		9362,	// "How many people in Goulburn were in employment?")); //9362
 		2821,	// "How many people in Goulburn were in part time employment?")); //2821
 		4722,	//	"How many women were in Goulburn in the labour force?")); //4722
+		2821,		// "How many people in Goulburn were part time employment?") ); 
+		2821, 		// "How many people in Goulburn were employed part time?") ); 
 
 		//B43
+		43,		//	"How many men aged 35-40 in Queanbeyan work in agriculture?") ); //43
+		11,		//	"How many men aged 35-40 in Queanbeyan work in mining?") ); //11
+		275,	//	"How many men aged 35-40 in Queanbeyan work in manufacturing?") );	//275
+		79,		//	"How many men aged 35-40 in Queanbeyan work in utilities?") );	//79
+		567,	//	"How many men aged 35-40 in Queanbeyan work in construction?") );	//567
+
 		43, 	//	"How many men aged 35-40 in Queanbeyan are in the agricultural sector?", 
 		11, 	//	"How many men aged 35-40 in Queanbeyan are in the mining sector?", 
 		275, 	//	"How many men from the manufacturing industry in Queanbeyan are aged 35-40?", 
