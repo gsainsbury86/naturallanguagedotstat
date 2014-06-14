@@ -17,50 +17,41 @@ body {
 html {
 	font-family: sans-serif;
 	font-size: 16px;
+	height: 100%;
+	text-align: left;
 }
 
 h1 {
-	font-size: 16px;
-	color: #a0a0a0;
-	font-weight:normal;
-	line-height: 2.0;
-}
-
-html {
-	height: 100%;
-	text-align: left;
-	font-size: 16px;
+	font-size: 32px;
+	color: #404040;
+	text-align:center;
 }
 
 div.container {
 	height: 100px;
-	width: 800px;
+	width: 630px;
 	position: absolute;
-	margin: -50px 0 0 -400px;
+	margin: -50px 0 0 -300px;
 	left: 50%;
 	top: 30%;
-}
-
-.mybutton {
-	color: #ffffff;
-	width: 80px;
-	font-size: 16px;
-	line-height: 1.67;
-	font-family: "Helvetica Neue", Helvetica, "Liberation Sans", Arial,
-		sans-serif;
 }
 
 a:link {
 color: #a0a0e0;
 }
 
+#map {
+	margin-top: 20px;
+}
+
 #url {
 	margin-top: 20px;
+	font-size: 12px;
 }
 
 #result {
 	color: #404040;
-	font-size: 96px;
+	font-size: 48px;
 	line-height: 1.6;
 }
 
@@ -68,9 +59,16 @@ input {
 	color: #404040;
 	font-size: 16px;
 	line-height: 1.6;
-	width: 670px;
+	width: 550px;
 	padding-left: 8px;
 }
+
+.mybutton {
+	color: #808080;
+	width: 80px;
+	height: 35px;
+}
+
 </style>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"
@@ -113,15 +111,19 @@ input {
 </head>
 <body>
 	<div class='container'>
-		<h1>What would you like to know?</h1>
+		<h1>Search for ABS.Stat</h1>
 		<input id="query" class="" type="text"
 			placeholder="eg. How many men aged 35-40 in Sandy Bay work in the IT industry?" />
-		<button id="go" class="mybutton">search</button>
-		<div id="result"></div>
-		<div id="map"></div>
-		<div id="url"></div>
-
+		<button id="go" class="mybutton">▶</button>
+		<div id="display">
+			<table>
+				<tr>
+					<td> <div id="map"></div> </td>
+					<td> <div id="result"></div> </td>
+				</tr>
+			</table>
+			<div id="url"></div>
+		</div>
 	</div>
-
 </body>
 </html>
