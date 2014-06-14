@@ -237,9 +237,7 @@ public class SemanticParser {
 		synonyms.put("study manangement","Management and Commerce");
 		synonyms.put("studied management","Management and Commerce");
 		synonyms.put("management degree","Management and Commerce");
-		synonyms.put("study commerce","Management and Commerce");
-		synonyms.put("studied commerce","Management and Commerce");
-		synonyms.put("commerce degree","Management and Commerce");
+		synonyms.put("commerce","Management and Commerce");
 		
 		//B42
 		synonyms.put("employed","Employed total");

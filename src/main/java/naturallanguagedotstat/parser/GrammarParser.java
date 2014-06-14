@@ -53,49 +53,82 @@ public class GrammarParser {
 	private void identifyAuxiliaryTerms(){
 
 		
+		// The following two categories will eventually be deleted from here an dbe the core basis for identifying datasets.
+		// A. Identify domain-specific verbs. This list might grow to several dozen!
+
+
+		// Ultimately we will not need to know what grammar type things are, merely if they are identifiable.
+
+		// Identify a small countable number of specific auxiliary non-NP words
+		tagWordWithGrammarType("what", "pron.int");		// interrogative pronoun
+		tagWordWithGrammarType("how", "adv.int");		// interrogative adverb
+		tagWordWithGrammarType("many", "adj.int");		// interrogative adjective
+		tagWordWithGrammarType("there", "adv.int");	
+		tagWordWithGrammarType("where", "adv.int");	
+
+		tagWordWithGrammarType("the", "art.def");		// definite article
+		tagWordWithGrammarType("a", "art.indef");		// indefinite article
+
+		tagWordWithGrammarType("that", "pron");			// pronoun
+		tagWordWithGrammarType("which", "pron");	
+		tagWordWithGrammarType("who", "pron");	
+
+		tagWordWithGrammarType("of", "prep.of");		// preposition "in"
+		tagWordWithGrammarType("'s", "NP.gen");			// NP.genitive
+
+		 tagWordWithGrammarType("in", "prep.in"); 		// preposition "of"
+
+		 tagWordWithGrammarType("is", "v.be");			// the verb "to be"
+		tagWordWithGrammarType("are", "v.be");	
+		tagWordWithGrammarType("were", "v.be");	
+
+		tagWordWithGrammarType("do", "v.aux");			// auxiliary verbs
+		tagWordWithGrammarType("did", "v.aux");	
+		tagWordWithGrammarType("will", "v.aux");	
+		tagWordWithGrammarType("can", "v.aux");	
+		tagWordWithGrammarType("have", "v.aux");	
+
+		tagWordWithGrammarType("only", "adv");			// adverb
+		
+		tagWordWithGrammarType("live", "v.persons");		// verb associated with population
+		tagWordWithGrammarType("lives", "v.persons");	
+		
+		tagWordWithGrammarType("work", "v");	//verbs not associated with population
+		tagWordWithGrammarType("works", "v");	
+		tagWordWithGrammarType("worked", "v");	
+		tagWordWithGrammarType("working", "v");	
+		tagWordWithGrammarType("employed", "v");	
+		tagWordWithGrammarType("born", "v");	
+		tagWordWithGrammarType("studied", "v");	
+		tagWordWithGrammarType("studying", "v");	
+
+
+		// B. identify domain-specific adjective. This list might grow to several dozen!
+		tagWordWithGrammarType("aged", "adj");	
+
+		
+		
+		eliminateAmbiguousPrepositions();
+		
+	}
+
+
+	private void eliminateAmbiguousPrepositions() {
+		
 		// identify multiple occurrences of the word 'in' which would lead to ambiguous identification of NP.obj
 		for (int i=1; i< words.length; i++) {
-			  if(words[i-1].equals("in") && words[i].equals("the")  ) {
+			  if(words[i-1].equals("in") && grammarTypes[i].startsWith("art.")) {
 				words[i-1] = "in_";
 				grammarTypes[i-1] = "prep";
 			 };
 		 };
 
 		 for (int i=1; i< words.length; i++) {
-			  if(words[i-1].equals("born") && words[i].equals("in")  ) {
+			  if(grammarTypes[i-1].equals("v") && words[i].equals("in")  ) {
 				words[i] = "_in";
 				grammarTypes[i] = "prep";
 			 };
 		 };
-		
-		// Identify a small countable number of specific auxiliary non-NP words
-		tagWordWithGrammarType("of", "prep.of");		//  preposition "in"
-		tagWordWithGrammarType("in", "prep.in"); 		// preposition "of"
-		tagWordWithGrammarType("what", "pron.int");		// interrogative pronoun
-		tagWordWithGrammarType("how", "adv.int");		// interrogative adverb
-		tagWordWithGrammarType("there", "adv.int");	
-		tagWordWithGrammarType("many", "adj.int");		// interrogative adjective
-		tagWordWithGrammarType("is", "v.be");			// the verb "to be"
-		tagWordWithGrammarType("are", "v.be");	
-		tagWordWithGrammarType("were", "v.be");	
-		tagWordWithGrammarType("the", "art.def");		// definite article
-		tagWordWithGrammarType("a", "art.indef");		// indefinite article
-		tagWordWithGrammarType("'s", "NP.gen");			// NP.genitive
-
-		tagWordWithGrammarType("only", "adv");			// adverb
-						
-		tagWordWithGrammarType("do", "v.aux");			// auxiliary verbs
-		tagWordWithGrammarType("did", "v.aux");	
-		tagWordWithGrammarType("will", "v.aux");	
-		tagWordWithGrammarType("can", "v.aux");	
-		tagWordWithGrammarType("have", "v.aux");	
-		
-		// identify domain-specific verbs. This list might grow to several dozen!
-		tagWordWithGrammarType("live", "v");		// verb
-		tagWordWithGrammarType("lives", "v");	
-		tagWordWithGrammarType("work", "v");	
-		tagWordWithGrammarType("works", "v");	
-		tagWordWithGrammarType("born", "v");	
 	}
 	
 
@@ -103,6 +136,7 @@ public class GrammarParser {
 	private void identifyNounPhrases(){
 	
 		// Identify object NPs
+		
 		tagAllWordsBeforeGrammarType("NP.gen" , "NP.obj");
 		tagAllWordsAfterGrammarType("prep.in", "NP.obj");
 		
