@@ -214,6 +214,33 @@ public class SemanticParser {
 		synonyms.put("bachelor","Bachelor Degree Level");
 		synonyms.put("bachelors","Bachelor Degree Level");
 
+		//B41 *
+		synonyms.put("study science","Natural and Physical Sciences");				// Clash with B44
+		synonyms.put("studied science","Natural and Physical Sciences");			// Clash with B44
+		synonyms.put("science degree","Natural and Physical Sciences");				// Clash with B44
+
+		synonyms.put("study information technology","Information Technology"); 		// Clash with B44
+		synonyms.put("studied information technology","Information Technology");	// Clash with B44
+
+		synonyms.put("study engineering","Engineering and Related Technologies");
+		synonyms.put("studied engineering","Engineering and Related Technologies");
+		synonyms.put("engineering degree","Engineering and Related Technologies");
+
+		synonyms.put("study architecture","Architecture and Building");
+		synonyms.put("studied architecture","Architecture and Building");
+		synonyms.put("architecture degree","Architecture and Building");
+		
+		synonyms.put("study agriculture","Agriculture, Environmental and Related Studies");	// Clash with B44
+		synonyms.put("studied agriculture","Agriculture, Environmental and Related Studies");	// Clash with B44
+		synonyms.put("study environmental","Agriculture, Environmental and Related Studies");	// Clash with B44
+		synonyms.put("studied environmental","Agriculture, Environmental and Related Studies");	// Clash with B44
+		synonyms.put("study manangement","Management and Commerce");
+		synonyms.put("studied management","Management and Commerce");
+		synonyms.put("management degree","Management and Commerce");
+		synonyms.put("study commerce","Management and Commerce");
+		synonyms.put("studied commerce","Management and Commerce");
+		synonyms.put("commerce degree","Management and Commerce");
+		
 		//B42
 		synonyms.put("employed","Employed total");
 		synonyms.put("employment","Employed total");
@@ -228,14 +255,17 @@ public class SemanticParser {
 		synonyms.put("part time employment","Part-time");
 		synonyms.put("part time employees","Part-time");
 		synonyms.put("labour force","Total labour force");
-
-
+  
 		//B43
-		synonyms.put("agriculture","Agriculture, forestry and fishing");
-		synonyms.put("agricultural","Agriculture, forestry and fishing");
-		synonyms.put("forestry","Agriculture, forestry and fishing");
+		synonyms.put("work in agriculture","Agriculture, forestry and fishing"); // note different in order not to clash with B41
+		synonyms.put("agriculture industry","Agriculture, forestry and fishing"); // note different in order not to clash with B41
+		synonyms.put("agriculture sector","Agriculture, forestry and fishing"); // note different in order not to clash with B41
+		synonyms.put("agricultural","Agriculture, forestry and fishing"); 
+		synonyms.put("work in forestry","Agriculture, forestry and fishing");
+		synonyms.put("forestry industry","Agriculture, forestry and fishing");
 		synonyms.put("fishing","Agriculture, forestry and fishing");
-		synonyms.put("aquaculture","Agriculture, forestry and fishing");
+		synonyms.put("work in aquaculture","Agriculture, forestry and fishing");
+		synonyms.put("aquaculture industry","Agriculture, forestry and fishing");
 		synonyms.put("utilities","Electricity, gas, water and waste services");
 		synonyms.put("electricity","Electricity, gas, water and waste services");
 		synonyms.put("electrical","Electricity, gas, water and waste services");
@@ -250,11 +280,15 @@ public class SemanticParser {
 		synonyms.put("transportation","Transport, postal and warehousing");
 		synonyms.put("postal","Transport, postal and warehousing");
 		synonyms.put("warehousing","Transport, postal and warehousing");
-		synonyms.put("technology","Information media and telecommunications");
-		synonyms.put("computing","Information media and telecommunications"); 
-		synonyms.put("information","Information media and telecommunications");
-		synonyms.put("ICT","Information media and telecommunications");
-		synonyms.put("IT","Information media and telecommunications");
+//		synonyms.put("computing","Information media and telecommunications"); 
+		synonyms.put("work in computing","Information media and telecommunications"); 
+		synonyms.put("computing industry","Information media and telecommunications"); 
+//		synonyms.put("ICT","Information media and telecommunications");
+		synonyms.put("work in ICT","Information media and telecommunications");
+		synonyms.put("ICT industry","Information media and telecommunications");
+//		synonyms.put("IT","Information media and telecommunications");
+		synonyms.put("work in IT","Information media and telecommunications");
+		synonyms.put("IT industry","Information media and telecommunications");
 		synonyms.put("telecommunication","Information media and telecommunications");
 		synonyms.put("telecommunications","Information media and telecommunications");
 		synonyms.put("financial","Financial and insurance services");
@@ -264,18 +298,22 @@ public class SemanticParser {
 		synonyms.put("real estate","Rental, hiring and real estate services");
 		synonyms.put("professional","Professional, scientific and technical services");
 		synonyms.put("scientific","Professional, scientific and technical services");
-		synonyms.put("scientists","Professional, scientific and technical services");
-		synonyms.put("science","Professional, scientific and technical services");
+		synonyms.put("are scientists","Professional, scientific and technical services");
+		synonyms.put("work in science","Professional, scientific and technical services");
+		synonyms.put("science industry","Professional, scientific and technical services");
 		synonyms.put("technical","Professional, scientific and technical services");
 		synonyms.put("administrative","Administrative and support services");
 		synonyms.put("support","Administrative and support services");
 		synonyms.put("public","Public administration and safety");
 		synonyms.put("safety","Public administration and safety");
-		synonyms.put("education","Education and training");
+		synonyms.put("work in education","Education and training");
+		synonyms.put("education industry","Education and training");
+		synonyms.put("work in education","Education and training");
 		synonyms.put("training","Education and training");
 		synonyms.put("health","Health care and social assistance");
 		synonyms.put("healthcare","Health care and social assistance");
-		synonyms.put("arts","Arts and recreation services");
+		synonyms.put("work in arts","Arts and recreation services");
+		synonyms.put("arts industry","Arts and recreation services");
 		synonyms.put("recreation","Arts and recreation services");
 
 		//B45

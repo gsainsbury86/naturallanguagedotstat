@@ -156,6 +156,14 @@ public class UnitTester {
 		"How many women 25-34 in Goulburn have a postgraduate degree",
 		"How many 35-44 year old men in Goulburn have a bachelors degree ",
 
+		//B41
+		"How many women aged 25-30 in Goulburn have studied science ?",
+		"How many women in Goulburn have studied information technology?",
+		"How many women in Goulburn have an engineering degree?",
+		"How many men aged 65-80 in Goulburn have studied architecture?",
+		"How many men in Goulburn have studied agriculture?",
+		"How many men in Goulburn have a commerce degree?",
+		
 		//B42
 		"How many people aged 35-40 in Goulburn were employed?",
 		"How many people aged 35-40 in Goulburn were in employment?",
@@ -281,6 +289,14 @@ public class UnitTester {
 		5, 		//	"How many people 15-24 have a diploma in Goulburn");
 		14,		// 	"How many women 25-34 in Goulburn have a postgraduate degree");
 		90, 	// 	"How many 35-44 year old men in Goulburn have a bachelors degree ");		
+
+		//B41
+		6, 		// "How many women aged 25-30 in Goulburn have studied science ?")); //6
+		48,		// "How many women in Goulburn have studied information technology?")); //48
+		53,		// "How many women in Goulburn have an engineering degree?")); // 53
+		50,		// "How many men aged 65-80 in Goulburn have studied architecture?")); // 50
+		180,	//	"How many men in Goulburn have studied agriculture?")); // 180
+		404,	// "How many men in Goulburn have a commerce degree?")); // 404
 
 		//B42
 		2047, 	// "How many people aged 35-40 in Goulburn were employed?")); //2047  

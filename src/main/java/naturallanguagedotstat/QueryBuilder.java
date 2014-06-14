@@ -54,6 +54,7 @@ public class QueryBuilder {
 		region = queryInputs.get("region").get(0);
 		queryInputs.remove("region");
 
+		//System.out.println( queryInputs);
 		Dataset dataset = findBestMatchDatasetForDimensionNames();
 
 		if(queryInputs.containsKey(AGE)){
@@ -79,6 +80,7 @@ public class QueryBuilder {
 				if(dataset.getName().equals("ABS_CENSUS2011_B20")  
 				|| dataset.getName().equals("ABS_CENSUS2011_B21")  
 				|| dataset.getName().equals("ABS_CENSUS2011_B40") 
+				|| dataset.getName().equals("ABS_CENSUS2011_B41") 
 				|| dataset.getName().equals("ABS_CENSUS2011_B42") 
 				|| dataset.getName().equals("ABS_CENSUS2011_B43") 
 						){
@@ -86,6 +88,7 @@ public class QueryBuilder {
 					list2.add("15 years and over");
 					queryInputs2.put(AGE, list2);
 				};
+				
 			};
 
 			if(dim.getName().equals(SEX) && queryInputs2.get(SEX) == null){
@@ -102,7 +105,6 @@ public class QueryBuilder {
 
 
 		NumericParser ageQueryParser = new NumericParser(queryInputs2.get(AGE).get(0) );
-		// System.out.println( ageQueryParser.getExplicitNumbers() );
 		int a0 = Integer.parseInt(ageQueryParser.getExplicitNumbers().get(0) );
 		int a1 = (ageQueryParser.getExplicitNumbers().size() >1) 
 				? Integer.parseInt(ageQueryParser.getExplicitNumbers().get(1) ) : -1;
