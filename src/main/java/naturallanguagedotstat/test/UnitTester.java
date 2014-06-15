@@ -99,6 +99,8 @@ public class UnitTester {
 		"In Sandy Bay, how many women aged 20-24 are there?",
 		"What is Sandy Bay's 20-24 female population?",
 		"Sandy Bay's female population aged 20-24 years?",
+		"What is the population of Sandy Bay women aged 20-24?",
+
 
 		//B05
 		"How many married 25-30 women are in Braidwood?",
@@ -128,12 +130,15 @@ public class UnitTester {
 		"How many men born in the US are in Goulburn?",
 		"How many men in Goulburn are from India?",  
 
+
 		//B13
 		"How many people speak Iranian in Goulburn?",
 		"In Goulburn, how many men speak Cantonese?",
 		"How many women in Goulburn only speak English?",
 		"How many women speak Arabic in Australia?",
 		"How many women speak Arabic?",
+		"How many women speak Arabic in Goulburn-Yass?",
+
 
 		//B14
 		"How many men in Goulburn are muslims?",
@@ -176,6 +181,7 @@ public class UnitTester {
 		"How many women were in Goulburn in the labour force?",
 		"How many people in Goulburn were part time employment?", 
 		"How many people in Goulburn were employed part time?", 
+		"How many men in Goulburn were full-time employed?",
 
 
 		//B43
@@ -234,14 +240,14 @@ public class UnitTester {
 		745, //"What is the population of women aged between 20 and 24 in Sandy Bay?",				
 		745, //"How many 20-24 year old females live in Sandy Bay?",
 		745, //"How many females  20-24 year old live in Sandy Bay?",
-
-		745, //"How many females aged 20-24 live in Sandy Bay?",
-		745, //"How many females aged 20 to 24 live in Sandy Bay?",
-		745, //"How many women aged between 20 and 24 live in Sandy Bay?",
-		745, //"How many women 20-24 in Sandy Bay are there?",
-		745, //"In Sandy Bay, how many women aged 20-24 are there?",
-		745, //"What is Sandy Bay's 20-24 female population?",
-		745, //"Sandy Bay's female population aged 20-24 years?"
+		745, 	//"How many females aged 20-24 live in Sandy Bay?",
+		745, 	//"How many females aged 20 to 24 live in Sandy Bay?",
+		745, 	//"How many women aged between 20 and 24 live in Sandy Bay?",
+		745, 	//"How many women 20-24 in Sandy Bay are there?",
+		745, 	//"In Sandy Bay, how many women aged 20-24 are there?",
+		745, 	//"What is Sandy Bay's 20-24 female population?",
+		745, 	//"Sandy Bay's female population aged 20-24 years?"
+		745,	// printQueryResult("What is the population of Sandy Bay women aged 20-24?") ; 
 
 		//B05
 		60, //"How many married 25-30 women are in Braidwood?", 
@@ -277,6 +283,7 @@ public class UnitTester {
 		9979,	//	"How many women in Goulburn only speak English?"); //9979
 		139945,	// 	"How many women speak Arabic in Australia?"); //139945
 		139945,	// 	"How many women speak Arabic?"); //139945
+		73,		// printQueryResult("How many women speak Arabic in Goulburn-Yass?");	//73
 
 		//B14
 		20,		//	"How many men in Goulburn are muslims?"); // 20
@@ -320,6 +327,7 @@ public class UnitTester {
 		4722,	//	"How many women were in Goulburn in the labour force?")); //4722
 		2821,		// "How many people in Goulburn were part time employment?") ); 
 		2821, 		// "How many people in Goulburn were employed part time?") ); 
+		4919,	// "How many men in Goulburn were full-time employed?") ; //4919
 
 		//B43
 		43,		//	"How many men aged 35-40 in Queanbeyan work in agriculture?") ); //43

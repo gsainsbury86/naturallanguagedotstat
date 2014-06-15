@@ -28,11 +28,7 @@ public class LocalTest {
 
 		/* The following queries fail for various as it does not successfully identify the region....
 
-		System.out.println(getQueryResult("What is the population of Sandy Bay women aged 20-24?") );
-		System.out.println(getQueryResult("How many women aged 45-50 did voluntary work in New South Wales?") ); //102622
-		System.out.println(getQueryResult("How many women aged 45-50 did volunteer work in New South Wales?") );
-		System.out.println(getQueryResult("How many people aged 35-40 in Goulburn were employed in total?") ); //2047  //can't have the word total in it.
-		System.out.println(getQueryResult("How many men in Goulburn were full-time employed?") ); 
+		// printQueryResult("How many people aged 35-40 in Goulburn were employed in total?") ; //2047  //can't have the word total in it.
 		*/
 
 
@@ -40,12 +36,12 @@ public class LocalTest {
 		// The following queries are correct and now should be moved to UnitTester 
 		
 		//B03
-		printQueryResult("How many women speak Arabic in Goulburn-Yass?");	//73
-		printQueryResult("How many women speak Arabic?");	//139945
 
+
+		// B42
 		 */
+		printQueryResult("How many women in Sandy Bay work in agriculture?") ; //35
 
-		printQueryResult("how many women in Australia were born in Germany?");	
 		
 
 	}
