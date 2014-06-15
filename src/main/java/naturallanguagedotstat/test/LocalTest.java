@@ -38,11 +38,14 @@ public class LocalTest {
 
 		/* 
 		// The following queries are correct and now should be moved to UnitTester 
+		
+		//B03
+		printQueryResult("How many women speak Arabic in Goulburn-Yass?");	//73
+		printQueryResult("How many women speak Arabic?");	//139945
 
 		 */
 
-		//B03
-		printQueryResult("How many people aged 18-20 were at home on Census night in Goulburn?");	
+		printQueryResult("how many women in Australia were born in Germany?");	
 		
 
 	}

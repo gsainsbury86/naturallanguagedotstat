@@ -389,6 +389,104 @@ public class SemanticParser {
 	}
 
 
+	
+	public void parseText(){
+		String region = identifyASGSRegion(grammarParser.inputText);
+		if (region != null){
+			dimensions.put("region", region );
+		};
+		
+		grammarParser.parseText();
+		identifyDimensions(grammarParser.keyPhrases);
+		cleanUpDimensions();
+
+	}
+
+	private void cleanUpDimensions(){
+		
+		dimensions.remove("Selected Person Characteristics"); // This eliminates Statistical Collections that are merely summaries of other ones.
+
+		if(dimensions.containsKey("Ancestry") ){
+			dimensions.remove("Ancestry");
+		};
+
+		if(dimensions.containsKey("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)") ){
+			dimensions.remove("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)");
+		};
+
+		
+		
+		// Begin the conditional checking.....
+		
+		if(!grammarParser.inputText.contains("born") &&	!grammarParser.inputText.contains("from") 
+				&& dimensions.containsKey("Country of Birth of Person") ){
+			dimensions.remove("Country of Birth of Person");
+		};
+
+		if(!grammarParser.inputText.contains("years ago") 
+				&& dimensions.containsKey("Place of Usual Residence 5 Years Ago") ){
+			dimensions.remove("Place of Usual Residence 5 Years Ago");
+		};
+
+		if(grammarParser.inputText.contains("lived") 
+				&& dimensions.containsKey("Country of Birth of Person") ){
+			dimensions.remove("Country of Birth of Person");
+		};
+
+		
+		if(grammarParser.inputText.contains("speak") 
+				&& dimensions.containsKey("Country of Birth of Person")  ){
+			dimensions.remove("Country of Birth of Person");
+		};
+
+
+		if(grammarParser.inputText.contains("assistance") ){
+			if(dimensions.containsKey("Country of Birth of Person") )
+				dimensions.remove("Country of Birth of Person");
+		};
+
+		if(grammarParser.inputText.contains("voluntary") ||  grammarParser.inputText.contains("volunteer") 
+				&& dimensions.containsKey("Country of Birth of Person") ){
+				dimensions.remove("Country of Birth of Person");
+		};
+
+		// ...................................
+		
+		int c = (dimensions.containsKey("region")) ? 1 : 0;
+		
+		if(dimensions.containsKey("Country of Birth of Person") && dimensions.size() == c){
+			dimensions.put("Age","Total all ages");
+		};
+
+		// if query only has <region>, make sure it chooses B04;
+		if(dimensions.size() == c ){
+			dimensions.put("Sex","Persons");
+			dimensions.put("Age","Total all ages");
+		};
+
+		// if query only has <Sex> and <Region>, make sure it chooses B04;
+		if(dimensions.size() == c+1  && dimensions.containsKey("Sex")){
+			dimensions.put("Age","Total all ages");
+		};
+
+		// if query only has <Age> and <Region>, make sure it chooses B04;
+		if(dimensions.size() == c+1  && dimensions.containsKey("Age")){
+			dimensions.put("Sex","persons");
+		};
+		
+		// the word "persons" is often used as a generic grammar term and not as a direct semantic indicator of sum of males+females.
+		if(dimensions.containsKey("Place of Usual Residence on Census Night")  && dimensions.containsKey("Sex") ){
+			dimensions.remove("Sex");
+		};
+		
+		// if query does not have <Region>, set it to the default value of "Australia";
+		if(!dimensions.containsKey("region") ) {dimensions.put("region","Australia");};
+	
+	}
+	
+
+	// ...........................................................................
+
 	public String identifyASGSRegion(String str){
 		HashMap<String, String> identifiedRegions = new HashMap<String, String>() ;
 		HashMap<String, String> regions = ASGS2011.getCodelist();
@@ -437,67 +535,14 @@ public class SemanticParser {
 				minLengthKey  = key.length();
 				largestRegion = regions.get(key);
 			}
-		};		
-		return largestRegion;
+		};	
+		if(minLengthKey != 9999){
+			return largestRegion;
+		} else {
+			return null;
+		}
+			
 	};
-	
-	public void parseText(){
+	// ...........................................................................
 
-		identifyASGSRegion(grammarParser.inputText);
-		
-		grammarParser.parseText();
-		if (grammarParser.npObjects.size() >0){
-			dimensions.put("region", grammarParser.npObjects.get(0) ); 	//assumes that npObjects has only 1 item in it.
-		};
-
-		identifyDimensions(grammarParser.npSubjects);
-		cleanUpDimensions();
-
-	}
-
-	private void cleanUpDimensions(){
-
-
-		dimensions.remove("Selected Person Characteristics"); // This eliminates Statistical Collections that are merely summaries of other ones.
-
-		if(dimensions.containsKey("Ancestry") ){
-			dimensions.remove("Ancestry");
-		};
-
-		if(dimensions.containsKey("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)") ){
-			dimensions.remove("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)");
-		};
-
-		int c = (dimensions.containsKey("region")) ? 1 : 0;
-		
-		// if query only has <Country of Birth of Person> currently make sure it chooses B09 and not B10;
-		if(dimensions.containsKey("Country of Birth of Person") && dimensions.size() == c){
-			dimensions.put("Age","Total all ages");
-		};
-
-		// if query only has <region>, make sure it chooses B04;
-		if(dimensions.size() == c ){
-			dimensions.put("Sex","Persons");
-			dimensions.put("Age","Total all ages");
-		};
-
-		// if query only has <Sex> and <Region>, make sure it chooses B04;
-		if(dimensions.size() == c+1  && dimensions.containsKey("Sex")){
-			dimensions.put("Age","Total all ages");
-		};
-
-		// if query only has <Age> and <Region>, make sure it chooses B04;
-		if(dimensions.size() == c+1  && dimensions.containsKey("Age")){
-			dimensions.put("Sex","persons");
-		};
-		
-		// the word "persons" is often used as a generic grammar term and not as a direct semantic indicator of sum of males+females.
-		if(dimensions.containsKey("Place of Usual Residence on Census Night")  && dimensions.containsKey("Sex") ){
-			dimensions.remove("Sex");
-		};
-		
-		// if query does not have <Region>, set it to the default value of "Australia";
-		if(!dimensions.containsKey("region") ) {dimensions.put("region","Australia");};
-	
-	}
 }
