@@ -38,26 +38,22 @@ public class LocalTest {
 
 		/* 
 		// The following queries are correct and now should be moved to UnitTester 
+
 		 */
 
-
-
-
+		//B03
+		printQueryResult("How many people aged 18-20 were at home on Census night in Goulburn?");	
 		
-
-
-
 
 	}
 	
-	public static String getQueryResult( String str) throws IOException, ClassNotFoundException{
+	public static void printQueryResult( String str) throws IOException, ClassNotFoundException{
 		Service service = new Service();
 
 		JsonReader jsonReader = Json.createReader(new StringReader((String) service.query(str).getEntity()));
 		JsonObject object = jsonReader.readObject();
 		jsonReader.close();
-		
-		return  object.getString("result");
+		System.out.println(object.getString("result")+ " <-- " + str);
 	}
 
 }

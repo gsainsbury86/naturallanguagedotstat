@@ -18,7 +18,8 @@ public class SemanticParser {
 	private Dimension ASGS2011;
 
 	private GrammarParser grammarParser;
-
+	
+	
 	// constructor
 	public SemanticParser (String str, ArrayList<Dataset> datasets, Dimension ASGS2011) throws IOException, ClassNotFoundException{
 		flatCodeList = new HashMap<String, String>();
@@ -388,7 +389,62 @@ public class SemanticParser {
 	}
 
 
+	public String identifyASGSRegion(String str){
+		HashMap<String, String> identifiedRegions = new HashMap<String, String>() ;
+		HashMap<String, String> regions = ASGS2011.getCodelist();
+
+		for(String key : regions.keySet()){
+			if(eliminateHyphens(str).contains(eliminateHyphens(regions.get(key) ) ) ){
+				identifiedRegions.put(key, regions.get(key) );
+			}
+		};
+		// System.out.println("Best match: "+ getBestMatchRegion(query,identifiedRegions) );
+		return getBestMatchRegion(eliminateHyphens(str),identifiedRegions);
+	}
+	
+	
+	public String eliminateHyphens(String str){
+		return str.replaceAll("-", " ").replaceAll("\\s+", " ");
+	}
+
+	
+	// Selects the best match region 
+	private String getBestMatchRegion(String str, HashMap<String, String> hashmap){
+		HashMap<String, String> regions = hashmap;
+		
+		// excludes Australia if multiple regions are identified, as it is most likely associated with phrases such as "born in Australia".
+		if(regions.size() >1 && regions.containsKey("0")){
+			System.out.println("removing australia from regions. ");
+			regions.remove("0");
+		};
+
+		for(String key : regions.keySet()){
+			if(str.contains("SA4") && key.length() == 9) return regions.get(key);
+			if(str.contains("SA3") && key.length() == 5) return regions.get(key);
+			if(str.contains("SA2") && key.length() == 3) return regions.get(key);
+		};		
+
+		return getLargestRegion(regions); //default if user does not explicitly include the RegionType.
+	};
+
+	
+	// Selects the largest region as the one at the highest level hierarchy.
+	private String getLargestRegion(HashMap<String, String> regions){
+		int minLengthKey = 9999;
+		String largestRegion = new String();
+		for(String key : regions.keySet()){
+			if(key.length() < minLengthKey) {
+				minLengthKey  = key.length();
+				largestRegion = regions.get(key);
+			}
+		};		
+		return largestRegion;
+	};
+	
 	public void parseText(){
+
+		identifyASGSRegion(grammarParser.inputText);
+		
 		grammarParser.parseText();
 		if (grammarParser.npObjects.size() >0){
 			dimensions.put("region", grammarParser.npObjects.get(0) ); 	//assumes that npObjects has only 1 item in it.
