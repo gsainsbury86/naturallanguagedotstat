@@ -31,22 +31,22 @@ public class UnitTester {
 	}
 
 	@Test
-	public void testQueries()
-			throws FileNotFoundException, IOException, ClassNotFoundException {
+	public void testQueries() throws FileNotFoundException, IOException, ClassNotFoundException {
 
 		LocalTest.localLoad = true;
 		LocalTest.debug = false;
+		LocalTest.test = true;
 
 		for(int i = 0; i < TEST_QUERIES.length; i++){
-			System.out.println("Testing: ("+(i+1)+ "/"+TEST_QUERIES.length +"): "+ TEST_QUERIES[i]);
+			//System.out.println("Testing: ("+(i+1)+ "/"+TEST_QUERIES.length +"): "+ TEST_QUERIES[i]);
 
 			JsonReader jsonReader = Json.createReader(new StringReader((String) service.query(TEST_QUERIES[i]).getEntity()));
 			JsonObject object = jsonReader.readObject();
 			jsonReader.close();
-
-			collector.checkThat(TEST_QUERIES[i], Integer.parseInt(
-					(object.getString("result"))), is(TEST_RESULTS[i]));
+			
+			collector.checkThat(TEST_QUERIES[i], object.getString("url"), is(TEST_RESULTS[i]));
 		}
+		
 	}
 
 	//	@Test
@@ -207,149 +207,113 @@ public class UnitTester {
 		"How many women aged 20-25 in Tasmania are labourers?"
 	};
 
-	private static final int[] TEST_RESULTS = {	
+	private static final String[] TEST_RESULTS = {	
 		
-		//B03
-		2497, 	// "How many people aged 18-20 were at home on Census night in Goulburn?",	
-		20430, 	//	"How many people were at home on Census night in Goulburn?",	
-		10760, 	//	"how many men were at home on the night of the Census in Goulburn",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B03/T15.1.1.SA2.101011001.A/ABS", //How many people aged 18-20 were at home on Census night in Goulburn?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B03/TT.1.1.SA2.101011001.A/ABS", //How many people were at home on Census night in Goulburn?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/1.TT.1.SA2.101011001.A/ABS", //how many men were at home on the night of the Census in Goulburn
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.0.AUS.0.A/ABS", //What is the population of Australia?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.6.SA2.601051031.A/ABS", //What is the population of Sandy Bay?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.6.SA2.601051031.A/ABS", //How many people live in Sandy Bay?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.6.SA2.601051031.A/ABS", //Population of Sandy Bay?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.6.SA2.601051031.A/ABS", //In Sandy Bay, how many people are there?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.6.SA2.601051031.A/ABS", //What is Sandy Bay's population?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.6.SA2.601051031.A/ABS", //Sandy Bay's population?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.6.SA2.601051031.A/ABS", //What is the female population of Sandy Bay?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.6.SA2.601051031.A/ABS", //What is the population of women in Sandy Bay?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.6.SA2.601051031.A/ABS", //How many females live in Sandy Bay?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.6.SA2.601051031.A/ABS", //How many women live in Sandy Bay?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.6.SA2.601051031.A/ABS", //How many women in Sandy Bay are there?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.6.SA2.601051031.A/ABS", //Female population of Sandy Bay?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.6.SA2.601051031.A/ABS", //In Sandy Bay, how many women are there?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.6.SA2.601051031.A/ABS", //What is Sandy Bay's female population?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.6.SA2.601051031.A/ABS", //Sandy Bay's female population?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.19+17+18+15+16.6.SA2.601051031.A/ABS", //What is the female 15-19 population of Sandy Bay?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601051031.A/ABS", //What is the female population of Sandy Bay aged 20-24?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601051031.A/ABS", //What is the female population aged 20-24 of Sandy Bay?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601051031.A/ABS", //What is the population of women aged between 20 and 24 in Sandy Bay?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601051031.A/ABS", //How many 20-24 year old females live in Sandy Bay?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601051031.A/ABS", //How many females  20-24 year old live in Sandy Bay?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601051031.A/ABS", //How many females aged 20-24 live in Sandy Bay?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601051031.A/ABS", //How many females aged 20 to 24 live in Sandy Bay?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601051031.A/ABS", //How many women aged between 20 and 24 live in Sandy Bay?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601051031.A/ABS", //How many women 20-24 in Sandy Bay are there?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601051031.A/ABS", //In Sandy Bay, how many women aged 20-24 are there?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601051031.A/ABS", //What is Sandy Bay's 20-24 female population?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601051031.A/ABS", //Sandy Bay's female population aged 20-24 years?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601051031.A/ABS", //What is the population of Sandy Bay women aged 20-24?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.5.1.SA2.101021007.A/ABS", //How many married 25-30 women are in Braidwood?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.5.1.SA2.101021007.A/ABS", //How many females married in Braidwood are 25-30?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.5.1.SA2.101021007.A/ABS", //How many married females in Braidwood are between 25 and 30 years old?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.5.1.SA2.101021007.A/ABS", //How many married women are in Braidwood?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.4.1.SA2.101021007.A/ABS", //How many women are separated in Braidwood?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.3.1.SA2.101021007.A/ABS", //How many women are divorced in Braidwood?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.2.1.SA2.101021007.A/ABS", //How many widowed women are in Braidwood?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.5.1.SA2.101021007.A/ABS", //How many women in Braidwood are married?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.3.1.SA2.101021007.A/ABS", //How many women in Braidwood are divorced?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.3.1.SA2.101021007.A/ABS", //How many women in Braidwood aged 25-30 are divorced
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.2.1.SA2.101021007.A/ABS", //How many females have a de facto relationship in Braidwood?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/3.TT.1.1.SA2.101021007.A/ABS", //How many people have a registered marriage in Braidwood?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.A35.4.1.SA2.101011001.A/ABS", //How many men aged 35-40 in Goulburn are indigenous?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.TT.4.1.SA2.101021007.A/ABS", //How many indigenous males are there in Braidwood?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.5105.6.STE.6.A/ABS", //What is the population of Tasmania born in vietnam
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.2304.0.AUS.0.A/ABS", //How many women in Australia were born in Germany?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.6101.1.SA2.101011001.A/ABS", //How many people in Goulburn were born in China?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/1.8104.1.SA2.101011001.A/ABS", //How many men born in the US are in Goulburn?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/1.7103.1.SA2.101011001.A/ABS", //How many men in Goulburn are from India?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/3.41.1.SA2.101011001.A/ABS", //How many people speak Iranian in Goulburn?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/1.7101.1.SA2.101011001.A/ABS", //In Goulburn, how many men speak Cantonese?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/2.1.1.SA2.101011001.A/ABS", //How many women in Goulburn only speak English?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/2.4202.0.AUS.0.A/ABS", //How many women speak Arabic in Australia?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/2.4202.0.AUS.0.A/ABS", //How many women speak Arabic?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/2.4202.1.SA3.10101.A/ABS", //How many women speak Arabic in Goulburn-Yass?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/1.4.1.SA2.101011001.A/ABS", //How many men in Goulburn are muslims?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/1.24.1.SA2.101011001.A/ABS", //How many Pentecostal men are there in Goulburn?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/3.215.1.SA2.101011001.A/ABS", //How many mormons in Goulburn?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/2.7.1.SA2.101011001.A/ABS", //How many women in Goulburn have no religion?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/2.101.1.SA2.101011001.A/ABS", //How many women follow Buddhism in Goulburn?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B18/3.A20.1.0.AUS.0.A/ABS", //How many people aged 20-25 need assistance in Australia?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B19/2.T45.2.1.STE.1.A/ABS", //How many women aged 45-50 in New South Wales did volunteer work?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B19/1.A20.2.1.SA2.101011001.A/ABS", //How many men aged 20-25 in Goulburn did volunteer work?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B21/2.O15+A15.2.0.AUS.0.A/ABS", //How many women aged 15-19 provided unpaid assistance in Australia?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B21/2.O15.2.0.AUS.0.A/ABS", //How many women provided unpaid assistance in Australia?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/2.O15.2.1.SA4.101.A/ABS", //How many women in Capital Region have a graduate diploma?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/2.O15.3.1.SA4.101.A/ABS", //How many women have a bachelor degree in Capital Region?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/3.O15+T15.2.1.SA2.101011001.A/ABS", //How many people 15-24 have a diploma in Goulburn
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/2.T25.1.1.SA2.101011001.A/ABS", //How many women 25-34 in Goulburn have a postgraduate degree
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/1.T35.3.1.SA2.101011001.A/ABS", //How many 35-44 year old men in Goulburn have a bachelors degree 
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/01.2.T25.1.SA2.101011001.A/ABS", //How many women aged 25-30 in Goulburn have studied science?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/03.2.O15.1.SA2.101011001.A/ABS", //How many women in Goulburn have an engineering degree?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/04.1.T65.1.SA2.101011001.A/ABS", //How many men aged 65-80 in Goulburn have studied architecture?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/08.1.O15.1.SA2.101011001.A/ABS", //How many men in Goulburn have a commerce degree?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.T35.EMP.1.SA2.101011001.A/ABS", //How many people aged 35-40 in Goulburn were employed?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.T35.EMP.1.SA2.101011001.A/ABS", //How many people aged 35-40 in Goulburn were in employment?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/1.O15.1.1.SA2.101011001.A/ABS", //How many men in Goulburn were in full time employment?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/2.O15.LF.1.SA2.101011001.A/ABS", //How many women in Goulburn were in the labour force?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.O15.EMP.1.SA2.101011001.A/ABS", //How many people in Goulburn were in employment?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.O15.2.1.SA2.101011001.A/ABS", //How many people in Goulburn were in part time employment?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/2.O15.LF.1.SA2.101011001.A/ABS", //How many women were in Goulburn in the labour force?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.O15.2.1.SA2.101011001.A/ABS", //How many people in Goulburn were part time employment?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.O15.2.1.SA2.101011001.A/ABS", //How many people in Goulburn were employed part time?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/1.O15.EMP.1.SA2.101011001.A/ABS", //How many men in Goulburn were full-time employed?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.T35.A.1.SA3.10102.A/ABS", //How many men aged 35-40 in Queanbeyan work in agriculture?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.T35.B.1.SA3.10102.A/ABS", //How many men aged 35-40 in Queanbeyan work in mining?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.T35.C.1.SA3.10102.A/ABS", //How many men aged 35-40 in Queanbeyan work in manufacturing?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.T35.D.1.SA3.10102.A/ABS", //How many men aged 35-40 in Queanbeyan work in utilities?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.T35.E.1.SA3.10102.A/ABS", //How many men aged 35-40 in Queanbeyan work in construction?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.T35.A.1.SA3.10102.A/ABS", //How many men aged 35-40 in Queanbeyan are in the agricultural sector?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.T35.B.1.SA3.10102.A/ABS", //How many men aged 35-40 in Queanbeyan are in the mining sector?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.T35.C.1.SA3.10102.A/ABS", //How many men from the manufacturing industry in Queanbeyan are aged 35-40?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.T35.D.1.SA3.10102.A/ABS", //How many men from the utilities industry in Queanbeyan are aged 35-40?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.T35.E.1.SA3.10102.A/ABS", //How many men from the construction industry in Queanbeyan are aged 35-40?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/A15.2.4.6.STE.6.A/ABS", //How many women aged 18-19 in Tasmania are community workers?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/T35.1.1.1.SA2.101021007.A/ABS", //How many men aged 35-40 in Braidwood are managers?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/A20.2.1.6.STE.6.A/ABS", //How many females aged 20 to 25 in Tasmania are Managers?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/A20.2.2.6.STE.6.A/ABS", //How many 20-25 year old females in Tasmania are professionals?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/A20.2.3.6.STE.6.A/ABS", //How many 20-25 year old women in Tasmania are technicians?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/A20.2.4.6.STE.6.A/ABS", //How many women aged 20-25 in Tasmania are community workers?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/A20.2.8.6.STE.6.A/ABS", //How many women aged 20-25 in Tasmania are labourers?
 
-		//B04
-		21507719, //"What is the population of Australia?"
-
-		11157, //"What is the population of Sandy Bay?",
-		11157, //"How many people live in Sandy Bay?",
-		11157, //"Population of Sandy Bay?",
-		11157, //"In Sandy Bay, how many people are there?",
-		11157, //"What is Sandy Bay's population?",
-		11157, //"Sandy Bay's population?",
-
-		5696, //"What is the female population of Sandy Bay?",
-		5696, //"What is the population of women in Sandy Bay?",
-		5696, //"How many females live in Sandy Bay?",
-		5696, //"How many women live in Sandy Bay?",
-		5696, //"How many women in Sandy Bay are there?",
-		5696, //"Female population of Sandy Bay?",
-		5696, //"In Sandy Bay, how many women are there?",
-		5696, //"What is Sandy Bay's female population?",
-		5696, //"Sandy Bay's female population?",
-
-		355, //"What is the female 15-19 population of Sandy Bay?",  // this agegroup metadata has an extra space at the end!
-		745, // "What is the female population of Sandy Bay aged 20-24?") ); //745
-		745, //"What is the female population aged 20-24 of Sandy Bay?",
-		745, //"What is the population of women aged between 20 and 24 in Sandy Bay?",				
-		745, //"How many 20-24 year old females live in Sandy Bay?",
-		745, //"How many females  20-24 year old live in Sandy Bay?",
-		745, 	//"How many females aged 20-24 live in Sandy Bay?",
-		745, 	//"How many females aged 20 to 24 live in Sandy Bay?",
-		745, 	//"How many women aged between 20 and 24 live in Sandy Bay?",
-		745, 	//"How many women 20-24 in Sandy Bay are there?",
-		745, 	//"In Sandy Bay, how many women aged 20-24 are there?",
-		745, 	//"What is Sandy Bay's 20-24 female population?",
-		745, 	//"Sandy Bay's female population aged 20-24 years?"
-		745,	// printQueryResult("What is the population of Sandy Bay women aged 20-24?") ; 
-
-		//B05
-		60, //"How many married 25-30 women are in Braidwood?", 
-		60, //"How many females married in Braidwood are 25-30?", 
-		60, //"How many married females in Braidwood are between 25 and 30 years old?", 
-		704, //"How many married women are in Braidwood?", 
-		51, //"How many women are separated in Braidwood?", 
-		150, //"How many women are divorced in Braidwood?", 
-		145, //"How many widowed women are in Braidwood?", 
-		704, //"How many women in Braidwood are married?", 
-		150, //"How many women in Braidwood are divorced?", 
-		3,	// "How many women in Braidwood aged 25-30 are divorced"
-
-
-		//B06
-		133, 	//"How many females have a de facto relationship in Braidwood?", 
-		1235, 	//"How many people have a registered marriage in Braidwood?", 
-
-		//B07
-		27, 	//"How many men aged 35-40 in Goulburn are indigenous?", 
-		22, 	//"How many indigenous males are there in Braidwood?", 
-
-		//B09
-		267, 	// "What is the population of Tasmania born in vietnam") ); //267
-		56674, 	//	"How many women in Australia were born in Germany?"); // 
-		45, 	// "How many people in Goulburn were born in China?"); // 45
-		14,		// "How many men born in the US are in Goulburn?"); // 14
-		30, 	//	"How many men in Goulburn are from India?"); // 30  
-
-		//B13
-		9,		//	"How many people speak Iranian in Goulburn?"); //9
-		16,		// 	"In Goulburn, how many men speak Cantonese?");
-		9979,	//	"How many women in Goulburn only speak English?"); //9979
-		139945,	// 	"How many women speak Arabic in Australia?"); //139945
-		139945,	// 	"How many women speak Arabic?"); //139945
-		73,		// printQueryResult("How many women speak Arabic in Goulburn-Yass?");	//73
-
-		//B14
-		20,		//	"How many men in Goulburn are muslims?"); // 20
-		61,		// 	"How many Pentecostal men are there in Goulburn?"); //61
-		26,		// 	"How many mormons in Goulburn?"); //26
-		1216,	// 	"How many women in Goulburn have no religion?"); //1216
-		84,		// 	"How many women follow Buddhism in Goulburn?"); //84
-
-		//B18
-		20107,	// 	"How many people aged 20-25 need assistance in Australia?"); //20107
-
-
-		//B19
-		102622,	// 	"How many women aged 45-50 in New South Wales did volunteer work?"); //102622
-		73, 	// 	"How many men aged 20-25 in Goulburn did volunteer work?"); 
-
-		//B21
-		32277,		//	"How many women aged 15-19 provided unpaid assistance in Australia?"); //32277
-		1160621,	// "How many women provided unpaid assistance in Australia?"); //1160621
-
-		//B40
-		1963,	// 	"How many women in Capital Region have a graduate diploma?"); // 1963
-		9773,	// 	"How many women have a bachelor degree in Capital Region?"); // 9773
-		5, 		//	"How many people 15-24 have a diploma in Goulburn");
-		14,		// 	"How many women 25-34 in Goulburn have a postgraduate degree");
-		90, 	// 	"How many 35-44 year old men in Goulburn have a bachelors degree ");		
-
-		//B41
-		6, 		// "How many women aged 25-30 in Goulburn have studied science ?")); //6
-		53,		// "How many women in Goulburn have an engineering degree?")); // 53
-		50,		// "How many men aged 65-80 in Goulburn have studied architecture?")); // 50
-		404,	// "How many men in Goulburn have a commerce degree?")); // 404
-
-		//B42
-		2047, 	// "How many people aged 35-40 in Goulburn were employed?")); //2047  
-		2047,	// "How many people aged 35-40 in Goulburn were in employment?")); //2047
-		3726,	// "How many men in Goulburn were in full time employment?"));	//3726
-		4722,	// "How many women in Goulburn were in the labour force?")); //4722
-		9362,	// "How many people in Goulburn were in employment?")); //9362
-		2821,	// "How many people in Goulburn were in part time employment?")); //2821
-		4722,	//	"How many women were in Goulburn in the labour force?")); //4722
-		2821,		// "How many people in Goulburn were part time employment?") ); 
-		2821, 		// "How many people in Goulburn were employed part time?") ); 
-		4919,	// "How many men in Goulburn were full-time employed?") ; //4919
-
-		//B43
-		43,		//	"How many men aged 35-40 in Queanbeyan work in agriculture?") ); //43
-		11,		//	"How many men aged 35-40 in Queanbeyan work in mining?") ); //11
-		275,	//	"How many men aged 35-40 in Queanbeyan work in manufacturing?") );	//275
-		79,		//	"How many men aged 35-40 in Queanbeyan work in utilities?") );	//79
-		567,	//	"How many men aged 35-40 in Queanbeyan work in construction?") );	//567
-
-		43, 	//	"How many men aged 35-40 in Queanbeyan are in the agricultural sector?", 
-		11, 	//	"How many men aged 35-40 in Queanbeyan are in the mining sector?", 
-		275, 	//	"How many men from the manufacturing industry in Queanbeyan are aged 35-40?", 
-		79, 	//	"How many men from the utilities industry in Queanbeyan are aged 35-40?", 
-		567, 	//	"How many men from the construction industry in Queanbeyan are aged 35-40?", 
-		1552, 	//	"How many women aged 18-19 in Tasmania are community workers?"); 
-		
-		//B45
-		39, 	//	"How many men aged 35-40 in Braidwood are managers?", 
-		402, 	//	"How many females aged 20 to 25 in Tasmania are Managers?", 
-		1190, 	//	"How many 20-25 year old females in Tasmania are professionals?", 
-		705, 	//	"How many 20-25 year old women in Tasmania are technicians?", 
-		2166, 	//	"How many women aged 20-25 in Tasmania are community workers?", 
-		711 	//	"How many women aged 20-25 in Tasmania are labourers?" 
 
 	};
 }

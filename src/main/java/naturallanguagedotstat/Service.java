@@ -110,15 +110,20 @@ public class Service {
 
 		QueryBuilder queryBuilder = new QueryBuilder(query, datasets, ASGS2011);
 		String urlToRead = queryBuilder.build();
-		
-		String data = Utils.httpGET(urlToRead);
 
-		Document dataDocument = Utils.XMLToDocument(data);
+		String data = null;
+		int result = -1;
 
-		String resultString = Utils.findObsValue(dataDocument);
+		if(!LocalTest.test){
+			data = Utils.httpGET(urlToRead);
+
+			Document dataDocument = Utils.XMLToDocument(data);
+
+			result = Utils.findObsValue(dataDocument);
+		}
 
 		JsonObjectBuilder builder = Json.createObjectBuilder();
-		builder.add("result", resultString);
+		builder.add("result", result);
 		builder.add("url", urlToRead);
 		builder.add("Region",queryBuilder.getRegion());
 		for(String key : queryBuilder.getQueryInputs().keySet()){

@@ -41,7 +41,7 @@ public class QueryBuilder {
 		this.datasets = datasets;
 		this.ASGS2011 = ASGS2011;
 		
-		doAggregateAges = false;
+		doAggregateAges = true;
 	}
 
 	public String build() throws IOException, ClassNotFoundException {
@@ -243,13 +243,19 @@ public class QueryBuilder {
 		url += "/restsdmx/sdmx.ashx/GetData/";
 
 		url += ds.getName()+"/";
+		
+//		System.out.println(queryInputs);
 
 		/* ensure order */
 		for(Dimension dim : ds.getDimensions()){
 			for(String dimKey : queryInputs.keySet()){
 				if(dim.getName().equals(dimKey)){
 					//TODO: Loop over all in queryInputs
-					url += Utils.findValue(dim.getCodelist(),queryInputs.get(dimKey).get(0)) + ".";
+					for(String str: queryInputs.get(dimKey)){
+						url += Utils.findValue(dim.getCodelist(),str) + "+";
+					}
+					url = url.substring(0,url.length()-1);
+					url+= ".";
 				}
 			}
 		}
@@ -265,6 +271,8 @@ public class QueryBuilder {
 
 		url += "/ABS";
 
+//		System.out.println(url);
+		
 		return url;
 	}
 

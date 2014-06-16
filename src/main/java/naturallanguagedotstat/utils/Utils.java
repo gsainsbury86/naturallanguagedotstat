@@ -38,7 +38,7 @@ public class Utils {
 		}
 		return document;
 	}
-	
+
 	/**
 	 * HTTP GET to a String
 	 * 
@@ -67,8 +67,8 @@ public class Utils {
 		}
 		return result;
 	}	
-	
-	
+
+
 	/**
 	 * Searches a map for the given value and returns the key
 	 * 
@@ -87,10 +87,15 @@ public class Utils {
 		return null;
 	}
 
-	public static String findObsValue(Document document) {
+	public static int findObsValue(Document document) {
+		int c = 0;
 		NodeList nodeList = document.getElementsByTagName("ObsValue");
-		Node node = nodeList.item(0);
-		return node.getAttributes().getNamedItem("value").getNodeValue();
+	    for (int i = 0; i < nodeList.getLength(); i++) {
+	        Node node = nodeList.item(i);
+			c += Integer.parseInt(  node.getAttributes().getNamedItem("value").getNodeValue());
+		}
+		return c;
+
 	}
 
 }

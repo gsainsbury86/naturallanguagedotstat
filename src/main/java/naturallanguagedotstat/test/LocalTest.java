@@ -18,6 +18,7 @@ import naturallanguagedotstat.Service;
 public class LocalTest {
 
 	public static boolean debug = false;
+	public static boolean test = false;
 	public static boolean localLoad = false;
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException{
@@ -40,7 +41,7 @@ public class LocalTest {
 
 		// B42
 		 */
-		printQueryResult("How many women in Sandy Bay work in agriculture?") ; //35
+		printQueryResult("How many women in Sandy Bay aged 30-33?") ; //35
 
 		
 
@@ -52,7 +53,7 @@ public class LocalTest {
 		JsonReader jsonReader = Json.createReader(new StringReader((String) service.query(str).getEntity()));
 		JsonObject object = jsonReader.readObject();
 		jsonReader.close();
-		System.out.println(object.getString("result")+ " <-- " + str);
+		System.out.println(object.getInt("result")+ " <-- " + str);
 	}
 
 }
