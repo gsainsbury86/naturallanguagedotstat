@@ -11,6 +11,8 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
 import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.servlet.ServletContext;
@@ -122,18 +124,21 @@ public class Service {
 			result = Utils.findObsValue(dataDocument);
 		}
 
-		JsonObjectBuilder builder = Json.createObjectBuilder();
+
+		JsonBuilderFactory factory = Json.createBuilderFactory(null);
+		JsonObjectBuilder builder = factory.createObjectBuilder();
 		builder.add("result", result);
 		builder.add("url", urlToRead);
 		builder.add("Region",queryBuilder.getRegion());
 		for(String key : queryBuilder.getQueryInputs().keySet()){
+			JsonArrayBuilder jab = factory.createArrayBuilder();
 			for(String dimValue : queryBuilder.getQueryInputs().get(key)){
-				builder.add(key, dimValue);
+				jab.add(dimValue);
 			}
+			builder.add(key,jab);
 		}
 		JsonObject myObject = builder.build();
 
-		return Response.status(200).entity(myObject.toString()).build();// + "<br><br>" + "<br>" + urlToRead;
-
+		return Response.status(200).entity(myObject.toString()).build();
 	}
 }
