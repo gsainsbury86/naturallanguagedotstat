@@ -146,7 +146,7 @@ public class UnitTester {
 		"How many men in Goulburn are indigenous?", 
 		"How many people aged 35-40 in Goulburn are indigenous?", 
 		"How many indigenous 35-40 year olds in Goulburn are female?", 
-		"How many indigenous 35-40 year olds are there?",
+//		"How many indigenous 35-40 year olds are there in Australia?",
 		"How many men aged 35-40 in Goulburn are indigenous?", 
 		"How many indigenous males are there in Braidwood?", 
 
@@ -309,7 +309,7 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.TT.4.1.SA2.101011001.A/ABS",	// "How many men in Goulburn are indigenous?", 350
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/3.A35.4.1.SA2.101011001.A/ABS",	// "How many people aged 35-40 in Goulburn are indigenous?", 45
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/2.A35.4.1.SA2.101011001.A/ABS",	// "How many indigenous 35-40 year olds in Goulburn are female?", 18
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/3.A35.4.0.AUS.0.A/ABS",			// How many indigenous 35-40 year olds are there?", 34072"
+//		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/3.A35.4.0.AUS.0.A/ABS",			// How many indigenous 35-40 year olds are there?", 34072"
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.A35.4.1.SA2.101011001.A/ABS", 	// How many men aged 35-40 in Goulburn are indigenous?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.TT.4.1.SA2.101021007.A/ABS", 	// How many indigenous males are there in Braidwood?
 		

@@ -510,13 +510,13 @@ public class SemanticParser {
 	
 
 	// ...........................................................................
-
+	
 	public String identifyASGSRegion(String str){
 		HashMap<String, String> identifiedRegions = new HashMap<String, String>() ;
 		HashMap<String, String> regions = ASGS2011.getCodelist();
 
 		for(String key : regions.keySet()){
-			if(eliminateHyphens(str).contains(eliminateHyphens(regions.get(key) ) ) ){
+			if(eliminateHyphens(str.toLowerCase()).contains(eliminateHyphens(regions.get(key).toLowerCase() ) ) ){
 				identifiedRegions.put(key, regions.get(key) );
 			}
 		};
