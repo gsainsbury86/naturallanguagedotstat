@@ -89,7 +89,7 @@ input {
 			var url = '/main/query/' + $('#query').val();
 			$.getJSON(url, function(data, status, jqXHR) {
 				$("#result").text(data.result);
-				$("#url").html('<a href="''">' + data.url + '</a>');
+				$("#url").html('<a href="'+data.url+'">' + data.url + '</a>');
 				$('#map').text(' ');
 				$.each(data, function(index) {
 					if (index != 'result' && index != 'url') {
