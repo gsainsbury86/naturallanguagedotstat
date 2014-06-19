@@ -63,7 +63,6 @@ public class QueryBuilder {
 		setDefaultsForMissingDimensions(queryInputs, dataset);
 
 		restfulURL = generateURL(dataset);
-		//TODO: Return more details in some new object
 		return restfulURL;
 
 
@@ -250,8 +249,8 @@ public class QueryBuilder {
 		for(Dimension dim : ds.getDimensions()){
 			for(String dimKey : queryInputs.keySet()){
 				if(dim.getName().equals(dimKey)){
-					//TODO: Loop over all in queryInputs
 					for(String str: queryInputs.get(dimKey)){
+						// TODO: url+=str + "+";
 						url += Utils.findValue(dim.getCodelist(),str) + "+";
 					}
 					url = url.substring(0,url.length()-1);
@@ -260,6 +259,7 @@ public class QueryBuilder {
 			}
 		}
 
+		//TODO: String regionCode = region;
 		String regionCode = Utils.findValue(ASGS2011.getCodelist(), region);
 		String stateCode = regionCode.substring(0,1);
 		String regionType = regionTypeForRegionCode(regionCode);

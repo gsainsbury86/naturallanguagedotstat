@@ -1,17 +1,11 @@
 package naturallanguagedotstat.test;
 
-import static org.hamcrest.CoreMatchers.is;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.StringReader;
 
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
-
-import org.junit.Test;
-import org.junit.rules.ErrorCollector;
 
 import naturallanguagedotstat.Service;
 

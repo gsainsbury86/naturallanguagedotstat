@@ -86,7 +86,7 @@ input {
 		});
 		$('#go').click(function() {
 			$('#result').text('...');
-			var url = 'query/' + $('#query').val();
+			var url = '/main/query/' + $('#query').val();
 			$.getJSON(url, function(data, status, jqXHR) {
 				$("#result").text(data.result);
 				$("#url").html('<a href="'+data.url+'">' + data.url + '</a>');

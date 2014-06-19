@@ -36,7 +36,6 @@ public class SemanticParser {
 
 
 	// methods (in alphabetical order - hopefully)
-	//TODO: Change dimensions field so that it is HashMap<String, ArrayList<String>> 
 	public HashMap<String, ArrayList<String>> getDimensions() {
 
 		HashMap<String, ArrayList<String>> toReturn = new HashMap<String, ArrayList<String>>();
