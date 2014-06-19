@@ -102,7 +102,25 @@ public class UnitTester {
 		"What is the population of Sandy Bay women aged 20-24?",
 
 
-		//B05
+		//B05		
+		"How many married men aged 25-30 are in Braidwood?",
+		"How many women aged 25-30 are separated?",
+		"How many divorced men are there in Braidwood?",
+		"How many widows aged 25-30 are in Braidwood?",
+		//"How many women have never been married?", 
+		"How many people aged 25-30 are married?",
+		"How many men in Braidwood are separated?",
+		"How many people are divorced?",
+		
+		"How many widowed women aged 25-30 are in Braidwood?",
+		"How many men aged 25-30 have never married?",
+		"How many married men are there in Braidwood?",
+		"How many separated persons aged 25-30 are in Braidwood?",
+		"How many divorced women are there?",
+		"How many widows aged 25-30 are there?",
+		//"How many women have never married in Braidwood?",
+		"How many people are married?",
+
 		"How many married 25-30 women are in Braidwood?",
 		"How many females married in Braidwood are 25-30?",
 		"How many married females in Braidwood are between 25 and 30 years old?",
@@ -116,10 +134,19 @@ public class UnitTester {
 
 
 		//B06
-		"How many females have a de facto relationship in Braidwood?", 
+		"How many men are living in a de facto relationship in Braidwood?", 
+		"How many people are living in a de facto relationship?", 
+		"How many females are in a de facto relationship in Braidwood?", 
 		"How many people have a registered marriage in Braidwood?", 
+		"How many registered marriages are there in Braidwood?", 
 
 		//B07
+		"What is the indigenous population of men aged 35-40 in Goulburn?", 
+		"How many women aged 35-40 are indigenous?", 
+		"How many men in Goulburn are indigenous?", 
+		"How many people aged 35-40 in Goulburn are indigenous?", 
+		"How many indigenous 35-40 year olds in Goulburn are female?", 
+		"How many indigenous 35-40 year olds are there?",
 		"How many men aged 35-40 in Goulburn are indigenous?", 
 		"How many indigenous males are there in Braidwood?", 
 
@@ -242,6 +269,24 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601051031.A/ABS", //What is Sandy Bay's 20-24 female population?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601051031.A/ABS", //Sandy Bay's female population aged 20-24 years?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601051031.A/ABS", //What is the population of Sandy Bay women aged 20-24?
+
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.T25.5.1.SA2.101021007.A/ABS",	//		"How many married men aged 25-30 are in Braidwood?",	46
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.4.0.AUS.0.A/ABS",		//"How many women aged 25-30 are separated?", 38274
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.3.1.SA2.101021007.A/ABS",		//"How many divorced men are there in Braidwood?",137
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.T25.2.1.SA2.101021007.A/ABS",		//"How many widows aged 25-30 are in Braidwood?",0
+		//"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.1.0.AUS.0.A/ABS",		//"How many women have never been married?",	2753427
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.T25.5.0.AUS.0.A/ABS",		//"How many people aged 25-30 are married?",1198562
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.4.1.SA2.101021007.A/ABS",		//"How many men in Braidwood are separated?",50
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.TT.3.0.AUS.0.A/ABS",		//"How many people are divorced?",1460900
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.2.1.SA2.101021007.A/ABS",		//"How many widowed women aged 25-30 are in Braidwood?",0
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.T25.1.0.AUS.0.A/ABS",		//"How many men aged 25-30 have never married?",895608
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.5.1.SA2.101021007.A/ABS",		//"How many married men are there in Braidwood?",	723
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.T25.4.1.SA2.101021007.A/ABS",		//"How many separated persons aged 25-30 are in Braidwood?",7
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.3.0.AUS.0.A/ABS",		//"How many divorced women are there?",835077
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.T25.2.0.AUS.0.A/ABS",		//"How many widows aged 25-30 are there?",4616
+		//"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.1.1.SA2.101021007.A/ABS",		//"How many women have never married in Braidwood?", xx
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.TT.5.0.AUS.0.A/ABS",		//"How many people are married?",8461114
+		
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.5.1.SA2.101021007.A/ABS", //How many married 25-30 women are in Braidwood?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.5.1.SA2.101021007.A/ABS", //How many females married in Braidwood are 25-30?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.5.1.SA2.101021007.A/ABS", //How many married females in Braidwood are between 25 and 30 years old?
@@ -252,10 +297,22 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.5.1.SA2.101021007.A/ABS", //How many women in Braidwood are married?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.3.1.SA2.101021007.A/ABS", //How many women in Braidwood are divorced?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.3.1.SA2.101021007.A/ABS", //How many women in Braidwood aged 25-30 are divorced
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.2.1.SA2.101021007.A/ABS", //How many females have a de facto relationship in Braidwood?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/3.TT.1.1.SA2.101021007.A/ABS", //How many people have a registered marriage in Braidwood?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.A35.4.1.SA2.101011001.A/ABS", //How many men aged 35-40 in Goulburn are indigenous?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.TT.4.1.SA2.101021007.A/ABS", //How many indigenous males are there in Braidwood?
+		
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/1.TT.2.1.SA2.101021007.A/ABS", 	// "How many men are living in a de facto relationship in Braidwood?",125 
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/3.TT.2.0.AUS.0.A/ABS",			// "How many people are living in a de facto relationship?", 1476370
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.2.1.SA2.101021007.A/ABS", 	// How many females are in a de facto relationship in Braidwood?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/3.TT.1.1.SA2.101021007.A/ABS", 	// How many people have a registered marriage in Braidwood?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.TT.5.1.SA2.101021007.A/ABS",	// "How many registered marriages are there in Braidwood?", 1427
+
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.A35.4.1.SA2.101011001.A/ABS",	// "What is the indigenous population of men aged 35-40 in Goulburn?", 27
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/2.A35.4.0.AUS.0.A/ABS",			// "How many women aged 35-40 are indigenous?", 17838
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.TT.4.1.SA2.101011001.A/ABS",	// "How many men in Goulburn are indigenous?", 350
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/3.A35.4.1.SA2.101011001.A/ABS",	// "How many people aged 35-40 in Goulburn are indigenous?", 45
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/2.A35.4.1.SA2.101011001.A/ABS",	// "How many indigenous 35-40 year olds in Goulburn are female?", 18
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/3.A35.4.0.AUS.0.A/ABS",			// How many indigenous 35-40 year olds are there?", 34072"
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.A35.4.1.SA2.101011001.A/ABS", 	// How many men aged 35-40 in Goulburn are indigenous?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.TT.4.1.SA2.101021007.A/ABS", 	// How many indigenous males are there in Braidwood?
+		
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.5105.6.STE.6.A/ABS", //What is the population of Tasmania born in vietnam
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.2304.0.AUS.0.A/ABS", //How many women in Australia were born in Germany?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.6101.1.SA2.101011001.A/ABS", //How many people in Goulburn were born in China?

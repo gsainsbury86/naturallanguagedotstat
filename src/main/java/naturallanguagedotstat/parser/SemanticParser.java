@@ -114,6 +114,7 @@ public class SemanticParser {
 		//B06
 		synonyms.put("registered marriage","Married in a registered marriage");
 		synonyms.put("de facto","Married in a de facto marriage(b)");
+//		synonyms.put("never married","Married in a de facto marriage(b)");
 
 		//B07
 		synonyms.put("indigenous","Indigenous(a)");
@@ -239,23 +240,33 @@ public class SemanticParser {
 		synonyms.put("labour force","Total labour force");
   
 		//B43
+		synonyms.put("agricultural","Agriculture, forestry and fishing"); 
 		synonyms.put("agriculture","Agriculture, forestry and fishing");   // note B41
+		synonyms.put("farming","Agriculture, forestry and fishing");   // note B41
+		synonyms.put("farmers","Agriculture, forestry and fishing");   // note B41
 		synonyms.put("forestry","Agriculture, forestry and fishing"); 
 		synonyms.put("fishing","Agriculture, forestry and fishing"); 
-		synonyms.put("agricultural","Agriculture, forestry and fishing"); 
+		synonyms.put("fishermen","Agriculture, forestry and fishing"); 
 		synonyms.put("utilities","Electricity, gas, water and waste services");
 		synonyms.put("electricity","Electricity, gas, water and waste services");
 		synonyms.put("electrical","Electricity, gas, water and waste services");
+		synonyms.put("electricians","Electricity, gas, water and waste services");
 		synonyms.put("waste","Electricity, gas, water and waste services");
 		synonyms.put("wholesale","Wholesale trade");
+		synonyms.put("wholesalers","Wholesale trade");
 		synonyms.put("retail","Retail trade");
 		synonyms.put("retailing","Retail trade");
+		synonyms.put("retailers","Retail trade");
 		synonyms.put("accommodation","Accommodation and food services");
+		synonyms.put("cooks","Accommodation and food services");
+		synonyms.put("chefs","Accommodation and food services");
 		synonyms.put("food","Accommodation and food services");
 		synonyms.put("hospitality","Accommodation and food services");
 		synonyms.put("transport","Transport, postal and warehousing");
 		synonyms.put("transportation","Transport, postal and warehousing");
+		synonyms.put("drivers","Transport, postal and warehousing");
 		synonyms.put("postal","Transport, postal and warehousing");
+		synonyms.put("postmen","Transport, postal and warehousing");
 		synonyms.put("warehousing","Transport, postal and warehousing");
 		synonyms.put("computing","Information media and telecommunications"); 	// note B41
 		synonyms.put("computing industry","Information media and telecommunications"); // note B41
@@ -268,35 +279,49 @@ public class SemanticParser {
 		synonyms.put("financial","Financial and insurance services");
 		synonyms.put("finance","Financial and insurance services");
 		synonyms.put("finances","Financial and insurance services");
+		synonyms.put("banking","Financial and insurance services");
+		synonyms.put("bankers","Financial and insurance services");
 		synonyms.put("insurance","Financial and insurance services");
 		synonyms.put("real estate","Rental, hiring and real estate services");
 		synonyms.put("professional","Professional, scientific and technical services");
 		synonyms.put("scientific","Professional, scientific and technical services");
 		// synonyms.put("science","Professional, scientific and technical services");	// Clash with B41
-		synonyms.put("technical","Professional, scientific and technical services");
+		synonyms.put("scienctists","Professional, scientific and technical services");	// Clash with B41
+		synonyms.put("technical","Professional, scientific and technical services");	
+		//synonyms.put("technicians","Professional, scientific and technical services");//Clash with B45
 		synonyms.put("administrative","Administrative and support services");
+		// synonyms.put("secretaries","Administrative and support services"); //Clash with B45
+		// synonyms.put("clerks","Administrative and support services"); Clash with B45
 		synonyms.put("support","Administrative and support services");
 		synonyms.put("public","Public administration and safety");
 		synonyms.put("safety","Public administration and safety");
 		synonyms.put("work in education","Education and training");
 		synonyms.put("education","Education and training");
+		synonyms.put("teachers","Education and training");
 		synonyms.put("training","Education and training");
 		synonyms.put("health","Health care and social assistance");
 		synonyms.put("healthcare","Health care and social assistance");
+		synonyms.put("doctors","Health care and social assistance");
+		synonyms.put("nurses","Health care and social assistance");
 		synonyms.put("arts industry","Arts and recreation services");
 		synonyms.put("recreation","Arts and recreation services");
 
 		//B45
 		synonyms.put("technicians","Technicians and trades workers");
-		synonyms.put("community worker","Community and personal service  workers");
 		synonyms.put("community workers","Community and personal service  workers");
 		synonyms.put("trades","Technicians and trades workers");
 		synonyms.put("trade","Technicians and trades workers");
+		synonyms.put("tradesmen","Technicians and trades workers");
+		synonyms.put("builders","Technicians and trades workers");
+		synonyms.put("plumbers","Technicians and trades workers");
+		synonyms.put("electricians","Technicians and trades workers");
 		synonyms.put("clerical","Clerical and administrative workers");
 		synonyms.put("clerks","Clerical and administrative workers");
+		synonyms.put("secretaries","Clerical and administrative workers");
 		synonyms.put("administrative","Clerical and administrative workers");
 		synonyms.put("administration","Clerical and administrative workers");
 		synonyms.put("sales","Sales workers");
+		synonyms.put("salesmen","Sales workers");
 		synonyms.put("machinery","Machinery operators and drivers");
 		synonyms.put("drivers","Machinery operators and drivers");
 
