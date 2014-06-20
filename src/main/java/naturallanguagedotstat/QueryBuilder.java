@@ -51,6 +51,8 @@ public class QueryBuilder {
 
 		queryInputs = semanticParser.getDimensions();	
 
+		System.out.println(queryInputs);
+		
 		region = queryInputs.get("region").get(0);
 		queryInputs.remove("region");
 

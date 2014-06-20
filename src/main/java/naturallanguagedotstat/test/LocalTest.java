@@ -24,20 +24,25 @@ public class LocalTest {
 		/* The following queries fail for various as it does not successfully identify the region....
 
 		// printQueryResult("How many people aged 35-40 in Goulburn were employed in total?") ; //2047  //can't have the word total in it.
+
+		
+		printQueryResult("How many men in Tasmania were born in Vietnam?") ; //129
 		*/
 
 
 		/* 
 		// The following queries are correct and now should be moved to UnitTester 
+		printQueryResult("How many people whose country of birth is Vietnam live in Tasmania?") ; //267
+		printQueryResult("Number of women in Australia born in Australia?") ; //7605247
+		printQueryResult("How many people in Tasmania were born in Vietnam?") ; //267
+		printQueryResult("Number of women in Australia whose country of birth is also Australia?") ; //7605247
+		printQueryResult("How many people in Tasmania were born in Tasmania?") ; 
 		
-		//B03
 
-
-		// B42
 		 */
-		printQueryResult("How many women in Sandy Bay aged 30-33?") ; //35
-
 		
+
+
 
 	}
 	

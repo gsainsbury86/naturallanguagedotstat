@@ -442,7 +442,8 @@ public class SemanticParser {
 		
 		// Begin the conditional checking.....
 		
-		if(!grammarParser.inputText.contains("born") &&	!grammarParser.inputText.contains("from") 
+		if(!grammarParser.inputText.contains("born") &&	!grammarParser.inputText.contains("birth") 
+				&& !grammarParser.inputText.contains("from") 
 				&& dimensions.containsKey("Country of Birth of Person") ){
 			dimensions.remove("Country of Birth of Person");
 		};
