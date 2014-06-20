@@ -156,6 +156,11 @@ public class UnitTester {
 		"How many people in Goulburn were born in China?",
 		"How many men born in the US are in Goulburn?",
 		"How many men in Goulburn are from India?",  
+		"How many people whose country of birth is New Zealand live in Tasmania?", 
+		"Number of women in Australia born in Australia?",
+		"How many people in Tasmania were born in the UK?",
+		"Number of women in Australia whose country of birth is also Australia?",
+		// "How many people in Victoria were born in Victoria?",
 
 
 		//B13
@@ -318,6 +323,11 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.6101.1.SA2.101011001.A/ABS", //How many people in Goulburn were born in China?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/1.8104.1.SA2.101011001.A/ABS", //How many men born in the US are in Goulburn?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/1.7103.1.SA2.101011001.A/ABS", //How many men in Goulburn are from India?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.1201.6.STE.6.A/ABS",		//	printQueryResult("How many people whose country of birth is New Zealand live in Tasmania?") ; //4927
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.1101.0.AUS.0.A/ABS",		//	printQueryResult("Number of women in Australia born in Australia?") ; //7605247
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.2100.6.STE.6.A/ABS",		//	printQueryResult("How many people in Tasmania were born in the UK?") ; //267
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.1101.0.AUS.0.A/ABS",		//	printQueryResult("Number of women in Australia whose country of birth is also Australia?") ; //7605247
+		// "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.2.STE.2.A/ABS",			// printQueryResult("How many people in Victoria were born in Victoria?") ; 
 				
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/3.41.1.SA2.101011001.A/ABS", //How many people speak Iranian in Goulburn?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/1.7101.1.SA2.101011001.A/ABS", //In Goulburn, how many men speak Cantonese?

@@ -25,6 +25,7 @@ public class LocalTest {
 
 		// printQueryResult("How many people aged 35-40 in Goulburn were employed in total?") ; //2047  //can't have the word total in it.
 
+		// "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.2.STE.2.A/ABS",			// printQueryResult("How many people in Victoria were born in Victoria?") ; 
 		
 		printQueryResult("How many men in Tasmania were born in Vietnam?") ; //129
 		*/
@@ -32,11 +33,6 @@ public class LocalTest {
 
 		/* 
 		// The following queries are correct and now should be moved to UnitTester 
-		printQueryResult("How many people whose country of birth is Vietnam live in Tasmania?") ; //267
-		printQueryResult("Number of women in Australia born in Australia?") ; //7605247
-		printQueryResult("How many people in Tasmania were born in Vietnam?") ; //267
-		printQueryResult("Number of women in Australia whose country of birth is also Australia?") ; //7605247
-		printQueryResult("How many people in Tasmania were born in Tasmania?") ; 
 		
 
 		 */
