@@ -33,10 +33,22 @@ public class LocalTest {
 
 		/* 
 		// The following queries are correct and now should be moved to UnitTester 
-		
+
+		printQueryResult("How many people in Tasmania speak Arabic?") ; // 910
+		printQueryResult("How many women in Sandy Bay speak Cantonese at home?") ; //71
+		printQueryResult("How many men in Australia can speak German?") ; // 36882
+		printQueryResult("How many women in Tasmania speak Greek at home?") ; // 571
+		printQueryResult("How many persons in Capital Region  speak Hindi?") ; //247
+		printQueryResult("How many men in Sandy Bay speak Korean?") ; // 65	
+		printQueryResult("How many people in Australia speak Vietnamese at home?") ; //233388
+		printQueryResult("How many women speak Spanish?") ; //61659
+		printQueryResult("How many men only speak English?") ; //8361710
+		printQueryResult("How many females in Australia speak a language other than English") ; //2019744
+		printQueryResult("How many Mandarin speakers are there?") ; //336410
+		printQueryResult("How many men in Capital Region are Chinese speakers?") ; // 285
+
 
 		 */
-		
 
 
 

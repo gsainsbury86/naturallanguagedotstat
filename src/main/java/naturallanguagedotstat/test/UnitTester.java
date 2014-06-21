@@ -171,6 +171,18 @@ public class UnitTester {
 		"How many women speak Arabic?",
 		"How many women speak Arabic in Goulburn-Yass?",
 
+		"How many people in Tasmania speak Arabic?",
+		"How many women in Sandy Bay speak Cantonese at home?",
+		"How many men in Australia can speak German?",
+		"How many women in Tasmania speak Greek at home?",
+		"How many persons in Capital Region  speak Hindi?",
+		"How many men in Sandy Bay speak Korean?",
+		"How many people in Australia speak Vietnamese at home?",
+		"How many women speak Spanish?",
+		"How many men only speak English?",
+		//printQueryResult("How many females in Australia speak a language other than English") ; //2019744
+		//printQueryResult("How many Mandarin speakers are there?") ; //336410
+		//printQueryResult("How many men in Capital Region are Chinese speakers?") ; // 285
 
 		//B14
 		"How many men in Goulburn are muslims?",
@@ -318,13 +330,13 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.A35.4.1.SA2.101011001.A/ABS", 	// How many men aged 35-40 in Goulburn are indigenous?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.TT.4.1.SA2.101021007.A/ABS", 	// How many indigenous males are there in Braidwood?
 		
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.5105.6.STE.6.A/ABS", //What is the population of Tasmania born in vietnam
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.2304.0.AUS.0.A/ABS", //How many women in Australia were born in Germany?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.6101.1.SA2.101011001.A/ABS", //How many people in Goulburn were born in China?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/1.8104.1.SA2.101011001.A/ABS", //How many men born in the US are in Goulburn?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/1.7103.1.SA2.101011001.A/ABS", //How many men in Goulburn are from India?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.1201.6.STE.6.A/ABS",		//	printQueryResult("How many people whose country of birth is New Zealand live in Tasmania?") ; //4927
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.1101.0.AUS.0.A/ABS",		//	printQueryResult("Number of women in Australia born in Australia?") ; //7605247
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.5105.6.STE.6.A/ABS", 			// What is the population of Tasmania born in vietnam
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.2304.0.AUS.0.A/ABS", 			// How many women in Australia were born in Germany?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.6101.1.SA2.101011001.A/ABS", 	// How many people in Goulburn were born in China?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/1.8104.1.SA2.101011001.A/ABS", 	// How many men born in the US are in Goulburn?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/1.7103.1.SA2.101011001.A/ABS", 	// How many men in Goulburn are from India?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.1201.6.STE.6.A/ABS",			//	printQueryResult("How many people whose country of birth is New Zealand live in Tasmania?") ; //4927
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.1101.0.AUS.0.A/ABS",			//	printQueryResult("Number of women in Australia born in Australia?") ; //7605247
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.2100.6.STE.6.A/ABS",		//	printQueryResult("How many people in Tasmania were born in the UK?") ; //267
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.1101.0.AUS.0.A/ABS",		//	printQueryResult("Number of women in Australia whose country of birth is also Australia?") ; //7605247
 		// "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.2.STE.2.A/ABS",			// printQueryResult("How many people in Victoria were born in Victoria?") ; 
@@ -335,6 +347,21 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/2.4202.0.AUS.0.A/ABS", //How many women speak Arabic in Australia?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/2.4202.0.AUS.0.A/ABS", //How many women speak Arabic?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/2.4202.1.SA3.10101.A/ABS", //How many women speak Arabic in Goulburn-Yass?
+		
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/3.4202.6.STE.6.A/ABS",		// 		printQueryResult("How many people in Tasmania speak Arabic?") ; // 910
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/2.7101.6.SA2.601051031.A/ABS",	// 		printQueryResult("How many women in Sandy Bay speak Cantonese at home?") ; //71
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/1.1301.0.AUS.0.A/ABS",			//		printQueryResult("How many men in Australia can speak German?") ; // 36882
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/2.2201.6.STE.6.A/ABS",		// 		printQueryResult("How many women in Tasmania speak Greek at home?") ; // 571
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/3.5203.1.SA4.101.A/ABS",		//		printQueryResult("How many persons in Capital Region  speak Hindi?") ; //247
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/1.7301.6.SA2.601051031.A/ABS",		//		printQueryResult("How many men in Sandy Bay speak Korean?") ; // 65	
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/3.6302.0.AUS.0.A/ABS", 		//		printQueryResult("How many people in Australia speak Vietnamese at home?") ; //233388
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/2.2303.0.AUS.0.A/ABS",		// printQueryResult("How many women speak Spanish?") ; //61659
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/1.1.0.AUS.0.A/ABS",		// printQueryResult("How many men only speak English?") ; //8147580
+//		printQueryResult("How many females in Australia speak a language other than English") ; //2019744
+//		printQueryResult("How many Mandarin speakers are there?") ; //336410
+//		printQueryResult("How many men in Capital Region are Chinese speakers?") ; // 285
+
+		
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/1.4.1.SA2.101011001.A/ABS", //How many men in Goulburn are muslims?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/1.24.1.SA2.101011001.A/ABS", //How many Pentecostal men are there in Goulburn?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/3.215.1.SA2.101011001.A/ABS", //How many mormons in Goulburn?

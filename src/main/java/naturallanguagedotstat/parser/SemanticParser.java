@@ -137,7 +137,9 @@ public class SemanticParser {
 		synonyms.put("speak only English","Speaks English only");  // note that the word "English" is in B13 and B09
 		synonyms.put("speak English","Speaks English only");
 		synonyms.put("speak another language","Speaks other language total");
+		synonyms.put("language other than English","Speaks other language total");  // note that the word "English" is in B13 and B09
 		synonyms.put("speak Chinese","Chinese languages total");
+		synonyms.put("Chinese speakers","Chinese languages total");
 		synonyms.put("speak Iranian","Iranic Languages total");
 
 		//B14
@@ -434,6 +436,10 @@ public class SemanticParser {
 			dimensions.remove("Ancestry");
 		};
 
+		if(dimensions.containsKey("Method of Travel to Work") ){
+			dimensions.remove("Method of Travel to Work");
+		};
+
 		if(dimensions.containsKey("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)") ){
 			dimensions.remove("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)");
 		};
@@ -459,12 +465,18 @@ public class SemanticParser {
 		};
 
 		
-		if(grammarParser.inputText.contains("speak") 
+		if( (grammarParser.inputText.contains("speak") || grammarParser.inputText.contains("speakers") )
 				&& dimensions.containsKey("Country of Birth of Person")  ){
 			dimensions.remove("Country of Birth of Person");
 		};
 
+		
+		if( (grammarParser.inputText.contains("speak") || grammarParser.inputText.contains("speakers") )
+				&& dimensions.containsKey("Ancestry")  ){
+			dimensions.remove("Ancestry");
+		};
 
+		
 		if(grammarParser.inputText.contains("assistance") ){
 			if(dimensions.containsKey("Country of Birth of Person") )
 				dimensions.remove("Country of Birth of Person");
