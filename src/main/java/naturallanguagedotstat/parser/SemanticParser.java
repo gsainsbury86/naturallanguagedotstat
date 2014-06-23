@@ -98,6 +98,7 @@ public class SemanticParser {
 		synonyms.put("men","Males");
 
 		//B03
+		synonyms.put("night of the Census","Counted at home on Census Night" ) ;
 		synonyms.put("at home on Census night","Counted at home on Census Night" ) ;
 		synonyms.put("at home on the night","Counted at home on Census Night" ) ;
 		synonyms.put("same Statistical Area Level 2","Same Statistical Area Level 2 (SA2)" ) ;
@@ -315,7 +316,7 @@ public class SemanticParser {
 		synonyms.put("trades","Technicians and trades workers");
 		synonyms.put("trade","Technicians and trades workers");
 		synonyms.put("tradesmen","Technicians and trades workers");
-		synonyms.put("builders","Technicians and trades workers");
+		synonyms.put("trade workers","Technicians and trades workers");
 		synonyms.put("plumbers","Technicians and trades workers");
 		synonyms.put("electricians","Technicians and trades workers");
 		synonyms.put("clerical","Clerical and administrative workers");
@@ -525,17 +526,33 @@ public class SemanticParser {
 
 	// ...........................................................................
 		
+	// converts to lowercase, eliminates hyphens and space delimits the string.
+	private String normalise(String str){
+		// we apply spaces before and after the main phrase so that we can do a whole-word only search,
+		String[] words = str.toLowerCase().replaceAll("'s", " 's").replaceAll("-", " ").split("[\\s?,-]+"); // separate on whitespace, question marks, commas, and hyphens;
+		String s = " "; // note that this is a space and not a null string.
+		for (String w : words)
+			s = s+ w+" ";
+		return s;
+	}
+	
 	public String identifyASGSRegion(String str){
 		HashMap<String, String> identifiedRegions = new HashMap<String, String>() ;
 		HashMap<String, String> regions = ASGS2011.getCodelist();
-
+		String normalisedStr = normalise(str);
+		String normalisedRegion = new String();
+		System.out.println("Best normalisedStr: "+ normalisedStr);
+		
 		for(String key : regions.keySet()){
-			if(eliminateHyphens(str.toLowerCase()).contains(eliminateHyphens(regions.get(key).toLowerCase() ) ) ){
+			normalisedRegion = normalise(regions.get(key));
+			if(normalisedStr.contains(normalisedRegion) ){
 				identifiedRegions.put(key, regions.get(key) );
 			}
 		};
-		// System.out.println("Best match: "+ getBestMatchRegion(query,identifiedRegions) );
-		return getBestMatchRegion(eliminateHyphens(str),identifiedRegions);
+	
+		
+		// System.out.println("Best match: "+ getBestMatchRegion(str,identifiedRegions) );
+		return getBestMatchRegion(str,identifiedRegions);
 	}
 	
 	

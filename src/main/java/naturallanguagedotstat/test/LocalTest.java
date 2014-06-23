@@ -30,20 +30,22 @@ public class LocalTest {
 		//"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.1.0.AUS.0.A/ABS",		//"How many women have never been married?",	2753427
 		//"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.1.1.SA2.101021007.A/ABS",		//"How many women have never married in Goulburn?", xx
 //		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/3.A35.4.0.AUS.0.A/ABS",			// How many indigenous 35-40 year olds are there?", 34072"
-
+// "how many men were at home on the night of the Census in Goulburn",
+ * 
 		*/
 
 
 		/* 
 		// The following queries are correct and now should be moved to UnitTester 
 
+		printQueryResult("How many indigenous men 35-40 years old are there?") ; // 7
 
 
 		 * 
 		 */
 
-		printQueryResult("How many men in Braidwood have a commerce degree?") ; // 7
 
+		printQueryResult("What is the population of Lindisfarne?") ; // 7
 
 
 	}
