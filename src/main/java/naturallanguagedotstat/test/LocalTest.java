@@ -27,28 +27,22 @@ public class LocalTest {
 
 		// "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.2.STE.2.A/ABS",			// printQueryResult("How many people in Victoria were born in Victoria?") ; 
 		
-		printQueryResult("How many men in Tasmania were born in Vietnam?") ; //129
+		//"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.1.0.AUS.0.A/ABS",		//"How many women have never been married?",	2753427
+		//"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.1.1.SA2.101021007.A/ABS",		//"How many women have never married in Goulburn?", xx
+//		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/3.A35.4.0.AUS.0.A/ABS",			// How many indigenous 35-40 year olds are there?", 34072"
+
 		*/
 
 
 		/* 
 		// The following queries are correct and now should be moved to UnitTester 
 
-		printQueryResult("How many people in Tasmania speak Arabic?") ; // 910
-		printQueryResult("How many women in Sandy Bay speak Cantonese at home?") ; //71
-		printQueryResult("How many men in Australia can speak German?") ; // 36882
-		printQueryResult("How many women in Tasmania speak Greek at home?") ; // 571
-		printQueryResult("How many persons in Capital Region  speak Hindi?") ; //247
-		printQueryResult("How many men in Sandy Bay speak Korean?") ; // 65	
-		printQueryResult("How many people in Australia speak Vietnamese at home?") ; //233388
-		printQueryResult("How many women speak Spanish?") ; //61659
-		printQueryResult("How many men only speak English?") ; //8361710
-		printQueryResult("How many females in Australia speak a language other than English") ; //2019744
-		printQueryResult("How many Mandarin speakers are there?") ; //336410
-		printQueryResult("How many men in Capital Region are Chinese speakers?") ; // 285
 
 
+		 * 
 		 */
+
+		printQueryResult("How many men in Braidwood have a commerce degree?") ; // 7
 
 
 

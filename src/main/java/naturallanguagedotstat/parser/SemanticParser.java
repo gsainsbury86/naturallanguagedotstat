@@ -151,7 +151,7 @@ public class SemanticParser {
 		synonyms.put("Anglicans","Anglican");
 		synonyms.put("Assyrian Apostolics","Assyrian Apostolic");
 		synonyms.put("Baptist","Baptist");
-		synonyms.put("Catholics","Catholic");// note that the word "Catholoic" is in B14 and B15
+		synonyms.put("Catholics","Catholic");// note that the word "Catholic" is in B14 and B15
 		synonyms.put("Catholicism","Catholic");// note that the word "English" is in B14 and B15
 		synonyms.put("Church of Christ","Churches of Christ");
 		synonyms.put("Witnesses","Jehovah's Witnesses");
@@ -166,6 +166,7 @@ public class SemanticParser {
 		synonyms.put("Hindus","Hinduism");
 		synonyms.put("muslim","Islam");
 		synonyms.put("muslims","Islam");
+		synonyms.put("islamic","Islam");
 		synonyms.put("jewish","Judaism");
 		synonyms.put("jews","Judaism");
 		synonyms.put("Aboriginal religions","Australian Aboriginal Traditional Religions");
@@ -217,7 +218,7 @@ public class SemanticParser {
 		synonyms.put("bachelor","Bachelor Degree Level");
 		synonyms.put("bachelors","Bachelor Degree Level");
 
-		//B41 *
+		//B41 
 		synonyms.put("science","Natural and Physical Sciences");				
 		//synonyms.put("study information technology","Information Technology"); 		// Clash with B44
 		//synonyms.put("studied information technology","Information Technology");	// Clash with B44
@@ -523,7 +524,7 @@ public class SemanticParser {
 	
 
 	// ...........................................................................
-	
+		
 	public String identifyASGSRegion(String str){
 		HashMap<String, String> identifiedRegions = new HashMap<String, String>() ;
 		HashMap<String, String> regions = ASGS2011.getCodelist();
