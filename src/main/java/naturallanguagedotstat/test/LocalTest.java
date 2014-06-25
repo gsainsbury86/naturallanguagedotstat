@@ -22,50 +22,40 @@ public class LocalTest {
 
 
 		/* The following queries fail for various as it does not successfully identify the region....
-
-		// printQueryResult("How many people aged 35-40 in Goulburn were employed in total?") ; //2047  //can't have the word total in it.
-
-		// "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.2.STE.2.A/ABS",			// printQueryResult("How many people in Victoria were born in Victoria?") ; 
+		printQueryResult("How many men are not married in Karabar?");	// 1257
 		
-		//"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.1.0.AUS.0.A/ABS",		//"How many women have never been married?",	2753427
-		//"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.1.1.SA2.101021007.A/ABS",		//"How many women have never married in Goulburn?", xx
-//		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/3.A35.4.0.AUS.0.A/ABS",			// How many indigenous 35-40 year olds are there?", 34072"
-// "how many men were at home on the night of the Census in Goulburn",
- * 
 		*/
 
+		
+		
+		
 
 		/* 
 		// The following queries are correct and now should be moved to UnitTester 
 
+		//B03
+		printQueryResult("how many people were aged 15-20 were at home on the night of the Census in Eden");	//1156
 
-		//B02
-		synonyms.put("median age","Median age of persons" ) ;
-		synonyms.put("average age","Median age of persons" ) ;
-		synonyms.put("personal income","Median total personal income ($/weekly)" ) ;		
-		synonyms.put("income for people","Median total personal income ($/weekly)" ) ;		
-		synonyms.put("income for persons","Median total personal income ($/weekly)" ) ;		
-		synonyms.put("family income","Median total family income ($/weekly)" ) ;
-		synonyms.put("income for families","Median total family income ($/weekly)" ) ;
-		synonyms.put("family of families","Median total family income ($/weekly)" ) ;
-		synonyms.put("household income","Median total household income ($/weekly)" ) ;
-		synonyms.put("income for households","Median total household income ($/weekly)" ) ;
-		synonyms.put("income of households","Median total household income ($/weekly)" ) ;
-		synonyms.put("mortgage","Median mortgage repayment ($/monthly)" ) ;
-		synonyms.put("repayment","Median mortgage repayment ($/monthly)" ) ;
-		synonyms.put("repayments","Median mortgage repayment ($/monthly)" ) ;
-		synonyms.put("rental","Median rent ($/weekly)" ) ;
-		synonyms.put("payment","Median rent ($/weekly)" ) ;
-		synonyms.put("rent","Median rent ($/weekly)" ) ;
+		//B05
+		printQueryResult("How many women have never been married?");	//	2753427
+		printQueryResult("How many women have never married in Karabar?");	// 1164
+
+		//B06
 
 		//B07
-		printQueryResult("How many indigenous men 35-40 years old are there?") ; // 7
+		printQueryResult("How many indigenous men 35-40 years old are there?") ; // 16234
+		printQueryResult("How many non indigenous men 35-40 years old are there?") ; // 691051
+		printQueryResult("How many men 35-40 years old are not indigenous?") ; // 695
+
+		//B09
+		printQueryResult("How many people in Victoria were born in Australia?") ; //3670934
 
 		//B42
-		printQueryResult("How many men in Goulburn were full time employed??") ; // 7
-
-		 * 
+		printQueryResult("How many men in Goulburn were full time employed?") ; // 3726
+		printQueryResult("How many men in Goulburn were employed full time?") ; // 3726
+		printQueryResult("How many people aged 35-40 in Goulburn were employed in total?") ; //2047  
 		 */
+
 
 
 
@@ -77,7 +67,7 @@ public class LocalTest {
 		JsonReader jsonReader = Json.createReader(new StringReader((String) service.query(str).getEntity()));
 		JsonObject object = jsonReader.readObject();
 		jsonReader.close();
-		System.out.println(object.getInt("result")+ " <-- " + str);
+		System.out.println(object.getInt("result")+ " <-- " + str +"\n");
 	}
 
 }

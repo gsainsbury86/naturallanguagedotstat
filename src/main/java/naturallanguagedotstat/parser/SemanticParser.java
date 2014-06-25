@@ -118,12 +118,11 @@ public class SemanticParser {
 		synonyms.put("rent","Median rent ($/weekly)" ) ;
 
 		//B03
-		synonyms.put("night of the Census","Counted at home on Census Night" ) ;
-		synonyms.put("at home on Census night","Counted at home on Census Night" ) ;
-		synonyms.put("at home on the night","Counted at home on Census Night" ) ;
+		synonyms.put("night of","Counted at home on Census Night" ) ;
+		synonyms.put("at home on","Counted at home on Census Night" ) ;
 		synonyms.put("same Statistical Area Level 2","Same Statistical Area Level 2 (SA2)" ) ;
 		synonyms.put("same SA2","Same Statistical Area Level 2 (SA2)" ) ;
-
+		
 		//B05
 		synonyms.put("married","Married(a)" ) ;
 		synonyms.put("marriages","Married(a)" );
@@ -131,15 +130,17 @@ public class SemanticParser {
 		synonyms.put("widowers","Widowed" );
 		synonyms.put("separations","Separated" );
 		synonyms.put("divorces","Divorced" );
+		synonyms.put("never been married","Never married");
 
 		//B06
 		synonyms.put("registered marriage","Married in a registered marriage");
 		synonyms.put("de facto","Married in a de facto marriage(b)");
-//		synonyms.put("never married","Married in a de facto marriage(b)");
+		// synonyms.put("not married","Not married");
 
 		//B07
 		synonyms.put("indigenous","Indigenous(a)");
 		synonyms.put("non indigenous","Non-Indigenous");
+		synonyms.put("not indigenous","Non-Indigenous");
 
 
 		//B09
@@ -365,7 +366,6 @@ public class SemanticParser {
 			if(wholeWordContains(str, keyWord)  ){ 
 				baseWord = synonyms.get(keyWord) ; 
 				dimensions.put(flatCodeList.get(baseWord), baseWord);
-				System.out.println("synonyms... "+keyWord+" " + flatCodeList.get(baseWord)+" "+ baseWord);
 			};
 		};		
 	}
@@ -466,9 +466,14 @@ public class SemanticParser {
 			dimensions.remove("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)");
 		};
 
+		if(dimensions.containsKey("Count of Families") ){
+			dimensions.remove("Count of Families");
+		};
 		
 		
 		// Begin the conditional checking.....
+		
+		
 		
 		if(!grammarParser.inputText.contains("born") &&	!grammarParser.inputText.contains("birth") 
 				&& !grammarParser.inputText.contains("from") 
@@ -561,7 +566,6 @@ public class SemanticParser {
 		HashMap<String, String> regions = ASGS2011.getCodelist();
 		String normalisedStr = normalise(str);
 		String normalisedRegion = new String();
-		System.out.println("Best normalisedStr: "+ normalisedStr);
 		
 		for(String key : regions.keySet()){
 			normalisedRegion = normalise(regions.get(key));

@@ -39,7 +39,7 @@ public class UnitTester {
 		System.out.println("Starting "+TEST_QUERIES.length +" functional tests.");
 
 		for(int i = 0; i < TEST_QUERIES.length; i++){
-			//System.out.println("Testing: ("+(i+1)+ "/"+TEST_QUERIES.length +"): "+ TEST_QUERIES[i]);
+			// System.out.println("Testing: ("+(i+1)+ "/"+TEST_QUERIES.length +"): "+ TEST_QUERIES[i]);
 
 			JsonReader jsonReader = Json.createReader(new StringReader((String) service.query(TEST_QUERIES[i]).getEntity()));
 			JsonObject object = jsonReader.readObject();
@@ -65,6 +65,25 @@ public class UnitTester {
 
 	private static final String[] TEST_QUERIES = {
 		
+		//B02
+		"What's median age for people in Australia?",	 // 37
+		"What is Australia's median age?",		//  37
+		"What is the average age of people in Tasmania?",	// 40 
+		"What is the average income for people in Tasmania?", // 499
+		"What's the median personal income for people in Queanbeyan?", // 833
+		"What is the median personal income in Queanbeyan?", // 833
+		"What is the average family income in Braidwood?", // 1259
+		// "What is the median income for families in Braidwood?") ; // 1259
+		"What's the median family income in Moonah?", // 1158
+		"What's the average household income in Moonah?", //  870
+		"What is the median income for households in Karabar?", //   1560
+		"What is the median household income in Karabar?", //  1560
+		"What is the average mortgage repayment in Eden?", // 1430
+		"What's the median repayment for mortgages in Eden?", // 1430
+		"What is the median mortgage repayment in Cooma?", // 1200
+		"What is the median cost of rent in Moonah?", // 230
+		"What is the median rent in Goulburn?", // 185
+		"What's the median rental payment in Goulburn?", // 185 
 
 		//B03
 		"How many people aged 18-20 were at home on Census night in Goulburn?",	
@@ -276,9 +295,31 @@ public class UnitTester {
 
 	private static final String[] TEST_RESULTS = {	
 		
+		//B02
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.0.AUS.0.A/ABS",	//	printQueryResult("What's median age for people in Australia?") ; // 37
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.0.AUS.0.A/ABS",	//	printQueryResult("What is Australia's median age?") ; //  37
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.6.STE.6.A/ABS",	// 	printQueryResult("What is the average age of people in Tasmania?") ; // 40 
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTPI.6.STE.6.A/ABS",	// 	printQueryResult("What is the average income for people in Tasmania?") ; // 499
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTPI.1.SA3.10102.A/ABS",	//	printQueryResult("What's the median personal income for people in Queanbeyan?") ; // 833
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTPI.1.SA3.10102.A/ABS",	//	printQueryResult("What is the median personal income in Queanbeyan?") ; // 833
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTFI.1.SA2.101021007.A/ABS",	//	printQueryResult("What is the average family income in Braidwood?") ; // 1259
+		//printQueryResult("What is the median income for families in Braidwood?") ; // 1259
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTFI.6.SA2.601031019.A/ABS",	//	printQueryResult("What's the median family income in Moonah?") ; // 1158
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTHI.6.SA2.601031019.A/ABS",	//	printQueryResult("What's the avereage household income in Moonah?") ; //  870
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTHI.1.SA2.101021008.A/ABS",	//	printQueryResult("What is the median income for households in Karabar?") ; //   1560
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTHI.1.SA2.101021008.A/ABS",	//	printQueryResult("What is the median household income in Karabar?") ; //  1560
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MMORT.1.SA2.101041023.A/ABS",	//	printQueryResult("What is the average mortgage repayment in Eden?") ; // 1430
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MMORT.1.SA2.101041023.A/ABS",	//	printQueryResult("What's the median repayment for mortgages in Eden?") ; // 1430
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MMORT.1.SA2.101031014.A/ABS",	//	printQueryResult("What is the median mortgage repayment in Cooma?") ; // 1200
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MRENT.6.SA2.601031019.A/ABS",	//	printQueryResult("What is the median cost of rent in Moonah?") ; // 230
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MRENT.1.SA2.101011001.A/ABS",	//	printQueryResult("What is the median rent in Goulburn?") ; // 185
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MRENT.1.SA2.101011001.A/ABS",	//	printQueryResult("What's the median rental payment in Goulburn?") ; // 185 
+
+		//B03
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B03/T15.1.1.SA2.101011001.A/ABS", //How many people aged 18-20 were at home on Census night in Goulburn?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B03/TT.1.1.SA2.101011001.A/ABS", //How many people were at home on Census night in Goulburn?
 		
+		//B04
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.0.AUS.0.A/ABS",					//What is the population of Australia?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.1.SA2.101011001.A/ABS", 			//What is the population of Goulburn?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.1.SA2.101011001.A/ABS", 			//How many people live in Goulburn?
