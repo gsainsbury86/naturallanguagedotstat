@@ -38,14 +38,35 @@ public class LocalTest {
 		/* 
 		// The following queries are correct and now should be moved to UnitTester 
 
+
+		//B02
+		synonyms.put("median age","Median age of persons" ) ;
+		synonyms.put("average age","Median age of persons" ) ;
+		synonyms.put("personal income","Median total personal income ($/weekly)" ) ;		
+		synonyms.put("income for people","Median total personal income ($/weekly)" ) ;		
+		synonyms.put("income for persons","Median total personal income ($/weekly)" ) ;		
+		synonyms.put("family income","Median total family income ($/weekly)" ) ;
+		synonyms.put("income for families","Median total family income ($/weekly)" ) ;
+		synonyms.put("family of families","Median total family income ($/weekly)" ) ;
+		synonyms.put("household income","Median total household income ($/weekly)" ) ;
+		synonyms.put("income for households","Median total household income ($/weekly)" ) ;
+		synonyms.put("income of households","Median total household income ($/weekly)" ) ;
+		synonyms.put("mortgage","Median mortgage repayment ($/monthly)" ) ;
+		synonyms.put("repayment","Median mortgage repayment ($/monthly)" ) ;
+		synonyms.put("repayments","Median mortgage repayment ($/monthly)" ) ;
+		synonyms.put("rental","Median rent ($/weekly)" ) ;
+		synonyms.put("payment","Median rent ($/weekly)" ) ;
+		synonyms.put("rent","Median rent ($/weekly)" ) ;
+
+		//B07
 		printQueryResult("How many indigenous men 35-40 years old are there?") ; // 7
 
+		//B42
+		printQueryResult("How many men in Goulburn were full time employed??") ; // 7
 
 		 * 
 		 */
 
-
-		printQueryResult("What is the population of Lindisfarne?") ; // 7
 
 
 	}

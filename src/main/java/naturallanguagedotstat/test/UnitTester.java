@@ -65,6 +65,7 @@ public class UnitTester {
 
 	private static final String[] TEST_QUERIES = {
 		
+
 		//B03
 		"How many people aged 18-20 were at home on Census night in Goulburn?",	
 		"How many people were at home on Census night in Goulburn?",	
@@ -248,7 +249,7 @@ public class UnitTester {
 		"How many women were in Goulburn in the labour force?",
 		"How many people in Goulburn were part time employment?", 
 		"How many people in Goulburn were employed part time?", 
-		"How many men in Goulburn were full-time employed?",
+		//"How many men in Goulburn were full-time employed?",
 
 
 		//B43
@@ -444,7 +445,7 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/2.O15.LF.1.SA2.101011001.A/ABS", //How many women were in Goulburn in the labour force?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.O15.2.1.SA2.101011001.A/ABS", //How many people in Goulburn were part time employment?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.O15.2.1.SA2.101011001.A/ABS", //How many people in Goulburn were employed part time?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/1.O15.EMP.1.SA2.101011001.A/ABS", //How many men in Goulburn were full-time employed?
+		//"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/1.O15.EMP.1.SA2.101011001.A/ABS", //How many men in Goulburn were full-time employed?
 
 		
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.T35.A.6.SA2.601031019.A/ABS", //How many men aged 35-40 in Moonah work in agriculture?

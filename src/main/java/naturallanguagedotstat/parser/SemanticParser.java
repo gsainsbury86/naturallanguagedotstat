@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 
 import naturallanguagedotstat.model.Dataset;
 import naturallanguagedotstat.model.Dimension;
@@ -14,7 +15,7 @@ public class SemanticParser {
 	public HashMap<String, String> dimensions;
 
 	private HashMap<String, String> flatCodeList;
-	private HashMap<String, String> synonyms;
+	private LinkedHashMap<String, String> synonyms;
 	private Dimension ASGS2011;
 
 	private GrammarParser grammarParser;
@@ -24,7 +25,7 @@ public class SemanticParser {
 	public SemanticParser (String str, ArrayList<Dataset> datasets, Dimension ASGS2011) throws IOException, ClassNotFoundException{
 		flatCodeList = new HashMap<String, String>();
 		dimensions = new HashMap<String, String>();
-		synonyms   = new HashMap<String, String>();
+		synonyms   = new LinkedHashMap<String, String>();
 		grammarParser = new GrammarParser(str);
 		
 		this.ASGS2011 = ASGS2011;
@@ -96,6 +97,25 @@ public class SemanticParser {
 		synonyms.put("women","Females");
 		synonyms.put("male","Males");
 		synonyms.put("men","Males");
+
+		//B02
+		synonyms.put("median age","Median age of persons" ) ;
+		synonyms.put("average age","Median age of persons" ) ;
+		synonyms.put("personal income","Median total personal income ($/weekly)" ) ;		
+		synonyms.put("income for people","Median total personal income ($/weekly)" ) ;		
+		synonyms.put("income for persons","Median total personal income ($/weekly)" ) ;		
+		synonyms.put("family income","Median total family income ($/weekly)" ) ;
+		synonyms.put("income for families","Median total family income ($/weekly)" ) ;
+		synonyms.put("family of families","Median total family income ($/weekly)" ) ;
+		synonyms.put("household income","Median total household income ($/weekly)" ) ;
+		synonyms.put("income for households","Median total household income ($/weekly)" ) ;
+		synonyms.put("income of households","Median total household income ($/weekly)" ) ;
+		synonyms.put("mortgage","Median mortgage repayment ($/monthly)" ) ;
+		synonyms.put("repayment","Median mortgage repayment ($/monthly)" ) ;
+		synonyms.put("repayments","Median mortgage repayment ($/monthly)" ) ;
+		synonyms.put("rental","Median rent ($/weekly)" ) ;
+		synonyms.put("payment","Median rent ($/weekly)" ) ;
+		synonyms.put("rent","Median rent ($/weekly)" ) ;
 
 		//B03
 		synonyms.put("night of the Census","Counted at home on Census Night" ) ;
@@ -238,7 +258,6 @@ public class SemanticParser {
 		synonyms.put("employed","Employed total");
 		synonyms.put("employment","Employed total");
 		synonyms.put("total employment","Employed total");
-		synonyms.put("employed in total","Employed total");
 		synonyms.put("full time","Full-time(a)");
 		synonyms.put("part time","Part-time");
 		synonyms.put("labour force","Total labour force");
@@ -346,6 +365,7 @@ public class SemanticParser {
 			if(wholeWordContains(str, keyWord)  ){ 
 				baseWord = synonyms.get(keyWord) ; 
 				dimensions.put(flatCodeList.get(baseWord), baseWord);
+				System.out.println("synonyms... "+keyWord+" " + flatCodeList.get(baseWord)+" "+ baseWord);
 			};
 		};		
 	}
