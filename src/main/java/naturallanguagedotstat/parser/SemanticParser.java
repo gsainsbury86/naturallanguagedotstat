@@ -124,12 +124,13 @@ public class SemanticParser {
 		synonyms.put("same SA2","Same Statistical Area Level 2 (SA2)" ) ;
 		
 		//B05
-		synonyms.put("married","Married(a)" ) ;
+		synonyms.put("married","Married(a)" ) ;  //must be before "never married"
 		synonyms.put("marriages","Married(a)" );
 		synonyms.put("widows","Widowed" );
 		synonyms.put("widowers","Widowed" );
 		synonyms.put("separations","Separated" );
 		synonyms.put("divorces","Divorced" );
+		synonyms.put("never married","Never married");
 		synonyms.put("never been married","Never married");
 
 		//B06
@@ -396,8 +397,8 @@ public class SemanticParser {
 			};
 
 			// check for all other dimensions
-			matchSynonymsOfCodeList(phrase);
 			matchCodeList(phrase);
+			matchSynonymsOfCodeList(phrase);
 		};
 
 
@@ -446,6 +447,7 @@ public class SemanticParser {
 		
 		grammarParser.parseText();
 		identifyDimensions(grammarParser.keyPhrases);
+		// System.out.println(dimensions);
 		cleanUpDimensions();
 
 	}
@@ -474,6 +476,10 @@ public class SemanticParser {
 		// Begin the conditional checking.....
 		
 		
+		if(dimensions.containsKey("Registered Marital Status") && dimensions.containsKey("Social Marital Status")){
+			dimensions.remove("Registered Marital Status");
+		};
+
 		
 		if(!grammarParser.inputText.contains("born") &&	!grammarParser.inputText.contains("birth") 
 				&& !grammarParser.inputText.contains("from") 
@@ -567,16 +573,31 @@ public class SemanticParser {
 		String normalisedStr = normalise(str);
 		String normalisedRegion = new String();
 		
+		String[] regionComponents;
+		
 		for(String key : regions.keySet()){
 			normalisedRegion = normalise(regions.get(key));
 			if(normalisedStr.contains(normalisedRegion) ){
 				identifiedRegions.put(key, regions.get(key) );
 			}
 		};
-	
+
 		
-		// System.out.println("Best match: "+ getBestMatchRegion(str,identifiedRegions) );
-		return getBestMatchRegion(str,identifiedRegions);
+		if(identifiedRegions.isEmpty()){
+			for(String key : regions.keySet()){
+				if(regions.get(key).contains("-")){
+					regionComponents = regions.get(key).split(" - ");
+					for (String subregion : regionComponents){
+						if (wholeWordContains(str, subregion.trim() ) ){						
+							identifiedRegions.put(key, regions.get(key) );
+						};
+					}
+				};
+			};
+		};
+		
+		// System.out.println("Best match: "+ getLargestRegion(str,identifiedRegions) );
+		return getLargestRegion(str,identifiedRegions);
 	}
 	
 	
@@ -586,12 +607,12 @@ public class SemanticParser {
 
 	
 	// Selects the best match region 
-	private String getBestMatchRegion(String str, HashMap<String, String> hashmap){
+	private String getLargestRegion(String str, HashMap<String, String> hashmap){
 		HashMap<String, String> regions = hashmap;
 		
 		// excludes Australia if multiple regions are identified, as it is most likely associated with phrases such as "born in Australia".
 		if(regions.size() >1 && regions.containsKey("0")){
-			System.out.println("removing australia from regions. ");
+			// System.out.println("removing australia from regions. ");
 			regions.remove("0");
 		};
 

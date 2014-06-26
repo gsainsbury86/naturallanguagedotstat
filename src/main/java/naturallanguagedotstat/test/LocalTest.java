@@ -22,30 +22,24 @@ public class LocalTest {
 
 
 		/* The following queries fail for various as it does not successfully identify the region....
-		printQueryResult("How many men are not married in Karabar?");	// 1257
 		
 		*/
 
 		
-		
-		
-
-		/* 
-		// The following queries are correct and now should be moved to UnitTester 
-
 		//B03
-		printQueryResult("how many people were aged 15-20 were at home on the night of the Census in Eden");	//1156
+		printQueryResult("how many people were aged 15-20 were at home on the night of the Census in Eden");	//321
 
 		//B05
 		printQueryResult("How many women have never been married?");	//	2753427
 		printQueryResult("How many women have never married in Karabar?");	// 1164
 
 		//B06
+		printQueryResult("How many men are not married in Karabar?");	// 1257
 
 		//B07
 		printQueryResult("How many indigenous men 35-40 years old are there?") ; // 16234
 		printQueryResult("How many non indigenous men 35-40 years old are there?") ; // 691051
-		printQueryResult("How many men 35-40 years old are not indigenous?") ; // 695
+		printQueryResult("How many men 35-40 years old are not indigenous?") ; // 691051
 
 		//B09
 		printQueryResult("How many people in Victoria were born in Australia?") ; //3670934
@@ -54,6 +48,12 @@ public class LocalTest {
 		printQueryResult("How many men in Goulburn were full time employed?") ; // 3726
 		printQueryResult("How many men in Goulburn were employed full time?") ; // 3726
 		printQueryResult("How many people aged 35-40 in Goulburn were employed in total?") ; //2047  
+
+		
+		
+
+		/* 
+		// The following queries are correct and now should be moved to UnitTester 
 		 */
 
 
