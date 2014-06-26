@@ -73,7 +73,7 @@ public class UnitTester {
 		"What's the median personal income for people in Queanbeyan?", // 833
 		"What is the median personal income in Queanbeyan?", // 833
 		"What is the average family income in Braidwood?", // 1259
-		// "What is the median income for families in Braidwood?") ; // 1259
+		"What is the median income for families in Braidwood?", // 1259
 		"What's the median family income in Moonah?", // 1158
 		"What's the average household income in Moonah?", //  870
 		"What is the median income for households in Karabar?", //   1560
@@ -88,9 +88,8 @@ public class UnitTester {
 		//B03
 		"How many people aged 18-20 were at home on Census night in Goulburn?",	
 		"How many people were at home on Census night in Goulburn?",	
-		
+		"how many people were aged 15-20 were at home on the night of the Census in Eden",
 
-		
 		//B04
 		"What is the population of Australia?",
 		"What is the population of Goulburn?",
@@ -105,11 +104,9 @@ public class UnitTester {
 		"Male population of Queanbeyan?",
 		"In Queanbeyan, how many men are there?",
 		"What is Queanbeyan's male population?",
-		
 		"What is the female population aged 20-24 of Cooma?",
 		"What is the population of women aged between 20 and 24 in Cooma?",				
 		"How many 20-24 year old females live in Cooma?",
-		
 		"How many females aged 20-24 live in Moonah?",
 		"How many females aged 20 to 24 live in Moonah?",
 		"How many women aged between 20 and 24 live in Moonah?",
@@ -118,12 +115,10 @@ public class UnitTester {
 		"What is Sandy Bay's 20-24 female population?",
 		"Sandy Bay's female population aged 20-24 years?",
 		"What is the population of Sandy Bay women aged 20-24?",
-		
 		"In Braidwood, how many women aged 20-24 are there?",
 		"What is Braidwood's 20-24 female population?",
 		"Goulburn's female population aged 20-24 years?",
 		"What is the population of Goulburn women aged 20-24?",
-
 
 		//B05		
 		"How many married men aged between 25 and 30 are in Karabar?",
@@ -140,22 +135,22 @@ public class UnitTester {
 		"How many divorced women are there?",
 		"How many widows aged 25-30 are there?",
 		"How many people are married?",
-		
 		"How many married 25-30 women are in Eden?",
 		"How many females married in Eden are 25-30?",
 		"How many married females in Eden are between 25 and 30 years old?",
 		"How many married women are in Eden?",
 		"How many men are separated in Eden?",
-		
 		"How many men are divorced in Braidwood?",
 		"How many widowed men are in Braidwood?",
 		"How many men in Braidwood are married?", 
 		"How many men in Braidwood are divorced?", 
 		"How many men in Braidwood aged 25-30 are divorced",
-
 		"What is the male population in Queanbeyan that are separated?",
 		"What is the male population in Capital Region that are divorced?",
 		"What is the male population in Sandy Bay that are widows?",
+		"How many women have never been married?",
+		"How many women have never married in Karabar?",
+
 		
 		//B06
 		"How many men are living in a de facto relationship in Karabar?", 
@@ -167,7 +162,7 @@ public class UnitTester {
 		"What is Goulburn's married population?",
 		"How many people have a registered marriage in Sandy Bay?",
 		"How many men in Sandy Bay are in a de facto relationship?",
-
+		"How many men are not married in Karabar?",
 		
 		//B07
 		"What is the indigenous population of men aged between 35 and 40 in Cooma?", 
@@ -177,10 +172,12 @@ public class UnitTester {
 		"How many indigenous 35-40 year olds in Goulburn are female?", 
 		"How many men aged 35-40 in Goulburn are indigenous?", 
 		"How many indigenous males are there in Braidwood?", 
-
 		"What is Goulburn's indigenous female 35-40 year old population?", 
 		"What is Tasmania's male 35 to 40 year old indigenous population?", 
 		"What is Braidwood's indigenous male population?", 
+		"How many indigenous men 35-40 years old are there?",
+		"How many non indigenous men 35-40 years old are there?",
+		"How many men 35-40 years old are not indigenous?",
 
 		//B09
 		"What is the population of Tasmania born in vietnam",
@@ -194,7 +191,7 @@ public class UnitTester {
 		"Number of women in Australia whose country of birth is also Australia?",
 		"How many men in Tasmania were born in Vietnam?",
 		"Sandy Bay's population of men who were born in Greece?",
-
+		"How many people in Victoria were born in Australia?",
 
 		//B13
 		"How many people speak Iranian in Goulburn?",
@@ -222,11 +219,9 @@ public class UnitTester {
 		"How many mormons in Goulburn?",
 		"How many women in Goulburn have no religion?",
 		"How many women follow Buddhism in Goulburn?",
-		
 		"What is Australia's Christian population?",
 		"What is Australia's female Buddhist population?",
 
-		
 		//B18
 		"How many men aged 20-25 need assistance in Australia?",
 		"How many female 20-25 year olds need assistance in Sandy Bay?",
@@ -268,8 +263,9 @@ public class UnitTester {
 		"How many women were in Goulburn in the labour force?",
 		"How many people in Goulburn were part time employment?", 
 		"How many people in Goulburn were employed part time?", 
-		//"How many men in Goulburn were full-time employed?",
-
+		"How many men in Goulburn were full time employed?",
+		"How many men in Goulburn were employed full time?",
+		"How many people aged 35-40 in Goulburn were employed in total?",
 
 		//B43
 		"How many men aged 35-40 years in Moonah work in agriculture?",
@@ -296,14 +292,14 @@ public class UnitTester {
 	private static final String[] TEST_RESULTS = {	
 		
 		//B02
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.0.AUS.0.A/ABS",	//	printQueryResult("What's median age for people in Australia?") ; // 37
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.0.AUS.0.A/ABS",	//	printQueryResult("What is Australia's median age?") ; //  37
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.6.STE.6.A/ABS",	// 	printQueryResult("What is the average age of people in Tasmania?") ; // 40 
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTPI.6.STE.6.A/ABS",	// 	printQueryResult("What is the average income for people in Tasmania?") ; // 499
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTPI.1.SA3.10102.A/ABS",	//	printQueryResult("What's the median personal income for people in Queanbeyan?") ; // 833
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTPI.1.SA3.10102.A/ABS",	//	printQueryResult("What is the median personal income in Queanbeyan?") ; // 833
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.0.AUS.0.A/ABS",			//	printQueryResult("What's median age for people in Australia?") ; // 37
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.0.AUS.0.A/ABS",			//	printQueryResult("What is Australia's median age?") ; //  37
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.6.STE.6.A/ABS",			// 	printQueryResult("What is the average age of people in Tasmania?") ; // 40 
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTPI.6.STE.6.A/ABS",			// 	printQueryResult("What is the average income for people in Tasmania?") ; // 499
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTPI.1.SA3.10102.A/ABS",		//	printQueryResult("What's the median personal income for people in Queanbeyan?") ; // 833
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTPI.1.SA3.10102.A/ABS",		//	printQueryResult("What is the median personal income in Queanbeyan?") ; // 833
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTFI.1.SA2.101021007.A/ABS",	//	printQueryResult("What is the average family income in Braidwood?") ; // 1259
-		//printQueryResult("What is the median income for families in Braidwood?") ; // 1259
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTFI.1.SA2.101021007.A/ABS",	//  printQueryResult("What is the median income for families in Braidwood?") ; // 1259
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTFI.6.SA2.601031019.A/ABS",	//	printQueryResult("What's the median family income in Moonah?") ; // 1158
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTHI.6.SA2.601031019.A/ABS",	//	printQueryResult("What's the avereage household income in Moonah?") ; //  870
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTHI.1.SA2.101021008.A/ABS",	//	printQueryResult("What is the median income for households in Karabar?") ; //   1560
@@ -316,9 +312,10 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MRENT.1.SA2.101011001.A/ABS",	//	printQueryResult("What's the median rental payment in Goulburn?") ; // 185 
 
 		//B03
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B03/T15.1.1.SA2.101011001.A/ABS", //How many people aged 18-20 were at home on Census night in Goulburn?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B03/TT.1.1.SA2.101011001.A/ABS", //How many people were at home on Census night in Goulburn?
-		
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B03/T15.1.1.SA2.101011001.A/ABS", // How many people aged 18-20 were at home on Census night in Goulburn?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B03/TT.1.1.SA2.101011001.A/ABS", 	// How many people were at home on Census night in Goulburn?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B03/T15.1.1.SA2.101041023.A/ABS",	//	printQueryResult("how many people were aged 15-20 were at home on the night of the Census in Eden");	//321
+
 		//B04
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.0.AUS.0.A/ABS",					//What is the population of Australia?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.1.SA2.101011001.A/ABS", 			//What is the population of Goulburn?
@@ -336,7 +333,6 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.1.SA2.101031014.A/ABS", //What is the female population aged 20-24 of Cooma?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.1.SA2.101031014.A/ABS", //What is the population of women aged between 20 and 24 in Cooma?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.1.SA2.101031014.A/ABS", //How many 20-24 year old females live in Cooma?
-
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601031019.A/ABS", //How many females aged 20-24 live in moonah?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601031019.A/ABS", //How many females aged 20 to 24 live in Moonah?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601031019.A/ABS", //How many women aged between 20 and 24 live in Moonah?
@@ -345,43 +341,43 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601051031.A/ABS", //What is Sandy Bay's 20-24 female population?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601051031.A/ABS", //Sandy Bay's female population aged 20-24 years?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.6.SA2.601051031.A/ABS", //What is the population of Sandy Bay women aged 20-24?
-		
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.1.SA2.101021007.A/ABS",	//		printQueryResult("In Braidwood, how many women aged 20-24 are there?") ; // 38
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.1.SA2.101021007.A/ABS",	//		printQueryResult("What is Braidwood's 20-24 female population?") ; // 38
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.1.SA2.101011001.A/ABS",	//		printQueryResult("Goulburn's female population aged 20-24 years?") ; // 626
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.22+23+24+21+20.1.SA2.101011001.A/ABS",	//		printQueryResult("What is the population of Goulburn women aged 20-24?") ; // 626
 
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.T25.5.1.SA2.101021008.A/ABS",	//		"How many married men are aged between 25 and 30 are in Karabar?",	46
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.4.6.STE.6.A/ABS",			//"How many female 25-30 year olds are separated?", 38274
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.3.1.SA2.101031014.A/ABS",		//"How many divorced men are there in Cooma?",137
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.T25.2.1.SA2.101031014.A/ABS",		//"How many 25-30 year old widows are in Cooma?",0
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.T25.5.0.AUS.0.A/ABS",			//"How many people aged 25-30 are married?",1198562
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.4.1.SA2.101011001.A/ABS",		//"How many men in Goulburn are separated?",50
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.TT.3.0.AUS.0.A/ABS",			//"How many people are divorced?",1460900
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.2.1.SA2.101011001.A/ABS",		//"How many widowed women aged 25-30 are in Goulburn?",0
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.T25.1.0.AUS.0.A/ABS",			//"How many men aged 25-30 have never married?",895608
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.5.1.SA2.101011001.A/ABS",		//"How many married men are there in Goulburn?",	723
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.T25.4.1.SA2.101011001.A/ABS",		//"How many separated persons aged 25-30 are in Goulburn?",7
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.3.0.AUS.0.A/ABS",			//"How many divorced women are there?",835077
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.T25.2.0.AUS.0.A/ABS",			//"How many widows aged 25-30 are there?",4616
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.TT.5.0.AUS.0.A/ABS",			//"How many people are married?",8461114
+		//B05
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.T25.5.1.SA2.101021008.A/ABS",	// "How many married men are aged between 25 and 30 are in Karabar?",	46
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.4.6.STE.6.A/ABS",			// "How many female 25-30 year olds are separated?", 38274
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.3.1.SA2.101031014.A/ABS",	// "How many divorced men are there in Cooma?",137
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.T25.2.1.SA2.101031014.A/ABS",	// "How many 25-30 year old widows are in Cooma?",0
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.T25.5.0.AUS.0.A/ABS",			// "How many people aged 25-30 are married?",1198562
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.4.1.SA2.101011001.A/ABS",	// "How many men in Goulburn are separated?",50
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.TT.3.0.AUS.0.A/ABS",			// "How many people are divorced?",1460900
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.2.1.SA2.101011001.A/ABS",	// "How many widowed women aged 25-30 are in Goulburn?",0
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.T25.1.0.AUS.0.A/ABS",			// "How many men aged 25-30 have never married?",895608
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.5.1.SA2.101011001.A/ABS",	// "How many married men are there in Goulburn?",	723
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.T25.4.1.SA2.101011001.A/ABS",	// "How many separated persons aged 25-30 are in Goulburn?",7
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.3.0.AUS.0.A/ABS",			// "How many divorced women are there?",835077
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.T25.2.0.AUS.0.A/ABS",			// "How many widows aged 25-30 are there?",4616
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.TT.5.0.AUS.0.A/ABS",			// "How many people are married?",8461114
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.5.1.SA2.101041023.A/ABS", 	// How many married 25-30 women are in Eden?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.5.1.SA2.101041023.A/ABS", 	// How many females married in Eden are 25-30?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.5.1.SA2.101041023.A/ABS", 	// How many married females in Eden are between 25 and 30 years old?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.5.1.SA2.101041023.A/ABS", 	// How many married women are in Eden?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.4.1.SA2.101041023.A/ABS", 	// How many men are separated in Eden?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.3.1.SA2.101021007.A/ABS", 	// How many men are divorced in Braidwood?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.2.1.SA2.101021007.A/ABS", 	// How many widowed men are in Braidwood?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.5.1.SA2.101021007.A/ABS", 	// How many men in Braidwood are married?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.3.1.SA2.101021007.A/ABS", 	// How many men in Braidwood are divorced?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.T25.3.1.SA2.101021007.A/ABS", 	// How many men in Braidwood aged 25-30 are divorced		
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.4.1.SA3.10102.A/ABS",		// printQueryResult("What is the male population in Queanbeyan that are separated?") ; //710
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.3.1.SA4.101.A/ABS",			// printQueryResult("What is the male population in Capital Region that are divorced?") ; //7444
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.2.6.SA2.601051031.A/ABS",	// printQueryResult("What is the male population in Sandy Bay that are widows?") ; //545
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.1.0.AUS.0.A/ABS",	//	printQueryResult("How many women have never been married?");	//	2753427
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.1.1.SA2.101021008.A/ABS",	//	printQueryResult("How many women have never married in Karabar?");	// 1164
 
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.5.1.SA2.101041023.A/ABS", 	//How many married 25-30 women are in Eden?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.5.1.SA2.101041023.A/ABS", 	//How many females married in Eden are 25-30?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T25.5.1.SA2.101041023.A/ABS", 	//How many married females in Eden are between 25 and 30 years old?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.5.1.SA2.101041023.A/ABS", 	//How many married women are in Eden?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.4.1.SA2.101041023.A/ABS", 	//How many men are separated in Eden?
-		
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.3.1.SA2.101021007.A/ABS", 	//How many men are divorced in Braidwood?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.2.1.SA2.101021007.A/ABS", 	//How many widowed men are in Braidwood?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.5.1.SA2.101021007.A/ABS", 	//How many men in Braidwood are married?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.3.1.SA2.101021007.A/ABS", 	//How many men in Braidwood are divorced?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.T25.3.1.SA2.101021007.A/ABS", 	//How many men in Braidwood aged 25-30 are divorced
-		
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.4.1.SA3.10102.A/ABS",		//	 	printQueryResult("What is the male population in Queanbeyan that are separated?") ; //710
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.3.1.SA4.101.A/ABS",			//		printQueryResult("What is the male population in Capital Region that are divorced?") ; //7444
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.2.6.SA2.601051031.A/ABS",	//		printQueryResult("What is the male population in Sandy Bay that are widows?") ; //545
-		
+		//B06
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/1.TT.2.1.SA2.101021008.A/ABS", 	// "How many men are living in a de facto relationship in Karabar?",125 
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/3.TT.2.0.AUS.0.A/ABS",			// "How many people are living in a de facto relationship?", 1476370
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.2.1.SA2.101041023.A/ABS", 	// How many females are in a de facto relationship in Eden?
@@ -391,8 +387,9 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.TT.5.1.SA2.101011001.A/ABS",	//		printQueryResult("What is Goulburn's married population?") ; // 7723
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/3.TT.1.6.SA2.601051031.A/ABS",	//		printQueryResult("How many people have a registered marriage in Sandy Bay?") ; // 3858
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/1.TT.2.6.SA2.601051031.A/ABS",	//		printQueryResult("How many men in Sandy Bay are in a de facto relationship?") ; // 381
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/1.TT.3.1.SA2.101021008.A/ABS",	//	printQueryResult("How many men are not married in Karabar?");	// 1257
 
-		
+		//B07
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.A35.4.1.SA2.101031014.A/ABS",	// "What is the indigenous population of men aged between 35 and 40 in Goulburn?", 27
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/2.A35.4.0.AUS.0.A/ABS",			// "How many women aged 35-40 are indigenous?", 17838
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.TT.4.1.SA2.101031014.A/ABS",	// "How many men in Goulburn are indigenous?", 350
@@ -403,8 +400,11 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/2.A35.4.1.SA2.101011001.A/ABS",	//		"What is Goulburn's indigenous female 35-40 year old population?", 18
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.A35.4.6.STE.6.A/ABS",			//		"What is Tasmania's male 35 to 40 year old indigenous population?", 492
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.TT.4.1.SA2.101021007.A/ABS",	//		"What is Braidwood's indigenous male population?", 
-		
-		
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.A35.4.0.AUS.0.A/ABS",			//	printQueryResult("How many indigenous men 35-40 years old are there?") ; // 16234
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.A35.1.0.AUS.0.A/ABS",			//	printQueryResult("How many non indigenous men 35-40 years old are there?") ; // 691051
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.A35.1.0.AUS.0.A/ABS",			// printQueryResult("How many men 35-40 years old are not indigenous?") ; // 691051
+
+		//B09
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.5105.6.STE.6.A/ABS", 			// What is the population of Tasmania born in vietnam
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.2304.0.AUS.0.A/ABS", 			// How many women in Australia were born in Germany?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.6101.1.SA2.101031014.A/ABS", 	// How many people in Cooma were born in China?
@@ -416,6 +416,7 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.1101.0.AUS.0.A/ABS",			//	printQueryResult("Number of women in Australia whose country of birth is also Australia?") ; //7605247
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/1.5105.6.STE.6.A/ABS", 			//		printQueryResult("How many men in Tasmania were born in Vietnam?") ; //267
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/1.3207.6.SA2.601051031.A/ABS",	//		printQueryResult("Sandy Bay's population of men who were born in Greece?") ; // 36
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.1101.2.STE.2.A/ABS",			//	printQueryResult("How many people in Victoria were born in Australia?") ; //3670934
 
 		
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/3.41.1.SA2.101011001.A/ABS",	 //How many people speak Iranian in Goulburn?
@@ -477,16 +478,18 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/08.1.O15.1.SA2.101021007.A/ABS",	//	printQueryResult("How many men in Braidwood have a commerce degree?") ; // 7
 
 		
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.T35.EMP.6.SA2.601031019.A/ABS", //How many people aged between 35 and 40 in Moonah were employed?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.T35.EMP.6.SA2.601031019.A/ABS", //How many people aged 35-40 in Moonah were in employment?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/1.O15.1.1.SA2.101011001.A/ABS", //How many men in Goulburn were in full time employment?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/2.O15.LF.1.SA2.101011001.A/ABS", //How many women in Goulburn were in the labour force?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.O15.EMP.1.SA2.101011001.A/ABS", //How many people in Goulburn were in employment?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.O15.2.1.SA2.101011001.A/ABS", //How many people in Goulburn were in part time employment?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/2.O15.LF.1.SA2.101011001.A/ABS", //How many women were in Goulburn in the labour force?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.O15.2.1.SA2.101011001.A/ABS", //How many people in Goulburn were part time employment?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.O15.2.1.SA2.101011001.A/ABS", //How many people in Goulburn were employed part time?
-		//"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/1.O15.EMP.1.SA2.101011001.A/ABS", //How many men in Goulburn were full-time employed?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.T35.EMP.6.SA2.601031019.A/ABS", // How many people aged between 35 and 40 in Moonah were employed?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.T35.EMP.6.SA2.601031019.A/ABS", // How many people aged 35-40 in Moonah were in employment?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/1.O15.1.1.SA2.101011001.A/ABS", 	// How many men in Goulburn were in full time employment?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/2.O15.LF.1.SA2.101011001.A/ABS", 	// How many women in Goulburn were in the labour force?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.O15.EMP.1.SA2.101011001.A/ABS", // How many people in Goulburn were in employment?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.O15.2.1.SA2.101011001.A/ABS", 	// How many people in Goulburn were in part time employment?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/2.O15.LF.1.SA2.101011001.A/ABS", 	// How many women were in Goulburn in the labour force?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.O15.2.1.SA2.101011001.A/ABS", 	// How many people in Goulburn were part time employment?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.O15.2.1.SA2.101011001.A/ABS", 	// How many people in Goulburn were employed part time?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/1.O15.1.1.SA2.101011001.A/ABS",	//	printQueryResult("How many men in Goulburn were full time employed?") ; // 3726
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/1.O15.1.1.SA2.101011001.A/ABS",	//	printQueryResult("How many men in Goulburn were employed full time?") ; // 3726
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.T35.EMP.1.SA2.101011001.A/ABS",	//	printQueryResult("How many people aged 35-40 in Goulburn were employed in total?") ; //2047  
 
 		
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.T35.A.6.SA2.601031019.A/ABS", //How many men aged 35-40 in Moonah work in agriculture?
