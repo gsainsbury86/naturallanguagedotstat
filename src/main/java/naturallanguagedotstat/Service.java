@@ -1,6 +1,9 @@
 package naturallanguagedotstat;
 
 import java.io.BufferedReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -138,6 +141,21 @@ public class Service {
 			builder.add(key,jab);
 		}
 		JsonObject myObject = builder.build();
+		
+		Connection conn = null;
+		try {
+		    conn =
+		       DriverManager.getConnection("jdbc:mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/naturallanguagedotstat?" +
+		                                   "user=adminPyfBNpf&password=YeBCcnq6qs6K");
+
+		    // Do something with the Connection
+
+		} catch (SQLException ex) {
+		    // handle any errors
+		    System.out.println("SQLException: " + ex.getMessage());
+		    System.out.println("SQLState: " + ex.getSQLState());
+		    System.out.println("VendorError: " + ex.getErrorCode());
+		}
 
 		return Response.status(200).entity(myObject.toString()).build();
 	}
