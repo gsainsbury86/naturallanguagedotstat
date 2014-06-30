@@ -3,6 +3,8 @@ package naturallanguagedotstat;
 import java.io.BufferedReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,6 +36,8 @@ import naturallanguagedotstat.test.LocalTest;
 import naturallanguagedotstat.utils.Utils;
 
 import org.w3c.dom.Document;
+
+import com.mysql.jdbc.Statement;
 
 
 @XmlAccessorType(XmlAccessType.NONE)
@@ -108,59 +112,83 @@ public class Service {
 	@GET
 	@Path("/query/{query}")
 	@Produces("application/json")
-	public Response query(@PathParam("query") String query) throws FileNotFoundException, IOException, ClassNotFoundException, SQLException{
+	public Response query(@PathParam("query") String query) throws SQLException{
 
-		ArrayList<Dataset> datasets = loadDatasets();
-		Dimension ASGS2011 = loadASGS_2011();
-
-		QueryBuilder queryBuilder = new QueryBuilder(query, datasets, ASGS2011);
-		String urlToRead = queryBuilder.build();
-
-		String data = null;
-		int result = -1;
-
-		if(!LocalTest.test){
-			data = Utils.httpGET(urlToRead);
-
-			Document dataDocument = Utils.XMLToDocument(data);
-
-			result = Utils.findObsValue(dataDocument);
-		}
+		JsonObject responseObject = null;
 
 
-		JsonBuilderFactory factory = Json.createBuilderFactory(null);
-		JsonObjectBuilder builder = factory.createObjectBuilder();
-		builder.add("result", result);
-		builder.add("url", urlToRead);
-		builder.add("Region",queryBuilder.getRegion());
-		for(String key : queryBuilder.getQueryInputs().keySet()){
-			JsonArrayBuilder jab = factory.createArrayBuilder();
-			for(String dimValue : queryBuilder.getQueryInputs().get(key)){
-				jab.add(dimValue);
-			}
-			builder.add(key,jab);
-		}
-		JsonObject myObject = builder.build();
-		
 		Connection conn = null;
-//		try {
-			
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try{
+			ArrayList<Dataset> datasets = loadDatasets();
+			Dimension ASGS2011 = loadASGS_2011();
+
+			QueryBuilder queryBuilder = new QueryBuilder(query, datasets, ASGS2011);
+			String urlToRead = queryBuilder.build();
+
+			String data = null;
+			int result = -1;
+
+			if(!LocalTest.test){
+				data = Utils.httpGET(urlToRead);
+
+				Document dataDocument = Utils.XMLToDocument(data);
+
+				result = Utils.findObsValue(dataDocument);
+			}
+
+
+			JsonBuilderFactory factory = Json.createBuilderFactory(null);
+			JsonObjectBuilder builder = factory.createObjectBuilder();
+			builder.add("result", result);
+			builder.add("url", urlToRead);
+			builder.add("Region",queryBuilder.getRegion());
+			for(String key : queryBuilder.getQueryInputs().keySet()){
+				JsonArrayBuilder jab = factory.createArrayBuilder();
+				for(String dimValue : queryBuilder.getQueryInputs().get(key)){
+					jab.add(dimValue);
+				}
+				builder.add(key,jab);
+			}
+
+			responseObject = builder.build();
+
+
 			String host = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
 			String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
 
-		    conn =
-		       DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/naturallanguagedotstat?" +
-		                                   "user=adminPyfBNpf&password=YeBCcnq6qs6K");
+			conn = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/naturallanguagedotstat?user=adminPyfBNpf&password=YeBCcnq6qs6K");
+			conn.setAutoCommit(false);
 
-		    // Do something with the Connection
+			String updateLog = "INSERT INTO naturallanguagedotstat.log VALUES (null, ?, ?, ?, NOW())";
 
-//		} catch (SQLException ex) {
-//		    // handle any errors
-//		    System.out.println("SQLException: " + ex.getMessage());
-//		    System.out.println("SQLState: " + ex.getSQLState());
-//		    System.out.println("VendorError: " + ex.getErrorCode());
-//		}
+			stmt = conn.prepareStatement(updateLog);
+			stmt.setString(1, query);
+			stmt.setString(2, "null");
+			stmt.setInt(3, 200);
+			stmt.executeUpdate();
 
-		return Response.status(200).entity(myObject.toString()).build();
+			conn.commit();
+
+		} catch (SQLException ex) {
+			return Response.status(500).build();
+		} catch (FileNotFoundException e) {
+			return Response.status(500).build();
+		} catch (IOException e) {
+			return Response.status(500).build();
+		} catch (ClassNotFoundException e) {
+			return Response.status(500).build();
+		} catch(NullPointerException e){
+			return Response.status(500).build();
+		} finally {
+			if (stmt != null) {
+				stmt.close();
+			}
+			conn.setAutoCommit(true);
+		}
+
+		return Response.status(200).entity(responseObject.toString()).build();
 	}
 }
