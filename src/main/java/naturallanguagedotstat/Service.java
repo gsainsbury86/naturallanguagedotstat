@@ -108,7 +108,7 @@ public class Service {
 	@GET
 	@Path("/query/{query}")
 	@Produces("application/json")
-	public Response query(@PathParam("query") String query) throws FileNotFoundException, IOException, ClassNotFoundException{
+	public Response query(@PathParam("query") String query) throws FileNotFoundException, IOException, ClassNotFoundException, SQLException{
 
 		ArrayList<Dataset> datasets = loadDatasets();
 		Dimension ASGS2011 = loadASGS_2011();
@@ -143,19 +143,23 @@ public class Service {
 		JsonObject myObject = builder.build();
 		
 		Connection conn = null;
-		try {
+//		try {
+			
+			String host = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
+			String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
+
 		    conn =
-		       DriverManager.getConnection("jdbc:mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/naturallanguagedotstat?" +
+		       DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/naturallanguagedotstat?" +
 		                                   "user=adminPyfBNpf&password=YeBCcnq6qs6K");
 
 		    // Do something with the Connection
 
-		} catch (SQLException ex) {
-		    // handle any errors
-		    System.out.println("SQLException: " + ex.getMessage());
-		    System.out.println("SQLState: " + ex.getSQLState());
-		    System.out.println("VendorError: " + ex.getErrorCode());
-		}
+//		} catch (SQLException ex) {
+//		    // handle any errors
+//		    System.out.println("SQLException: " + ex.getMessage());
+//		    System.out.println("SQLState: " + ex.getSQLState());
+//		    System.out.println("VendorError: " + ex.getErrorCode());
+//		}
 
 		return Response.status(200).entity(myObject.toString()).build();
 	}

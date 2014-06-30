@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.is;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.StringReader;
+import java.sql.SQLException;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -31,7 +32,7 @@ public class UnitTester {
 	}
 
 	@Test
-	public void testQueries() throws FileNotFoundException, IOException, ClassNotFoundException {
+	public void testQueries() throws FileNotFoundException, IOException, ClassNotFoundException, SQLException {
 
 		LocalTest.localLoad = true;
 		LocalTest.debug = false;

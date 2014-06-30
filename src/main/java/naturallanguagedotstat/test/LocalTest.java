@@ -2,6 +2,7 @@ package naturallanguagedotstat.test;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.sql.SQLException;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -15,7 +16,7 @@ public class LocalTest {
 	public static boolean test = false;
 	public static boolean localLoad = false;
 
-	public static void main(String[] args) throws IOException, ClassNotFoundException{
+	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException{
 
 		debug = true;
 		localLoad = true;
@@ -35,7 +36,7 @@ public class LocalTest {
 
 	}
 	
-	public static void printQueryResult( String str) throws IOException, ClassNotFoundException{
+	public static void printQueryResult( String str) throws IOException, ClassNotFoundException, SQLException{
 		Service service = new Service();
 
 		JsonReader jsonReader = Json.createReader(new StringReader((String) service.query(str).getEntity()));
