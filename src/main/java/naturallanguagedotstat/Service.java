@@ -117,7 +117,7 @@ public class Service {
 		Dimension ASGS2011 = null;
 		JsonObject responseObject = null;
 		String error = null;
-		
+
 		int responseCode = 200;
 
 		try{
@@ -161,7 +161,7 @@ public class Service {
 
 			Connection conn = null;
 			PreparedStatement stmt = null;
-			
+
 			String host = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
 			String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
 
@@ -174,8 +174,12 @@ public class Service {
 			stmt.setString(2, error);
 			stmt.setInt(3, responseCode);
 			stmt.executeUpdate();
+
+			if (stmt != null) {
+				stmt.close();
+			}
 		}
-		
+
 		return Response.status(responseCode).entity(responseObject != null ? responseObject.toString() : null).build();
 
 	}
