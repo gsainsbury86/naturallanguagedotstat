@@ -161,26 +161,28 @@ public class Service {
 			error = e.toString();
 		} finally {
 
-			Connection conn = null;
-			PreparedStatement stmt = null;
+			if(!LocalTest.test){
+				Connection conn = null;
+				PreparedStatement stmt = null;
 
-			String host = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
-			String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
+				String host = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
+				String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
 
-			conn = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/naturallanguagedotstat?user=adminPyfBNpf&password=YeBCcnq6qs6K");
+				conn = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/naturallanguagedotstat?user=adminPyfBNpf&password=YeBCcnq6qs6K");
 
-			String updateLog = "INSERT INTO naturallanguagedotstat.log VALUES (null, ?, ?, ?, ?, ?, NOW())";
+				String updateLog = "INSERT INTO naturallanguagedotstat.log VALUES (null, ?, ?, ?, ?, ?, NOW())";
 
-			stmt = conn.prepareStatement(updateLog);
-			stmt.setString(1, query);
-			stmt.setString(2, error);
-			stmt.setString(3, urlToRead);
-			stmt.setString(4, queryBuilder.getQueryInputs().toString());
-			stmt.setInt(5, responseCode);
-			stmt.executeUpdate();
+				stmt = conn.prepareStatement(updateLog);
+				stmt.setString(1, query);
+				stmt.setString(2, error);
+				stmt.setString(3, urlToRead);
+				stmt.setString(4, queryBuilder.getQueryInputs().toString());
+				stmt.setInt(5, responseCode);
+				stmt.executeUpdate();
 
-			if (stmt != null) {
-				stmt.close();
+				if (stmt != null) {
+					stmt.close();
+				}
 			}
 		}
 
