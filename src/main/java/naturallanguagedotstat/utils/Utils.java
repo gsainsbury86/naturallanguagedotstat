@@ -90,9 +90,12 @@ public class Utils {
 	public static int findObsValue(Document document) {
 		int c = 0;
 		NodeList nodeList = document.getElementsByTagName("ObsValue");
+		if(nodeList.getLength() == 0){
+			throw new NullPointerException("No ObsValue in SDMX response.");
+		}
 	    for (int i = 0; i < nodeList.getLength(); i++) {
 	        Node node = nodeList.item(i);
-			c += Integer.parseInt(  node.getAttributes().getNamedItem("value").getNodeValue());
+			c += Integer.parseInt(node.getAttributes().getNamedItem("value").getNodeValue());
 		}
 		return c;
 
