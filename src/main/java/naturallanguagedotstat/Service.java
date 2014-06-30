@@ -117,6 +117,8 @@ public class Service {
 		Dimension ASGS2011 = null;
 		JsonObject responseObject = null;
 		String error = null;
+		String urlToRead = null;
+		QueryBuilder queryBuilder = null;
 
 		int responseCode = 200;
 
@@ -124,8 +126,8 @@ public class Service {
 			datasets = loadDatasets();
 			ASGS2011 = loadASGS_2011();
 
-			QueryBuilder queryBuilder = new QueryBuilder(query, datasets, ASGS2011);
-			String urlToRead = queryBuilder.build();
+			queryBuilder = new QueryBuilder(query, datasets, ASGS2011);
+			urlToRead = queryBuilder.build();
 
 			String data = null;
 			int result = -1;
@@ -167,12 +169,14 @@ public class Service {
 
 			conn = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/naturallanguagedotstat?user=adminPyfBNpf&password=YeBCcnq6qs6K");
 
-			String updateLog = "INSERT INTO naturallanguagedotstat.log VALUES (null, ?, ?, ?, NOW())";
+			String updateLog = "INSERT INTO naturallanguagedotstat.log VALUES (null, ?, ?, ?, ?, ?, NOW())";
 
 			stmt = conn.prepareStatement(updateLog);
 			stmt.setString(1, query);
 			stmt.setString(2, error);
-			stmt.setInt(3, responseCode);
+			stmt.setString(3, urlToRead);
+			stmt.setString(4, queryBuilder.getQueryInputs().toString());
+			stmt.setInt(5, responseCode);
 			stmt.executeUpdate();
 
 			if (stmt != null) {
