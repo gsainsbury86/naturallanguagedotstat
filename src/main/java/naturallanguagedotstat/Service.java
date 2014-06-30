@@ -1,11 +1,6 @@
 package naturallanguagedotstat;
 
 import java.io.BufferedReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,6 +8,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.json.Json;
@@ -36,8 +35,6 @@ import naturallanguagedotstat.test.LocalTest;
 import naturallanguagedotstat.utils.Utils;
 
 import org.w3c.dom.Document;
-
-import com.mysql.jdbc.Statement;
 
 
 @XmlAccessorType(XmlAccessType.NONE)
@@ -114,16 +111,18 @@ public class Service {
 	@Produces("application/json")
 	public Response query(@PathParam("query") String query) throws SQLException{
 
+
+
+		ArrayList<Dataset> datasets = null;
+		Dimension ASGS2011 = null;
 		JsonObject responseObject = null;
-
-
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
+		String error = null;
+		
+		int responseCode = 200;
 
 		try{
-			ArrayList<Dataset> datasets = loadDatasets();
-			Dimension ASGS2011 = loadASGS_2011();
+			datasets = loadDatasets();
+			ASGS2011 = loadASGS_2011();
 
 			QueryBuilder queryBuilder = new QueryBuilder(query, datasets, ASGS2011);
 			String urlToRead = queryBuilder.build();
@@ -138,7 +137,6 @@ public class Service {
 
 				result = Utils.findObsValue(dataDocument);
 			}
-
 
 			JsonBuilderFactory factory = Json.createBuilderFactory(null);
 			JsonObjectBuilder builder = factory.createObjectBuilder();
@@ -156,39 +154,29 @@ public class Service {
 			responseObject = builder.build();
 
 
+		} catch(Exception e) {
+			responseCode = 500;
+			error = e.toString();
+		} finally {
+
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			
 			String host = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
 			String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
 
 			conn = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/naturallanguagedotstat?user=adminPyfBNpf&password=YeBCcnq6qs6K");
-			conn.setAutoCommit(false);
 
 			String updateLog = "INSERT INTO naturallanguagedotstat.log VALUES (null, ?, ?, ?, NOW())";
 
 			stmt = conn.prepareStatement(updateLog);
 			stmt.setString(1, query);
-			stmt.setString(2, "null");
-			stmt.setInt(3, 200);
+			stmt.setString(2, error);
+			stmt.setInt(3, responseCode);
 			stmt.executeUpdate();
-
-			conn.commit();
-
-		} catch (SQLException ex) {
-			return Response.status(500).build();
-		} catch (FileNotFoundException e) {
-			return Response.status(500).build();
-		} catch (IOException e) {
-			return Response.status(500).build();
-		} catch (ClassNotFoundException e) {
-			return Response.status(500).build();
-		} catch(NullPointerException e){
-			return Response.status(500).build();
-		} finally {
-			if (stmt != null) {
-				stmt.close();
-			}
-			conn.setAutoCommit(true);
 		}
+		
+		return Response.status(responseCode).entity(responseObject != null ? responseObject.toString() : null).build();
 
-		return Response.status(200).entity(responseObject.toString()).build();
 	}
 }
