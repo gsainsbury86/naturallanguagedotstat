@@ -11,6 +11,7 @@ public class Dataset implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private ArrayList<Dimension> dimensions;
+	private Dimension timeDimension;
 	
 	public Dataset(String name, ArrayList<Dimension> dimensions) {
 		super();
@@ -41,6 +42,14 @@ public class Dataset implements Serializable{
 		}
 		
 		return toReturn;
+	}
+
+	public Dimension getTimeDimension() {
+		return timeDimension;
+	}
+
+	public void setTimeDimension(Dimension timeDimension) {
+		this.timeDimension = timeDimension;
 	}
 	
 }

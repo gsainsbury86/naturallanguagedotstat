@@ -39,15 +39,19 @@ public class LocalTest {
 		//printQueryResult("How many men in Sandy Bay?") ;
 //		printQueryResult("How many men aged 35-40 years in Moonah work in agriculture?") ;
 //		printQueryResult("How many men in Sandy Bay?") ;
-//		printQueryResult("CPI") ;
+		printQueryResult("CPI") ;
 
 		
-		printQueryResult("What is the current CPI?");
+		//printQueryResult("What is the current CPI?");
 		
 
 //		Service s = new Service();
-//		
+////		
 //		ArrayList<Dataset> datasets = s.loadDatasets();
+//		
+//		for(Dataset ds: datasets){
+//			System.out.println(ds.getTimeDimension());
+//		}
 //		
 //		Dataset ds = datasets.get(46);
 //		for(Dimension dim : ds.getDimensions()){

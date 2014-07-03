@@ -2,6 +2,7 @@ package naturallanguagedotstat;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -79,7 +80,7 @@ public class QueryBuilder {
 		}
 
 		Dataset dataset = findBestMatchDatasetForDimensionNames();
-		
+
 		if(queryInputs.containsKey(AGE)){
 			getBestAgeCodeLists(queryInputs, dataset);
 		};
@@ -87,7 +88,7 @@ public class QueryBuilder {
 
 
 		setDefaultsForMissingDimensions(queryInputs, dataset);
-		
+
 		if(dataset.getName().contains("CENSUS")){
 			queryInputs.remove("State");
 		}
@@ -298,7 +299,7 @@ public class QueryBuilder {
 			for(String dimKey : queryInputs.keySet()){
 				if(dim.getName().equals(dimKey)){
 					for(String str: queryInputs.get(dimKey)){
-						
+
 
 						if(dimKey.equals("Region") && ds.getName().contains("CENSUS")){
 							//TODO: String regionCode = region;
@@ -324,11 +325,27 @@ public class QueryBuilder {
 		url = url.substring(0,url.length()-1);
 		url += "/ABS";
 
+		//TODO: Add one for end time and make better
+		url += "?startTime=";
+		url += findStartTime(ds.getTimeDimension());
+		url += "&endTime=";
+		url += findStartTime(ds.getTimeDimension());
+
+
+
 
 		return url;
 	}
 
 	// ........................................................................................
+
+	private String findStartTime(Dimension timeDimension) {
+
+		ArrayList<String> list = new ArrayList<String>();
+		list.addAll(timeDimension.getCodelist().keySet());
+		Collections.sort(list);
+		return list.get(list.size()-1);
+	}
 
 	private String getKeyForMaxValue (HashMap< String, Double> map){
 		double maxValue = -9999999;
@@ -340,30 +357,30 @@ public class QueryBuilder {
 		return keyForMaxValue;
 	};
 
-//	/**
-//	 * Find a list of Datasets which contain the given dimensions (by name).
-//	 *  
-//	 * @param set an ArrayList of Strings with names of Dimensions
-//	 * @return an ArrayList of Dimension objects
-//	 */
-//	public ArrayList<Dataset> findDatasetsWithDimensionNames(){
-//		ArrayList<Dataset> toReturn = new ArrayList<Dataset>();
-//
-//		for(Dataset dataset : datasets){
-//			int c = 0;
-//			for(Dimension dimension : dataset.getDimensions()){
-//				for(String dimensionName : queryInputs.keySet()){
-//					if(dimension.getName().equals(dimensionName)){
-//						c++;
-//					}
-//				}
-//			}
-//			if(c == queryInputs.keySet().size()){
-//				toReturn.add(dataset);
-//			}
-//		}
-//		return toReturn;
-//	}
+	//	/**
+	//	 * Find a list of Datasets which contain the given dimensions (by name).
+	//	 *  
+	//	 * @param set an ArrayList of Strings with names of Dimensions
+	//	 * @return an ArrayList of Dimension objects
+	//	 */
+	//	public ArrayList<Dataset> findDatasetsWithDimensionNames(){
+	//		ArrayList<Dataset> toReturn = new ArrayList<Dataset>();
+	//
+	//		for(Dataset dataset : datasets){
+	//			int c = 0;
+	//			for(Dimension dimension : dataset.getDimensions()){
+	//				for(String dimensionName : queryInputs.keySet()){
+	//					if(dimension.getName().equals(dimensionName)){
+	//						c++;
+	//					}
+	//				}
+	//			}
+	//			if(c == queryInputs.keySet().size()){
+	//				toReturn.add(dataset);
+	//			}
+	//		}
+	//		return toReturn;
+	//	}
 
 	public Dataset findBestMatchDatasetForDimensionNames(){
 		//ArrayList<Dataset> datasetsWithDimensions = findDatasetsWithDimensionNames();
@@ -374,9 +391,9 @@ public class QueryBuilder {
 			if(toReturn == null){
 				toReturn = ds;
 			}
-			
+
 			int localMatches = 0;
-			
+
 			for(Dimension dim : ds.getDimensions()){
 				for(String dimensionName : queryInputs.keySet()){
 					if(dim.getName().equals(dimensionName)){
@@ -384,7 +401,7 @@ public class QueryBuilder {
 					}
 				}
 			}			
-			
+
 			if(localMatches > numMatches){
 				toReturn = ds;
 				numMatches = localMatches;
