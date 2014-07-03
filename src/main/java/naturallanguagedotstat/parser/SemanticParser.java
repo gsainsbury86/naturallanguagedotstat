@@ -442,7 +442,7 @@ public class SemanticParser {
 	public void parseText(){
 		String region = identifyASGSRegion(grammarParser.inputText);
 		if (region != null){
-			dimensions.put("region", region );
+		dimensions.put("Region", region );
 		};
 		
 		grammarParser.parseText();
@@ -522,7 +522,7 @@ public class SemanticParser {
 
 		// ...................................
 		
-		int c = (dimensions.containsKey("region")) ? 1 : 0;
+		int c = (dimensions.containsKey("Region")) ? 1 : 0;
 		
 		if(dimensions.containsKey("Country of Birth of Person") && dimensions.size() == c){
 			dimensions.put("Age","Total all ages");
@@ -550,7 +550,7 @@ public class SemanticParser {
 		};
 		
 		// if query does not have <Region>, set it to the default value of "Australia";
-		if(!dimensions.containsKey("region") ) {dimensions.put("region","Australia");};
+		if(!dimensions.containsKey("Region") ) {dimensions.put("Region","Australia");};
 	
 	}
 	

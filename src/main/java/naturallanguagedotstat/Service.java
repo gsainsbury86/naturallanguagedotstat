@@ -111,8 +111,6 @@ public class Service {
 	@Produces("application/json")
 	public Response query(@PathParam("query") String query) throws SQLException{
 
-
-
 		ArrayList<Dataset> datasets = null;
 		Dimension ASGS2011 = null;
 		JsonObject responseObject = null;
@@ -139,12 +137,12 @@ public class Service {
 
 				result = Utils.findObsValue(dataDocument);
 			}
+			
 
 			JsonBuilderFactory factory = Json.createBuilderFactory(null);
 			JsonObjectBuilder builder = factory.createObjectBuilder();
 			builder.add("result", result);
 			builder.add("url", urlToRead);
-			builder.add("Region",queryBuilder.getRegion());
 			for(String key : queryBuilder.getQueryInputs().keySet()){
 				JsonArrayBuilder jab = factory.createArrayBuilder();
 				for(String dimValue : queryBuilder.getQueryInputs().get(key)){
@@ -152,9 +150,7 @@ public class Service {
 				}
 				builder.add(key,jab);
 			}
-
 			responseObject = builder.build();
-
 
 		} catch(Exception e) {
 			responseCode = 500;

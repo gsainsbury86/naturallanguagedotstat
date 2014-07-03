@@ -3,12 +3,17 @@ package naturallanguagedotstat.test;
 import java.io.IOException;
 import java.io.StringReader;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
+import javax.ws.rs.core.Response;
 
+import naturallanguagedotstat.QueryBuilder;
 import naturallanguagedotstat.Service;
+import naturallanguagedotstat.model.Dataset;
+import naturallanguagedotstat.model.Dimension;
 
 public class LocalTest {
 
@@ -20,6 +25,7 @@ public class LocalTest {
 
 		debug = true;
 		localLoad = true;
+		test = true;
 
 
 		/* The following queries fail for various as it does not successfully identify the region....
@@ -30,17 +36,39 @@ public class LocalTest {
 		/*
 		 */
 
-		printQueryResult("What is the median income for families in Braidwood?") ;
+		//printQueryResult("How many men in Sandy Bay?") ;
+		printQueryResult("CPI") ;
+		
 
+//		Service s = new Service();
+//		
+//		ArrayList<Dataset> datasets = s.loadDatasets();
+//		
+//		Dataset ds = datasets.get(46);
+//		for(Dimension dim : ds.getDimensions()){
+//			System.out.println(dim);
+//		}
+		
+//		
+//		Service s = new Service();
+//		
+//		for(Dataset ds : s.loadDatasets()){
+//			System.out.println(ds.getName());
+//		}
 
 
 	}
 	
 	public static void printQueryResult( String str) throws IOException, ClassNotFoundException, SQLException{
 		Service service = new Service();
+		
+		Response res = service.query(str);
+		System.out.println(res);
 
-		JsonReader jsonReader = Json.createReader(new StringReader((String) service.query(str).getEntity()));
+
+		JsonReader jsonReader = Json.createReader(new StringReader((String) res.getEntity()));
 		JsonObject object = jsonReader.readObject();
+		System.out.println(object);
 		jsonReader.close();
 		System.out.println(object.getInt("result")+ " <-- " + str +"\n");
 	}

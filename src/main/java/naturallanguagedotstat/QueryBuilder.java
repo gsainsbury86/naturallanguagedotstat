@@ -24,10 +24,9 @@ public class QueryBuilder {
 	private Dimension ASGS2011;
 
 	private String query;
-	private String region;
 	private HashMap<String, ArrayList<String>> queryInputs;
 	public String getRegion() {
-		return region;
+		return queryInputs.get("Region").get(0);
 	}
 
 	public HashMap<String, ArrayList<String>> getQueryInputs() {
@@ -40,7 +39,7 @@ public class QueryBuilder {
 		this.query = query;
 		this.datasets = datasets;
 		this.ASGS2011 = ASGS2011;
-		
+
 		doAggregateAges = true;
 	}
 
@@ -52,9 +51,34 @@ public class QueryBuilder {
 		queryInputs = semanticParser.getDimensions();	
 
 		// System.out.println(queryInputs);
-		
-		region = queryInputs.get("region").get(0);
-		queryInputs.remove("region");
+
+		//TODO: put this somewhere sensible
+		// http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.10001.10.Q/ABS?startTime=2014&endTime=2014
+		if(query.contains("CPI")){
+
+			queryInputs = new HashMap<String, ArrayList<String>>();
+
+			ArrayList<String> a = new ArrayList<String>();
+			ArrayList<String> b = new ArrayList<String>();
+			ArrayList<String> c = new ArrayList<String>();
+			ArrayList<String> d = new ArrayList<String>();
+			ArrayList<String> e = new ArrayList<String>();
+
+			a.add("Index Numbers");
+			b.add("Weighted average of eight capital cities");
+			c.add("All groups CPI");
+			d.add("Original");
+			e.add("Quarterly");
+
+			queryInputs.put("Measure",a);
+			queryInputs.put("Region",b);
+			queryInputs.put("Index",c);
+			queryInputs.put("Adjustment Type",d);
+			queryInputs.put("Frequency",e);
+
+		}
+
+
 
 		Dataset dataset = findBestMatchDatasetForDimensionNames();
 
@@ -62,7 +86,10 @@ public class QueryBuilder {
 			getBestAgeCodeLists(queryInputs, dataset);
 		};
 
+
+
 		setDefaultsForMissingDimensions(queryInputs, dataset);
+
 
 		restfulURL = generateURL(dataset);
 		return restfulURL;
@@ -72,23 +99,39 @@ public class QueryBuilder {
 
 	private void setDefaultsForMissingDimensions(
 			HashMap<String, ArrayList<String>> queryInputs2, Dataset dataset) {
+
+
+		//TODO: neater
+		try{
+			if(dataset.getName().contains("ABS_CENSUS2011")){
+				ArrayList<String> freq = new ArrayList<String>();
+				freq.add("Annual");
+				queryInputs2.put("Frequency", freq);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+
+
+
 		for(Dimension dim : dataset.getDimensions()){
 			if(dim.getName().equals(AGE) && queryInputs2.get(AGE) == null){
 				ArrayList<String> list = new ArrayList<String>();
 				list.add("Total all ages");
 				queryInputs2.put(AGE, list);
 				if(dataset.getName().equals("ABS_CENSUS2011_B20")  
-				|| dataset.getName().equals("ABS_CENSUS2011_B21")  
-				|| dataset.getName().equals("ABS_CENSUS2011_B40") 
-				|| dataset.getName().equals("ABS_CENSUS2011_B41") 
-				|| dataset.getName().equals("ABS_CENSUS2011_B42") 
-				|| dataset.getName().equals("ABS_CENSUS2011_B43") 
+						|| dataset.getName().equals("ABS_CENSUS2011_B21")  
+						|| dataset.getName().equals("ABS_CENSUS2011_B40") 
+						|| dataset.getName().equals("ABS_CENSUS2011_B41") 
+						|| dataset.getName().equals("ABS_CENSUS2011_B42") 
+						|| dataset.getName().equals("ABS_CENSUS2011_B43") 
 						){
 					ArrayList<String> list2 = new ArrayList<String>();
 					list2.add("15 years and over");
 					queryInputs2.put(AGE, list2);
 				};
-				
+
 			};
 
 			if(dim.getName().equals(SEX) && queryInputs2.get(SEX) == null){
@@ -109,87 +152,87 @@ public class QueryBuilder {
 		int a1 = (ageQueryParser.getExplicitNumbers().size() >1) 
 				? Integer.parseInt(ageQueryParser.getExplicitNumbers().get(1) ) : -1;
 
-		HashMap<String, String> ageCodeList = null;
-		for(Dimension dim : dataset.getDimensions()){
-			if(dim.getName().equals(AGE)){
-				ageCodeList = dim.getCodelist();
-			};
-		};
-
-		List<String> ageCodeListDescriptions = new ArrayList<String>(ageCodeList.values());
-
-		HashMap< String, Double> matches = new HashMap< String, Double>();
-
-		Double overlapScore;
-		for (String descr: ageCodeListDescriptions){
-			NumericParser ageDescriptionParser = new NumericParser(descr);
-
-			int b0 = (ageDescriptionParser.getExplicitNumbers().size() >0) 
-					? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(0) ) : -1;
-
-			int b1 = (ageDescriptionParser.getExplicitNumbers().size() >1) 
-							? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) ) : -1;
-
-			if(ageDescriptionParser.getExplicitNumbers().size() >1){
-				String comparatorDescriptor = ageDescriptionParser.comparatorAsString (ageDescriptionParser.getComparator() );
-
-				if (comparatorDescriptor.equals("∈") )
-					b1 = Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) );
-				
-				if (comparatorDescriptor.equals(">") )
-					b1 = 999;
-				
-				if (comparatorDescriptor.equals("<") ){
-					b1 = b0;
-					b0 = 0;
+				HashMap<String, String> ageCodeList = null;
+				for(Dimension dim : dataset.getDimensions()){
+					if(dim.getName().equals(AGE)){
+						ageCodeList = dim.getCodelist();
+					};
 				};
-			}
 
-		
-			overlapScore =  getOverlapScore(a0, a1, b0, b1);
-			matches.put(descr, overlapScore);
-			ageDescriptionParser = null;
-		};
+				List<String> ageCodeListDescriptions = new ArrayList<String>(ageCodeList.values());
 
-		ArrayList<String> list = new ArrayList<String>();
-		Double scoreMax = matches.get(getKeyForMaxValue(matches) );
+				HashMap< String, Double> matches = new HashMap< String, Double>();
 
-		double epsilon = 0.000001;
-		for (String descr: ageCodeListDescriptions){
-			if(Math.abs(matches.get(descr) - scoreMax ) < epsilon ){
-				list.add(descr);
-			}
-		}
+				Double overlapScore;
+				for (String descr: ageCodeListDescriptions){
+					NumericParser ageDescriptionParser = new NumericParser(descr);
 
-		// Treat B04 differently as it is the only dataset with hierarchical age ranges.
-		if(doAggregateAges && dataset.getName().equals("ABS_CENSUS2011_B04")){
-		    for (Iterator<String> iter = list.iterator(); iter.hasNext();) {
-		        String s = iter.next();
-			    if (!isNumber(s) ) 
-			       iter.remove();
-		    };
-		};
-			
-		// System.out.println("Matched AGE intervals are:" + list);
-		queryInputs2.put(AGE, list);
+					int b0 = (ageDescriptionParser.getExplicitNumbers().size() >0) 
+							? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(0) ) : -1;
+
+							int b1 = (ageDescriptionParser.getExplicitNumbers().size() >1) 
+									? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) ) : -1;
+
+									if(ageDescriptionParser.getExplicitNumbers().size() >1){
+										String comparatorDescriptor = ageDescriptionParser.comparatorAsString (ageDescriptionParser.getComparator() );
+
+										if (comparatorDescriptor.equals("∈") )
+											b1 = Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) );
+
+										if (comparatorDescriptor.equals(">") )
+											b1 = 999;
+
+										if (comparatorDescriptor.equals("<") ){
+											b1 = b0;
+											b0 = 0;
+										};
+									}
+
+
+									overlapScore =  getOverlapScore(a0, a1, b0, b1);
+									matches.put(descr, overlapScore);
+									ageDescriptionParser = null;
+				};
+
+				ArrayList<String> list = new ArrayList<String>();
+				Double scoreMax = matches.get(getKeyForMaxValue(matches) );
+
+				double epsilon = 0.000001;
+				for (String descr: ageCodeListDescriptions){
+					if(Math.abs(matches.get(descr) - scoreMax ) < epsilon ){
+						list.add(descr);
+					}
+				}
+
+				// Treat B04 differently as it is the only dataset with hierarchical age ranges.
+				if(doAggregateAges && dataset.getName().equals("ABS_CENSUS2011_B04")){
+					for (Iterator<String> iter = list.iterator(); iter.hasNext();) {
+						String s = iter.next();
+						if (!isNumber(s) ) 
+							iter.remove();
+					};
+				};
+
+				// System.out.println("Matched AGE intervals are:" + list);
+				queryInputs2.put(AGE, list);
 	}
 
 	private boolean isNumber(String aString)
 	{
 		try {
-	        Integer.parseInt( aString );
-	        return true;
-	    }
-	    catch( Exception e ) {
-	        return false;
-	    }
+			Integer.parseInt( aString );
+			return true;
+		}
+		catch( Exception e ) {
+			return false;
+		}
 	};
-	
+
 	private Double getOverlapScore(int a0, int a1, int b0, int b1) {
 		//if both query and codelist are null
 		if (a0==-1 || b0 ==-1) 
 			return -1.0;
-		
+
 		//if both query and codelist are single-valued
 		if(a1 ==-1  && b1 == -1){
 			if(a0==b0){
@@ -208,7 +251,7 @@ public class QueryBuilder {
 		if(a1 != -1 && b1==-1){
 			if (!doAggregateAges)
 				return -1.0;
-			
+
 			if(a0 <= b0 && b0 <= a1){
 				return +1.0; //perfect element match .
 			};
@@ -244,16 +287,28 @@ public class QueryBuilder {
 		url += "/restsdmx/sdmx.ashx/GetData/";
 
 		url += ds.getName()+"/";
-		
-//		System.out.println(queryInputs);
+
+		//		System.out.println(queryInputs);
 
 		/* ensure order */
 		for(Dimension dim : ds.getDimensions()){
 			for(String dimKey : queryInputs.keySet()){
 				if(dim.getName().equals(dimKey)){
 					for(String str: queryInputs.get(dimKey)){
-						// TODO: url+=str + "+";
-						url += Utils.findValue(dim.getCodelist(),str) + "+";
+
+						if(str.equals("Region")){
+							//TODO: String regionCode = region;
+							String regionCode = Utils.findValue(ASGS2011.getCodelist(), str);
+							String stateCode = regionCode.substring(0,1);
+							String regionType = regionTypeForRegionCode(regionCode);
+
+							url += stateCode + ".";
+							url += regionType + ".";
+							url += regionCode + ".";
+						}else{
+							// TODO: url+=str + "+";
+							url += Utils.findValue(dim.getCodelist(),str) + "+";
+						}
 					}
 					url = url.substring(0,url.length()-1);
 					url+= ".";
@@ -261,20 +316,11 @@ public class QueryBuilder {
 			}
 		}
 
-		//TODO: String regionCode = region;
-		String regionCode = Utils.findValue(ASGS2011.getCodelist(), region);
-		String stateCode = regionCode.substring(0,1);
-		String regionType = regionTypeForRegionCode(regionCode);
 
-		url += stateCode + ".";
-		url += regionType + ".";
-		url += regionCode + ".";
-		url += "A";
-
+		url = url.substring(0,url.length()-1);
 		url += "/ABS";
 
-//		System.out.println(url);
-		
+
 		return url;
 	}
 
