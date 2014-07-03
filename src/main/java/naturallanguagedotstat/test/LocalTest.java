@@ -37,7 +37,12 @@ public class LocalTest {
 		 */
 
 		//printQueryResult("How many men in Sandy Bay?") ;
-		printQueryResult("CPI") ;
+//		printQueryResult("How many men aged 35-40 years in Moonah work in agriculture?") ;
+//		printQueryResult("How many men in Sandy Bay?") ;
+//		printQueryResult("CPI") ;
+
+		
+		printQueryResult("What is the current CPI?");
 		
 
 //		Service s = new Service();
@@ -63,14 +68,12 @@ public class LocalTest {
 		Service service = new Service();
 		
 		Response res = service.query(str);
-		System.out.println(res);
 
 
 		JsonReader jsonReader = Json.createReader(new StringReader((String) res.getEntity()));
 		JsonObject object = jsonReader.readObject();
-		System.out.println(object);
 		jsonReader.close();
-		System.out.println(object.getInt("result")+ " <-- " + str +"\n");
+		System.out.println(object);//.getInt("result")+ " <-- " + str +"\n");
 	}
 
 }

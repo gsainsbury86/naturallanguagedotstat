@@ -41,11 +41,11 @@ public class UnitTester {
 
 		for(int i = 0; i < TEST_QUERIES.length; i++){
 			 System.out.println("Testing: ("+(i+1)+ "/"+TEST_QUERIES.length +"): "+ TEST_QUERIES[i]);
-
+				
 			JsonReader jsonReader = Json.createReader(new StringReader((String) service.query(TEST_QUERIES[i]).getEntity()));
 			JsonObject object = jsonReader.readObject();
 			jsonReader.close();
-			
+						
 			collector.checkThat(TEST_QUERIES[i], object.getString("url"), is(TEST_RESULTS[i]));
 		}
 		System.out.println("Functional tests are now complete.");
@@ -287,7 +287,10 @@ public class UnitTester {
 		"How many 20-25 year old females in Tasmania are professionals?", 
 		"How many 20-25 year old women in Sandy Bay are technicians?", 
 		"How many women aged 20-25 in Cooma are community workers?", 
-		"How many women aged 20-25 in Karabar are labourers?"
+		"How many women aged 20-25 in Karabar are labourers?",
+		
+		//CPI
+		"What is the current CPI?"
 	};
 
 	private static final String[] TEST_RESULTS = {	
@@ -514,6 +517,8 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/A20.2.4.1.SA2.101031014.A/ABS", 	//How many women aged 20-25 in Cooma are community workers?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/A20.2.8.1.SA2.101021008.A/ABS", 	//How many women aged 20-25 in Karabar are labourers?
 
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.10001.10.Q/ABS" // "What is the current CPI?
+		
 
 	};
 }

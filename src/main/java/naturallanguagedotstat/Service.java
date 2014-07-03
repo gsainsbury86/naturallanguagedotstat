@@ -128,7 +128,7 @@ public class Service {
 			urlToRead = queryBuilder.build();
 
 			String data = null;
-			int result = -1;
+			double result = -1;
 
 			if(!LocalTest.test){
 				data = Utils.httpGET(urlToRead);

@@ -78,10 +78,8 @@ public class QueryBuilder {
 
 		}
 
-
-
 		Dataset dataset = findBestMatchDatasetForDimensionNames();
-
+		
 		if(queryInputs.containsKey(AGE)){
 			getBestAgeCodeLists(queryInputs, dataset);
 		};
@@ -89,6 +87,10 @@ public class QueryBuilder {
 
 
 		setDefaultsForMissingDimensions(queryInputs, dataset);
+		
+		if(dataset.getName().contains("CENSUS")){
+			queryInputs.remove("State");
+		}
 
 
 		restfulURL = generateURL(dataset);
@@ -290,13 +292,15 @@ public class QueryBuilder {
 
 		//		System.out.println(queryInputs);
 
+
 		/* ensure order */
 		for(Dimension dim : ds.getDimensions()){
 			for(String dimKey : queryInputs.keySet()){
 				if(dim.getName().equals(dimKey)){
 					for(String str: queryInputs.get(dimKey)){
+						
 
-						if(str.equals("Region")){
+						if(dimKey.equals("Region") && ds.getName().contains("CENSUS")){
 							//TODO: String regionCode = region;
 							String regionCode = Utils.findValue(ASGS2011.getCodelist(), str);
 							String stateCode = regionCode.substring(0,1);
@@ -336,41 +340,54 @@ public class QueryBuilder {
 		return keyForMaxValue;
 	};
 
-	/**
-	 * Find a list of Datasets which contain the given dimensions (by name).
-	 *  
-	 * @param set an ArrayList of Strings with names of Dimensions
-	 * @return an ArrayList of Dimension objects
-	 */
-	public ArrayList<Dataset> findDatasetsWithDimensionNames(){
-		ArrayList<Dataset> toReturn = new ArrayList<Dataset>();
-
-		for(Dataset dataset : datasets){
-			int c = 0;
-			for(Dimension dimension : dataset.getDimensions()){
-				for(String dimensionName : queryInputs.keySet()){
-					if(dimension.getName().equals(dimensionName)){
-						c++;
-					}
-				}
-			}
-			if(c == queryInputs.keySet().size()){
-				toReturn.add(dataset);
-			}
-		}
-		return toReturn;
-	}
+//	/**
+//	 * Find a list of Datasets which contain the given dimensions (by name).
+//	 *  
+//	 * @param set an ArrayList of Strings with names of Dimensions
+//	 * @return an ArrayList of Dimension objects
+//	 */
+//	public ArrayList<Dataset> findDatasetsWithDimensionNames(){
+//		ArrayList<Dataset> toReturn = new ArrayList<Dataset>();
+//
+//		for(Dataset dataset : datasets){
+//			int c = 0;
+//			for(Dimension dimension : dataset.getDimensions()){
+//				for(String dimensionName : queryInputs.keySet()){
+//					if(dimension.getName().equals(dimensionName)){
+//						c++;
+//					}
+//				}
+//			}
+//			if(c == queryInputs.keySet().size()){
+//				toReturn.add(dataset);
+//			}
+//		}
+//		return toReturn;
+//	}
 
 	public Dataset findBestMatchDatasetForDimensionNames(){
-		ArrayList<Dataset> datasetsWithDimensions = findDatasetsWithDimensionNames();
+		//ArrayList<Dataset> datasetsWithDimensions = findDatasetsWithDimensionNames();
 
 		Dataset toReturn = null;
-		for(Dataset ds : datasetsWithDimensions){
+		int numMatches = 0;
+		for(Dataset ds : datasets){
 			if(toReturn == null){
 				toReturn = ds;
 			}
-			if(ds.getDimensions().size() < toReturn.getDimensions().size()){
+			
+			int localMatches = 0;
+			
+			for(Dimension dim : ds.getDimensions()){
+				for(String dimensionName : queryInputs.keySet()){
+					if(dim.getName().equals(dimensionName)){
+						localMatches++;
+					}
+				}
+			}			
+			
+			if(localMatches > numMatches){
 				toReturn = ds;
+				numMatches = localMatches;
 			}
 		};
 		return toReturn;
