@@ -293,7 +293,7 @@ public class UnitTester {
 		"What is the current CPI?"
 	};
 
-	private static final String[] TEST_RESULTS = {	
+	private static final String[] TEST_RESULTS = {
 		
 		//B02
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.0.AUS.0.A/ABS?startTime=2011&endTime=2011",			//	printQueryResult("What's median age for people in Australia?") ; // 37

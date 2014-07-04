@@ -26,7 +26,7 @@ public class QueryBuilder {
 
 	private String query;
 	private HashMap<String, ArrayList<String>> queryInputs;
-	
+
 	public String getRegion() {
 		return queryInputs.get("Region").get(0);
 	}
@@ -85,9 +85,9 @@ public class QueryBuilder {
 
 		setDefaultsForMissingDimensions(queryInputs, dataset);
 
-//		if(dataset.getName().contains("CENSUS")){
-//			queryInputs.remove("State");
-//		}
+		//		if(dataset.getName().contains("CENSUS")){
+		//			queryInputs.remove("State");
+		//		}
 
 		restfulURL = generateURL(dataset);
 		return restfulURL;
@@ -99,43 +99,43 @@ public class QueryBuilder {
 		//TODO: New way of dealing with CENSUS datasets.
 		// this should probably be a better check.
 		/* Manually add frequency key/value */
-			if(dataset.getName().contains("ABS_CENSUS2011")){
-				ArrayList<String> freq = new ArrayList<String>();
-				freq.add("Annual");
-				queryInputs2.put("Frequency", freq);
-			}
-			
-			if(dataset.getName().contains("ABS_CENSUS2011")){
-				String regionCode = Utils.findValue(ASGS2011.getCodelist(), queryInputs.get("Region").get(0));
-				String stateCode = regionCode.substring(0,1);
-				String regionType = regionTypeForRegionCode(regionCode);
+		if(dataset.getName().contains("ABS_CENSUS2011")){
+			ArrayList<String> freq = new ArrayList<String>();
+			freq.add("Annual");
+			queryInputs2.put("Frequency", freq);
+		}
 
-				ArrayList<String> stateList = new ArrayList<String>();
-				
-				Dimension state = null;
-				for(Dimension dim : dataset.getDimensions()){
-					if(dim.getName().equals("State")){
-						state = dim;
-					}
-				}
-				
-				stateList.add(state.getCodelist().get(stateCode));
-				
-				Dimension regionTypeDim = null;
-				for(Dimension dim : dataset.getDimensions()){
-					if(dim.getName().equals("Region Type")){
-						regionTypeDim = dim;
-					}
-				}
+		if(dataset.getName().contains("ABS_CENSUS2011")){
+			String regionCode = Utils.findValue(ASGS2011.getCodelist(), queryInputs.get("Region").get(0));
+			String stateCode = regionCode.substring(0,1);
+			String regionType = regionTypeForRegionCode(regionCode);
 
-				ArrayList<String> regionTypeList = new ArrayList<String>();
-				regionTypeList.add(regionTypeDim.getCodelist().get(regionType));
-				
-				queryInputs.put("State",stateList);
-				queryInputs.put("Region Type", regionTypeList);
+			ArrayList<String> stateList = new ArrayList<String>();
+
+			Dimension state = null;
+			for(Dimension dim : dataset.getDimensions()){
+				if(dim.getName().equals("State")){
+					state = dim;
+				}
 			}
-			
-		
+
+			stateList.add(state.getCodelist().get(stateCode));
+
+			Dimension regionTypeDim = null;
+			for(Dimension dim : dataset.getDimensions()){
+				if(dim.getName().equals("Region Type")){
+					regionTypeDim = dim;
+				}
+			}
+
+			ArrayList<String> regionTypeList = new ArrayList<String>();
+			regionTypeList.add(regionTypeDim.getCodelist().get(regionType));
+
+			queryInputs.put("State",stateList);
+			queryInputs.put("Region Type", regionTypeList);
+		}
+
+
 
 		for(Dimension dim : dataset.getDimensions()){
 			if(dim.getName().equals(AGE) && queryInputs2.get(AGE) == null){
@@ -162,6 +162,26 @@ public class QueryBuilder {
 				queryInputs2.put(SEX, list3);
 			};
 		};
+
+
+		/* ensure no extraneous dimensions */
+		ArrayList<String> dimList = new ArrayList<String>();
+		for(Dimension dim : dataset.getDimensions()){
+			dimList.add(dim.getName());
+		}
+
+		ArrayList<String> toRemove = new ArrayList<String>();
+
+		for(String dimName : queryInputs.keySet()){
+			if(!dimList.contains(dimName)){
+				toRemove.add(dimName);
+			}
+		}
+
+		for(String rem : toRemove){
+			queryInputs.remove(rem);
+		}
+
 	}
 
 	private void getBestAgeCodeLists(HashMap<String, ArrayList<String>> queryInputs2, Dataset dataset) {
@@ -309,14 +329,14 @@ public class QueryBuilder {
 		url += "/restsdmx/sdmx.ashx/GetData/";
 
 		url += ds.getName()+"/";
-		
-		
-		
-		
+
+
+
+
 
 		/* ensure order */
 		for(Dimension dim : ds.getDimensions()){
-			
+
 
 			for(String dimKey : queryInputs.keySet()){
 				if(dim.getName().equals(dimKey)){
@@ -389,6 +409,7 @@ public class QueryBuilder {
 			for(Dimension dim : ds.getDimensions()){
 				for(String dimensionName : queryInputs.keySet()){
 					if(dim.getName().equals(dimensionName)){
+						//System.out.println(ds.getName() + dim.getName() + dimensionName);
 						localMatches++;
 					}
 				}
