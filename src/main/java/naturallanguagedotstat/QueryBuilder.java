@@ -26,6 +26,7 @@ public class QueryBuilder {
 
 	private String query;
 	private HashMap<String, ArrayList<String>> queryInputs;
+	
 	public String getRegion() {
 		return queryInputs.get("Region").get(0);
 	}
@@ -51,10 +52,7 @@ public class QueryBuilder {
 
 		queryInputs = semanticParser.getDimensions();	
 
-		// System.out.println(queryInputs);
-
-		//TODO: put this somewhere sensible
-		// http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.10001.10.Q/ABS?startTime=2014&endTime=2014
+		//TODO: hijack queryInputs for CPI
 		if(query.contains("CPI")){
 
 			queryInputs = new HashMap<String, ArrayList<String>>();
@@ -77,7 +75,7 @@ public class QueryBuilder {
 			queryInputs.put("Adjustment Type",d);
 			queryInputs.put("Frequency",e);
 
-		}
+		}/* end CPI hijack */
 
 		Dataset dataset = findBestMatchDatasetForDimensionNames();
 
@@ -85,38 +83,59 @@ public class QueryBuilder {
 			getBestAgeCodeLists(queryInputs, dataset);
 		};
 
-
-
 		setDefaultsForMissingDimensions(queryInputs, dataset);
 
-		if(dataset.getName().contains("CENSUS")){
-			queryInputs.remove("State");
-		}
-
+//		if(dataset.getName().contains("CENSUS")){
+//			queryInputs.remove("State");
+//		}
 
 		restfulURL = generateURL(dataset);
 		return restfulURL;
-
-
 	}
 
 	private void setDefaultsForMissingDimensions(
 			HashMap<String, ArrayList<String>> queryInputs2, Dataset dataset) {
 
-
-		//TODO: neater
-		try{
+		//TODO: New way of dealing with CENSUS datasets.
+		// this should probably be a better check.
+		/* Manually add frequency key/value */
 			if(dataset.getName().contains("ABS_CENSUS2011")){
 				ArrayList<String> freq = new ArrayList<String>();
 				freq.add("Annual");
 				queryInputs2.put("Frequency", freq);
 			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+			
+			if(dataset.getName().contains("ABS_CENSUS2011")){
+				String regionCode = Utils.findValue(ASGS2011.getCodelist(), queryInputs.get("Region").get(0));
+				String stateCode = regionCode.substring(0,1);
+				String regionType = regionTypeForRegionCode(regionCode);
 
+				ArrayList<String> stateList = new ArrayList<String>();
+				
+				Dimension state = null;
+				for(Dimension dim : dataset.getDimensions()){
+					if(dim.getName().equals("State")){
+						state = dim;
+					}
+				}
+				
+				stateList.add(state.getCodelist().get(stateCode));
+				
+				Dimension regionTypeDim = null;
+				for(Dimension dim : dataset.getDimensions()){
+					if(dim.getName().equals("Region Type")){
+						regionTypeDim = dim;
+					}
+				}
 
-
+				ArrayList<String> regionTypeList = new ArrayList<String>();
+				regionTypeList.add(regionTypeDim.getCodelist().get(regionType));
+				
+				queryInputs.put("State",stateList);
+				queryInputs.put("Region Type", regionTypeList);
+			}
+			
+		
 
 		for(Dimension dim : dataset.getDimensions()){
 			if(dim.getName().equals(AGE) && queryInputs2.get(AGE) == null){
@@ -290,28 +309,22 @@ public class QueryBuilder {
 		url += "/restsdmx/sdmx.ashx/GetData/";
 
 		url += ds.getName()+"/";
-
-		//		System.out.println(queryInputs);
-
+		
+		
+		
+		
 
 		/* ensure order */
 		for(Dimension dim : ds.getDimensions()){
+			
+
 			for(String dimKey : queryInputs.keySet()){
 				if(dim.getName().equals(dimKey)){
 					for(String str: queryInputs.get(dimKey)){
-
-
 						if(dimKey.equals("Region") && ds.getName().contains("CENSUS")){
-							//TODO: String regionCode = region;
 							String regionCode = Utils.findValue(ASGS2011.getCodelist(), str);
-							String stateCode = regionCode.substring(0,1);
-							String regionType = regionTypeForRegionCode(regionCode);
-
-							url += stateCode + ".";
-							url += regionType + ".";
 							url += regionCode + ".";
 						}else{
-							// TODO: url+=str + "+";
 							url += Utils.findValue(dim.getCodelist(),str) + "+";
 						}
 					}
@@ -325,14 +338,11 @@ public class QueryBuilder {
 		url = url.substring(0,url.length()-1);
 		url += "/ABS";
 
-		//TODO: Add one for end time and make better
+		//TODO: Add one for end time and have some better decision making
 		url += "?startTime=";
 		url += findStartTime(ds.getTimeDimension());
 		url += "&endTime=";
 		url += findStartTime(ds.getTimeDimension());
-
-
-
 
 		return url;
 	}
@@ -357,33 +367,15 @@ public class QueryBuilder {
 		return keyForMaxValue;
 	};
 
-	//	/**
-	//	 * Find a list of Datasets which contain the given dimensions (by name).
-	//	 *  
-	//	 * @param set an ArrayList of Strings with names of Dimensions
-	//	 * @return an ArrayList of Dimension objects
-	//	 */
-	//	public ArrayList<Dataset> findDatasetsWithDimensionNames(){
-	//		ArrayList<Dataset> toReturn = new ArrayList<Dataset>();
-	//
-	//		for(Dataset dataset : datasets){
-	//			int c = 0;
-	//			for(Dimension dimension : dataset.getDimensions()){
-	//				for(String dimensionName : queryInputs.keySet()){
-	//					if(dimension.getName().equals(dimensionName)){
-	//						c++;
-	//					}
-	//				}
-	//			}
-	//			if(c == queryInputs.keySet().size()){
-	//				toReturn.add(dataset);
-	//			}
-	//		}
-	//		return toReturn;
-	//	}
 
+	//TODO: This has fundamentally changed. The "best" dataset
+	// is now the one for which there is the highest number of matches
+	// this means that if you had 5 dimensions identified of which 4
+	// were in one dataset and 3 of those 4 and the 5th were in another
+	// dataset, it will just pick the first one is finds, rather than
+	// breaking. It may make more sense to return an error when too
+	// many selectors are specified.
 	public Dataset findBestMatchDatasetForDimensionNames(){
-		//ArrayList<Dataset> datasetsWithDimensions = findDatasetsWithDimensionNames();
 
 		Dataset toReturn = null;
 		int numMatches = 0;

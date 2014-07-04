@@ -27,44 +27,7 @@ public class LocalTest {
 		localLoad = true;
 		test = true;
 
-
-		/* The following queries fail for various as it does not successfully identify the region....
-		
-		*/
-
-		// The following queries are correct and now should be moved to UnitTester 
-		/*
-		 */
-
-		//printQueryResult("How many men in Sandy Bay?") ;
-//		printQueryResult("How many men aged 35-40 years in Moonah work in agriculture?") ;
-//		printQueryResult("How many men in Sandy Bay?") ;
-		printQueryResult("CPI") ;
-
-		
-		//printQueryResult("What is the current CPI?");
-		
-
-//		Service s = new Service();
-////		
-//		ArrayList<Dataset> datasets = s.loadDatasets();
-//		
-//		for(Dataset ds: datasets){
-//			System.out.println(ds.getTimeDimension());
-//		}
-//		
-//		Dataset ds = datasets.get(46);
-//		for(Dimension dim : ds.getDimensions()){
-//			System.out.println(dim);
-//		}
-		
-//		
-//		Service s = new Service();
-//		
-//		for(Dataset ds : s.loadDatasets()){
-//			System.out.println(ds.getName());
-//		}
-
+		printQueryResult("Number of women in Australia born in Australia?") ;
 
 	}
 	

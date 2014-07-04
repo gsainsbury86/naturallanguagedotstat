@@ -87,6 +87,7 @@ public class Utils {
 		return null;
 	}
 
+	//TODO: Change this so that it only aggregates when its supposed to.
 	public static double findObsValue(Document document) {
 		double c = 0;
 		NodeList nodeList = document.getElementsByTagName("ObsValue");

@@ -106,6 +106,7 @@ public class Service {
 
 	}
 
+	//TODO: Change this to a POST. No rush here though.
 	@GET
 	@Path("/query/{query}")
 	@Produces("application/json")
