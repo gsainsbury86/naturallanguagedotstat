@@ -136,12 +136,8 @@ public class QueryBuilder {
 		}
 
 
-
 		for(Dimension dim : dataset.getDimensions()){
 			if(dim.getName().equals(AGE) && queryInputs2.get(AGE) == null){
-				ArrayList<String> list = new ArrayList<String>();
-				list.add("Total all ages");
-				queryInputs2.put(AGE, list);
 				if(dataset.getName().equals("ABS_CENSUS2011_B20")  
 						|| dataset.getName().equals("ABS_CENSUS2011_B21")  
 						|| dataset.getName().equals("ABS_CENSUS2011_B40") 
@@ -161,8 +157,13 @@ public class QueryBuilder {
 				list3.add("Persons");
 				queryInputs2.put(SEX, list3);
 			};
+
+
 		};
 
+		setDefaultValueForDimension(dataset, "Age", "Total all ages");
+		setDefaultValueForDimension(dataset, "Sex", "Persons");
+		setDefaultValueForDimension(dataset, "Selected Person Characteristics", "Total persons");
 
 		/* ensure no extraneous dimensions */
 		ArrayList<String> dimList = new ArrayList<String>();
@@ -182,6 +183,16 @@ public class QueryBuilder {
 			queryInputs.remove(rem);
 		}
 
+	}
+
+	private void setDefaultValueForDimension(Dataset dataset, String dimName, String dimValue) {
+		for(Dimension dim : dataset.getDimensions()){
+			if(dim.getName().equals(dimName) && queryInputs.get(dimName) == null){
+				ArrayList<String> list = new ArrayList<String>();
+				list.add(dimValue);
+				queryInputs.put(dimName, list);
+			};
+		};
 	}
 
 	private void getBestAgeCodeLists(HashMap<String, ArrayList<String>> queryInputs2, Dataset dataset) {

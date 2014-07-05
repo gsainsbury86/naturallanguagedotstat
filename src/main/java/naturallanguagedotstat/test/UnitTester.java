@@ -321,7 +321,7 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B03/T15.1.1.SA2.101041023.A/ABS?startTime=2011&endTime=2011",	//	printQueryResult("how many people were aged 15-20 were at home on the night of the Census in Eden");	//321
 
 		//B04
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.0.AUS.0.A/ABS?startTime=2011&endTime=2011",					//What is the population of Australia?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B01/3.TT.0.AUS.0.A/ABS?startTime=2011&endTime=2011", //	"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.0.AUS.0.A/ABS?startTime=2011&endTime=2011",					//What is the population of Australia?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", 			//What is the population of Goulburn?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", 			//How many people live in Goulburn?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", 			//Population of Goulburn?

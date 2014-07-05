@@ -92,10 +92,12 @@ public class Utils {
 		double c = 0;
 		NodeList nodeList = document.getElementsByTagName("ObsValue");
 		if(nodeList.getLength() == 0){
+			System.out.println("No ObsVAlue in SDMX response.");
 			throw new NullPointerException("No ObsValue in SDMX response.");
 		}
 	    for (int i = 0; i < nodeList.getLength(); i++) {
 	        Node node = nodeList.item(i);
+			System.out.println("value: "+Double.parseDouble(node.getAttributes().getNamedItem("value").getNodeValue()));
 			c += Double.parseDouble(node.getAttributes().getNamedItem("value").getNodeValue());
 		}
 		return c;

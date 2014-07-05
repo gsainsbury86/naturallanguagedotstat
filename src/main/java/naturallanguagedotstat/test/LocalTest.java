@@ -27,7 +27,7 @@ public class LocalTest {
 		localLoad = true;
 		test = true;
 
-		printQueryResult("How many men are Baptist?") ;
+		printQueryResult("What is the population of Australia?") ;
 
 	}
 	
