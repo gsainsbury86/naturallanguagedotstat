@@ -54,7 +54,7 @@ public class SemanticParser {
 		for(Dataset dataset : datasets){
 			for(Dimension dim : dataset.getDimensions() ){
 				HashMap<String, String> map = dim.getCodelist();
-				if (!dim.getName().equals("Age")  && map != null) {
+				if (!dim.getName().equals("Age") &&  !dim.getName().equals("Region Type") &&  !dim.getName().equals("State")   && map != null) {
 					for(String key : map.keySet()){
 						flatCodeList.put(map.get(key), dim.getName() );
 					}
@@ -173,15 +173,18 @@ public class SemanticParser {
 		synonyms.put("Christianity","Christianity total");
 		synonyms.put("Anglicans","Anglican");
 		synonyms.put("Assyrian Apostolics","Assyrian Apostolic");
-		synonyms.put("Baptist","Baptist");
+		synonyms.put("apostolic","Assyrian Apostolic");
+		synonyms.put("apostolics","Assyrian Apostolic");
+		synonyms.put("Baptists","Baptist");
 		synonyms.put("Catholics","Catholic");// note that the word "Catholic" is in B14 and B15
 		synonyms.put("Catholicism","Catholic");// note that the word "English" is in B14 and B15
 		synonyms.put("Church of Christ","Churches of Christ");
 		synonyms.put("Witnesses","Jehovah's Witnesses");
-		synonyms.put("Latter Day saints","Latter-day Saints");
+		synonyms.put("Latter Day","Latter-day Saints");
 		synonyms.put("Mormons","Latter-day Saints");
 		synonyms.put("Lutherans","Lutheran");
 		synonyms.put("Pentecostals","Pentecostal");
+		synonyms.put("Presbyterian","Presbyterian and Reformed");
 		synonyms.put("Presbyterians","Presbyterian and Reformed");
 		synonyms.put("Adventist","Seventh-day Adventist");
 		synonyms.put("Adventists","Seventh-day Adventist");
@@ -389,7 +392,6 @@ public class SemanticParser {
 
 		for(String phrase: phrases){
 			words = phrase.split("[\\s]+"); 
-
 			// (Note that this code block currently assumes that all numeric data with str corresponds to the age dimension)
 			numericalString = getNumericString(words);
 			if(numericalString.length() > 0){
@@ -447,7 +449,6 @@ public class SemanticParser {
 		
 		grammarParser.parseText();
 		identifyDimensions(grammarParser.keyPhrases);
-		// System.out.println(dimensions);
 		cleanUpDimensions();
 
 	}
@@ -481,8 +482,7 @@ public class SemanticParser {
 		};
 
 		
-		if(!grammarParser.inputText.contains("born") &&	!grammarParser.inputText.contains("birth") 
-				&& !grammarParser.inputText.contains("from") 
+		if(!grammarParser.inputText.contains("born") &&	!grammarParser.inputText.contains("birth") && !grammarParser.inputText.contains("from") 
 				&& dimensions.containsKey("Country of Birth of Person") ){
 			dimensions.remove("Country of Birth of Person");
 		};

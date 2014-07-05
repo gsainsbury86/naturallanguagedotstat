@@ -27,7 +27,7 @@ public class LocalTest {
 		localLoad = true;
 		test = true;
 
-		printQueryResult("What is the population of Australia?") ;
+		printQueryResult("Number of women born in Australia from Sandy Bay?") ;
 
 	}
 	
