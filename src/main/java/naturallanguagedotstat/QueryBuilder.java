@@ -79,10 +79,10 @@ public class QueryBuilder {
 		
 		//Begin MEI defaults
 		setDefaultRegionForCPI(dataset);
-		setDefaultValueForDimension(dataset, "Measure", 		"Index Numbers"); 								// CPI
+		setDefaultValueForDimension(dataset, "Measure", 		"Percentage Change from Previous Period"); 		// CPI
 		setDefaultValueForDimension(dataset, "Region", 			"Weighted average of eight capital cities"); 	// CPI
 		setDefaultValueForDimension(dataset, "Index", 			"All groups CPI"); 								// CPI
-		setDefaultValueForDimension(dataset, "Adjustment Type", "Seasonally Adjusted");							// CPI
+		setDefaultValueForDimension(dataset, "Adjustment Type", "Original");									// CPI
 		setDefaultValueForDimension(dataset, "Frequency", 		"Quarterly");									// CPI
 	}
 
@@ -90,31 +90,32 @@ public class QueryBuilder {
 		if(dataset.getName().contains("CPI") ){
 			ArrayList<String> a1 = new ArrayList<String>();
 			
-			if(queryInputs.get("Region").get(0).equalsIgnoreCase("Australia"))
+			String str = queryInputs.get("Region").get(0);
+			if(str.equalsIgnoreCase("Australia"))
 				a1.add("Weighted average of eight capital cities");
 
-			if(queryInputs.get("Region").get(0).equalsIgnoreCase("New South Wales"))
+			if(str.equalsIgnoreCase("New South Wales") || str.equalsIgnoreCase("Sydney") )
 				a1.add("Sydney");
 
-			if(queryInputs.get("Region").get(0).equalsIgnoreCase("Victoria") )
+			if(str.equalsIgnoreCase("Victoria") || str.equalsIgnoreCase("Melbourne") )
 				a1.add("Melbourne");
 
-			if(queryInputs.get("Region").get(0).equalsIgnoreCase("Queensland"))
+			if(str.equalsIgnoreCase("Queensland")|| str.equalsIgnoreCase("Brisbane") )
 				a1.add("Brisbane");
 
-			if(queryInputs.get("Region").get(0).equalsIgnoreCase("South Australia"))
+			if(str.equalsIgnoreCase("South Australia")|| str.equalsIgnoreCase("Adelaide") )
 				a1.add("Adelaide");
 
-			if(queryInputs.get("Region").get(0).equalsIgnoreCase("Western Australia"))
+			if(str.equalsIgnoreCase("Western Australia")|| str.equalsIgnoreCase("Perth") )
 				a1.add("Perth");
 
-			if(queryInputs.get("Region").get(0).equalsIgnoreCase("Tasmania"))
+			if(str.equalsIgnoreCase("Tasmania")|| str.equalsIgnoreCase("Hobart") )
 				a1.add("Hobart");
 
-			if(queryInputs.get("Region").get(0).equalsIgnoreCase("Northern Territory"))
+			if(str.equalsIgnoreCase("Northern Territory")|| str.equalsIgnoreCase("Darwin") )
 				a1.add("Darwin");
 
-			if(queryInputs.get("Region").get(0).equalsIgnoreCase("Australian Capital Territory"))
+			if(str.equalsIgnoreCase("Australian Capital Territory")|| str.equalsIgnoreCase("Canberra") )
 				a1.add("Canberra");
 			
 			queryInputs.put("Region",a1);

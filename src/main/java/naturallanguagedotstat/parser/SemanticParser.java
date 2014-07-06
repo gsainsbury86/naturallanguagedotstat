@@ -336,6 +336,39 @@ public class SemanticParser {
 
 		//CPI
 		synonyms.put("CPI","All groups CPI");
+		synonyms.put("Consumer price index","All groups CPI");
+		synonyms.put("CPI for food","Food and non-alcoholic beverages");
+		synonyms.put("CPI for alcohol","Alcohol and tobacco");
+		synonyms.put("CPI for tobacco","Alcohol and tobacco");
+		synonyms.put("CPI for housing","Housing");
+		synonyms.put("CPI for furnishing","Furnishings, household equipment and services");
+		synonyms.put("CPI for health","Health");
+		synonyms.put("CPI for transport","Transport");
+		synonyms.put("CPI for communication","Communication");
+		synonyms.put("CPI for recreation","Recreation and culture");
+		synonyms.put("CPI for education","Education");
+		
+		synonyms.put("index for food","Food and non-alcoholic beverages");
+		synonyms.put("index","Alcohol and tobacco");
+		synonyms.put("index for tobacco","Alcohol and tobacco");
+		synonyms.put("index for housing","Housing");
+		synonyms.put("index for furnishing","Furnishings, household equipment and services");
+		synonyms.put("index for health","Health");
+		synonyms.put("index for transport","Transport");
+		synonyms.put("index for communication","Communication");
+		synonyms.put("index for recreation","Recreation and culture");
+		synonyms.put("index for education","Education");
+
+		synonyms.put("food CPI","Food and non-alcoholic beverages");
+		synonyms.put("alcohol CPI","Alcohol and tobacco");
+		synonyms.put("tobacco CPI","Alcohol and tobacco");
+		synonyms.put("housing CPI","Housing");
+		synonyms.put("furnishing CPI","Furnishings, household equipment and services");
+		synonyms.put("health CPI","Health");
+		synonyms.put("transport CPI","Transport");
+		synonyms.put("communication CPI","Communication");
+		synonyms.put("recreation CPI","Recreation and culture");
+		synonyms.put("education CPI","Education");
 
 	};
 
@@ -507,9 +540,9 @@ public class SemanticParser {
 				dimensions.remove("Country of Birth of Person");
 		};
 
-		if(!grammarParser.inputText.contains("CPI") 
-				&& dimensions.containsKey("Place of Usual Residence 5 Years Ago") ){
+		if(grammarParser.inputText.contains("CPI") ){
 			dimensions.remove("Place of Usual Residence 5 Years Ago");
+			dimensions.remove("Industry of Employment");
 		};
 
 		
