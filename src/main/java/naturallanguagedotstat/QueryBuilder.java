@@ -51,121 +51,129 @@ public class QueryBuilder {
 		semanticParser.parseText();
 
 		queryInputs = semanticParser.getDimensions();	
-
-		//TODO: hijack queryInputs for CPI
-		if(query.contains("CPI")){
-
-			queryInputs = new HashMap<String, ArrayList<String>>();
-
-			ArrayList<String> a = new ArrayList<String>();
-			ArrayList<String> b = new ArrayList<String>();
-			ArrayList<String> c = new ArrayList<String>();
-			ArrayList<String> d = new ArrayList<String>();
-			ArrayList<String> e = new ArrayList<String>();
-
-			a.add("Index Numbers");
-			b.add("Weighted average of eight capital cities");
-			c.add("All groups CPI");
-			d.add("Original");
-			e.add("Quarterly");
-
-			queryInputs.put("Measure",a);
-			queryInputs.put("Region",b);
-			queryInputs.put("Index",c);
-			queryInputs.put("Adjustment Type",d);
-			queryInputs.put("Frequency",e);
-
-		}/* end CPI hijack */
-
 		Dataset dataset = findBestMatchDatasetForDimensionNames();
 
 		if(queryInputs.containsKey(AGE)){
 			getBestAgeCodeLists(queryInputs, dataset);
 		};
 
-		setDefaultsForMissingDimensions(queryInputs, dataset);
-
-		//		if(dataset.getName().contains("CENSUS")){
-		//			queryInputs.remove("State");
-		//		}
-
+		setDefaultsForMissingDimensions(dataset);
+		removeExtraneousDimensions(dataset);
+		
 		restfulURL = generateURL(dataset);
 		return restfulURL;
 	}
 
-	private void setDefaultsForMissingDimensions(
-			HashMap<String, ArrayList<String>> queryInputs2, Dataset dataset) {
+	private void setDefaultsForMissingDimensions(Dataset dataset) {
 
-		//TODO: New way of dealing with CENSUS datasets.
-		// this should probably be a better check.
-		/* Manually add frequency key/value */
-		if(dataset.getName().contains("ABS_CENSUS2011")){
-			ArrayList<String> freq = new ArrayList<String>();
-			freq.add("Annual");
-			queryInputs2.put("Frequency", freq);
-		}
-
-		if(dataset.getName().contains("ABS_CENSUS2011")){
-			String regionCode = Utils.findValue(ASGS2011.getCodelist(), queryInputs.get("Region").get(0));
-			String stateCode = regionCode.substring(0,1);
-			String regionType = regionTypeForRegionCode(regionCode);
-
-			ArrayList<String> stateList = new ArrayList<String>();
-
-			Dimension state = null;
-			for(Dimension dim : dataset.getDimensions()){
-				if(dim.getName().equals("State")){
-					state = dim;
-				}
-			}
-
-			stateList.add(state.getCodelist().get(stateCode));
-
-			Dimension regionTypeDim = null;
-			for(Dimension dim : dataset.getDimensions()){
-				if(dim.getName().equals("Region Type")){
-					regionTypeDim = dim;
-				}
-			}
-
-			ArrayList<String> regionTypeList = new ArrayList<String>();
-			regionTypeList.add(regionTypeDim.getCodelist().get(regionType));
-
-			queryInputs.put("State",stateList);
-			queryInputs.put("Region Type", regionTypeList);
-		}
-
-
-		for(Dimension dim : dataset.getDimensions()){
-			if(dim.getName().equals(AGE) && queryInputs2.get(AGE) == null){
-				if(dataset.getName().equals("ABS_CENSUS2011_B20")  
-						|| dataset.getName().equals("ABS_CENSUS2011_B21")  
-						|| dataset.getName().equals("ABS_CENSUS2011_B40") 
-						|| dataset.getName().equals("ABS_CENSUS2011_B41") 
-						|| dataset.getName().equals("ABS_CENSUS2011_B42") 
-						|| dataset.getName().equals("ABS_CENSUS2011_B43") 
-						){
-					ArrayList<String> list2 = new ArrayList<String>();
-					list2.add("15 years and over");
-					queryInputs2.put(AGE, list2);
-				};
-
-			};
-
-			if(dim.getName().equals(SEX) && queryInputs2.get(SEX) == null){
-				ArrayList<String> list3 = new ArrayList<String>();
-				list3.add("Persons");
-				queryInputs2.put(SEX, list3);
-			};
-
-
-		};
+		setDefaultsForMissingCensusRegionDimensions(dataset);
+		setDefaultsForMissingCensusAgeDimension(dataset);
 
 		setDefaultValueForDimension(dataset, "Age", "Total all ages");
 		setDefaultValueForDimension(dataset, "Sex", "Persons");
 		setDefaultValueForDimension(dataset, "Selected Person Characteristics", "Total persons");
+		
+		if(dataset.getName().contains("ABS_CENSUS2011"))
+			setDefaultValueForDimension(dataset, "Frequency", "Annual");									
 
-		/* ensure no extraneous dimensions */
+		
+		//Begin MEI defaults
+		setDefaultRegionForCPI(dataset);
+		setDefaultValueForDimension(dataset, "Measure", 		"Index Numbers"); 								// CPI
+		setDefaultValueForDimension(dataset, "Region", 			"Weighted average of eight capital cities"); 	// CPI
+		setDefaultValueForDimension(dataset, "Index", 			"All groups CPI"); 								// CPI
+		setDefaultValueForDimension(dataset, "Adjustment Type", "Seasonally Adjusted");							// CPI
+		setDefaultValueForDimension(dataset, "Frequency", 		"Quarterly");									// CPI
+	}
+
+	private void setDefaultRegionForCPI(Dataset dataset) {
+		if(dataset.getName().contains("CPI") ){
+			ArrayList<String> a1 = new ArrayList<String>();
+			
+			if(queryInputs.get("Region").get(0).equalsIgnoreCase("Australia"))
+				a1.add("Weighted average of eight capital cities");
+
+			if(queryInputs.get("Region").get(0).equalsIgnoreCase("New South Wales"))
+				a1.add("Sydney");
+
+			if(queryInputs.get("Region").get(0).equalsIgnoreCase("Victoria") )
+				a1.add("Melbourne");
+
+			if(queryInputs.get("Region").get(0).equalsIgnoreCase("Queensland"))
+				a1.add("Brisbane");
+
+			if(queryInputs.get("Region").get(0).equalsIgnoreCase("South Australia"))
+				a1.add("Adelaide");
+
+			if(queryInputs.get("Region").get(0).equalsIgnoreCase("Western Australia"))
+				a1.add("Perth");
+
+			if(queryInputs.get("Region").get(0).equalsIgnoreCase("Tasmania"))
+				a1.add("Hobart");
+
+			if(queryInputs.get("Region").get(0).equalsIgnoreCase("Northern Territory"))
+				a1.add("Darwin");
+
+			if(queryInputs.get("Region").get(0).equalsIgnoreCase("Australian Capital Territory"))
+				a1.add("Canberra");
+			
+			queryInputs.put("Region",a1);
+
+		};
+	}
+
+	private void setDefaultsForMissingCensusAgeDimension(Dataset dataset) {
+		for(Dimension dim : dataset.getDimensions()){
+			if(dim.getName().equals(AGE) && queryInputs.get(AGE) == null){
+				if(dataset.getName().equals("ABS_CENSUS2011_B20")  
+				|| dataset.getName().equals("ABS_CENSUS2011_B21")  
+				|| dataset.getName().equals("ABS_CENSUS2011_B40") 
+				|| dataset.getName().equals("ABS_CENSUS2011_B41") 
+				|| dataset.getName().equals("ABS_CENSUS2011_B42") 
+				|| dataset.getName().equals("ABS_CENSUS2011_B43") 
+						){
+					ArrayList<String> list2 = new ArrayList<String>();
+					list2.add("15 years and over");
+					queryInputs.put(AGE, list2);
+				};
+			};
+		};
+	}
+
+	private void setDefaultsForMissingCensusRegionDimensions(Dataset dataset) {
+		if(!dataset.getName().contains("ABS_CENSUS2011")) 
+				return;
+		
+		String regionCode = Utils.findValue(ASGS2011.getCodelist(), queryInputs.get("Region").get(0));
+		String stateCode = regionCode.substring(0,1);
+		String regionType = regionTypeForRegionCode(regionCode);
+
+		ArrayList<String> stateList = new ArrayList<String>();
+
+		Dimension state = null;
+		for(Dimension dim : dataset.getDimensions()){
+			if(dim.getName().equals("State")){
+				state = dim;
+			}
+		}
+
+		stateList.add(state.getCodelist().get(stateCode));
+
+		Dimension regionTypeDim = null;
+		for(Dimension dim : dataset.getDimensions()){
+			if(dim.getName().equals("Region Type")){
+				regionTypeDim = dim;
+			}
+		}
+
+		ArrayList<String> regionTypeList = new ArrayList<String>();
+		regionTypeList.add(regionTypeDim.getCodelist().get(regionType));
+
+		queryInputs.put("State",stateList);
+		queryInputs.put("Region Type", regionTypeList);
+	}
+
+	private void removeExtraneousDimensions(Dataset dataset) {
 		ArrayList<String> dimList = new ArrayList<String>();
 		for(Dimension dim : dataset.getDimensions()){
 			dimList.add(dim.getName());
@@ -182,7 +190,6 @@ public class QueryBuilder {
 		for(String rem : toRemove){
 			queryInputs.remove(rem);
 		}
-
 	}
 
 	private void setDefaultValueForDimension(Dataset dataset, String dimName, String dimValue) {
@@ -205,69 +212,69 @@ public class QueryBuilder {
 		int a1 = (ageQueryParser.getExplicitNumbers().size() >1) 
 				? Integer.parseInt(ageQueryParser.getExplicitNumbers().get(1) ) : -1;
 
-				HashMap<String, String> ageCodeList = null;
-				for(Dimension dim : dataset.getDimensions()){
-					if(dim.getName().equals(AGE)){
-						ageCodeList = dim.getCodelist();
-					};
+		HashMap<String, String> ageCodeList = null;
+		for(Dimension dim : dataset.getDimensions()){
+			if(dim.getName().equals(AGE)){
+				ageCodeList = dim.getCodelist();
+			};
+		};
+
+		List<String> ageCodeListDescriptions = new ArrayList<String>(ageCodeList.values());
+
+		HashMap< String, Double> matches = new HashMap< String, Double>();
+
+		Double overlapScore;
+		for (String descr: ageCodeListDescriptions){
+			NumericParser ageDescriptionParser = new NumericParser(descr);
+
+			int b0 = (ageDescriptionParser.getExplicitNumbers().size() >0) 
+					? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(0) ) : -1;
+
+			int b1 = (ageDescriptionParser.getExplicitNumbers().size() >1) 
+						? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) ) : -1;
+
+			if(ageDescriptionParser.getExplicitNumbers().size() >1){
+				String comparatorDescriptor = ageDescriptionParser.comparatorAsString (ageDescriptionParser.getComparator() );
+
+			if (comparatorDescriptor.equals("∈") )
+				b1 = Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) );
+
+				if (comparatorDescriptor.equals(">") )
+					b1 = 999;
+
+				if (comparatorDescriptor.equals("<") ){
+					b1 = b0;
+					b0 = 0;
 				};
-
-				List<String> ageCodeListDescriptions = new ArrayList<String>(ageCodeList.values());
-
-				HashMap< String, Double> matches = new HashMap< String, Double>();
-
-				Double overlapScore;
-				for (String descr: ageCodeListDescriptions){
-					NumericParser ageDescriptionParser = new NumericParser(descr);
-
-					int b0 = (ageDescriptionParser.getExplicitNumbers().size() >0) 
-							? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(0) ) : -1;
-
-							int b1 = (ageDescriptionParser.getExplicitNumbers().size() >1) 
-									? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) ) : -1;
-
-									if(ageDescriptionParser.getExplicitNumbers().size() >1){
-										String comparatorDescriptor = ageDescriptionParser.comparatorAsString (ageDescriptionParser.getComparator() );
-
-										if (comparatorDescriptor.equals("∈") )
-											b1 = Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) );
-
-										if (comparatorDescriptor.equals(">") )
-											b1 = 999;
-
-										if (comparatorDescriptor.equals("<") ){
-											b1 = b0;
-											b0 = 0;
-										};
-									}
+			}
 
 
-									overlapScore =  getOverlapScore(a0, a1, b0, b1);
-									matches.put(descr, overlapScore);
-									ageDescriptionParser = null;
-				};
+			overlapScore =  getOverlapScore(a0, a1, b0, b1);
+			matches.put(descr, overlapScore);
+			ageDescriptionParser = null;
+		};
 
-				ArrayList<String> list = new ArrayList<String>();
-				Double scoreMax = matches.get(getKeyForMaxValue(matches) );
+		ArrayList<String> list = new ArrayList<String>();
+		Double scoreMax = matches.get(getKeyForMaxValue(matches) );
 
-				double epsilon = 0.000001;
-				for (String descr: ageCodeListDescriptions){
-					if(Math.abs(matches.get(descr) - scoreMax ) < epsilon ){
-						list.add(descr);
-					}
-				}
+		double epsilon = 0.000001;
+		for (String descr: ageCodeListDescriptions){
+			if(Math.abs(matches.get(descr) - scoreMax ) < epsilon ){
+				list.add(descr);
+			}
+		}
 
-				// Treat B04 differently as it is the only dataset with hierarchical age ranges.
-				if(doAggregateAges && dataset.getName().equals("ABS_CENSUS2011_B04")){
-					for (Iterator<String> iter = list.iterator(); iter.hasNext();) {
-						String s = iter.next();
-						if (!isNumber(s) ) 
-							iter.remove();
-					};
-				};
+		// Treat B04 differently as it is the only dataset with hierarchical age ranges.
+		if(doAggregateAges && dataset.getName().equals("ABS_CENSUS2011_B04")){
+			for (Iterator<String> iter = list.iterator(); iter.hasNext();) {
+				String s = iter.next();
+				if (!isNumber(s) ) 
+					iter.remove();
+			};
+		};
 
-				// System.out.println("Matched AGE intervals are:" + list);
-				queryInputs2.put(AGE, list);
+		// System.out.println("Matched AGE intervals are:" + list);
+		queryInputs2.put(AGE, list);
 	}
 
 	private boolean isNumber(String aString)
@@ -340,9 +347,6 @@ public class QueryBuilder {
 		url += "/restsdmx/sdmx.ashx/GetData/";
 
 		url += ds.getName()+"/";
-
-
-
 
 
 		/* ensure order */
@@ -420,7 +424,6 @@ public class QueryBuilder {
 			for(Dimension dim : ds.getDimensions()){
 				for(String dimensionName : queryInputs.keySet()){
 					if(dim.getName().equals(dimensionName)){
-						//System.out.println(ds.getName() + dim.getName() + dimensionName);
 						localMatches++;
 					}
 				}

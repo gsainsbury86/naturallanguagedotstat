@@ -517,7 +517,7 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/A20.2.4.1.SA2.101031014.A/ABS?startTime=2011&endTime=2011", 	//How many women aged 20-25 in Cooma are community workers?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/A20.2.8.1.SA2.101021008.A/ABS?startTime=2011&endTime=2011", 	//How many women aged 20-25 in Karabar are labourers?
 
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1" // "What is the current CPI?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.10001.20.Q/ABS?startTime=2014-Q1&endTime=2014-Q1" // "What is the current CPI?
 		
 
 	};

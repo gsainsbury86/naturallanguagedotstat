@@ -27,7 +27,8 @@ public class LocalTest {
 		localLoad = true;
 		test = true;
 
-		printQueryResult("Number of women born in Australia from Sandy Bay?") ;
+		printQueryResult("CPI for Tasmania") ;
+//		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1" // "What is the current CPI?
 
 	}
 	

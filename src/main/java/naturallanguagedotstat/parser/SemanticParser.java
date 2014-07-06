@@ -34,9 +34,6 @@ public class SemanticParser {
 		createFlatCodeList(datasets); 
 	}		
 
-
-
-	// methods (in alphabetical order - hopefully)
 	public HashMap<String, ArrayList<String>> getDimensions() {
 
 		HashMap<String, ArrayList<String>> toReturn = new HashMap<String, ArrayList<String>>();
@@ -53,6 +50,7 @@ public class SemanticParser {
 	private void createFlatCodeList(ArrayList<Dataset> datasets) throws IOException, ClassNotFoundException{
 		for(Dataset dataset : datasets){
 			for(Dimension dim : dataset.getDimensions() ){
+				// System.out.println(dataset.getName() + " : " + dim.getName() );
 				HashMap<String, String> map = dim.getCodelist();
 				if (!dim.getName().equals("Age") &&  !dim.getName().equals("Region Type") &&  !dim.getName().equals("State")   && map != null) {
 					for(String key : map.keySet()){
@@ -73,26 +71,9 @@ public class SemanticParser {
 
 	public void initializeSynonyms(){		
 
-
-		/*
-
-		// Eventually do synonyms to confirm identity of Dimensions.
-		// However, currently we identify synonyms based purely on the identification of codelists.
-
-		synonyms.put("aged","Age");
-		synonyms.put("year","Age");
-		synonyms.put("years","Age");
-		synonyms.put("old","Age");
-		synonyms.put("older","Age");
-		synonyms.put("younger","Age");
-
-		synonyms.put("born","Country of Birth of Person");
-		synonyms.put("birth","Country of Birth of Person");
-
-		 */
-
 		// .put("synonym", "rootWord");
 
+		//B01
 		synonyms.put("female","Females");
 		synonyms.put("women","Females");
 		synonyms.put("male","Males");
@@ -353,14 +334,17 @@ public class SemanticParser {
 		synonyms.put("machinery","Machinery operators and drivers");
 		synonyms.put("drivers","Machinery operators and drivers");
 
+		//CPI
+		synonyms.put("CPI","All groups CPI");
+
 	};
 
 
 	private boolean wholeWordContains (String aPhrase, String aSubstr){
 		// we apply spaces before and after the main phrase and substr,
 		// as a trick to search for whole words only.
-		String phrase = " "+ aPhrase.toLowerCase() +" ";  
-		String substr = " "+ aSubstr.toLowerCase()+" ";
+		String phrase = " " + aPhrase.replaceAll("[?]", "").toLowerCase() + " ";  
+		String substr = " " + aSubstr.replaceAll("[?]", "").toLowerCase() + " ";
 		return phrase.contains(substr);   
 	}
 
@@ -370,6 +354,7 @@ public class SemanticParser {
 			if(wholeWordContains(str, keyWord)  ){ 
 				baseWord = synonyms.get(keyWord) ; 
 				dimensions.put(flatCodeList.get(baseWord), baseWord);
+				System.out.println(flatCodeList.get(baseWord)+" : "+ baseWord);
 			};
 		};		
 	}
@@ -381,6 +366,7 @@ public class SemanticParser {
 			if(wholeWordContains(str, keyWord)  ){ 
 				baseWord = keyWord ; 
 				dimensions.put(flatCodeList.get(baseWord), baseWord);
+				System.out.println(flatCodeList.get(baseWord)+" : "+ baseWord);
 			};
 		};
 
@@ -435,7 +421,6 @@ public class SemanticParser {
 		if (someWords[j-1].equals("∈") ) {
 			str = str + " " + someWords[j+1];
 		};
-
 		return str;
 	}
 
@@ -456,6 +441,8 @@ public class SemanticParser {
 	private void cleanUpDimensions(){
 		
 		dimensions.remove("Selected Person Characteristics"); // This eliminates Statistical Collections that are merely summaries of other ones.
+
+		dimensions.remove("Year of Arrival in Australia"); // This eliminates Statistical Collections that are merely summaries of other ones.
 
 		if(dimensions.containsKey("Ancestry") ){
 			dimensions.remove("Ancestry");
@@ -520,6 +507,12 @@ public class SemanticParser {
 				dimensions.remove("Country of Birth of Person");
 		};
 
+		if(!grammarParser.inputText.contains("CPI") 
+				&& dimensions.containsKey("Place of Usual Residence 5 Years Ago") ){
+			dimensions.remove("Place of Usual Residence 5 Years Ago");
+		};
+
+		
 		// ...................................
 		
 		int c = (dimensions.containsKey("Region")) ? 1 : 0;
@@ -595,6 +588,28 @@ public class SemanticParser {
 				};
 			};
 		};
+		
+		System.out.println(str);
+		if (wholeWordContains(str, "Aust"))						
+			identifiedRegions.put("0", "Australia");
+		if (wholeWordContains(str, "Aus"))						
+			identifiedRegions.put("0", "Australia");
+		if (wholeWordContains(str, "NSW"))						
+			identifiedRegions.put("1", "New South Wales");
+		if (wholeWordContains(str, "Vic"))						
+			identifiedRegions.put("2", "Victoria");
+		if (wholeWordContains(str, "Qld"))						
+			identifiedRegions.put("3", "Queensland");
+		if (wholeWordContains(str, "SA"))						
+			identifiedRegions.put("4", "South Australia");
+		if (wholeWordContains(str, "WA"))						
+			identifiedRegions.put("5", "Western Australia");
+		if (wholeWordContains(str, "Tas"))						
+			identifiedRegions.put("6", "Tasmania");
+		if (wholeWordContains(str, "NT"))						
+			identifiedRegions.put("7", "Northern Territory");		
+		if (wholeWordContains(str, "ACT"))						
+			identifiedRegions.put("8", "Australian Capital Territory");
 		
 		// System.out.println("Best match: "+ getLargestRegion(str,identifiedRegions) );
 		return getLargestRegion(str,identifiedRegions);
