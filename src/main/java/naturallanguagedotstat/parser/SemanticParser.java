@@ -269,7 +269,7 @@ public class SemanticParser {
 		synonyms.put("accommodation","Accommodation and food services");
 		synonyms.put("cooks","Accommodation and food services");
 		synonyms.put("chefs","Accommodation and food services");
-		synonyms.put("food","Accommodation and food services");
+		// synonyms.put("food","Accommodation and food services"); Clash with CPI x industry
 		synonyms.put("hospitality","Accommodation and food services");
 		synonyms.put("transport","Transport, postal and warehousing");
 		synonyms.put("transportation","Transport, postal and warehousing");
@@ -335,6 +335,8 @@ public class SemanticParser {
 		synonyms.put("drivers","Machinery operators and drivers");
 
 		//CPI
+		synonyms.put("inflation","All groups CPI");
+
 		synonyms.put("CPI","All groups CPI");
 		synonyms.put("Consumer price index","All groups CPI");
 		synonyms.put("CPI for food","Food and non-alcoholic beverages");
@@ -530,7 +532,10 @@ public class SemanticParser {
 				dimensions.remove("Country of Birth of Person");
 		};
 
-		if(grammarParser.inputText.contains("CPI") ){
+		if(grammarParser.inputText.toLowerCase().contains("cpi") 
+		|| grammarParser.inputText.toLowerCase().contains("price index") 
+		|| grammarParser.inputText.toLowerCase().contains("inflation") 
+		){
 			dimensions.remove("Place of Usual Residence 5 Years Ago");
 			dimensions.remove("Industry of Employment");
 		};
