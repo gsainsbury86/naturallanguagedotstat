@@ -474,25 +474,14 @@ public class SemanticParser {
 	private void cleanUpDimensions(){
 		
 		dimensions.remove("Selected Person Characteristics"); // This eliminates Statistical Collections that are merely summaries of other ones.
-
 		dimensions.remove("Year of Arrival in Australia"); // This eliminates Statistical Collections that are merely summaries of other ones.
-
-		if(dimensions.containsKey("Ancestry") ){
-			dimensions.remove("Ancestry");
-		};
-
-		if(dimensions.containsKey("Method of Travel to Work") ){
-			dimensions.remove("Method of Travel to Work");
-		};
+		dimensions.remove("Ancestry");
+		dimensions.remove("Method of Travel to Work");
+		dimensions.remove("Count of Families");
 
 		if(dimensions.containsKey("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)") ){
 			dimensions.remove("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)");
 		};
-
-		if(dimensions.containsKey("Count of Families") ){
-			dimensions.remove("Count of Families");
-		};
-		
 		
 		// Begin the conditional checking.....
 		
