@@ -104,12 +104,12 @@ a {
     }   
       
     .form-wrapper button:hover{		
-        background: #154015;
+        background: #50a050;
     }	
       
     .form-wrapper button:active,
     .form-wrapper button:focus{   
-        background: #c42f2f;    
+        background: #50a050;    
     }
     
     .form-wrapper button:before {
@@ -123,11 +123,11 @@ a {
     }
     
     .form-wrapper button:hover:before{
-        border-right-color: #e54040;
+        border-right-color: #308030;
     }
     
     .form-wrapper button:focus:before{
-        border-right-color: #c42f2f;
+        border-right-color: #308030;
     }    
     
     .form-wrapper button::-moz-focus-inner {
@@ -136,21 +136,6 @@ a {
     }
         
 
-#map {
-	margin-top: 20px;
-	line-height: 1.5;
-}
-
-#url {
-	margin-top: 20px;
-	font-size: 12px;
-	text-align: center;
-}
-
-#result {
-	font-size: 72px;
-	line-height: 1.6;
-}
 
 
 </style>
@@ -206,11 +191,9 @@ a {
 	<form class="form-wrapper cf">
 		<input type="text" id="query" placeholder="How many women in Sandy Bay work are married?" required>
 		<button type="submit" id="go" >Search</button>
-	</form>
-	<div>
 		<div id="map"></div>
 		<div id="result"></div>
 		<div id="url"></div>
-	</div>
+	</form>
 </body>
 </html>
