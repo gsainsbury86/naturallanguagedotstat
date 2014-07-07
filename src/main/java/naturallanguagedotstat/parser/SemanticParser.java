@@ -55,6 +55,8 @@ public class SemanticParser {
 				if (!dim.getName().equals("Age") &&  !dim.getName().equals("Region Type") &&  !dim.getName().equals("State")   && map != null) {
 					for(String key : map.keySet()){
 						flatCodeList.put(map.get(key), dim.getName() );
+						if(map.get(key).equalsIgnoreCase("Canberra") )
+							System.out.println(map.get(key) +"~"+ dim.getName() +"~"+dataset.getName() );
 					}
 				}
 			}
@@ -387,7 +389,7 @@ public class SemanticParser {
 			if(wholeWordContains(str, keyWord)  ){ 
 				baseWord = synonyms.get(keyWord) ; 
 				dimensions.put(flatCodeList.get(baseWord), baseWord);
-				System.out.println(flatCodeList.get(baseWord)+" : "+ baseWord);
+				System.out.println("synonyms:" + flatCodeList.get(baseWord)+" : "+ baseWord);
 			};
 		};		
 	}
@@ -399,7 +401,7 @@ public class SemanticParser {
 			if(wholeWordContains(str, keyWord)  ){ 
 				baseWord = keyWord ; 
 				dimensions.put(flatCodeList.get(baseWord), baseWord);
-				System.out.println(flatCodeList.get(baseWord)+" : "+ baseWord);
+				System.out.println("codelist:" + flatCodeList.get(baseWord)+" : "+ baseWord);
 			};
 		};
 
@@ -462,11 +464,12 @@ public class SemanticParser {
 	public void parseText(){
 		String region = identifyASGSRegion(grammarParser.inputText);
 		if (region != null){
-		dimensions.put("Region", region );
+			dimensions.put("Region", region );
 		};
 		
 		grammarParser.parseText();
 		identifyDimensions(grammarParser.keyPhrases);
+		System.out.println(dimensions);
 		cleanUpDimensions();
 
 	}
@@ -596,7 +599,6 @@ public class SemanticParser {
 				identifiedRegions.put(key, regions.get(key) );
 			}
 		};
-
 		
 		if(identifiedRegions.isEmpty()){
 			for(String key : regions.keySet()){
@@ -611,7 +613,7 @@ public class SemanticParser {
 			};
 		};
 		
-		System.out.println(str);
+		// System.out.println(str);
 		if (wholeWordContains(str, "Aust"))						
 			identifiedRegions.put("0", "Australia");
 		if (wholeWordContains(str, "Aus"))						
@@ -633,7 +635,7 @@ public class SemanticParser {
 		if (wholeWordContains(str, "ACT"))						
 			identifiedRegions.put("8", "Australian Capital Territory");
 		
-		// System.out.println("Best match: "+ getLargestRegion(str,identifiedRegions) );
+		System.out.println("Best match: "+ getLargestRegion(str,identifiedRegions) );
 		return getLargestRegion(str,identifiedRegions);
 	}
 	

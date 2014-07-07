@@ -152,6 +152,16 @@ a {
 	margin: 30px;
 }
 
+#resultheader {
+	font-size: 1.5em;
+	margin: 30px;
+}
+
+#resultfooter {
+	font-size: 1.5em;
+	margin: 30px;
+}
+
 #map {
 	color: #ccc;
 	margin: 10px;
@@ -182,6 +192,8 @@ a {
 			var url = '/main/query/' + $('#query').val();
 			$.getJSON(url, function(data, status, jqXHR) {
 				$("#result").text(data.result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+				$("#resultheader").text(' ');
+				$("#resultfooter").text(' ');
 				$("#url").html('<a href="'+data.url+'">' + 'source' + '</a><br>');
 				$('#map').text(' ');
 				$.each(data, function(index) {
