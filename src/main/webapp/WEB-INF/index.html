@@ -146,9 +146,8 @@ a {
 	text-align: center;
 }
 
-#result {
-	font-size: 72px;
-	line-height: 1.6;
+#output {
+	background: #308030;
 }
 
 #result {
@@ -194,7 +193,7 @@ a {
 			var url = '/main/query/' + $('#query').val();
 			$.getJSON(url, function(data, status, jqXHR) {
 				$("#result").text(data.result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
-				$("#url").html('<a href="'+data.url+'">' + data.url + '</a>');
+				$("#url").html('<a href="'+data.url+'">' + 'source' + '</a>');
 				$('#map').text(' ');
 				$.each(data, function(index) {
 					if (index != 'result' && index != 'url') {
@@ -227,10 +226,11 @@ a {
 	<div class="form-wrapper cf">
 		<input type="text" id="query" placeholder="eg. How many men in Sandy Bay are married?" required>
 		<button type="submit" id="go" >Search</button>
-		<div> <br> </div>
-		<div id="result"></div>
-		<div id="map"></div>
-		<div id="url"></div>
+		<div id="output">
+			<div id="result"></div>
+			<div id="map"></div>
+			<div id="url"></div>
+		</div>
 	</div>
 </body>
 </html>
