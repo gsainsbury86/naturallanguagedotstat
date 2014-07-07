@@ -8,7 +8,7 @@
 
 <style>
 body {
-       background: #555 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB9JREFUeNpi/P//PwM6YGLAAuCCmpqacC2MRGsHCDAA+fIHfeQbO8kAAAAASUVORK5CYII=);
+       background: #aaa url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB9JREFUeNpi/P//PwM6YGLAAuCCmpqacC2MRGsHCDAA+fIHfeQbO8kAAAAASUVORK5CYII=);
         font: 13px 'Lucida sans', Arial, Helvetica;
         color: #eee;
         text-align: center;
@@ -104,7 +104,7 @@ a {
     }   
       
     .form-wrapper button:hover{		
-        background: #e54040;
+        background: #154015;
     }	
       
     .form-wrapper button:active,
@@ -142,20 +142,9 @@ html {
 	text-align: left;
 }
 
-h1 {
-	font-size: 32px;
-	color: #222;
-	text-align: center;
-}
 
-div.container {
-	height: 100px;
-	width: 610px;
-	position: absolute;
-	margin: -50px 0 0 -300px;
-	left: 50%;
-	top: 20%;
-}
+
+
 
 a:link {
 	color: #55B;
@@ -177,21 +166,7 @@ a:link {
 	line-height: 1.6;
 }
 
-input {
-	color: #444;
-	font-size: 16px;
-	line-height: 1.6;
-	width: 540px;
-	padding-left: 8px;
-	float: left;
-}
 
-.mybutton {
-	width: 34px;
-	height: 34px;
-	-webkit-appearance: none;
-	-webkit-border-radius: 0px;
-}
 </style>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"
@@ -245,20 +220,10 @@ input {
 	<form class="form-wrapper cf">
 		<input type="text" id="query" placeholder="How many women in Sandy Bay work in agriculture?" required>
 		<button type="submit" id="go" >Search</button>
-
-		<div id="display">
-			<table width=100%>
-				<tr>
-					<td>
-						<div id="map"></div>
-					</td>
-					<td>
-						<div id="result"></div>
-					</td>
-				</tr>
-			</table>
-			<div id="url"></div>
-		</div>
+		
+		<div id="map"></div>
+		<div id="result"></div>
+		<div id="url"></div>
 	</form>
 
 </body>
