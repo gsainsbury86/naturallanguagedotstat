@@ -221,7 +221,7 @@ a {
 			$('#result').text('...');
 			var url = '/main/query/' + $('#query').val();
 			$.getJSON(url, function(data, status, jqXHR) {
-				$("#result").text(data.result).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+				$("#result").text(data.result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
 				$("#url").html('<a href="'+data.url+'">' + data.url + '</a>');
 				$('#map').text(' ');
 				$.each(data, function(index) {
@@ -259,11 +259,12 @@ a {
 		<table class="flat-table flat-table-3">
 			<thead>
 				<th> <div id="result"> </div>  </th>
-		</thead>
-		<tbody>
-			<tr> <td>  <div id="map"></div> </td> </tr>
-			<tr> <td>  <div id="url"></div> </td> </tr>
-		</tbody>
+			</thead>
+			<tbody>
+				<tr> <td>  <div id="map"></div> </td> </tr>
+				<tr> <td>  <div id="url"></div> </td> </tr>
+			</tbody>
+		</table>
 	</div>
 </body>
 </html>
