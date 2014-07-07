@@ -163,8 +163,10 @@ a {
                -moz-border-radius: 3px;
                
         empty-cells: hide;
+  		visibility: collapse;
 	}
 	
+
 	.flat-table th, .flat-table td {
 		box-shadow: inset 0 -1px rgba(0,0,0,0.25), 
 			inset 0 1px rgba(0,0,0,0.25);
@@ -264,13 +266,13 @@ a {
 	<div class="form-wrapper cf">
 		<input type="text" id="query" placeholder="eg. How many men in Sandy Bay are married?" required>
 		<button type="submit" id="go" >Search</button>
-		<br> 
+		<div> <br> </div>
 		<table class="flat-table flat-table-3">
 			<thead>
-				<th id="result"></th>
+			<tr><th id="result"></th></tr>
 			</thead>
 			<tbody>
-				<tr><td id="map"></td></tr>
+				<tr><td><div id="map"></div></td></tr>
 				<tr><td id="url"></td></tr>
 			</tbody>
 		</table>
