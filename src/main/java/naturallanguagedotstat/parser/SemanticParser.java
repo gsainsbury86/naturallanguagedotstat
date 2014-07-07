@@ -469,7 +469,7 @@ public class SemanticParser {
 		
 		grammarParser.parseText();
 		identifyDimensions(grammarParser.keyPhrases);
-		//System.out.println(dimensions);
+		System.out.println(dimensions);
 		cleanUpDimensions();
 
 	}
@@ -481,10 +481,7 @@ public class SemanticParser {
 		dimensions.remove("Ancestry");
 		dimensions.remove("Method of Travel to Work");
 		dimensions.remove("Count of Families");
-
-		if(dimensions.containsKey("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)") ){
-			dimensions.remove("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)");
-		};
+		dimensions.remove("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)");
 		
 		// Begin the conditional checking.....
 		
