@@ -55,8 +55,6 @@ public class SemanticParser {
 				if (!dim.getName().equals("Age") &&  !dim.getName().equals("Region Type") &&  !dim.getName().equals("State")   && map != null) {
 					for(String key : map.keySet()){
 						flatCodeList.put(map.get(key), dim.getName() );
-						if(map.get(key).equalsIgnoreCase("Canberra") )
-							System.out.println(map.get(key) +"~"+ dim.getName() +"~"+dataset.getName() );
 					}
 				}
 			}
@@ -389,7 +387,7 @@ public class SemanticParser {
 			if(wholeWordContains(str, keyWord)  ){ 
 				baseWord = synonyms.get(keyWord) ; 
 				dimensions.put(flatCodeList.get(baseWord), baseWord);
-				System.out.println("synonyms:" + flatCodeList.get(baseWord)+" : "+ baseWord);
+				//System.out.println("synonyms:" + flatCodeList.get(baseWord)+" : "+ baseWord);
 			};
 		};		
 	}
@@ -401,7 +399,7 @@ public class SemanticParser {
 			if(wholeWordContains(str, keyWord)  ){ 
 				baseWord = keyWord ; 
 				dimensions.put(flatCodeList.get(baseWord), baseWord);
-				System.out.println("codelist:" + flatCodeList.get(baseWord)+" : "+ baseWord);
+				//System.out.println("codelist:" + flatCodeList.get(baseWord)+" : "+ baseWord);
 			};
 		};
 
@@ -469,7 +467,7 @@ public class SemanticParser {
 		
 		grammarParser.parseText();
 		identifyDimensions(grammarParser.keyPhrases);
-		System.out.println(dimensions);
+		//System.out.println(dimensions);
 		cleanUpDimensions();
 
 	}
@@ -635,7 +633,7 @@ public class SemanticParser {
 		if (wholeWordContains(str, "ACT"))						
 			identifiedRegions.put("8", "Australian Capital Territory");
 		
-		System.out.println("Best match: "+ getLargestRegion(str,identifiedRegions) );
+		//System.out.println("Best match: "+ getLargestRegion(str,identifiedRegions) );
 		return getLargestRegion(str,identifiedRegions);
 	}
 	
