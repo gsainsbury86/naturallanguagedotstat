@@ -96,7 +96,7 @@ a {
         font: bold 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma';
         color: #fff;
         text-transform: uppercase;
-        background: #d83c3c;
+        background: #308030;
         -moz-border-radius: 0 3px 3px 0;
         -webkit-border-radius: 0 3px 3px 0;
         border-radius: 0 3px 3px 0;      
@@ -117,7 +117,7 @@ a {
         position: absolute;
         border-width: 8px 8px 8px 0;
         border-style: solid solid solid none;
-        border-color: transparent #d83c3c transparent;
+        border-color: transparent #308030 transparent;
         top: 12px;
         left: -6px;
     }
@@ -243,8 +243,8 @@ input {
 <body>
 
 	<form class="form-wrapper cf">
-		<input type="text" placeholder="How many women in Sandy Bay work in agriculture?" required>
-		<button type="submit">Search</button>
+		<input type="text" id="query" placeholder="How many women in Sandy Bay work in agriculture?" required>
+		<button type="submit" id="go" >Search</button>
 
 		<div id="display">
 			<table width=100%>
@@ -261,25 +261,5 @@ input {
 		</div>
 	</form>
 
-
-	<div class='container'>
-		<h1>Search.Stat!</h1>
-		<input id="query" class="" type="text"
-			placeholder="eg. How many women in Sandy Bay work in agriculture?" />
-		<button id="go" class="mybutton"></button>
-		<div id="display">
-			<table width=100%>
-				<tr>
-					<td>
-						<div id="map"></div>
-					</td>
-					<td>
-						<div id="result"></div>
-					</td>
-				</tr>
-			</table>
-			<div id="url"></div>
-		</div>
-	</div>
 </body>
 </html>
