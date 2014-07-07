@@ -180,7 +180,7 @@ a {
 			$('#result').text('searching...');
 			var url = '/main/query/' + $('#query').val();
 			$.getJSON(url, function(data, status, jqXHR) {
-				$("#result").html('<br>''+ data.result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +'<br>');
+				$("#result").text(data.result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 				$("#url").html('<a href="'+data.url+'">' + 'source' + '</a><br>');
 				$('#map').text(' ');
 				$.each(data, function(index) {
