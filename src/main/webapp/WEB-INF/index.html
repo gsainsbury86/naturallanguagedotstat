@@ -150,7 +150,6 @@ a {
 	font-weight: normal;
 	font-size: 3em;
 	margin: 30px;
-	padding-top: 30px;
 }
 
 #map {
@@ -161,9 +160,8 @@ a {
 
 #url {
 	color: rgba(0,0,0,0.45);
-	margin: 15px;
+	margin: 30px;
 	text-align:left;
-	padding-bottom: 15px;
 }
 
 </style>
@@ -179,11 +177,11 @@ a {
 			}
 		});
 		$('#go').click(function() {
-			$('#result').text('...');
+			$('#result').text('searching...');
 			var url = '/main/query/' + $('#query').val();
 			$.getJSON(url, function(data, status, jqXHR) {
-				$("#result").text(data.result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
-				$("#url").html('<a href="'+data.url+'">' + 'source' + '</a>');
+				$("#result").html('<br>''+ data.result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +'<br>');
+				$("#url").html('<a href="'+data.url+'">' + 'source' + '</a><br>');
 				$('#map').text(' ');
 				$.each(data, function(index) {
 					if (index != 'result' && index != 'url') {
