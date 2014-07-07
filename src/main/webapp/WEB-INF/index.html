@@ -15,8 +15,12 @@ body {
 }
 
 a {
-	color: rgba(0,0,0,0.45);
+	color: #383838;
  }
+
+a:visited {
+    color: #383838;
+}
 
  .cf:before, .cf:after{
  	content:"";
@@ -145,36 +149,35 @@ a {
     -moz-border-radius: 6px;
 }
 
+#outputheader {
+	color: #308030;
+	font-size: 1em;
+}
+
+#outputfooter {
+	color: #308030;
+	font-size: 0.5em;
+}
+
 #result {
 	color: #fff;
 	font-weight: normal;
 	font-size: 3em;
-	margin: 30px;
+	line-height: 2;
 }
 
-#outputheader {
-	color: #308030;
-	font-size: 1.5em;
-	margin: 30px;
-}
 
-#outputheader {
-	color: #308030;
-	font-size: 1.5em;
-	margin: 30px;
-}
 
 #map {
-	color: #ccc;
-	margin: 10px;
+	color: #383838;
 	text-align:left;
 }
 
 #url {
-	color: #ccc;
-	margin-top:  10px;
+	color: #383838;
 	margin-left: 10px;
 	text-align:left;
+	line-height: 2;
 }
 
 </style>
@@ -196,7 +199,7 @@ a {
 				$("#result").text(data.result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 				$("#outputheader").text('.');
 				$("#outputfooter").text('.');
-				$("#url").html('<a href="'+data.url+'">' + 'source' + '</a><br>');
+				$("#url").html('<a href="'+data.url+'" target="_blank" >' + 'source' + '</a><br>');
 				$('#map').text(' ');
 				$.each(data, function(index) {
 					if (index != 'result' && index != 'url') {
@@ -230,11 +233,11 @@ a {
 		<input type="text" id="query" placeholder="eg. How many men in Sandy Bay are married?" required>
 		<button type="submit" id="go" >Search</button>
 		<div id="output">
-			<div id="outputheader"></div>
+
 			<div id="result"></div>
 			<div id="map"></div>
 			<div id="url"></div>
-			<div id="outputfooter"></div>
+
 		</div>
 	</div>
 </body>
