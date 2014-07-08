@@ -18,7 +18,7 @@ public class SemanticParser {
 	private Dimension ASGS2011;
 
 	private GrammarParser grammarParser;
-	
+	private ArrayList<Dataset>  datasets;
 	
 	// constructor
 	public SemanticParser (String str, ArrayList<Dataset> datasets, Dimension ASGS2011) throws IOException, ClassNotFoundException{
@@ -28,6 +28,9 @@ public class SemanticParser {
 		grammarParser = new GrammarParser(str);
 		
 		this.ASGS2011 = ASGS2011;
+		this.datasets = datasets;
+		
+		
 		
 		initializeSynonyms();
 		createFlatCodeList(datasets); 
@@ -49,7 +52,6 @@ public class SemanticParser {
 	private void createFlatCodeList(ArrayList<Dataset> datasets) throws IOException, ClassNotFoundException{
 		for(Dataset dataset : datasets){
 			for(Dimension dim : dataset.getDimensions() ){
-				// System.out.println(dataset.getName() + " : " + dim.getName() );
 				HashMap<String, String> map = dim.getCodelist();
 				if (!dim.getName().equals("Age") &&  !dim.getName().equals("Region Type") &&  !dim.getName().equals("State")   && map != null) {
 					for(String key : map.keySet()){
@@ -133,6 +135,7 @@ public class SemanticParser {
 		synonyms.put("UK","United Kingdom, Channel Islands and Isle of Man(d)");
 		synonyms.put("USA","United States of America");
 		synonyms.put("US","United States of America");
+		synonyms.put("NZ","New Zealnd");
 		synonyms.put("United States","United States of America");
 		synonyms.put("America","United States of America");
 
@@ -377,33 +380,54 @@ public class SemanticParser {
 	private boolean wholeWordContains (String aPhrase, String aSubstr){
 		// we apply spaces before and after the main phrase and substr,
 		// as a trick to search for whole words only.
-		String phrase = " " + aPhrase.replaceAll("[?]", "").toLowerCase() + " ";  
-		String substr = " " + aSubstr.replaceAll("[?]", "").toLowerCase() + " ";
+		String phrase = " " + aPhrase.replace("?", "").toLowerCase() + " ";  
+		String substr = " " + aSubstr.replace("?", "").toLowerCase() + " ";
 		return phrase.contains(substr);   
 	}
 
+
+	private void searchCodeListForRootWord(String str){
+		for(Dataset dataset : datasets){
+			for(Dimension dim : dataset.getDimensions() ){
+				HashMap<String, String> map = dim.getCodelist();
+				if (!dim.getName().equals("Age") &&  !dim.getName().equals("Region Type") &&  !dim.getName().equals("State")) {
+					for(String key: map.keySet ()){
+						if(str.equalsIgnoreCase(map.get(key) )){
+							// System.out.println(dataset.getName() + " ~ "+ dim.getName() +" ~ " + map.get(key) ) ;
+							dimensions.put(dim.getName(), map.get(key) );
+						}
+					}
+				}
+			}
+		};
+	}
+	
 	private void matchSynonymsOfCodeList(String str){
-		String baseWord = new String();
+		String rootWord = new String();
 		for (String keyWord : synonyms.keySet() ) {
 			if(wholeWordContains(str, keyWord)  ){ 
-				baseWord = synonyms.get(keyWord) ; 
-				dimensions.put(flatCodeList.get(baseWord), baseWord);
-				//System.out.println("synonyms:" + flatCodeList.get(baseWord)+" : "+ baseWord);
+				rootWord = synonyms.get(keyWord) ; 
+				// System.out.println("Found the word: "+ keyWord + "~" + rootWord);
+				searchCodeListForRootWord(rootWord);
 			};
-		};		
+		};				
 	}
 
 
 	private void matchCodeList(String str){
-		String baseWord = new String();
-		for (String keyWord : flatCodeList.keySet() ) {
-			if(wholeWordContains(str, keyWord)  ){ 
-				baseWord = keyWord ; 
-				dimensions.put(flatCodeList.get(baseWord), baseWord);
-				//System.out.println("codelist:" + flatCodeList.get(baseWord)+" : "+ baseWord);
-			};
+		for(Dataset dataset : datasets){
+			for(Dimension dim : dataset.getDimensions() ){
+				HashMap<String, String> map = dim.getCodelist();
+				if (!dim.getName().equals("Age") &&  !dim.getName().equals("Region Type") &&  !dim.getName().equals("State")) {
+					for(String key: map.keySet ()){
+						if(! map.get(key).equalsIgnoreCase("total") &&  wholeWordContains(str,map.get(key) )){
+							// System.out.println(dataset.getName() + " ~ "+ dim.getName() +" ~ " + map.get(key) ) ;
+							dimensions.put(dim.getName(), map.get(key) );
+						}
+					}
+				}
+			}
 		};
-
 	}
 
 	public void identifyDimensions(ArrayList<String> phrases){
@@ -417,7 +441,7 @@ public class SemanticParser {
 			if(numericalString.length() > 0){
 				dimensions.put("Age", numericalString ); 		
 			};
-
+			
 			// check for all other dimensions
 			matchCodeList(phrase);
 			matchSynonymsOfCodeList(phrase);
@@ -468,9 +492,8 @@ public class SemanticParser {
 		
 		grammarParser.parseText();
 		identifyDimensions(grammarParser.keyPhrases);
-		//System.out.println(dimensions);
+		// System.out.println(dimensions);
 		cleanUpDimensions();
-
 	}
 
 	private void cleanUpDimensions(){
@@ -482,6 +505,21 @@ public class SemanticParser {
 		dimensions.remove("Count of Families");
 		dimensions.remove("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)");
 		
+		dimensions.remove("Count of Dwellings");
+		dimensions.remove("Count of Families and Persons in Families");
+		dimensions.remove("Type of Internet Connection");
+		dimensions.remove("Number of Motor Vehicles");
+		dimensions.remove("Place of Usual Residence 5 Years Ago");
+		dimensions.remove("Place of Usual Residence 1 Year Ago");
+		dimensions.remove("Proficiency in Spoken English/Language");
+		dimensions.remove("Proficiency in Spoken English/Language of Male Parent");
+		dimensions.remove("Proficiency in Spoken English/Language of Female Parent");
+		
+		dimensions.remove("Selected Labour Force, Education and Migration Characteristics");
+
+		dimensions.remove("State of Destination");
+		dimensions.remove("State of Origin");
+
 		// Begin the conditional checking.....
 		
 		
@@ -490,41 +528,44 @@ public class SemanticParser {
 		};
 
 		
-		if(!grammarParser.inputText.contains("born") &&	!grammarParser.inputText.contains("birth") && !grammarParser.inputText.contains("from") 
-				&& dimensions.containsKey("Country of Birth of Person") ){
+		if(grammarParser.inputText.contains("born") ||	grammarParser.inputText.contains("birth")   ){
+			dimensions.remove("Country of Origin");
+			dimensions.remove("Country of Destination");
+		};
+
+		if(	!grammarParser.inputText.toLowerCase().contains("census") ){
+				dimensions.remove("Place of Usual Residence on Census Night");
+			};
+			
+		if(		!grammarParser.inputText.contains("born") 
+			&&	!grammarParser.inputText.contains("birth") 
+			&&  !grammarParser.inputText.contains("from") 
+			 ){
 			dimensions.remove("Country of Birth of Person");
 		};
 
-		if(!grammarParser.inputText.contains("years ago") 
-				&& dimensions.containsKey("Place of Usual Residence 5 Years Ago") ){
-			dimensions.remove("Place of Usual Residence 5 Years Ago");
-		};
-
-		if(grammarParser.inputText.contains("lived") 
-				&& dimensions.containsKey("Country of Birth of Person") ){
+		if(grammarParser.inputText.contains("lived") ){
 			dimensions.remove("Country of Birth of Person");
 		};
 
 		
-		if( (grammarParser.inputText.contains("speak") || grammarParser.inputText.contains("speakers") )
-				&& dimensions.containsKey("Country of Birth of Person")  ){
+		if( grammarParser.inputText.contains("speak") ){
 			dimensions.remove("Country of Birth of Person");
+			dimensions.remove("Ancestry");			
 		};
 
-		
-		if( (grammarParser.inputText.contains("speak") || grammarParser.inputText.contains("speakers") )
-				&& dimensions.containsKey("Ancestry")  ){
-			dimensions.remove("Ancestry");
-		};
 
 		
 		if(grammarParser.inputText.contains("assistance") ){
-			if(dimensions.containsKey("Country of Birth of Person") )
-				dimensions.remove("Country of Birth of Person");
+			dimensions.remove("Country of Birth of Person");
 		};
 
-		if(grammarParser.inputText.contains("voluntary") ||  grammarParser.inputText.contains("volunteer") 
-				&& dimensions.containsKey("Country of Birth of Person") ){
+		if(grammarParser.inputText.contains("employed") ){
+			dimensions.remove("Country of Birth of Person");
+		};
+
+		
+		if(grammarParser.inputText.contains("voluntary") ||  grammarParser.inputText.contains("volunteer")  ){
 				dimensions.remove("Country of Birth of Person");
 		};
 
@@ -532,7 +573,6 @@ public class SemanticParser {
 		|| grammarParser.inputText.toLowerCase().contains("price index") 
 		|| grammarParser.inputText.toLowerCase().contains("inflation") 
 		){
-			dimensions.remove("Place of Usual Residence 5 Years Ago");
 			dimensions.remove("Industry of Employment");
 		};
 
@@ -562,7 +602,7 @@ public class SemanticParser {
 		};
 		
 		// the word "persons" is often used as a generic grammar term and not as a direct semantic indicator of sum of males+females.
-		if(dimensions.containsKey("Place of Usual Residence on Census Night")  && dimensions.containsKey("Sex") ){
+		if(	dimensions.containsKey("Place of Usual Residence on Census Night") || dimensions.containsKey("Selected Medians and Averages") ){
 			dimensions.remove("Sex");
 		};
 		

@@ -50,7 +50,8 @@ public class QueryBuilder {
 		SemanticParser semanticParser = new SemanticParser(this.query, this.datasets, this.ASGS2011);
 		semanticParser.parseText();
 
-		queryInputs = semanticParser.getDimensions();		
+		queryInputs = semanticParser.getDimensions();	
+		// System.out.println(queryInputs);
 		dataset = findBestMatchDatasetForDimensionNames();
 
 		if(queryInputs.containsKey(AGE)){

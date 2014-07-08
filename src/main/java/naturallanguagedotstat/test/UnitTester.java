@@ -41,7 +41,7 @@ public class UnitTester {
 		System.out.println("Starting "+TEST_QUERIES.length +" functional tests.");
 
 		for(int i = 0; i < TEST_QUERIES.length; i++){
-			  System.out.println("Testing: ("+(i+1)+ "/"+TEST_QUERIES.length +"): "+ TEST_QUERIES[i]);
+			  // System.out.println("Testing: ("+(i+1)+ "/"+TEST_QUERIES.length +"): "+ TEST_QUERIES[i]);
 				
 			JsonReader jsonReader = Json.createReader(new StringReader((String) service.query(TEST_QUERIES[i]).getEntity()));
 			JsonObject object = jsonReader.readObject();
