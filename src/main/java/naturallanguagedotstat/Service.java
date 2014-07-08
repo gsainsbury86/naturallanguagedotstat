@@ -109,7 +109,7 @@ public class Service {
 
 			String datasetNamePrefix = new String();
 			if(queryBuilder.getDataset().getName().toLowerCase().contains("census")){
-				datasetNamePrefix = "Census 2011:";
+				datasetNamePrefix = "Census 2011 - ";
 			} else {
 				datasetNamePrefix = "";
 			};
