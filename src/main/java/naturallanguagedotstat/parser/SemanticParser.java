@@ -469,7 +469,7 @@ public class SemanticParser {
 		
 		grammarParser.parseText();
 		identifyDimensions(grammarParser.keyPhrases);
-		System.out.println(dimensions);
+		//System.out.println(dimensions);
 		cleanUpDimensions();
 
 	}

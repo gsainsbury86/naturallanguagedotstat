@@ -18,7 +18,6 @@ import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 
 
-
 public class UnitTester {
 
 	@Rule
@@ -27,6 +26,10 @@ public class UnitTester {
 	public Service service;
 
 	public UnitTester() throws IOException, ClassNotFoundException{
+		LocalTest.localLoad = true;
+		LocalTest.debug = true;
+		LocalTest.test = true;
+		
 		collector = new ErrorCollector();
 		service = new Service();
 	}
@@ -34,9 +37,7 @@ public class UnitTester {
 	@Test
 	public void testQueries() throws FileNotFoundException, IOException, ClassNotFoundException, SQLException {
 
-		LocalTest.localLoad = true;
-		LocalTest.debug = true;
-		LocalTest.test = true;
+
 		System.out.println("Starting "+TEST_QUERIES.length +" functional tests.");
 
 		for(int i = 0; i < TEST_QUERIES.length; i++){

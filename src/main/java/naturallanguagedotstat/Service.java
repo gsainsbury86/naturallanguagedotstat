@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -47,11 +48,16 @@ public class Service {
 	private static final String WEB_INF = "/WEB-INF/";
 	static final String serverName = "stat.abs.gov.au";
 
+	private static ArrayList<Dataset> datasets;
+	private static Dimension ASGS2011;
+
 	@javax.ws.rs.core.Context 
 	ServletContext context;
 
 	public Service() throws IOException, ClassNotFoundException{
 		//TODO: Try to pre-load
+		datasets = loadDatasets();
+		ASGS2011 = loadASGS_2011();
 	}
 
 	@GET
@@ -85,6 +91,23 @@ public class Service {
 		objIn.close();
 		fileIn.close();
 
+		HashSet<Dataset> toRemove = new HashSet<Dataset>();
+
+		for(Dataset ds : datasets){
+			String name = ds.getName();
+			if(!(name.startsWith("ABS_CENSUS2011_B") && name.length() == 18)
+					&& !name.equals("CPI") 
+					&& !name.equals("LF") 
+					&& !name.equals("MERCH_EXP") 
+					&& !name.equals("MERCH_IMP") 
+					&& !name.equals("BOP") 
+					&& !name.equals("RT") 
+					){
+				toRemove.add(ds);
+			}
+		}
+
+		datasets.removeAll(toRemove);
 		return datasets;
 	}
 
@@ -112,8 +135,6 @@ public class Service {
 	@Produces("application/json")
 	public Response query(@PathParam("query") String query) throws SQLException{
 
-		ArrayList<Dataset> datasets = null;
-		Dimension ASGS2011 = null;
 		JsonObject responseObject = null;
 		String error = null;
 		String urlToRead = null;
@@ -122,11 +143,14 @@ public class Service {
 		int responseCode = 200;
 
 		try{
-			datasets = loadDatasets();
-			ASGS2011 = loadASGS_2011();
+			if(!LocalTest.localLoad){
+				datasets = loadDatasets();
+				ASGS2011 = loadASGS_2011();
+			}
 
 			queryBuilder = new QueryBuilder(query, datasets, ASGS2011);
 			urlToRead = queryBuilder.build();
+
 
 			String data = null;
 			double result = -1;
@@ -138,7 +162,7 @@ public class Service {
 
 				result = Utils.findObsValue(dataDocument);
 			}
-			
+
 
 			JsonBuilderFactory factory = Json.createBuilderFactory(null);
 			JsonObjectBuilder builder = factory.createObjectBuilder();
