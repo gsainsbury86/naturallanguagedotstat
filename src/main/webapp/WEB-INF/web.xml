@@ -7,5 +7,10 @@
          metadata-complete="false">
 
          
+   <listener>
+        <listener-class>ContextListener</listener-class>
+    </listener>
+         
 </web-app>
+
 

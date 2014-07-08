@@ -193,7 +193,7 @@ a:visited {
 				$("#datasetURL").html('<a href="'+data.datasetURL+'" target="_blank" >' + data.datasetName + '</a><br>');
 				$('#map').text(' ');
 				$.each(data, function(index) {
-					if (index != 'result' && index != 'url') {
+					if (index != 'result' && index != 'url'&& index != 'datasetName' && index != 'datasetURL') {
 						var e = data[index];
 
 						/*TODO: Fix for age ranges*/
