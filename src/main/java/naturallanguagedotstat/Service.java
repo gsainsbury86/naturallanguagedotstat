@@ -56,8 +56,10 @@ public class Service {
 
 	public Service() throws IOException, ClassNotFoundException{
 		//TODO: Try to pre-load
-		datasets = loadDatasets();
-		ASGS2011 = loadASGS_2011();
+		if(LocalTest.localLoad){
+			datasets = loadDatasets();
+			ASGS2011 = loadASGS_2011();
+		}
 	}
 
 	@GET
