@@ -84,6 +84,8 @@ public class SemanticParser {
 		synonyms.put("median age","Median age of persons" ) ;
 		synonyms.put("average age","Median age of persons" ) ;
 		synonyms.put("personal income","Median total personal income ($/weekly)" ) ;		
+		synonyms.put("median income","Median total personal income ($/weekly)" ) ;		
+		synonyms.put("average income","Median total personal income ($/weekly)" ) ;		
 		synonyms.put("income for people","Median total personal income ($/weekly)" ) ;		
 		synonyms.put("income for persons","Median total personal income ($/weekly)" ) ;		
 		synonyms.put("family income","Median total family income ($/weekly)" ) ;
