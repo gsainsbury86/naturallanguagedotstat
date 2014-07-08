@@ -14,7 +14,13 @@ body {
         text-align: center;
 }
 
+a {
+	color: #383838;
+ }
 
+a:visited {
+    color: #383838;
+}
 
  .cf:before, .cf:after{
  	content:"";
@@ -135,7 +141,6 @@ body {
         
 #output {
 	margin-top:50px;
-	text-align:left;
 	background: #308030;
     font: 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
 	border: none;
@@ -145,38 +150,32 @@ body {
 }
 
 #result {
-	margin-right:130px;
-	line-height: 2.0;
-	text-align:center;
 	color: #fff;
 	font-weight: normal;
 	font-size: 3em;
+	line-height: 2.0;
+	margin-right:130px;
 }
 
 
 #datasetURL {
+	color: #383838;
 	margin-left: 10px;
+	text-align:left;
 	line-height: 2.0;
-	color: #141414;
 }
 
 #map {
 	margin-left:10px;
 	color: #383838;
+	text-align:left;
 }
 
 #url {
 	color: #383838;
 	margin-left: 10px;
-	line-height: 2.0;
-}
-
-#url {
-	color: #383838;
-	margin-left: 10px;
-	line-height: 1.0;
-	text-align:right;
-	font-size: 0.5em;
+	text-align:left;
+	line-height: 1.5;
 }
 
 </style>
@@ -196,7 +195,7 @@ body {
 			var url = '/main/query/' + $('#query').val();
 			$.getJSON(url, function(data, status, jqXHR) {
 				$("#result").text(data.result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-				$("#url").html('<a href="'+data.url+'" target="_blank" >' + 'reference' + '</a><br>');
+				$("#url").html('<a href="'+data.url+'" target="_blank" >' + 'citation' + '</a><br>');
 				$("#datasetURL").html('<a href="'+data.datasetURL+'" target="_blank" >' + data.datasetName + '</a><br>');
 				$('#map').text(' ');
 				$.each(data, function(index) {
@@ -231,11 +230,10 @@ body {
 		<input type="text" id="query" placeholder="eg. How many women in Tasmania are Buddhists?" required>
 		<button type="submit" id="go" >Search</button>
 		<div id="output">
-			<div id="result"></div>
 			<div id="datasetURL"></div>
+			<div id="result"></div>
 			<div id="map"></div>
 			<div id="url"></div>
-			<div id="footnote"><i> powered by </i> <b>ABS.Stat</b> </div>
 		</div>
 	</div>
 </body>
