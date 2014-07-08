@@ -144,6 +144,8 @@ public class Service {
 			JsonObjectBuilder builder = factory.createObjectBuilder();
 			builder.add("result", result);
 			builder.add("url", urlToRead);
+			builder.add("datasetName", queryBuilder.getDataset().getEnglishName());
+			builder.add("datasetURL", "http://stat.abs.gov.au/Index.aspx?DatasetCode="+queryBuilder.getDataset().getName());
 			for(String key : queryBuilder.getQueryInputs().keySet()){
 				JsonArrayBuilder jab = factory.createArrayBuilder();
 				for(String dimValue : queryBuilder.getQueryInputs().get(key)){

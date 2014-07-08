@@ -10,6 +10,7 @@ public class Dataset implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String name;
+	private String englishName;
 	private ArrayList<Dimension> dimensions;
 	private Dimension timeDimension;
 	
@@ -50,6 +51,14 @@ public class Dataset implements Serializable{
 
 	public void setTimeDimension(Dimension timeDimension) {
 		this.timeDimension = timeDimension;
+	}
+
+	public String getEnglishName() {
+		return englishName;
+	}
+
+	public void setEnglishName(String englishName) {
+		this.englishName = englishName;
 	}
 	
 }

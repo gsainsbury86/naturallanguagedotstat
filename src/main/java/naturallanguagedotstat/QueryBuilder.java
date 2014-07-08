@@ -1,5 +1,6 @@
 package naturallanguagedotstat;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,6 +24,8 @@ public class QueryBuilder {
 	//TODO: Make static once we fix one-time loading
 	private ArrayList<Dataset> datasets;
 	private Dimension ASGS2011;
+	
+	private Dataset dataset;
 
 	private String query;
 	private HashMap<String, ArrayList<String>> queryInputs;
@@ -51,7 +54,7 @@ public class QueryBuilder {
 		semanticParser.parseText();
 
 		queryInputs = semanticParser.getDimensions();	
-		Dataset dataset = findBestMatchDatasetForDimensionNames();
+		dataset = findBestMatchDatasetForDimensionNames();
 
 		if(queryInputs.containsKey(AGE)){
 			getBestAgeCodeLists(queryInputs, dataset);
@@ -470,6 +473,10 @@ public class QueryBuilder {
 			regionType = "AUS";
 		}
 		return regionType;
+	}
+
+	public Dataset getDataset() {
+		return dataset;
 	}
 
 
