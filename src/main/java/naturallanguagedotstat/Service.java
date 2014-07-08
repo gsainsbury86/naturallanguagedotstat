@@ -1,19 +1,15 @@
 package naturallanguagedotstat;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -43,11 +39,8 @@ import org.w3c.dom.Document;
 @Path("/main")
 public class Service {
 
-	private static final String local_webapp = "src/main/webapp/";
-	private static final String RES_DIR = "/WEB-INF/resources/";
 	private static final String WEB_INF = "/WEB-INF/";
 	static final String serverName = "stat.abs.gov.au";
-
 	public static ArrayList<Dataset> datasets;
 	public static Dimension ASGS2011;
 
@@ -55,11 +48,10 @@ public class Service {
 	ServletContext context;
 
 	public Service() throws IOException, ClassNotFoundException{
-		//TODO: Try to pre-load
-//		if(LocalTest.localLoad){
-//			datasets = loadDatasets();
-//			ASGS2011 = loadASGS_2011();
-//		}
+		if(LocalTest.localLoad){
+			datasets = Utils.loadDatasets();
+			ASGS2011 = Utils.loadASGS_2011();
+		}
 	}
 
 	@GET
@@ -76,60 +68,7 @@ public class Service {
 		return new String(sb);
 	}
 
-//	@SuppressWarnings("unchecked")
-//	public ArrayList<Dataset> loadDatasets() throws IOException, ClassNotFoundException,
-//	FileNotFoundException {
-//
-//		ArrayList<Dataset> datasets = new ArrayList<Dataset>();
-//
-//		InputStream fileIn;
-//		if(LocalTest.localLoad){
-//			fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"datasets.ser"));
-//		}else{
-//			fileIn = context.getResourceAsStream(RES_DIR+"datasets.ser");
-//		}
-//		ObjectInputStream objIn = new ObjectInputStream(fileIn);
-//		datasets = (ArrayList<Dataset>) objIn.readObject();
-//		objIn.close();
-//		fileIn.close();
-//
-//		HashSet<Dataset> toRemove = new HashSet<Dataset>();
-//
-//		for(Dataset ds : datasets){
-//			String name = ds.getName();
-//			if(!(name.startsWith("ABS_CENSUS2011_B") && name.length() == 18)
-//					&& !name.equals("CPI") 
-//					&& !name.equals("LF") 
-//					&& !name.equals("MERCH_EXP") 
-//					&& !name.equals("MERCH_IMP") 
-//					&& !name.equals("BOP") 
-//					&& !name.equals("RT") 
-//					){
-//				toRemove.add(ds);
-//			}
-//		}
-//
-//		datasets.removeAll(toRemove);
-//		return datasets;
-//	}
-//
-//
-//	public Dimension loadASGS_2011() throws IOException, ClassNotFoundException,
-//	FileNotFoundException {
-//		InputStream fileIn;
-//		if(LocalTest.localLoad){
-//			fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"ASGS_2011.ser"));
-//		}else{
-//			fileIn = context.getResourceAsStream(RES_DIR+"ASGS_2011.ser");
-//		}
-//		ObjectInputStream objIn = new ObjectInputStream(fileIn);
-//		Dimension ASGS2011 = (Dimension) objIn.readObject();
-//		objIn.close();
-//		fileIn.close();
-//
-//		return ASGS2011;
-//
-//	}
+
 
 	//TODO: Change this to a POST. No rush here though.
 	@GET
@@ -145,10 +84,7 @@ public class Service {
 		int responseCode = 200;
 
 		try{
-			if(!LocalTest.localLoad){
-			//	datasets = loadDatasets();
-			//	ASGS2011 = loadASGS_2011();
-			}
+
 
 			queryBuilder = new QueryBuilder(query, datasets, ASGS2011);
 			urlToRead = queryBuilder.build();

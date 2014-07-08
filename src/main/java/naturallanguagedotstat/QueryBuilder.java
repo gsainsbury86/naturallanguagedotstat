@@ -1,11 +1,9 @@
 package naturallanguagedotstat;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,7 +15,6 @@ import naturallanguagedotstat.utils.Utils;
 
 public class QueryBuilder {
 
-	private static final String SEX = "Sex";
 	private static final String AGE = "Age";
 
 	private boolean doAggregateAges;

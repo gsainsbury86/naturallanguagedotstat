@@ -1,9 +1,6 @@
 package naturallanguagedotstat.parser;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import naturallanguagedotstat.model.Dimension;
 
 public class GrammarParser {
 	public String inputText;

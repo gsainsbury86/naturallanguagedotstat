@@ -1,7 +1,5 @@
 package naturallanguagedotstat;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +13,6 @@ import javax.servlet.ServletContextListener;
 
 import naturallanguagedotstat.model.Dataset;
 import naturallanguagedotstat.model.Dimension;
-import naturallanguagedotstat.test.LocalTest;
 
 public class ContextListener implements ServletContextListener {
 
@@ -78,7 +75,6 @@ public class ContextListener implements ServletContextListener {
 	FileNotFoundException {
 		InputStream fileIn;
 		fileIn = context.getResourceAsStream(RES_DIR+"ASGS_2011.ser");
-
 		ObjectInputStream objIn = new ObjectInputStream(fileIn);
 		Dimension ASGS2011 = (Dimension) objIn.readObject();
 		objIn.close();
