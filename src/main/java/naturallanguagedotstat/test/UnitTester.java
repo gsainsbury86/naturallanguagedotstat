@@ -291,17 +291,13 @@ public class UnitTester {
 		"How many women aged 20-25 in Karabar are labourers?",
 		
 		//CPI
-		"What is the current CPI?",
-		"What is the CPI for New South Wales?", 
-		"What is the inflation rate for Tasmania?",
-		"What is the current transport CPI?",
-		"What is the food CPI for Hobart?",
-		"What is the housing CPI in Canberra?",
+		"What is the current CPI?", //0.6
+		"What is the CPI for New South Wales?", // 0.6
+		"What is the inflation rate for Tasmania?", //0.5
+		"What is the current transport CPI?", //1.1
+		"What is the food CPI for Hobart?", //-0.3
+		"What is the housing CPI in Canberra?" //-0.2
 		
-		//LF
-		"What is the participation rate for QLD?",
-		"What is the employment rate for Vic?",
-		"What is the unemployment rate for Tasmania?"
 
 		
 	};
@@ -525,11 +521,8 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.6.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1" ,		// printQueryResult("What is the inflation rate for Tasmania?") ; //
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.50.20005.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1",	// printQueryResult("What is the current transport CPI?") ; 
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.6.20001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1", 	//	printQueryResult("What is the food CPI for Hobart?") ; 
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.8.20003.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1",	// printQueryResult("What is the housing CPI in Canberra?") ; 
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.8.20003.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1"	// printQueryResult("What is the housing CPI in Canberra?") ; 
 
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/3.10.3.1599.10.M/ABS?startTime=2014-Q2&endTime=2014-Q2", 	// printQueryResult("What is the participation rate for QLD?") ; 
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/2.5.3.1599.10.M/ABS?startTime=2014-Q2&endTime=2014-Q2", // printQueryResult("What is the employment rate for Vic?") ; 
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/6.14.3.1599.10.M/ABS?startTime=2014-Q2&endTime=2014-Q2"			// printQueryResult("What is the unemployment rate for Tasmania?") ;	// 
 
 	};
 }

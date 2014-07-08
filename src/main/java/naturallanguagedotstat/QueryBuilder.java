@@ -78,6 +78,7 @@ public class QueryBuilder {
 			setDefaultValueForDimension(dataset, "Region", "Total");									
 			setDefaultValueForDimension(dataset, "Age", "Total");
 			setDefaultValueForDimension(dataset, "Frequency", "Monthly");									
+			setDefaultValueForDimension(dataset, "Adjustment Type", "Original");
 		}
 		
 		//Begin MEI defaults
