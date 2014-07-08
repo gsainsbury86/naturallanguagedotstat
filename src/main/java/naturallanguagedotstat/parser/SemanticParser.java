@@ -246,7 +246,7 @@ public class SemanticParser {
 		
 		//B42
 		synonyms.put("employed","Employed total");
-		synonyms.put("employment","Employed total");
+		synonyms.put("in employment","Employed total");
 		synonyms.put("total employment","Employed total");
 		synonyms.put("full time","Full-time(a)");
 		synonyms.put("part time","Part-time");
@@ -376,6 +376,13 @@ public class SemanticParser {
 		synonyms.put("recreation CPI","Recreation and culture");
 		synonyms.put("education CPI","Education");
 
+		synonyms.put("employment to population","Employment to population ratio (%)");
+		synonyms.put("employment ratio","Employment to population ratio (%)");
+		synonyms.put("employment rate","Employment to population ratio (%)");
+		synonyms.put("participation","Participation rate (%)");
+		synonyms.put("unemployment","Unemployment rate (%)");
+		
+		synonyms.put("employment ratio","Employment to population ratio (%)");
 	};
 
 

@@ -291,7 +291,19 @@ public class UnitTester {
 		"How many women aged 20-25 in Karabar are labourers?",
 		
 		//CPI
-		"What is the current CPI?"
+		"What is the current CPI?",
+		"What is the CPI for New South Wales?", 
+		"What is the inflation rate for Tasmania?",
+		"What is the current transport CPI?",
+		"What is the food CPI for Hobart?",
+		"What is the housing CPI in Canberra?",
+		
+		//LF
+		"What is the participation rate for QLD?",
+		"What is the employment rate for Vic?",
+		"What is the unemployment rate for Tasmania?"
+
+		
 	};
 
 	private static final String[] TEST_RESULTS = {
@@ -423,7 +435,6 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/1.3207.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011",	//		printQueryResult("Sandy Bay's population of men who were born in Greece?") ; // 36
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.1101.2.STE.2.A/ABS?startTime=2011&endTime=2011",			//	printQueryResult("How many people in Victoria were born in Australia?") ; //3670934
 
-		
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/3.41.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011",	 //How many people speak Iranian in Goulburn?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/1.7101.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", //In Goulburn, how many men speak Cantonese?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/2.1.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", 	//How many women in Goulburn only speak English?
@@ -443,7 +454,6 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/3.7104.0.AUS.0.A/ABS?startTime=2011&endTime=2011",		// printQueryResult("How many Mandarin speakers are there?") ; //336410
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/1.71.1.SA4.101.A/ABS?startTime=2011&endTime=2011",		// printQueryResult("How many men in Capital Region are Chinese speakers?") ; // 285
 	
-		
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/1.4.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", 		//How many men in Goulburn are muslims?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/1.24.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", 		//How many Pentecostal men are there in Goulburn?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/3.215.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011",		 //How many mormons in Goulburn?
@@ -452,22 +462,18 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/3.2.0.AUS.0.A/ABS?startTime=2011&endTime=2011",				//		printQueryResult("What is Australia's Christian population?") ; // 13150673
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/2.101.0.AUS.0.A/ABS?startTime=2011&endTime=2011",				//		printQueryResult("What is Australia's female Buddhist population?") ; //288792
 		
-		
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B18/1.A20.1.0.AUS.0.A/ABS?startTime=2011&endTime=2011", //How many men 20-25 need assistance in Australia?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B18/2.A20.1.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011",	//	printQueryResult("How many female 20-25 year olds need assistance in Sandy Bay?") ; // 7
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B18/3.TT.1.1.SA2.101021007.A/ABS?startTime=2011&endTime=2011",	//	printQueryResult("How many people need assistance in Braidwood?") ; // 121
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B18/3.TT.1.1.SA3.10102.A/ABS?startTime=2011&endTime=2011",	//	printQueryResult("How many people need assistance in Braidwood?") ; // 121
-
 		
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B19/2.T45.2.6.STE.6.A/ABS?startTime=2011&endTime=2011", //How many women aged 45-50 in Tasmania did volunteer work?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B19/1.A20.2.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", //How many men aged 20-25 in Goulburn did volunteer work?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B19/1.A20.2.1.SA3.10102.A/ABS?startTime=2011&endTime=2011", //How many men aged 20-25 in Goulburn did volunteer work?
 
-		
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B21/2.O15+A15.2.0.AUS.0.A/ABS?startTime=2011&endTime=2011", //How many women aged 15-19 provided unpaid assistance in Australia?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B21/2.O15.2.0.AUS.0.A/ABS?startTime=2011&endTime=2011", //How many women provided unpaid assistance in Australia?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B21/2.O15.2.1.SA3.10102.A/ABS?startTime=2011&endTime=2011", //How many women provided unpaid assistance in Queanbeyan?
-
 
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/2.O15.2.1.SA4.101.A/ABS?startTime=2011&endTime=2011", //How many women in Capital Region have a graduate diploma?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/2.O15.3.1.SA4.101.A/ABS?startTime=2011&endTime=2011", //How many women have a bachelor degree in Capital Region?
@@ -475,13 +481,11 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/2.T25.1.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", //How many women 25-34 in Goulburn have a postgraduate degree
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/1.T35.3.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", //How many 35-44 year old men in Goulburn have a bachelors degree 
 
-		
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/01.2.T25.6.SA2.601031019.A/ABS?startTime=2011&endTime=2011", //How many women aged 25-30 in Moonah have studied science?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/03.2.O15.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", //How many women in Goulburn have an engineering degree?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/04.1.T65.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", //How many men aged 65-80 in Goulburn have studied architecture?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/08.1.O15.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", //How many men in Goulburn have a commerce degree?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/08.1.O15.1.SA2.101021007.A/ABS?startTime=2011&endTime=2011",	//	printQueryResult("How many men in Braidwood have a commerce degree?") ; // 7
-
 		
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.T35.EMP.6.SA2.601031019.A/ABS?startTime=2011&endTime=2011", // How many people aged between 35 and 40 in Moonah were employed?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.T35.EMP.6.SA2.601031019.A/ABS?startTime=2011&endTime=2011", // How many people aged 35-40 in Moonah were in employment?
@@ -495,7 +499,6 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/1.O15.1.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011",	//	printQueryResult("How many men in Goulburn were full time employed?") ; // 3726
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/1.O15.1.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011",	//	printQueryResult("How many men in Goulburn were employed full time?") ; // 3726
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.T35.EMP.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011",	//	printQueryResult("How many people aged 35-40 in Goulburn were employed in total?") ; //2047  
-
 		
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.T35.A.6.SA2.601031019.A/ABS?startTime=2011&endTime=2011", //How many men aged 35-40 in Moonah work in agriculture?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.T35.B.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011", //How many men aged 35-40 in Sandy Bay work in mining?
@@ -509,7 +512,6 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/2.T35.D.1.SA3.10102.A/ABS?startTime=2011&endTime=2011", //How many men from the utilities industry in Queanbeyan are aged 35-40?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/2.T35.E.1.SA3.10102.A/ABS?startTime=2011&endTime=2011", //How many men from the construction industry in Queanbeyan are aged 35-40?
 
-		
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/A15.2.4.6.STE.6.A/ABS?startTime=2011&endTime=2011", 			// What is the female population aged 18-19 in Tasmania that are community workers?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/T35.1.1.1.SA2.101021007.A/ABS?startTime=2011&endTime=2011", 	//What is the male population aged 35-40 in Braidwood are managers?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/A20.2.1.6.STE.6.A/ABS?startTime=2011&endTime=2011", 			// What is the female population aged 20 to 25 in Tasmania that are Managers?
@@ -518,8 +520,16 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/A20.2.4.1.SA2.101031014.A/ABS?startTime=2011&endTime=2011", 	//How many women aged 20-25 in Cooma are community workers?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/A20.2.8.1.SA2.101021008.A/ABS?startTime=2011&endTime=2011", 	//How many women aged 20-25 in Karabar are labourers?
 
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.50.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1" // "What is the current CPI?
-		
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.50.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1", 		// "What is the current CPI?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.1.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1", 		// printQueryResult("What is the CPI for New South Wales?") ; //
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.6.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1" ,		// printQueryResult("What is the inflation rate for Tasmania?") ; //
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.50.20005.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1",	// printQueryResult("What is the current transport CPI?") ; 
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.6.20001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1", 	//	printQueryResult("What is the food CPI for Hobart?") ; 
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.8.20003.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1",	// printQueryResult("What is the housing CPI in Canberra?") ; 
+
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/3.10.3.1599.10.M/ABS?startTime=2014-Q2&endTime=2014-Q2", 	// printQueryResult("What is the participation rate for QLD?") ; 
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/2.5.3.1599.10.M/ABS?startTime=2014-Q2&endTime=2014-Q2", // printQueryResult("What is the employment rate for Vic?") ; 
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/6.14.3.1599.10.M/ABS?startTime=2014-Q2&endTime=2014-Q2"			// printQueryResult("What is the unemployment rate for Tasmania?") ;	// 
 
 	};
 }

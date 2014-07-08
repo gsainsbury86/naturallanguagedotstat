@@ -51,7 +51,7 @@ public class QueryBuilder {
 		semanticParser.parseText();
 
 		queryInputs = semanticParser.getDimensions();	
-		// System.out.println(queryInputs);
+		//System.out.println(queryInputs);
 		dataset = findBestMatchDatasetForDimensionNames();
 
 		if(queryInputs.containsKey(AGE)){
@@ -70,13 +70,15 @@ public class QueryBuilder {
 		setDefaultsForMissingCensusRegionDimensions(dataset);
 		setDefaultsForMissingCensusAgeDimension(dataset);
 
-		setDefaultValueForDimension(dataset, "Age", "Total all ages");
-		setDefaultValueForDimension(dataset, "Sex", "Persons");
-		setDefaultValueForDimension(dataset, "Selected Person Characteristics", "Total persons");
-		
+
 		if(dataset.getName().contains("ABS_CENSUS2011"))
 			setDefaultValueForDimension(dataset, "Frequency", "Annual");									
 
+		if(dataset.getName().contains("LF")){
+			setDefaultValueForDimension(dataset, "Region", "Total");									
+			setDefaultValueForDimension(dataset, "Age", "Total");
+			setDefaultValueForDimension(dataset, "Frequency", "Monthly");									
+		}
 		
 		//Begin MEI defaults
 		setDefaultRegionForCPI(dataset);
@@ -85,6 +87,12 @@ public class QueryBuilder {
 		setDefaultValueForDimension(dataset, "Index", 			"All groups CPI"); 								// CPI
 		setDefaultValueForDimension(dataset, "Adjustment Type", "Original");									// CPI
 		setDefaultValueForDimension(dataset, "Frequency", 		"Quarterly");									// CPI
+
+	
+		setDefaultValueForDimension(dataset, "Age", "Total all ages");
+		setDefaultValueForDimension(dataset, "Sex", "Persons");
+		setDefaultValueForDimension(dataset, "Selected Person Characteristics", "Total persons");
+		
 	}
 
 	private void setDefaultRegionForCPI(Dataset dataset) {
@@ -125,6 +133,9 @@ public class QueryBuilder {
 	}
 
 	private void setDefaultsForMissingCensusAgeDimension(Dataset dataset) {
+		if(!dataset.getName().contains("ABS_CENSUS2011")) 
+			return;
+		
 		for(Dimension dim : dataset.getDimensions()){
 			if(dim.getName().equals(AGE) && queryInputs.get(AGE) == null){
 				if(dataset.getName().equals("ABS_CENSUS2011_B20")  

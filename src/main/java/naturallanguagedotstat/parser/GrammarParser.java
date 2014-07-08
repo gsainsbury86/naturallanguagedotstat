@@ -11,7 +11,7 @@ public class GrammarParser {
 			"what","how","many","there", "where", 
 			"the", "a", 
 			"that", "which", "who", 
-			"of", "in", 
+			"of",  
 			"is", "are","were",
 			"do", "did","will", "can","have",
 			"only"
