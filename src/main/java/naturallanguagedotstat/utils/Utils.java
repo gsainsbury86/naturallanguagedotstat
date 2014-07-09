@@ -10,6 +10,8 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,10 +29,10 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 public class Utils {
-	
+
 	private static final String RES_DIR = "/WEB-INF/resources/";
 	private static final String local_webapp = "src/main/webapp/";
-	
+
 	@SuppressWarnings("unchecked")
 	public static ArrayList<Dataset> loadDatasets() throws IOException, ClassNotFoundException,
 	FileNotFoundException {
@@ -64,7 +66,7 @@ public class Utils {
 		return datasets;
 	}
 
-	
+
 
 
 	public static Dimension loadASGS_2011() throws IOException, ClassNotFoundException,
@@ -106,14 +108,15 @@ public class Utils {
 	 * 
 	 * @param urlToRead the address from which to read data
 	 * @return String from webpage
+	 * @throws IOException 
 	 */
-	public static String httpGET(String urlToRead) {
+	public static String httpGET(String urlToRead) throws IOException {
 		URL url;
 		HttpURLConnection conn;
 		BufferedReader rd;
 		String line;
 		String result = "";
-		try {
+		try{
 			url = new URL(urlToRead);
 			conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
@@ -122,10 +125,8 @@ public class Utils {
 				result += line;
 			}
 			rd.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+		}catch(IOException e){
+			throw new IOException("Unable to connect to ABS.Stat");
 		}
 		return result;
 	}	
@@ -157,8 +158,8 @@ public class Utils {
 			System.out.println("No ObsVAlue in SDMX response.");
 			throw new NullPointerException("No ObsValue in SDMX response.");
 		}
-	    for (int i = 0; i < nodeList.getLength(); i++) {
-	        Node node = nodeList.item(i);
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			Node node = nodeList.item(i);
 			System.out.println("value: "+Double.parseDouble(node.getAttributes().getNamedItem("value").getNodeValue()));
 			c += Double.parseDouble(node.getAttributes().getNamedItem("value").getNodeValue());
 		}

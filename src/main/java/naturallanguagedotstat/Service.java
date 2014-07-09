@@ -123,8 +123,7 @@ public class Service {
 				builder.add(key,jab);
 			}
 			responseObject = builder.build();
-
-		} catch(Exception e) {
+		}catch(Exception e) {
 			responseCode = 500;
 			error = e.toString();
 		} finally {
@@ -154,7 +153,7 @@ public class Service {
 			}
 		}
 
-		return Response.status(responseCode).entity(responseObject != null ? responseObject.toString() : null).build();
+		return Response.status(responseCode).entity(responseObject != null ? responseObject.toString() : error).build();
 
 	}
 }
