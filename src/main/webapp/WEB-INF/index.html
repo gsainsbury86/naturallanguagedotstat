@@ -197,7 +197,6 @@ a:visited {
 			$('#result').text('searching...');
 			var url = '/main/query/' + $('#query').val();
 			$.getJSON(url, function(data, status, jqXHR) {
-				if(status == 200){
 				$("#result").text(data.result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 				$("#url").html('URL : '+'<a href="'+data.url+'" target="_blank" >' + 'source' + '</a><br>');
 				$("#datasetURL").html('<a href="'+data.datasetURL+'" target="_blank" >' + data.datasetName + '</a><br>');
@@ -221,10 +220,6 @@ a:visited {
 						$("#map").append(index + " : " + e + '<br>');
 					}
 				});
-				}else{
-					$("#result").text(data.result);
-				}
-
 			});
 		});
 	});
