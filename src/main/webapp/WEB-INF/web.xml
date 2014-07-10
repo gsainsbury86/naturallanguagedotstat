@@ -25,6 +25,17 @@
         <url-pattern>/main/</url-pattern>
     </filter-mapping>
     
+    <servlet>
+        <servlet-name>default</servlet-name>
+        <servlet-class>javax.servlet.http.HttpServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>   
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.html</url-pattern>
+    
+</servlet-mapping>
+    
 </web-app>
 
 
