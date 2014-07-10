@@ -536,6 +536,12 @@ public class SemanticParser {
 			dimensions.remove("Registered Marital Status");
 		};
 
+		if(dimensions.containsKey("Sex") ){
+			dimensions.remove("Country of Origin"); //EXPORTS
+			dimensions.remove("Country of Destination"); //IMPORTS
+			dimensions.remove("Index"); //CPI
+		};
+
 		
 		if(grammarParser.inputText.contains("born") ||	grammarParser.inputText.contains("birth")   ){
 			dimensions.remove("Country of Origin");

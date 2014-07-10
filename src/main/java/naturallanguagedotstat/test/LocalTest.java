@@ -31,8 +31,10 @@ public class LocalTest {
  * 		
  */
 
-		printQueryResult("What is the employment rate for Vic?") ; // http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/2.5.3.1599.10.M/ABS?startTime=2014-Q2&endTime=2014-Q2
+//		printQueryResult("What is the employment rate for Vic?") ; // http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/2.5.3.1599.10.M/ABS?startTime=2014-Q2&endTime=2014-Q2
 
+
+		printQueryResult("How many men aged 35-40 in Eden work in utilities?") ; 
 		
 	}
 	

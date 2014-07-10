@@ -51,12 +51,13 @@ public class QueryBuilder {
 		semanticParser.parseText();
 
 		queryInputs = semanticParser.getDimensions();	
-		//System.out.println(queryInputs);
 		dataset = findBestMatchDatasetForDimensionNames();
-
-		if(queryInputs.containsKey(AGE)){
-			getBestAgeCodeLists(queryInputs, dataset);
-		};
+	
+		for (Dimension dim: dataset.getDimensions() ){
+			if(dim.getName().equalsIgnoreCase("Age") ){
+				getBestAgeCodeLists(queryInputs, dataset);
+			};
+		}
 
 		setDefaultsForMissingDimensions(dataset);
 		removeExtraneousDimensions(dataset);
@@ -74,6 +75,70 @@ public class QueryBuilder {
 		if(dataset.getName().contains("ABS_CENSUS2011"))
 			setDefaultValueForDimension(dataset, "Frequency", "Annual");									
 
+		if(dataset.getName().contains("ABS_CENSUS2011_B02"))
+			setDefaultValueForDimension(dataset, "Selected Medians and Averages", "Median age of persons");									
+
+		if(dataset.getName().contains("ABS_CENSUS2011_B03"))
+			setDefaultValueForDimension(dataset, "Place of Usual Residence on Census Night", "Counted at home on Census Night");									
+
+		if(dataset.getName().contains("ABS_CENSUS2011_B05"))
+			setDefaultValueForDimension(dataset, "Registered Marital Status", "Married(a)");									
+
+		if(dataset.getName().contains("ABS_CENSUS2011_B06"))
+			setDefaultValueForDimension(dataset, "Social Marital Status", "Married in a registered marriage");									
+
+		if(dataset.getName().contains("ABS_CENSUS2011_B07"))
+			setDefaultValueForDimension(dataset, "Indigenous Status", "Indigenous(a)");									
+
+		if(dataset.getName().contains("ABS_CENSUS2011_B09"))
+			setDefaultValueForDimension(dataset, "Country of Birth of Person", "Australia");									
+
+		if(dataset.getName().contains("ABS_CENSUS2011_B13"))
+			setDefaultValueForDimension(dataset, "Language Spoken at Home", "Speaks English only");									
+
+		if(dataset.getName().contains("ABS_CENSUS2011_B14"))
+			setDefaultValueForDimension(dataset, "Religious Affiliation", "Total");									
+
+		if(dataset.getName().contains("ABS_CENSUS2011_B15"))
+			setDefaultValueForDimension(dataset, "Type of Educational Institution Attending (Full/Part-Time Student Status by Age)", "Total");									
+
+		if(dataset.getName().contains("ABS_CENSUS2011_B16"))
+			setDefaultValueForDimension(dataset, "Highest Year of School Completed", "Total");									
+		
+		if(dataset.getName().contains("ABS_CENSUS2011_B19"))
+			setDefaultValueForDimension(dataset, "Voluntary Work for an Organisation or Group", "Volunteer");									
+
+		if(dataset.getName().contains("ABS_CENSUS2011_B21"))
+			setDefaultValueForDimension(dataset, "Unpaid Assistance to a Person with a Disability", "Provided unpaid assistance");									
+
+		if(dataset.getName().contains("ABS_CENSUS2011_B37"))
+			setDefaultValueForDimension(dataset, "Selected Labour Force, Education and Migration Characteristics", "Total labour force");									
+		
+		if(dataset.getName().contains("ABS_CENSUS2011_B38"))
+			setDefaultValueForDimension(dataset, "Place of Usual Residence 1 Year Ago", "Same usual address 1 year ago as in 2011");									
+
+		if(dataset.getName().contains("ABS_CENSUS2011_B39"))
+			setDefaultValueForDimension(dataset, "Place of Usual Residence 5 Years Ago", "Same usual address 5 years ago as in 2011");									
+
+		if(dataset.getName().contains("ABS_CENSUS2011_B40"))
+			setDefaultValueForDimension(dataset, "Non-School Qualification: Level of Education", "Total");									
+
+		if(dataset.getName().contains("ABS_CENSUS2011_B41"))
+			setDefaultValueForDimension(dataset, "Non-School Qualification: Field of Study", "Total");									
+
+		if(dataset.getName().contains("ABS_CENSUS2011_B2"))
+			setDefaultValueForDimension(dataset, "Labour Force Status", "Employed Total");									
+
+		if(dataset.getName().contains("ABS_CENSUS2011_B43"))
+			setDefaultValueForDimension(dataset, "Industry of Employment", "Total");									
+
+
+		if(dataset.getName().contains("ABS_CENSUS2011_B44")){
+			setDefaultValueForDimension(dataset, "Industry of Employment", "Employed Total");									
+			setDefaultValueForDimension(dataset, "Occupation", "Total");												
+		}
+
+		
 		if(dataset.getName().contains("LF")){
 			setDefaultValueForDimension(dataset, "Region", "Total");									
 			setDefaultValueForDimension(dataset, "Age", "Total");
@@ -139,12 +204,14 @@ public class QueryBuilder {
 		
 		for(Dimension dim : dataset.getDimensions()){
 			if(dim.getName().equals(AGE) && queryInputs.get(AGE) == null){
-				if(dataset.getName().equals("ABS_CENSUS2011_B20")  
+				if(dataset.getName().equals("ABS_CENSUS2011_B19")  
+				|| dataset.getName().equals("ABS_CENSUS2011_B20")  
 				|| dataset.getName().equals("ABS_CENSUS2011_B21")  
 				|| dataset.getName().equals("ABS_CENSUS2011_B40") 
 				|| dataset.getName().equals("ABS_CENSUS2011_B41") 
 				|| dataset.getName().equals("ABS_CENSUS2011_B42") 
 				|| dataset.getName().equals("ABS_CENSUS2011_B43") 
+				|| dataset.getName().equals("ABS_CENSUS2011_B45") 
 						){
 					ArrayList<String> list2 = new ArrayList<String>();
 					list2.add("15 years and over");
@@ -417,35 +484,42 @@ public class QueryBuilder {
 	};
 
 
-	//TODO: This has fundamentally changed. The "best" dataset
-	// is now the one for which there is the highest number of matches
-	// this means that if you had 5 dimensions identified of which 4
-	// were in one dataset and 3 of those 4 and the 5th were in another
-	// dataset, it will just pick the first one is finds, rather than
-	// breaking. It may make more sense to return an error when too
-	// many selectors are specified.
+
 	public Dataset findBestMatchDatasetForDimensionNames(){
 
+		HashMap<String, Integer> weights = new HashMap<String, Integer>();
+		
+		for(String dimensionName : queryInputs.keySet()){
+			int cnt = 0;
+			for(Dataset ds : datasets){
+				for(Dimension dim : ds.getDimensions()){
+					if(dim.getName().equals(dimensionName)){
+						cnt++;
+					};
+				};
+			};
+			weights.put(dimensionName, cnt );
+		};
+
 		Dataset toReturn = null;
-		int numMatches = 0;
+		double bestScore = -9999.0; //The higher the better.
+		
 		for(Dataset ds : datasets){
-			if(toReturn == null){
-				toReturn = ds;
-			}
-
-			int localMatches = 0;
-
+			boolean b  = false;
+			double datasetScore = 0;
+			
 			for(Dimension dim : ds.getDimensions()){
 				for(String dimensionName : queryInputs.keySet()){
 					if(dim.getName().equals(dimensionName)){
-						localMatches++;
+						b = true;
+						datasetScore += 1.0 / weights.get(dimensionName);
 					}
 				}
-			}			
-
-			if(localMatches > numMatches){
+			};
+			
+			if(datasetScore > bestScore && b){
+				bestScore = datasetScore;
 				toReturn = ds;
-				numMatches = localMatches;
 			}
 		};
 		return toReturn;

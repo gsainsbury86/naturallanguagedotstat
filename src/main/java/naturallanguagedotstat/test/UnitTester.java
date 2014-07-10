@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 
 
+
 public class UnitTester {
 
 	@Rule
@@ -39,7 +40,8 @@ public class UnitTester {
 
 
 		System.out.println("Starting "+TEST_QUERIES.length +" functional tests.");
-
+		long startTime = System.currentTimeMillis();
+		
 		for(int i = 0; i < TEST_QUERIES.length; i++){
 			  // System.out.println("Testing: ("+(i+1)+ "/"+TEST_QUERIES.length +"): "+ TEST_QUERIES[i]);
 				
@@ -49,7 +51,10 @@ public class UnitTester {
 						
 			collector.checkThat(TEST_QUERIES[i], object.getString("url"), is(TEST_RESULTS[i]));
 		}
-		System.out.println("Functional tests are now complete.");
+		
+		long elapsedTime = System.currentTimeMillis() - startTime;
+
+		System.out.println("Functional tests were completed in "+elapsedTime +" milliseconds." );
 		
 	}
 
