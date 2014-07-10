@@ -208,6 +208,7 @@ a:link, a:visited {
 				$("#url").html('URL : '+'<a href="'+data.url+'" target="_blank" >' + 'source' + '</a><br>');
 				$("#datasetURL").html('<a href="'+data.datasetURL+'" target="_blank" >' + data.datasetName + '</a><br>');
 				$('#map').text(' ');
+				$("#footer").html('<a href="about.html">About</a>');
 				$.each(data, function(index) {
 					if (index != 'result' && index != 'url'&& index != 'datasetName' && index != 'datasetURL') {
 						var e = data[index];
@@ -255,7 +256,7 @@ a:link, a:visited {
 			<div id="datasetURL"></div>
 			<div id="map"></div>
 			<div id="url"></div>
-			<div id="footer"> <a href="about.html">About</a> </div>
+			<div id="footer"></div>
 		</div>
 	</div>
 </body>
