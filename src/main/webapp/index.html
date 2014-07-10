@@ -160,11 +160,7 @@ body {
 	line-height: 2.0;
 	font-size: 1.4em;
 }
-.dataset a {
-	color: #383838;
-}
-
-.dataset a:visited {
+.dataset a:link, .dataset a:visited {
 	color: #383838;
 }
 
@@ -182,11 +178,7 @@ body {
 	line-height: 2.0;
 }
 
-.url a {
-	color: #383838;
-}
-
-.url a:visited {
+.url a:link, .url a:visited {
 	color: #383838;
 }
 
@@ -198,13 +190,10 @@ body {
 	line-height: 1.5;
 }
 
-.footer a {
+.footer a:link, .footer a:visited {
 	color: #fff;
 }
 
-.footer a:visited {
-	color: #fff;
-}
 
 </style>
 
@@ -267,7 +256,7 @@ body {
 
 	<div class="form-wrapper cf">
 		<input type="text" id="query"
-			placeholder="eg. How many women in Tasmania are Buddhists?" required>
+			placeholder="eg. How many women in Tasmania are married?" required>
 		<button type="submit" id="go">Search</button>
 		<div id="output">
 			<div id="result"></div>
