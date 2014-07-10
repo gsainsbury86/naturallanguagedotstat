@@ -22,7 +22,7 @@
 
     <filter-mapping>
         <filter-name>Resteasy</filter-name>
-        <url-pattern>/main/</url-pattern>
+        <url-pattern>/main/*</url-pattern>
     </filter-mapping>
 
  <welcome-file-list>
