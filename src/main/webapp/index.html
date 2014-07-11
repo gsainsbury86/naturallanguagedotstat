@@ -15,7 +15,7 @@ body {
 	text-align: center;
 }
 
-a:link, a:visited {
+a:link,a:visited {
 	color: #383838;
 }
 
@@ -177,16 +177,11 @@ a:link, a:visited {
 	line-height: 2.0;
 }
 
-
-
 #footer {
 	margin-right: 10px;
 	text-align: right;
 	line-height: 2.0;
 }
-
-
-
 </style>
 
 <script
@@ -194,56 +189,148 @@ a:link, a:visited {
 	type="text/javascript"></script>
 
 <script>
-	$(document).ready(function() {
-		$("#query").keyup(function(event) {
-			if (event.keyCode == 13) {
-				$("#go").click();
-			}
-		});
-		$('#go').click(function() {
-			$('#result').text('searching...');
-			var url = '/main/query/' + $('#query').val();
-			$.getJSON(url, function(data, status, jqXHR) {
-				$("#result").text(data.result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-				$("#url").html('URL : '+'<a href="'+data.url+'" target="_blank" >' + 'source' + '</a><br>');
-				$("#datasetURL").html('<a href="'+data.datasetURL+'" target="_blank" >' + data.datasetName + '</a><br>');
-				$('#map').text(' ');
-				$("#footer").html('<a href="about.html">About</a>');
-				$.each(data, function(index) {
-					if (index != 'result' && index != 'url'&& index != 'datasetName' && index != 'datasetURL') {
-						var e = data[index];
-
-						/*TODO: Fix for age ranges*/
-						if ($.isArray(e) && e.length > 1 && index == "Age") {
-							var dataArray = [];
-							for (year in e) {
-								var word = e[year];
-								dataArray.push(word);
+	$(document)
+			.ready(
+					function() {
+						$("#query").keyup(function(event) {
+							if (event.keyCode == 13) {
+								$("#go").click();
 							}
-							e = dataArray.sort(function(a, b) {
-								return a - b;
-							});
-							e = e[0] + ", ... , " + e[e.length - 1];
-						}
-						$("#map").append(index + " : " + e + '<br>');
-					}
-				});
-			});
-		});
-	});
+						});
+						$('#go')
+								.click(
+										function() {
+											$('#result').text('searching...');
+											var url = '/main/query/'
+													+ $('#query').val();
+											$
+													.getJSON(
+															url,
+															function(data,
+																	status,
+																	jqXHR) {
+																$("#result")
+																		.text(
+																				data.result
+																						.toString()
+																						.replace(
+																								/\B(?=(\d{3})+(?!\d))/g,
+																								","));
+																$("#url")
+																		.html(
+																				'URL : '
+																						+ '<a href="'+data.url+'" target="_blank" >'
+																						+ 'source'
+																						+ '</a><br>');
+																$("#datasetURL")
+																		.html(
+																				'<a href="'+data.datasetURL+'" target="_blank" >'
+																						+ data.datasetName
+																						+ '</a><br>');
+																$('#map').text(
+																		' ');
+																$
+																		.each(
+																				data,
+																				function(
+																						index) {
+																					if (index != 'result'
+																							&& index != 'url'
+																							&& index != 'datasetName'
+																							&& index != 'datasetURL') {
+																						var e = data[index];
+
+																						/*TODO: Fix for age ranges*/
+																						if ($
+																								.isArray(e)
+																								&& e.length > 1
+																								&& index == "Age") {
+																							var dataArray = [];
+																							for (year in e) {
+																								var word = e[year];
+																								dataArray
+																										.push(word);
+																							}
+																							e = dataArray
+																									.sort(function(
+																											a,
+																											b) {
+																										return a
+																												- b;
+																									});
+																							e = e[0]
+																									+ ", ... , "
+																									+ e[e.length - 1];
+																						}
+																						$(
+																								"#map")
+																								.append(
+																										index
+																												+ " : "
+																												+ e
+																												+ '<br>');
+																					}
+																				});
+															});
+										});
+					});
 </script>
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	(function(i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r;
+		i[r] = i[r] || function() {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date();
+		a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+		a.async = 1;
+		a.src = g;
+		m.parentNode.insertBefore(a, m)
+	})(window, document, 'script', '//www.google-analytics.com/analytics.js',
+			'ga');
 
-  ga('create', 'UA-2102677-16', 'auto');
-  ga('send', 'pageview');
-
+	ga('create', 'UA-2102677-16', 'auto');
+	ga('send', 'pageview');
 </script>
- 
+
+<style>
+#fbar {
+	-webkit-background-clip: border-box;
+	-webkit-background-origin: padding-box;
+	-webkit-background-size: auto;
+	background-attachment: scroll;
+	background-clip: border-box;
+	background-color: #206020;
+	background-image: none;
+	background-origin: padding-box;
+	background-size: auto;
+	border-top-color: #308030;
+	border-top-style: solid;
+	border-top-width: 1px;
+	bottom: 0px;
+	color: rgb(200, 200, 200);
+	display: block;
+	font-family: arial, sans-serif;
+	font-size: 13px;
+	height: 40px;
+	left: 0px;
+	line-height: 40px;
+	min-width: 980px;
+	position: absolute;
+	right: 0px;
+	width: 100%;
+}
+
+#fsl {
+	float: right;
+	margin-right:30px
+}
+
+#fsl a{
+	color: #fff
+	}
+</style>
+
 </head>
 <body>
 
@@ -258,6 +345,10 @@ a:link, a:visited {
 			<div id="url"></div>
 			<div id="footer"></div>
 		</div>
+	</div>
+	<div id="fbar">
+		<span id="fsl"> <a class="_fd" href="about.html">About</a>
+		</span>
 	</div>
 </body>
 
