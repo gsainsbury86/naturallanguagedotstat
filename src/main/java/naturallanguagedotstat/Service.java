@@ -5,10 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.json.Json;
@@ -32,6 +35,8 @@ import naturallanguagedotstat.test.LocalTest;
 import naturallanguagedotstat.utils.Utils;
 
 import org.w3c.dom.Document;
+
+import au.com.bytecode.opencsv.CSVWriter;
 
 
 @XmlAccessorType(XmlAccessType.NONE)
@@ -154,6 +159,43 @@ public class Service {
 		}
 
 		return Response.status(responseCode).entity(responseObject != null ? responseObject.toString() : error).build();
+
+	}
+
+	@GET
+	@Path("/log")
+	@Produces("application/json")
+	public Response log() throws SQLException, IOException{
+
+		Connection conn = null;
+		Statement stmt = null;
+
+		String host = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
+		String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
+
+		conn = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/naturallanguagedotstat?user=adminPyfBNpf&password=YeBCcnq6qs6K");
+
+		String sqlQuery = "select * from naturallanguagedotstat.log order by date desc LIMIT 0, 1000";
+		stmt = conn.createStatement();
+
+		ResultSet rs = stmt.executeQuery(sqlQuery);
+
+		StringWriter sw = new StringWriter();
+
+		CSVWriter writer = new CSVWriter(sw);
+
+		writer.writeAll(rs, true);
+
+		String toReturn = sw.toString();
+
+		writer.close();
+		rs.close();
+
+		if (stmt != null) {
+			stmt.close();
+		}
+
+		return Response.status(200).entity(toReturn).build();
 
 	}
 }
