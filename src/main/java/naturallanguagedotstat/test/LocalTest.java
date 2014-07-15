@@ -24,7 +24,7 @@ public class LocalTest {
 
 		log = true;
 		localLoad = true;
-		unitTests = true;
+		unitTests = false;
 /*
 		// Don't quite work yet, due to multiple months appearing in Query result
 		printQueryResult("What is the participation rate for QLD?") ; // http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/3.10.3.1599.10.M/ABS?startTime=2014-Q2&endTime=2014-Q2
