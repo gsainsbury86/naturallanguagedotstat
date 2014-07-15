@@ -28,8 +28,8 @@ public class UnitTester {
 
 	public UnitTester() throws IOException, ClassNotFoundException{
 		LocalTest.localLoad = true;
-		LocalTest.debug = true;
-		LocalTest.test = true;
+		LocalTest.log = true;
+		LocalTest.unitTests = true;
 		
 		collector = new ErrorCollector();
 		service = new Service();

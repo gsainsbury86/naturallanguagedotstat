@@ -13,15 +13,18 @@ import naturallanguagedotstat.Service;
 
 public class LocalTest {
 
-	public static boolean debug = false;
-	public static boolean test = false;
+	/* print logging statements */
+	public static boolean log = false;
+	/* running UnitTests so do not perform ABS.Stat restful call */
+	public static boolean unitTests = false;
+	/* running locally so load data irrespective of web context */
 	public static boolean localLoad = false;
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException{
 
-		debug = true;
+		log = true;
 		localLoad = true;
-		test = true;
+		unitTests = true;
 /*
 		// Don't quite work yet, due to multiple months appearing in Query result
 		printQueryResult("What is the participation rate for QLD?") ; // http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/3.10.3.1599.10.M/ABS?startTime=2014-Q2&endTime=2014-Q2

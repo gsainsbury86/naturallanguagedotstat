@@ -98,7 +98,7 @@ public class Service {
 			String data = null;
 			double result = -1;
 
-			if(!LocalTest.test){
+			if(!LocalTest.unitTests){
 				data = Utils.httpGET(urlToRead);
 
 				Document dataDocument = Utils.XMLToDocument(data);
@@ -133,7 +133,7 @@ public class Service {
 			error = e.toString();
 		} finally {
 
-			if(!LocalTest.test){
+			if(!LocalTest.unitTests){
 				Connection conn = null;
 				PreparedStatement stmt = null;
 
@@ -164,7 +164,7 @@ public class Service {
 
 	@GET
 	@Path("/log")
-	@Produces("application/json")
+	@Produces("text/csv")
 	public Response log() throws SQLException, IOException{
 
 		Connection conn = null;
