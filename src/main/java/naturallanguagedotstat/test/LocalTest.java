@@ -40,14 +40,25 @@ public class LocalTest {
 		printQueryResult("females in adelaide over 30") ; //Q11	"does not parse over 30"
 		printQueryResult("How many women in Sandy Bay are not employed") ; 		// Does not parse "not"	
 		printQueryResult("How many men in Canberra?") ; 		// Does not parse "Canberra" in ASGS	
+		"What is the participation rate for QLD?"	Q341. //hangs
+		"What is the employment rate for VIC?" //Q342. hangs
+		"How many men aged 15-19 are in Sydney?" //Q343.//Does not find Sydney
+  		"How many women in Tasmania are unmarried?"	//Q433. Does not parse unmarried.
+  		"How many men were born in Ghana?" /Q441. Does not parse Ghana.
+  		"how many women in Murrumbeena are single" // Q488. does not parse single.
+  		"How many builders are in Canberra?" //Q497. Does not parse Builders. Does not parse Canberra!!
+  		
+  		
+ */
 		
-  
- */
-
+		
+		
 /*
+		
+		
 
  */
-		printQueryResult("How many women follow Buddhism") ; 							// Q88. 
+		printQueryResult("how many women in Murrumbeena are unmarried?") ; 							// Q88. 
 /*
 
  		

@@ -120,7 +120,9 @@ public class SemanticParser {
 		//B06
 		synonyms.put("registered marriage","Married in a registered marriage");
 		synonyms.put("de facto","Married in a de facto marriage(b)");
-		// synonyms.put("not married","Not married");
+		// synonyms.put("not married","Not married");  //Already in codelist
+		synonyms.put("single","Not married"); 
+		synonyms.put("unmarried","Not married"); 
 
 		//B07
 		synonyms.put("indigenous","Indigenous(a)");
@@ -315,6 +317,7 @@ public class SemanticParser {
 		synonyms.put("health","Health care and social assistance");
 		synonyms.put("healthcare","Health care and social assistance");
 		synonyms.put("doctors","Health care and social assistance");
+		synonyms.put("dentists","Health care and social assistance");
 		synonyms.put("nurses","Health care and social assistance");
 		synonyms.put("arts industry","Arts and recreation services");
 		synonyms.put("recreation","Arts and recreation services");
@@ -326,6 +329,7 @@ public class SemanticParser {
 		synonyms.put("trade","Technicians and trades workers");
 		synonyms.put("tradesmen","Technicians and trades workers");
 		synonyms.put("trade workers","Technicians and trades workers");
+		synonyms.put("builders","Technicians and trades workers");
 		synonyms.put("plumbers","Technicians and trades workers");
 		synonyms.put("electricians","Technicians and trades workers");
 		synonyms.put("clerical","Clerical and administrative workers");
@@ -402,7 +406,7 @@ public class SemanticParser {
 				if (!dim.getName().equals("Age") &&  !dim.getName().equals("Region Type") &&  !dim.getName().equals("State")) {
 					for(String key: map.keySet ()){
 						if(str.equalsIgnoreCase(map.get(key) )){
-							// System.out.println(dataset.getName() + " ~ "+ dim.getName() +" ~ " + map.get(key) ) ;
+							//System.out.println(dataset.getName() + " ~ "+ dim.getName() +" ~ " + map.get(key) ) ;
 							dimensions.put(dim.getName(), map.get(key) );
 						}
 					}
@@ -416,7 +420,7 @@ public class SemanticParser {
 		for (String keyWord : synonyms.keySet() ) {
 			if(wholeWordContains(str, keyWord)  ){ 
 				rootWord = synonyms.get(keyWord) ; 
-				// System.out.println("Found the word: "+ keyWord + "~" + rootWord);
+				//System.out.println("Found the word: "+ keyWord + "~" + rootWord);
 				searchCodeListForRootWord(rootWord);
 			};
 		};				
@@ -430,7 +434,7 @@ public class SemanticParser {
 				if (!dim.getName().equals("Age") &&  !dim.getName().equals("Region Type") &&  !dim.getName().equals("State")) {
 					for(String key: map.keySet ()){
 						if(! map.get(key).equalsIgnoreCase("total") &&  wholeWordContains(str,map.get(key) )){
-							// System.out.println(dataset.getName() + " ~ "+ dim.getName() +" ~ " + map.get(key) ) ;
+							//System.out.println(dataset.getName() + " ~ "+ dim.getName() +" ~ " + map.get(key) ) ;
 							dimensions.put(dim.getName(), map.get(key) );
 						}
 					}
@@ -501,7 +505,7 @@ public class SemanticParser {
 		
 		grammarParser.parseText();
 		identifyDimensions(grammarParser.keyPhrases);
-		// System.out.println(dimensions);
+		System.out.println(dimensions);
 		cleanUpDimensions();
 	}
 
