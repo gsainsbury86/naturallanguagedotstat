@@ -58,9 +58,9 @@ public class LocalTest {
 		
 
  */
-		printQueryResult("how many women in Murrumbeena are unmarried?") ; 							// Q88. 
+		printQueryResult("how many women in Murrumbeena are single?") ; 							// Q88. 
 /*
-
+ 
  		
 		
 
