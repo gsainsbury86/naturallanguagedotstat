@@ -73,11 +73,13 @@ public class UnitTester {
 	private static final String[] TEST_QUERIES = {
 		
 		"How many Jewish people live in Caufield?", 				// Q495. 97335. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/3.5.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"how many women in Murrumbeena are single",					// Q488. 1526. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.2.SA2.208021181.A/ABS?startTime=2011&endTime=2011
 		"how many women in Australia are aged 65-99", 				// Q456. 1121632. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.79+78+77+67+66+69+68+70+71+72+73+74+75+76+65.0.AUS.0.A/ABS?startTime=2011&endTime=2011
 		"how many women in Australia work in engineering?",			 // Q455. 102776. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/03.2.O15.0.AUS.0.A/ABS?startTime=2011&endTime=2011
 		"inflation rate for Tasmania",								// Q444. 0.6. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.6.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
 		"How many men were born in Korea?"	,						// Q442. 34383. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/1.6203.0.AUS.0.A/ABS?startTime=2011&endTime=2011
 		"How many women in Tasmania are not married?", 				// Q434. 78276.  http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.6.STE.6.A/ABS?startTime=2011&endTime=2011
+		"How many women in Tasmania are unmarried?",				// Q433. 78276. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.6.STE.6.A/ABS?startTime=2011&endTime=2011
 
 		"What is the average family income for Darwin?", 			//	Q377. 2040. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTFI.7.SA4.701.A/ABS?startTime=2011&endTime=2011
 		"What is the median family income for Darwin?", 			//	Q377. 2040. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTFI.7.SA4.701.A/ABS?startTime=2011&endTime=2011
@@ -440,10 +442,12 @@ public class UnitTester {
 	private static final String[] TEST_RESULTS = {
 		
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/3.5.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.2.SA2.208021181.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.79+78+77+67+66+69+68+70+71+72+73+74+75+76+65.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/03.2.O15.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.6.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/1.6203.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.6.STE.6.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.6.STE.6.A/ABS?startTime=2011&endTime=2011",
 
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTFI.7.SA4.701.A/ABS?startTime=2011&endTime=2011",
