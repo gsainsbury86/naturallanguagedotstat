@@ -40,16 +40,27 @@ public class LocalTest {
 		printQueryResult("females in adelaide over 30") ; //Q11	"does not parse over 30"
 		printQueryResult("How many women in Sandy Bay are not employed") ; 		// Does not parse "not"	
 		printQueryResult("How many men in Canberra?") ; 		// Does not parse "Canberra" in ASGS	
+		"What is the participation rate for QLD?"	Q341. //hangs
+		"What is the employment rate for VIC?" //Q342. hangs
+		"How many men aged 15-19 are in Sydney?" //Q343.//Does not find Sydney
+  		Does not parse unmarried.
+  		"How many men were born in Ghana?" /Q441. Does not parse Ghana.
+  		
+  		"How many builders are in Canberra?" //Q497. Does not parse Builders. Does not parse Canberra!!
+  		
+  		
+ */
 		
-  
- */
-
+		
+		
 /*
+		"How many women in Tasmania are unmarried?"	//Q433. 78276. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.6.STE.6.A/ABS?startTime=2011&endTime=2011
+		"how many women in Murrumbeena are single" // Q488. 1526. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.2.SA2.208021181.A/ABS?startTime=2011&endTime=2011
 
  */
-		printQueryResult("How many women follow Buddhism") ; 							// Q88. 
+		printQueryResult("how many women in Murrumbeena are single?") ; 							// Q88. 
 /*
-
+ 
  		
 		
 
