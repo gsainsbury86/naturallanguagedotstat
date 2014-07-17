@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -32,6 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import naturallanguagedotstat.model.Dataset;
 import naturallanguagedotstat.model.Dimension;
 import naturallanguagedotstat.test.LocalTest;
+import naturallanguagedotstat.test.UnitTester;
 import naturallanguagedotstat.utils.Utils;
 
 import org.w3c.dom.Document;
@@ -60,19 +62,14 @@ public class Service {
 	}
 
 	@GET
-	@Path("/")
-	public String landing() throws FileNotFoundException, IOException, ClassNotFoundException{
-		//TODO: Serve as static page
-		InputStream fileIn = context.getResourceAsStream(WEB_INF+"index.html");
-		InputStreamReader isr = new InputStreamReader(fileIn);
-		BufferedReader br = new BufferedReader(isr);
-		StringBuffer sb = new StringBuffer();
-		String s;
-		while ((s = br.readLine()) != null)
-			sb.append(s);	
-		return new String(sb);
+	@Path("/randomQuery")
+	@Produces("text/html")
+	public Response randomQuery(){
+		Random r = new Random();
+		int index = r.nextInt(UnitTester.TEST_QUERIES.length);
+		return Response.status(200).entity(UnitTester.TEST_QUERIES[index]).build();
+		
 	}
-
 
 
 	//TODO: Change this to a POST. No rush here though.

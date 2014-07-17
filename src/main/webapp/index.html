@@ -197,6 +197,12 @@ a:link,a:visited {
 								$("#go").click();
 							}
 						});
+						
+						
+						$.get('/main/randomQuery', function(data){
+							$('#query').attr('placeholder',data);
+						});
+						
 						$('#go')
 								.click(
 										function() {

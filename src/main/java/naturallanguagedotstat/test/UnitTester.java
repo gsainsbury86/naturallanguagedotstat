@@ -70,7 +70,7 @@ public class UnitTester {
 	//		}
 	//	}
 
-	private static final String[] TEST_QUERIES = {
+	public static final String[] TEST_QUERIES = {
 		
  		"How many Anglicans in Aust", 						//Q299, 3679907. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/3.201.0.AUS.0.A/ABS?startTime=2011&endTime=2011
  		"How many women in Bendigo were born in Germany?", //Q286.17. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.2304.2.SA2.202011018.A/ABS?startTime=2011&endTime=2011	
