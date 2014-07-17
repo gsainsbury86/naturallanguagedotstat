@@ -46,13 +46,9 @@ import au.com.bytecode.opencsv.CSVWriter;
 @Path("/main")
 public class Service {
 
-	private static final String WEB_INF = "/WEB-INF/";
 	static final String serverName = "stat.abs.gov.au";
 	public static ArrayList<Dataset> datasets;
 	public static Dimension ASGS2011;
-
-	@javax.ws.rs.core.Context 
-	ServletContext context;
 
 	public Service() throws IOException, ClassNotFoundException{
 		if(LocalTest.localLoad){
