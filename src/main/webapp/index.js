@@ -1,10 +1,22 @@
+$.postJSON = function(url, data, callback) {
+	return jQuery.ajax({
+		headers: { 
+			'Accept': 'application/json',
+			'Content-Type': 'application/json' 
+		},
+		'url': url,
+		'data': JSON.stringify(data),
+		'dataType': 'json',
+		'success': callback
+	});
+};
+
 $(document).ready(function() {
 	$("#query").keyup(function(event) {
 		if (event.keyCode == 13) {
 			$("#go").click();
 		}
 	});
-
 
 	$.get('/main/randomQuery', function(data){
 		$('#query').attr('placeholder',data);
@@ -13,7 +25,7 @@ $(document).ready(function() {
 	$('#go').click( function() {
 		$('#result').text('searching...');
 		var url = '/main/query';
-		$.post(url, $('#query').val(), function(data, status, jqXHR) {
+		$.postJSON(url, { query: $('#query').val() }, function(data, status, jqXHR) {
 			if (status == "error"){
 				$('#result').text(xhr.status + " " + xhr.statusText);
 			}
@@ -41,5 +53,5 @@ $(document).ready(function() {
 				});
 			}
 		});
-});
+	});
 });

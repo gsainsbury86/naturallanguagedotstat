@@ -67,9 +67,11 @@ public class Service {
 
 	@POST
 	@Path("/query")
-	@Consumes("text/*")
+	@Consumes("application/json")
 	@Produces("application/json")
-	public Response query(String query) throws SQLException{
+	public Response query(JsonObject queryObject) throws SQLException{
+		
+		String query = queryObject.get("query").toString();
 
 		JsonObject responseObject = null;
 		String error = null;
