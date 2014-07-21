@@ -1,6 +1,7 @@
 package naturallanguagedotstat;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,6 +17,7 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
+import javax.json.JsonReader;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -69,11 +71,17 @@ public class Service {
 	@Path("/query")
 	@Consumes("application/json")
 	@Produces("application/json")
-	public Response query(Query queryObject) throws SQLException{
-		
-		String query = queryObject.getQuery();
-		
-		
+	public Response query(String query) throws SQLException{
+
+		if(!LocalTest.unitTests){
+			JsonReader jsonReader = Json.createReader(new StringReader(query));
+			JsonObject object = jsonReader.readObject();
+			jsonReader.close();
+
+			query = object.getString("query");
+		}
+
+
 		JsonObject responseObject = null;
 		String error = null;
 		String urlToRead = null;
