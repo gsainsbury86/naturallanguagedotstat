@@ -12,7 +12,7 @@ $(document).ready(function() {
 	$('#go').click( function() {
 		$('#result').text('searching...');
 		var url = '/main/query';
-		var data = { query:$('#query').val()};
+		var data = {'"query"':$('#query').val()};
 		$.post(url, data, function(data, status, jqXHR) {
 			if (status == "error"){
 				$('#result').text(xhr.status + " " + xhr.statusText);
