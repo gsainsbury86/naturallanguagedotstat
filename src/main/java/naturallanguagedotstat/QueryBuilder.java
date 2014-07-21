@@ -18,8 +18,6 @@ public class QueryBuilder {
 	private static final String AGE = "Age";
 
 	private boolean doAggregateAges;
-	//TODO: Make static once we fix one-time loading
-	private ArrayList<Dataset> datasets;
 	private Dimension ASGS2011;
 	
 	private Dataset dataset;
@@ -37,9 +35,8 @@ public class QueryBuilder {
 
 	private String restfulURL;
 
-	public QueryBuilder(String query, ArrayList<Dataset> datasets, Dimension ASGS2011) {
+	public QueryBuilder(String query, Dimension ASGS2011) {
 		this.query = query;
-		this.datasets = datasets;
 		this.ASGS2011 = ASGS2011;
 
 		doAggregateAges = true;
@@ -47,7 +44,7 @@ public class QueryBuilder {
 
 	public String build() throws IOException, ClassNotFoundException {
 
-		SemanticParser semanticParser = new SemanticParser(this.query, this.datasets, this.ASGS2011);
+		SemanticParser semanticParser = new SemanticParser(this.query, this.ASGS2011);
 		semanticParser.parseText();
 
 		queryInputs = semanticParser.getDimensions();	
@@ -491,7 +488,7 @@ public class QueryBuilder {
 		
 		for(String dimensionName : queryInputs.keySet()){
 			int cnt = 0;
-			for(Dataset ds : datasets){
+			for(Dataset ds : Service.datasets){
 				for(Dimension dim : ds.getDimensions()){
 					if(dim.getName().equals(dimensionName)){
 						cnt++;
@@ -504,7 +501,7 @@ public class QueryBuilder {
 		Dataset toReturn = null;
 		double bestScore = -9999.0; //The higher the better.
 		
-		for(Dataset ds : datasets){
+		for(Dataset ds : Service.datasets){
 			boolean b  = false;
 			double datasetScore = 0;
 			

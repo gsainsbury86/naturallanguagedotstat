@@ -16,7 +16,9 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -64,10 +66,11 @@ public class Service {
 
 
 	//TODO: Change this to a POST. No rush here though.
-	@GET
-	@Path("/query/{query}")
+	@POST
+	@Path("/query")
+	@Consumes("text/plain")
 	@Produces("application/json")
-	public Response query(@PathParam("query") String query) throws SQLException{
+	public Response query(String query) throws SQLException{
 
 		JsonObject responseObject = null;
 		String error = null;
@@ -79,7 +82,7 @@ public class Service {
 		try{
 
 
-			queryBuilder = new QueryBuilder(query, datasets, ASGS2011);
+			queryBuilder = new QueryBuilder(query, ASGS2011);
 			urlToRead = queryBuilder.build();
 
 

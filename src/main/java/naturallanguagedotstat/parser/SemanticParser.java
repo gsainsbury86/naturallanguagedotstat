@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+import naturallanguagedotstat.Service;
 import naturallanguagedotstat.model.Dataset;
 import naturallanguagedotstat.model.Dimension;
 
@@ -18,22 +19,19 @@ public class SemanticParser {
 	private Dimension ASGS2011;
 
 	private GrammarParser grammarParser;
-	private ArrayList<Dataset>  datasets;
 	
 	// constructor
-	public SemanticParser (String str, ArrayList<Dataset> datasets, Dimension ASGS2011) throws IOException, ClassNotFoundException{
+	public SemanticParser (String str, Dimension ASGS2011) throws IOException, ClassNotFoundException{
 		flatCodeList = new HashMap<String, String>();
 		dimensions = new HashMap<String, String>();
 		synonyms   = new LinkedHashMap<String, String>();
 		grammarParser = new GrammarParser(str);
 		
-		this.ASGS2011 = ASGS2011;
-		this.datasets = datasets;
-		
+		this.ASGS2011 = ASGS2011;		
 		
 		
 		initializeSynonyms();
-		createFlatCodeList(datasets); 
+		createFlatCodeList(Service.datasets); 
 	}		
 
 	public HashMap<String, ArrayList<String>> getDimensions() {
@@ -400,7 +398,7 @@ public class SemanticParser {
 
 
 	private void searchCodeListForRootWord(String str){
-		for(Dataset dataset : datasets){
+		for(Dataset dataset : Service.datasets){
 			for(Dimension dim : dataset.getDimensions() ){
 				HashMap<String, String> map = dim.getCodelist();
 				if (!dim.getName().equals("Age") &&  !dim.getName().equals("Region Type") &&  !dim.getName().equals("State")) {
@@ -428,7 +426,7 @@ public class SemanticParser {
 
 
 	private void matchCodeList(String str){
-		for(Dataset dataset : datasets){
+		for(Dataset dataset : Service.datasets){
 			for(Dimension dim : dataset.getDimensions() ){
 				HashMap<String, String> map = dim.getCodelist();
 				if (!dim.getName().equals("Age") &&  !dim.getName().equals("Region Type") &&  !dim.getName().equals("State")) {

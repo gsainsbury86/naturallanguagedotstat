@@ -12,8 +12,8 @@ $(document).ready(function() {
 
 	$('#go').click( function() {
 		$('#result').text('searching...');
-		var url = '/main/query/' + $('#query').val();
-		$.getJSON(url, function(data, status, jqXHR) {
+		var url = '/main/query';
+		$.post(url, $('#query').val(), function(data, status, jqXHR) {
 			if (status == "error"){
 				$('#result').text(xhr.status + " " + xhr.statusText);
 			}
