@@ -69,10 +69,11 @@ public class Service {
 	@Path("/query")
 	@Consumes("application/json")
 	@Produces("application/json")
-	public Response query(JsonObject queryObject) throws SQLException{
+	public Response query(Query queryObject) throws SQLException{
 		
-		String query = queryObject.getString("query");
-
+		String query = queryObject.getQuery();
+		
+		
 		JsonObject responseObject = null;
 		String error = null;
 		String urlToRead = null;
