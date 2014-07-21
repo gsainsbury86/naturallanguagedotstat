@@ -81,7 +81,6 @@ public class Service {
 			query = object.getString("query");
 		}
 
-
 		JsonObject responseObject = null;
 		String error = null;
 		String urlToRead = null;
