@@ -61,14 +61,13 @@ public class Service {
 		Random r = new Random();
 		int index = r.nextInt(UnitTester.TEST_QUERIES.length);
 		return Response.status(200).entity(UnitTester.TEST_QUERIES[index]).build();
-		
+
 	}
 
 
-	//TODO: Change this to a POST. No rush here though.
 	@POST
 	@Path("/query")
-	@Consumes("text/plain")
+	@Consumes("text/*")
 	@Produces("application/json")
 	public Response query(String query) throws SQLException{
 
@@ -81,7 +80,6 @@ public class Service {
 
 		try{
 
-
 			queryBuilder = new QueryBuilder(query, ASGS2011);
 			urlToRead = queryBuilder.build();
 
@@ -90,7 +88,11 @@ public class Service {
 			double result = -1;
 
 			if(!LocalTest.unitTests){
-				data = Utils.httpGET(urlToRead);
+				try{
+					data = Utils.httpGET(urlToRead);
+				}catch(IOException e){
+					throw new IOException("Unable to connect to ABS.Stat");
+				}
 
 				Document dataDocument = Utils.XMLToDocument(data);
 
