@@ -1,16 +1,3 @@
-$.postJSON = function(url, data, callback) {
-	return jQuery.ajax({
-		headers: { 
-			'Accept': 'application/json',
-			'Content-Type': 'application/json' 
-		},
-		'url': url,
-		'data': JSON.stringify(data),
-		'dataType': 'json',
-		'success': callback
-	});
-};
-
 $(document).ready(function() {
 	$("#query").keyup(function(event) {
 		if (event.keyCode == 13) {
@@ -25,7 +12,8 @@ $(document).ready(function() {
 	$('#go').click( function() {
 		$('#result').text('searching...');
 		var url = '/main/query';
-		$.postJSON(url, { query: '"'+$('#query').val()+'"' }, function(data, status, jqXHR) {
+		var data = { query:$('#query').val()};
+		$.post(url, data, function(data, status, jqXHR) {
 			if (status == "error"){
 				$('#result').text(xhr.status + " " + xhr.statusText);
 			}
@@ -52,6 +40,6 @@ $(document).ready(function() {
 					}
 				});
 			}
-		});
+		}, 'json');
 	});
 });
