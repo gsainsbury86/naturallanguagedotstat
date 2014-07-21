@@ -71,7 +71,7 @@ public class Service {
 	@Produces("application/json")
 	public Response query(JsonObject queryObject) throws SQLException{
 		
-		String query = queryObject.get("query").toString();
+		String query = queryObject.getString("query");
 
 		JsonObject responseObject = null;
 		String error = null;
