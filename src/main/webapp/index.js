@@ -10,15 +10,13 @@ $(document).ready(function() {
 
 		var list = $("#tags").find('ul');
 		for (var i = 0; i < 10; i++){
-			list.append('<li><a href="#">'+data.queries[i]+'</a></li>');
-
-			list.find('a').on("click",function(){
-				$('#query').val(data.queries[i]);
-				$('#go').click();
-			});
-
+			var queryi = data.queries[i];
+			list.append('<li><a onclick="'+ "$('#query').val('"+queryi.replace(/(['"])/g, "\\$1")+"'); $('#go').click();"  +'" href="#">'+queryi+'</a></li>');				
+			//
+			
+			
 		}
-		
+
 		$('#myCanvas').tagcanvas({
 			textColour: '#000000',
 			outlineColour: '#ffffff',
