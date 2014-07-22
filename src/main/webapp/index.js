@@ -14,11 +14,11 @@ $(document).ready(function() {
 			list.append('<li><a onclick="'+ "$('#query').val('"+queryi.replace(/(['"])/g, "\\$1")+"'); $('#go').click();"  +'" href="#">'+queryi+'</a></li>');				
 		}
 		$('#myCanvas').tagcanvas({
-			textColour: '#000000',
+			textColour: '#808080',
 			outlineColour: '#ffffff',
 			reverse: true,
 			depth: 0.8,
-			maxSpeed: 0.05
+			maxSpeed: 0.01
 		},'tags');
 	});
 
