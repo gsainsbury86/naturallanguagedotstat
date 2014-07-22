@@ -5,11 +5,11 @@ $(document).ready(function() {
 		}
 	});
 
-	$.get('main/randomQueries/15', function(data){
+	$.get('main/randomQueries/10', function(data){
 		$('#query').attr('placeholder',data.queries[0]);
 
 		var list = $("#tags").find('ul');
-		for (var i = 0; i < 15; i++){
+		for (var i = 0; i < 10; i++){
 			var queryi = data.queries[i];
 			list.append('<li><a onclick="'+ "$('#query').val('"+queryi.replace(/(['"])/g, "\\$1")+"'); $('#go').click();"  +'" href="#">'+queryi+'</a></li>');				
 		}
