@@ -17,8 +17,8 @@ $(document).ready(function() {
 			textColour: '#808080',
 			outlineColour: '#404040',
 			reverse: false,
-			depth: 0.25,
-			maxSpeed: 0.002
+			depth: 0.33,
+			maxSpeed: 0.0001
 		},'tags');
 	});
 
