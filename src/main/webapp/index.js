@@ -13,7 +13,6 @@ $(document).ready(function() {
 			var queryi = data.queries[i];
 			list.append('<li><a onclick="'+ "$('#query').val('"+queryi.replace(/(['"])/g, "\\$1")+"'); $('#go').click();"  +'" href="#">'+queryi+'</a></li>');				
 		}
-
 		$('#myCanvas').tagcanvas({
 			textColour: '#000000',
 			outlineColour: '#ffffff',
