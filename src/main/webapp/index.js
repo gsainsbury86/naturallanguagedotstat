@@ -13,16 +13,12 @@ $(document).ready(function() {
 			list.append('<li><a href="#">'+data.queries[i]+'</a></li>');
 
 			list.find('a').on("click",function(){
-				$('#query').attr('placeholder',data.queries[i]);
+				$('#query').val(data.queries[i]);
 				$('#go').click();
 			});
 
 		}
-
-
-
-
-
+		
 		$('#myCanvas').tagcanvas({
 			textColour: '#000000',
 			outlineColour: '#ffffff',
