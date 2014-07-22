@@ -5,17 +5,17 @@ $(document).ready(function() {
 		}
 	});
 
-	$.get('main/randomQueries/8', function(data){
+	$.get('main/randomQueries/10', function(data){
 		$('#query').attr('placeholder',data.queries[0]);
 
 		var list = $("#tags").find('ul');
-		for (var i = 0; i < 8; i++){
+		for (var i = 0; i < 10; i++){
 			var queryi = data.queries[i];
 			list.append('<li><a onclick="'+ "$('#query').val('"+queryi.replace(/(['"])/g, "\\$1")+"'); $('#go').click();"  +'" href="#">'+queryi+'</a></li>');				
 		}
 		$('#myCanvas').tagcanvas({
-			textColour: '#505050',
-			outlineColour: '#a0a0a0',
+			textColour: '#a0a0a0',
+			outlineColour: '#404040',
 			reverse: false,
 			depth: 0.4,
 			maxSpeed: 0.01
