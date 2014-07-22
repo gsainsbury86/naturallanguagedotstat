@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import javax.json.Json;
@@ -64,6 +65,40 @@ public class Service {
 		Random r = new Random();
 		int index = r.nextInt(UnitTester.TEST_QUERIES.length);
 		return Response.status(200).entity(UnitTester.TEST_QUERIES[index]).build();
+
+	}
+
+	@GET
+	@Path("/randomQueries/{n}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response randomQueries(@PathParam("n") int n){
+		//Random r = new Random();
+		//int index = r.nextInt(UnitTester.TEST_QUERIES.length);
+		//return Response.status(200).entity(UnitTester.TEST_QUERIES[index]).build();
+
+		ArrayList<String> toReturn = new ArrayList<String>();
+		for(int i = 0; i < UnitTester.TEST_QUERIES.length; i++){
+			toReturn.add(UnitTester.TEST_QUERIES[i]);
+		}
+		
+		Collections.shuffle(toReturn);
+		
+		while(n < toReturn.size()){
+			toReturn.remove(0);
+		}
+		
+		JsonBuilderFactory factory = Json.createBuilderFactory(null);
+		JsonObjectBuilder builder = factory.createObjectBuilder();
+		JsonArrayBuilder jab = factory.createArrayBuilder();
+
+		for(String query : toReturn){
+			jab.add(query);
+		}
+		builder.add("queries", jab);
+		
+		JsonObject responseObject = builder.build();
+
+		return Response.status(200).entity(responseObject.toString()).build();
 
 	}
 
