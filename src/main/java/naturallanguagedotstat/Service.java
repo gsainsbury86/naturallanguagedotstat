@@ -80,13 +80,13 @@ public class Service {
 		for(int i = 0; i < UnitTester.TEST_QUERIES.length; i++){
 			toReturn.add(UnitTester.TEST_QUERIES[i]);
 		}
-		
+
 		Collections.shuffle(toReturn);
-		
+
 		while(n < toReturn.size()){
 			toReturn.remove(0);
 		}
-		
+
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
 		JsonObjectBuilder builder = factory.createObjectBuilder();
 		JsonArrayBuilder jab = factory.createArrayBuilder();
@@ -95,7 +95,7 @@ public class Service {
 			jab.add(query);
 		}
 		builder.add("queries", jab);
-		
+
 		JsonObject responseObject = builder.build();
 
 		return Response.status(200).entity(responseObject.toString()).build();
@@ -173,26 +173,33 @@ public class Service {
 		} finally {
 
 			if(!LocalTest.unitTests){
-				Connection conn = null;
-				PreparedStatement stmt = null;
+				try{
+					Connection conn = null;
+					PreparedStatement stmt = null;
 
-				String host = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
-				String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
+					String host = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
+					String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
 
-				conn = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/naturallanguagedotstat?user=adminPyfBNpf&password=YeBCcnq6qs6K");
+					conn = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/naturallanguagedotstat?user=adminPyfBNpf&password=YeBCcnq6qs6K");
 
-				String updateLog = "INSERT INTO naturallanguagedotstat.log VALUES (null, ?, ?, ?, ?, ?, NOW())";
+					String updateLog = "INSERT INTO naturallanguagedotstat.log VALUES (null, ?, ?, ?, ?, ?, NOW())";
 
-				stmt = conn.prepareStatement(updateLog);
-				stmt.setString(1, query);
-				stmt.setString(2, error);
-				stmt.setString(3, urlToRead);
-				stmt.setString(4, queryBuilder.getQueryInputs().toString());
-				stmt.setInt(5, responseCode);
-				stmt.executeUpdate();
+					stmt = conn.prepareStatement(updateLog);
+					stmt.setString(1, query);
+					stmt.setString(2, error);
+					stmt.setString(3, urlToRead);
+					stmt.setString(4, queryBuilder.getQueryInputs().toString());
+					stmt.setInt(5, responseCode);
+					stmt.executeUpdate();
 
-				if (stmt != null) {
-					stmt.close();
+					if (stmt != null) {
+						stmt.close();
+					}
+
+				}catch(Exception e){
+					// do nothing
+				}finally{
+					// also do nothing
 				}
 			}
 		}
