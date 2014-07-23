@@ -124,6 +124,10 @@ public class SemanticParser {
 
 		//B07
 		synonyms.put("indigenous","Indigenous(a)");
+		synonyms.put("aboriginal","Indigenous(a)");
+		synonyms.put("aboriginals","Indigenous(a)");
+		synonyms.put("aborgines","Indigenous(a)");
+		synonyms.put("torres strait","Indigenous(a)");
 		synonyms.put("non indigenous","Non-Indigenous");
 		synonyms.put("not indigenous","Non-Indigenous");
 
