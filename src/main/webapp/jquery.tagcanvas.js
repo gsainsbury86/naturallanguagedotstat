@@ -1182,8 +1182,8 @@
 					AddHandler('selectstart', Nop, c);
 				}
 				if(this.wheelZoom) {
-					AddHandler('mousewheel', MouseWheel, c);
-					AddHandler('DOMMouseScroll', MouseWheel, c);
+					//AddHandler('mousewheel', MouseWheel, c);
+					//AddHandler('DOMMouseScroll', MouseWheel, c);
 				}
 				handlers[cid] = 1;
 			}
