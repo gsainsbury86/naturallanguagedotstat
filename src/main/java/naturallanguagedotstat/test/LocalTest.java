@@ -58,7 +58,7 @@ public class LocalTest {
 		"how many women in Murrumbeena are single" // Q488. 1526. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.2.SA2.208021181.A/ABS?startTime=2011&endTime=2011
 
  */
-		printQueryResult("How many people live in Sydney?") ; 							// Q88. 
+		printQueryResult("Population of ACT?") ; 							// Q88. 
 		
 /*
  

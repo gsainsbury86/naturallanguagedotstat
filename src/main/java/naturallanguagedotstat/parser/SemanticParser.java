@@ -500,15 +500,30 @@ public class SemanticParser {
 
 	
 	public void parseText(){
-		String region = identifyASGSRegion(grammarParser.inputText);
-		if (region != null){
-			dimensions.put("Region", region );
-		};
 		
 		grammarParser.parseText();
 		identifyDimensions(grammarParser.keyPhrases);
 		//System.out.println("Dimensions are :" + dimensions);
+		identifyRegion(grammarParser.inputText);
 		cleanUpDimensions();
+		//System.out.println("After cleanUp: Dimensions are :" + dimensions);
+	}
+
+	private void identifyRegion(String inputString) {
+		identifyAbbreviatedRegions(inputString);
+	
+		boolean isCPI = false;
+		String str = grammarParser.inputText.toLowerCase();
+		if(str.contains("cpi") || str.contains("inflation") || str.contains("index")){
+			isCPI = true;
+		};
+		
+		if (! isCPI && !dimensions.containsKey("Region") ){
+			String region = identifyASGSRegion(grammarParser.inputText);
+			if (region != null){
+				dimensions.put("Region", region );
+			};
+		}
 	}
 
 	private void cleanUpDimensions(){
@@ -597,10 +612,6 @@ public class SemanticParser {
 			dimensions.remove("Industry of Employment");
 		};
 
-		if(!grammarParser.inputText.contains("cpi") && !grammarParser.inputText.contains("inflation")  && !grammarParser.inputText.contains("index")   ){
-			dimensions.remove("Region");
-		};
-
 
 		// ...................................
 		
@@ -661,6 +672,7 @@ public class SemanticParser {
 			normalisedRegion = normalise(regions.get(key));
 			if(normalisedStr.contains(normalisedRegion) ){
 				identifiedRegions.put(key, regions.get(key) );
+				// System.out.println("1: "+key+" ~ "+ regions.get(key));
 			}
 		};
 		
@@ -671,36 +683,33 @@ public class SemanticParser {
 					for (String subregion : regionComponents){
 						if (wholeWordContains(str, subregion.trim() ) ){						
 							identifiedRegions.put(key, regions.get(key) );
+							// System.out.println("2: "+key+" ~ "+ regions.get(key));
 						};
 					}
 				};
 			};
 		};
 		
-		// System.out.println(str);
-		if (wholeWordContains(str, "Aust"))						
-			identifiedRegions.put("0", "Australia");
-		if (wholeWordContains(str, "Aus"))						
-			identifiedRegions.put("0", "Australia");
-		if (wholeWordContains(str, "NSW"))						
-			identifiedRegions.put("1", "New South Wales");
-		if (wholeWordContains(str, "Vic"))						
-			identifiedRegions.put("2", "Victoria");
-		if (wholeWordContains(str, "Qld"))						
-			identifiedRegions.put("3", "Queensland");
-		if (wholeWordContains(str, "SA"))						
-			identifiedRegions.put("4", "South Australia");
-		if (wholeWordContains(str, "WA"))						
-			identifiedRegions.put("5", "Western Australia");
-		if (wholeWordContains(str, "Tas"))						
-			identifiedRegions.put("6", "Tasmania");
-		if (wholeWordContains(str, "NT"))						
-			identifiedRegions.put("7", "Northern Territory");		
-		if (wholeWordContains(str, "ACT"))						
-			identifiedRegions.put("8", "Australian Capital Territory");
 		
-		//System.out.println("Best match: "+ getLargestRegion(str,identifiedRegions) );
+		System.out.println("Best match: "+ getLargestRegion(str,identifiedRegions) );
 		return getLargestRegion(str,identifiedRegions);
+	}
+
+	private void identifyAbbreviatedRegions(String str) {
+		String region = new String() ;
+		if (wholeWordContains(str, "Aust"))	region =  "Australia";
+		if (wholeWordContains(str, "Aus"))	region =  "Australia";
+		if (wholeWordContains(str, "NSW"))	region =  "New South Wales";
+		if (wholeWordContains(str, "Vic"))	region =  "Victoria";
+		if (wholeWordContains(str, "Qld"))  region =  "Queensland";
+		if (wholeWordContains(str, "SA"))	region =  "South Australia";
+		if (wholeWordContains(str, "WA"))	region =  "Western Australia";
+		if (wholeWordContains(str, "Tas")) 	region =  "Tasmania";
+		if (wholeWordContains(str, "NT")) 	region =  "Northern Territory";		
+		if (wholeWordContains(str, "ACT"))	region =  "Australian Capital Territory";
+		if(!region.isEmpty()){
+			dimensions.put("Region", region);
+		}
 	}
 	
 	
