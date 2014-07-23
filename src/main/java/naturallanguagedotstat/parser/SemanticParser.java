@@ -507,7 +507,7 @@ public class SemanticParser {
 		
 		grammarParser.parseText();
 		identifyDimensions(grammarParser.keyPhrases);
-		//System.out.println(dimensions);
+		//System.out.println("Dimensions are :" + dimensions);
 		cleanUpDimensions();
 	}
 
@@ -597,7 +597,11 @@ public class SemanticParser {
 			dimensions.remove("Industry of Employment");
 		};
 
-		
+		if(!grammarParser.inputText.contains("cpi") && !grammarParser.inputText.contains("inflation")  && !grammarParser.inputText.contains("index")   ){
+			dimensions.remove("Region");
+		};
+
+
 		// ...................................
 		
 		int c = (dimensions.containsKey("Region")) ? 1 : 0;
