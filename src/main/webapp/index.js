@@ -8,14 +8,13 @@ $(document).ready(function() {
 //	var canvas = $('#myCanvas');
 //	canvas.width($(window).width());
 //	canvas.height($(window).height());
+	var numQueriesInCloud = 15;
 
-
-	$.get('main/randomQueries/10', function(data){
+	$.get('main/randomQueries/'+numQueriesInCloud, function(data){
 		$('#query').attr('placeholder',data.queries[0]);
-		
 
 		var list = $("#tags").find('ul');
-		for (var i = 0; i < 10; i++){
+		for (var i = 0; i < numQueriesInCloud; i++){
 			var queryi = data.queries[i];
 			list.append('<li><a onclick="'+ "$('#query').val('"+queryi.replace(/(['"])/g, "\\$1")+"'); $('#go').click();"  +'" href="#">'+queryi+'</a></li>');				
 		}
