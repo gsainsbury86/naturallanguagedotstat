@@ -503,10 +503,10 @@ public class SemanticParser {
 		
 		grammarParser.parseText();
 		identifyDimensions(grammarParser.keyPhrases);
-		System.out.println("Dimensions are :" + dimensions);
+		//System.out.println("Dimensions are :" + dimensions);
 		identifyRegion(grammarParser.inputText.toLowerCase());
 		cleanUpDimensions();
-		System.out.println("After cleanUp: Dimensions are :" + dimensions);
+		//System.out.println("After cleanUp: Dimensions are :" + dimensions);
 	}
 
 	private void identifyRegion(String inputString) {
@@ -667,7 +667,7 @@ public class SemanticParser {
 			normalisedRegion = normalise(regions.get(key));
 			if(normalisedStr.contains(normalisedRegion) ){
 				identifiedRegions.put(key, regions.get(key) );
-				System.out.println("1: "+key+" ~ "+ regions.get(key));
+				//System.out.println("1: "+key+" ~ "+ regions.get(key));
 			}
 		};
 		
@@ -678,7 +678,7 @@ public class SemanticParser {
 					for (String subregion : regionComponents){
 						if (wholeWordContains(str, subregion.trim() ) ){						
 							identifiedRegions.put(key, regions.get(key) );
-							System.out.println("2: "+key+" ~ "+ regions.get(key));
+							//System.out.println("2: "+key+" ~ "+ regions.get(key));
 						};
 					}
 				};
@@ -711,7 +711,7 @@ public class SemanticParser {
 			identifiedRegions.put("8", "Australian Capital Territory");
 		
 		
-		System.out.println("Best match: "+ getLargestRegion(str,identifiedRegions) );
+		//System.out.println("Best match: "+ getLargestRegion(str,identifiedRegions) );
 		return getLargestRegion(str,identifiedRegions);
 	}
 
