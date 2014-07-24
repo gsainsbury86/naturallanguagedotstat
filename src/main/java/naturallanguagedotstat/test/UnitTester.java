@@ -43,7 +43,7 @@ public class UnitTester {
 		long startTime = System.currentTimeMillis();
 		
 		for(int i = 0; i < TEST_QUERIES.length; i++){
-			  System.out.println("Testing: ("+(i+1)+ "/"+TEST_QUERIES.length +"): "+ TEST_QUERIES[i]);
+			 // System.out.println("Testing: ("+(i+1)+ "/"+TEST_QUERIES.length +"): "+ TEST_QUERIES[i]);
 				
 			JsonReader jsonReader = Json.createReader(new StringReader((String) service.query(TEST_QUERIES[i]).getEntity()));
 			JsonObject object = jsonReader.readObject();
@@ -72,6 +72,34 @@ public class UnitTester {
 
 	public static final String[] TEST_QUERIES = {
 		
+		"Number of females in adelaide aged 30 who are managers?",	// Q1380. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/T25.2.1.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011
+		"How many people whose country of birth is New Zealand live in Tasmania?", //Q1297. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.1201.6.STE.6.A/ABS?startTime=2011&endTime=2011
+		"median rent in VIC?", 										// Q1282 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MRENT.2.STE.2.A/ABS?startTime=2011&endTime=2011
+		"How many teachers are there in WA?", 						// Q1274 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/3.O15.P.5.STE.5.A/ABS?startTime=2011&endTime=2011
+		"What is Australia's median age?",							// Q1273 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"What is the unemployment rate?", 							// Q1265 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B37/UER.3.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"What is the median family income for Adelaide?",			// Q1247 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTFI.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011
+		"What is the median family income for Darwin?",				// Q1246 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTFI.7.SA4.701.A/ABS?startTime=2011&endTime=2011
+		"How many women in Deloraine?",								// Q1226 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.6.SA2.602021054.A/ABS?startTime=2011&endTime=2011
+		"How many people speak Dutch in Adelaide?",					// Q1200 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/3.1401.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011
+		"How many aboriginal males live in Howrah?",				// Q1191 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.TT.4.6.SA2.601021007.A/ABS?startTime=2011&endTime=2011
+		"How many men in Geelong are teachers?",					// Q1155 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.O15.P.2.SA2.203021039.A/ABS?startTime=2011&endTime=2011
+		"how many women speak Spanish?",							// Q1146 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/2.2303.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"How many men aged 20-30 work in finance?",					// Q1136 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.A20.K.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"Number of people from Korea?",								// Q908 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.6203.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"What is the average age of women in Melbourne?",			// Q894 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.2.SA2.206041122.A/ABS?startTime=2011&endTime=2011
+		"average age of males in Hobart?",							// Q893 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.6.SA2.601051027.A/ABS?startTime=2011&endTime=2011
+		"Number of people in Belconnen?",							// Q883 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.8.SA2.801011002.A/ABS?startTime=2011&endTime=2011
+		"Average income?",											// Q876 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTPI.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"How many people in Sydney?",								// Q865 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.1.SA4.116.A/ABS?startTime=2011&endTime=2011
+  		"How many builders are in Canberra?", 						// Q830 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B44/TOT.3.8.SA3.80105.A/ABS?startTime=2011&endTime=2011 
+		"Number of males, aged 18?", 								// Q642 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/1.18.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+  		"Hindus?" , 												// Q636 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/3.3.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+  		"Number of people born in South Korea living in Adelaide", 	// Q623 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.6203.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011
+		"CPI?", 													// Q611 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.50.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
+		"How many men were born in Ghana?",							// Q441 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B01/1.BPELSE.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"How many women in Sandy Bay are not employed?", 			// 		 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B37/LF_6.2.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
+
  		"How many people are from Korea?",							// Q599 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.6203.0.AUS.0.A/ABS?startTime=2011&endTime=2011
  		"How many aboriginal people in Tasmania?", 					// Q588 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/3.TT.4.6.STE.6.A/ABS?startTime=2011&endTime=2011
  		"How many single women in Unley?",							// Q577 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.4.SA3.40107.A/ABS?startTime=2011&endTime=2011
@@ -475,6 +503,34 @@ public class UnitTester {
 
 	private static final String[] TEST_RESULTS = {
 		
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/T25.2.1.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.1201.6.STE.6.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MRENT.2.STE.2.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/3.O15.P.5.STE.5.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B37/UER.3.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTFI.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTFI.7.SA4.701.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.6.SA2.602021054.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/3.1401.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/1.TT.4.6.SA2.601021007.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.O15.P.2.SA2.203021039.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/2.2303.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.A20.K.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.6203.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.2.SA2.206041122.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.6.SA2.601051027.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.8.SA2.801011002.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTPI.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.1.SA4.116.A/ABS?startTime=2011&endTime=2011",
+  		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B44/TOT.3.8.SA3.80105.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/1.18.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
+  		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/3.3.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
+  		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.6203.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.50.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B01/1.BPELSE.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B37/LF_6.2.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011",
+
  		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.6203.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
  		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/3.TT.4.6.STE.6.A/ABS?startTime=2011&endTime=2011",
  		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.4.SA3.40107.A/ABS?startTime=2011&endTime=2011",

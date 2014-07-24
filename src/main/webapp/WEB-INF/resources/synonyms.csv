@@ -7,6 +7,8 @@ average age,Median age of persons
 personal income,Median total personal income ($/weekly)
 median income,Median total personal income ($/weekly)
 average income,Median total personal income ($/weekly)
+average wage,Median total personal income ($/weekly)
+median wage,Median total personal income ($/weekly)
 income for people,Median total personal income ($/weekly)
 income for persons,Median total personal income ($/weekly)
 family income,Median total family income ($/weekly)
@@ -44,7 +46,40 @@ aborgines,Indigenous(a)
 torres strait,Indigenous(a)
 non indigenous,Non-Indigenous
 not indigenous,Non-Indigenous
+Cambodian,Cambodia
+Cambodians,Cambodia
+Canadian,Candada
+Canadians,Canada
+Croatian,Crotia
+Croatians,Crotia
+Egyptian,Egypt
+Egyptians,Egypt
+Fijian,Fiji
+Fijians,Fiji
+German,Germany
+Germans,Germany
+Greek,Greece
+Greeks,Greece
+Indian,India
+Indians,India
+Iraqi,Iraq
+Iraqis,Iraq
+Irish,Ireland
+Japanese,Japan
+Korean,Korea, Republic of (South)
+Koreans,Korea, Republic of (South)
+Dutch,Netherlands
+New Zealanders,New Zealand
+Polish,Poland
+South African,South Africa
+South Africans,South Africa
+Thai,Thailand
+Thais,Thailand
+Turkish,Turkey
+Vietnamese,Vietnam
+Lebanese,Lebanon
 China,China (excl. SARs and Taiwan)(b)
+Chinese,China (excl. SARs and Taiwan)(b)
 Yugoslavia,Former Yugoslav Republic of Macedonia (FYROM)
 Hong Kong,Hong Kong (SAR of China)(b)
 Korea,Korea, Republic of (South)
@@ -59,6 +94,7 @@ speak only English,Speaks English only
 speak English,Speaks English only
 speak another language,Speaks other language total
 language other than English,Speaks other language total
+foreign language,Speaks other language total
 speak Chinese,Chinese languages total
 Chinese speakers,Chinese languages total
 speak Iranian,Iranic Languages total
@@ -94,6 +130,10 @@ jews,Judaism
 Aboriginal religions,Australian Aboriginal Traditional Religions
 Aboriginal traditional religions,Australian Aboriginal Traditional Religions
 no religion,No religion(b)
+atheist,No religion(b)
+atheists,No religion(b)
+jedi,Other religious affiliation(c)
+jedis,Other religious affiliation(c)
 year 12,Year 12 or equivalent
 grade 12,Year 12 or equivalent
 year 11,Year 11 or equivalent
@@ -129,6 +169,7 @@ bachelor,Bachelor Degree Level
 bachelors,Bachelor Degree Level
 science,Natural and Physical Sciences
 engineering,Engineering and Related Technologies
+engineers,Engineering and Related Technologies
 architecture,Architecture and Building
 study environmental,Agriculture, Environmental and Related Studies
 studied environmental,Agriculture, Environmental and Related Studies
@@ -193,6 +234,7 @@ safety,Public administration and safety
 work in education,Education and training
 education,Education and training
 teachers,Education and training
+teaching,Education and training
 training,Education and training
 health,Health care and social assistance
 healthcare,Health care and social assistance
@@ -221,6 +263,7 @@ inflation,All groups CPI
 CPI,All groups CPI
 Consumer price index,All groups CPI
 CPI for food,Food and non-alcoholic beverages
+CPI for coffee,Food and non-alcoholic beverages
 CPI for alcohol,Alcohol and tobacco
 CPI for tobacco,Alcohol and tobacco
 CPI for housing,Housing
@@ -241,6 +284,7 @@ index for communication,Communication
 index for recreation,Recreation and culture
 index for education,Education
 food CPI,Food and non-alcoholic beverages
+coffee CPI,Food and non-alcoholic beverages
 alcohol CPI,Alcohol and tobacco
 tobacco CPI,Alcohol and tobacco
 housing CPI,Housing

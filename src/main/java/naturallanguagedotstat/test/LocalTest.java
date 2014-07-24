@@ -28,24 +28,23 @@ public class LocalTest {
 
 
 		// The following don't work for whatever reasons.
-		printQueryResult("What is the food CPI in Sydney?") ; //Q11	"does not parse over 30"
-  		
-  		
- 
 		
 		
 		
 /*
 		// These work and need to be web checked and then integrated into unit tests.
-		 * 
-  		"How many builders are in Canberra?" //Q497. 
-		printQueryResult("How many men were born in Ghana?"); //Q441. 
-		printQueryResult("How many women in Sandy Bay are not employed?"); 
+		printQueryResult("Number of atheists?");  	// Q637
+		printQueryResult("Average wage?");  		// Q875. 
+		printQueryResult("coffee cpi?");  		// Q877. 
+		printQueryResult("foreign language speakers in howrah?"); 
+		printQueryResult("How many people follow the jedi religion?");  //Q1235.
+		printQueryResult("How many females are engineers?"); 
+		"How many Irish women live in Adelaide?",			//Q1390
+
 
 
  */
 		 
-		printQueryResult("How many people in Tasmania were born in Hungary?"); 
 
 	}
 	
