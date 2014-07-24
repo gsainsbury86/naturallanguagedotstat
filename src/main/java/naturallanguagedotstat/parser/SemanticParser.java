@@ -383,14 +383,11 @@ public class SemanticParser {
 		synonyms.put("education CPI","Education");
 
 		synonyms.put("unemployment","% Unemployment(d)");
-
-		// synonyms.put("employment to population","Employment to population ratio (%)");
-		// synonyms.put("employment ratio","Employment to population ratio (%)");
-		// synonyms.put("employment rate","Employment to population ratio (%)");
-		// synonyms.put("participation","Participation rate (%)");
-		//  synonyms.put("unemployment","Unemployment rate (%)");
-		
-		// synonyms.put("employment ratio","Employment to population ratio (%)");
+		synonyms.put("participation","% Labour force participation(e)");
+		synonyms.put("labour force","% Labour force participation(e)");
+		synonyms.put("employment to population","% Employment to population(f)");
+		synonyms.put("employment rate","% Employment to population(f)");
+		synonyms.put("employment ratio","% Employment to population(f)");
 	};
 
 
@@ -424,7 +421,7 @@ public class SemanticParser {
 		for (String keyWord : synonyms.keySet() ) {
 			if(wholeWordContains(str, keyWord)  ){ 
 				rootWord = synonyms.get(keyWord) ; 
-				System.out.println("Found the word: "+ keyWord + "~" + rootWord);
+				//System.out.println("Found the word: "+ keyWord + "~" + rootWord);
 				searchCodeListForRootWord(rootWord);
 			};
 		};				
@@ -438,7 +435,7 @@ public class SemanticParser {
 				if (!dim.getName().equals("Age") &&  !dim.getName().equals("Region Type") &&  !dim.getName().equals("State")) {
 					for(String key: map.keySet ()){
 						if(! map.get(key).equalsIgnoreCase("total") &&  wholeWordContains(str,map.get(key) )){
-							System.out.println(dataset.getName() + " ~ "+ dim.getName() +" ~ " + map.get(key) ) ;
+							//System.out.println(dataset.getName() + " ~ "+ dim.getName() +" ~ " + map.get(key) ) ;
 							dimensions.put(dim.getName(), map.get(key) );
 						}
 					}

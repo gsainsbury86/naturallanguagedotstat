@@ -54,20 +54,48 @@ public class LocalTest {
 		
 		
 /*
+
+ 		printQueryResult("How many people are from South Korea?") ; 							// Q599
+ 		printQueryResult("How many aboriginal people in Tasmania?") ; 							// Q588
+ 		printQueryResult("How many single women in Unley?") ; 							// Q577
+ 		printQueryResult("How many single women in South Australia?") ; 							// Q576
+		printQueryResult("How many people divorced men in South Australia?") ; 							// Q573
+		printQueryResult("How many people divorced men in Adelaide?") ; 							// 572
+		printQueryResult("How many people in Hobart work as dentists?") ; 							// Q565
+		printQueryResult("How many people in Lenah Valley work in Agriculture?") ; 							// Q562
+		printQueryResult("How many people in Tasmania born in Malaysia?") ; 							// Q560
+		printQueryResult("How many people in Tasmania born in Sri Lanka?") ; 							// Q559
+		printQueryResult("How many people in Tasmania born in Germany?") ; 							// Q558
+		printQueryResult("How many people in Tasmania born in uk?") ; 							// Q557
+		printQueryResult("How many people in Tasmania born in Hungary?") ; 							// Q556
+		printQueryResult("How many in Tasmania are married?") ; 							// Q554
+		printQueryResult("What is the cpi for food?") ; 							// Q553
+		printQueryResult("What is the cpi for tas?") ; 							// Q552
+		printQueryResult("What is the unemployment rate for Tasmania?") ; 							// Q548
+		printQueryResult("how many people 0 to 15 in Canberra?") ; 							// Q545
+		printQueryResult("how many IT in Tasmania?") ; 							// Q539
+		printQueryResult("how many doctors in Tasmania?") ; 							// Q538
+		printQueryResult("cpi?") ; 							// Q535
+		printQueryResult("How many women in Adelaide are married?") ; 							// Q528
+		printQueryResult("How many people live in Canberra?") ; 							// Q516
+		printQueryResult("How many people live in Adelaide?") ; 							// Q514
+		printQueryResult("How many men with IT degrees in Adelaide?") ; 							// Q513
+		printQueryResult("How many single women in Burnside council?") ; 							// Q512
+		printQueryResult("How many men in Frankston?") ; 							// Q509
+		printQueryResult("How many men in Eliza?") ; 							// Q505
+		printQueryResult("How many men in melbourne?") ; 							// Q504
+		printQueryResult("What is the unemployment rate in NSW?") ; 							// Q503
 		printQueryResult("What is the current CPI in NSW?") ; 							// Q500
-		"How many women in Tasmania are unmarried?"	//Q433. 78276. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.6.STE.6.A/ABS?startTime=2011&endTime=2011
-		"how many women in Murrumbeena are single" // Q488. 1526. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.2.SA2.208021181.A/ABS?startTime=2011&endTime=2011
+		"How many women in Tasmania are unmarried?"	//Q433. 78276. 
+		"how many women in Murrumbeena are single" // Q488. 1526. 
+		printQueryResult("What is the unemployment rate in Tasmania?") ; 		
+		printQueryResult("What is the employment rate in Victoria?") ; 							// Q342
+		printQueryResult("What is the participation rate for QLD?") ; 							// Q341
 
  */
-		//printQueryResult("How many women in Capital Region have a graduate diploma?") ; 							// Q500
-		printQueryResult("What is the unemployment rate in Victoria?") ; 							// Q500
 		
-/*
- 
- 		
-		
+		printQueryResult("How many people are from Korea?") ; 							// Q588
 
- */
 	}
 	
 	public static void printQueryResult( String str) throws IOException, ClassNotFoundException, SQLException{

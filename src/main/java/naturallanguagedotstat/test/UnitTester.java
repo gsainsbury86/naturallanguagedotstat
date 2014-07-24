@@ -399,7 +399,6 @@ public class UnitTester {
 		"How many women in Goulburn were in the labour force?",
 		"How many people in Goulburn were in employment?",
 		"How many people in Goulburn were in part time employment?",
-		"How many women were in Goulburn in the labour force?",
 		"How many people in Goulburn were part time employment?", 
 		"How many people in Goulburn were employed part time?", 
 		"How many men in Goulburn were full time employed?",
@@ -741,8 +740,8 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B21/2.O15.2.0.AUS.0.A/ABS?startTime=2011&endTime=2011", //How many women provided unpaid assistance in Australia?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B21/2.O15.2.1.SA3.10102.A/ABS?startTime=2011&endTime=2011", //How many women provided unpaid assistance in Queanbeyan?
 
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/2.O15.2.1.SA4.101.A/ABS?startTime=2011&endTime=2011", //How many women in Capital Region have a graduate diploma?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/2.O15.3.1.SA4.101.A/ABS?startTime=2011&endTime=2011", //How many women have a bachelor degree in Capital Region?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B37/NSQ_2.2.1.SA4.101.A/ABS?startTime=2011&endTime=2011", //How many women in Capital Region have a graduate diploma?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B37/NSQ_3.2.1.SA4.101.A/ABS?startTime=2011&endTime=2011", //How many women have a bachelor degree in Capital Region?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/3.O15+T15.2.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", //How many people 15-24 have a diploma in Goulburn
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/2.T25.1.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", //How many women 25-34 in Goulburn have a postgraduate degree
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/1.T35.3.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", //How many 35-44 year old men in Goulburn have a bachelors degree 
@@ -756,10 +755,9 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.T35.EMP.6.SA2.601031019.A/ABS?startTime=2011&endTime=2011", // How many people aged between 35 and 40 in Moonah were employed?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.T35.EMP.6.SA2.601031019.A/ABS?startTime=2011&endTime=2011", // How many people aged 35-40 in Moonah were in employment?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/1.O15.1.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", 	// How many men in Goulburn were in full time employment?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/2.O15.LF.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", 	// How many women in Goulburn were in the labour force?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B37/LFTOT.2.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", 	// How many women in Goulburn were in the labour force?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.O15.EMP.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", // How many people in Goulburn were in employment?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.O15.2.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", 	// How many people in Goulburn were in part time employment?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/2.O15.LF.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", 	// How many women were in Goulburn in the labour force?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.O15.2.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", 	// How many people in Goulburn were part time employment?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.O15.2.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", 	// How many people in Goulburn were employed part time?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/1.O15.1.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011",	//	printQueryResult("How many men in Goulburn were full time employed?") ; // 3726

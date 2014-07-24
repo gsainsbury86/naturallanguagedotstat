@@ -50,7 +50,7 @@ public class QueryBuilder {
 		queryInputs = semanticParser.getDimensions();	
 		dataset = findBestMatchDatasetForDimensionNames();
 	
-		System.out.println("best matched dataset is "+dataset.getName());
+		//System.out.println("best matched dataset is "+dataset.getName());
 		for (Dimension dim: dataset.getDimensions() ){
 			if(dim.getName().equalsIgnoreCase("Age") ){
 				getBestAgeCodeLists(queryInputs, dataset);
@@ -191,7 +191,7 @@ public class QueryBuilder {
 			if(str.equalsIgnoreCase("Australian Capital Territory")|| str.equalsIgnoreCase("Canberra") )
 				a1.add("Canberra");
 			
-			System.out.println("a1 = "+a1);
+			//System.out.println("a1 = "+a1);
 			queryInputs.put("Region",a1);
 
 		};
