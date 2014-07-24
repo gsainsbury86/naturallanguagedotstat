@@ -132,7 +132,7 @@ public class QueryBuilder {
 
 
 		if(dataset.getName().contains("ABS_CENSUS2011_B44")){
-			setDefaultValueForDimension(dataset, "Industry of Employment", "Employed Total");									
+			setDefaultValueForDimension(dataset, "Industry of Employment", "Total");									
 			setDefaultValueForDimension(dataset, "Occupation", "Total");												
 		}
 

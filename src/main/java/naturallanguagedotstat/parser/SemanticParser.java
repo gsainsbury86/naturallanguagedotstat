@@ -250,6 +250,7 @@ public class SemanticParser {
 		
 		//B42
 		synonyms.put("employed","Employed total");
+		synonyms.put("not employed","Not in the labour force");
 		synonyms.put("in employment","Employed total");
 		synonyms.put("total employment","Employed total");
 		synonyms.put("full time","Full-time(a)");
@@ -384,7 +385,6 @@ public class SemanticParser {
 
 		synonyms.put("unemployment","% Unemployment(d)");
 		synonyms.put("participation","% Labour force participation(e)");
-		synonyms.put("labour force","% Labour force participation(e)");
 		synonyms.put("employment to population","% Employment to population(f)");
 		synonyms.put("employment rate","% Employment to population(f)");
 		synonyms.put("employment ratio","% Employment to population(f)");
@@ -502,10 +502,10 @@ public class SemanticParser {
 		
 		grammarParser.parseText();
 		identifyDimensions(grammarParser.keyPhrases);
-		System.out.println("Dimensions are :" + dimensions);
+		//System.out.println("Dimensions are :" + dimensions);
 		identifyRegion(grammarParser.inputText.toLowerCase());
 		cleanUpDimensions();
-		System.out.println("After cleanUp: Dimensions are :" + dimensions);
+		//System.out.println("After cleanUp: Dimensions are :" + dimensions);
 	}
 
 	private void identifyRegion(String inputString) {
@@ -559,6 +559,9 @@ public class SemanticParser {
 
 		
 		if(grammarParser.inputText.contains("born") ||	grammarParser.inputText.contains("birth")   ){
+			if(!dimensions.containsKey("Country of Birth of Person")){
+				dimensions.put("Selected Person Characteristics", "Birthplace Elsewhere");
+			};
 			dimensions.remove("Country of Origin");
 			dimensions.remove("Country of Destination");
 		};
