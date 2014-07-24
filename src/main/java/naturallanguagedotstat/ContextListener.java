@@ -104,11 +104,19 @@ public class ContextListener implements ServletContextListener {
 			// use comma as separator
 			String[] newSynonym = line.split(",");
 
-			toReturn.put(newSynonym[0],newSynonym[1]);
+			// fix for commas in values e.g. Korea, Republic of South
+			String value = "";
+			for(int i = 1; i < newSynonym.length; i++){
+				value+=newSynonym[i] + ",";
+			}
+
+			value = value.substring(0,value.length() - 1);
+
+			toReturn.put(newSynonym[0],value);
 		}
 		
 		br.close();
 		return toReturn;
-	}
 
+	}
 }
