@@ -203,12 +203,12 @@ a:link,a:visited {
 	width: 100%;
 }
 
-#fsl {
+.fsl {
 	float: right;
 	margin-right: 30px
 }
 
-#fsl a {
+._fd {
 	color: #fff
 }
 
