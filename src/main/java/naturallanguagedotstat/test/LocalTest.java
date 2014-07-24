@@ -54,11 +54,13 @@ public class LocalTest {
 		
 		
 /*
+		printQueryResult("What is the current CPI in NSW?") ; 							// Q500
 		"How many women in Tasmania are unmarried?"	//Q433. 78276. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.6.STE.6.A/ABS?startTime=2011&endTime=2011
 		"how many women in Murrumbeena are single" // Q488. 1526. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.2.SA2.208021181.A/ABS?startTime=2011&endTime=2011
 
  */
-		printQueryResult("How many people in Sydney?") ; 							// Q88. 
+		//printQueryResult("How many women in Capital Region have a graduate diploma?") ; 							// Q500
+		printQueryResult("What is the unemployment rate in Victoria?") ; 							// Q500
 		
 /*
  

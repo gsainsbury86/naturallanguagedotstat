@@ -382,13 +382,15 @@ public class SemanticParser {
 		synonyms.put("recreation CPI","Recreation and culture");
 		synonyms.put("education CPI","Education");
 
-		synonyms.put("employment to population","Employment to population ratio (%)");
-		synonyms.put("employment ratio","Employment to population ratio (%)");
-		synonyms.put("employment rate","Employment to population ratio (%)");
-		synonyms.put("participation","Participation rate (%)");
-		synonyms.put("unemployment","Unemployment rate (%)");
+		synonyms.put("unemployment","% Unemployment(d)");
+
+		// synonyms.put("employment to population","Employment to population ratio (%)");
+		// synonyms.put("employment ratio","Employment to population ratio (%)");
+		// synonyms.put("employment rate","Employment to population ratio (%)");
+		// synonyms.put("participation","Participation rate (%)");
+		//  synonyms.put("unemployment","Unemployment rate (%)");
 		
-		synonyms.put("employment ratio","Employment to population ratio (%)");
+		// synonyms.put("employment ratio","Employment to population ratio (%)");
 	};
 
 
@@ -422,7 +424,7 @@ public class SemanticParser {
 		for (String keyWord : synonyms.keySet() ) {
 			if(wholeWordContains(str, keyWord)  ){ 
 				rootWord = synonyms.get(keyWord) ; 
-				//System.out.println("Found the word: "+ keyWord + "~" + rootWord);
+				System.out.println("Found the word: "+ keyWord + "~" + rootWord);
 				searchCodeListForRootWord(rootWord);
 			};
 		};				
@@ -436,7 +438,7 @@ public class SemanticParser {
 				if (!dim.getName().equals("Age") &&  !dim.getName().equals("Region Type") &&  !dim.getName().equals("State")) {
 					for(String key: map.keySet ()){
 						if(! map.get(key).equalsIgnoreCase("total") &&  wholeWordContains(str,map.get(key) )){
-							//System.out.println(dataset.getName() + " ~ "+ dim.getName() +" ~ " + map.get(key) ) ;
+							System.out.println(dataset.getName() + " ~ "+ dim.getName() +" ~ " + map.get(key) ) ;
 							dimensions.put(dim.getName(), map.get(key) );
 						}
 					}
@@ -503,10 +505,10 @@ public class SemanticParser {
 		
 		grammarParser.parseText();
 		identifyDimensions(grammarParser.keyPhrases);
-		//System.out.println("Dimensions are :" + dimensions);
+		System.out.println("Dimensions are :" + dimensions);
 		identifyRegion(grammarParser.inputText.toLowerCase());
 		cleanUpDimensions();
-		//System.out.println("After cleanUp: Dimensions are :" + dimensions);
+		System.out.println("After cleanUp: Dimensions are :" + dimensions);
 	}
 
 	private void identifyRegion(String inputString) {
@@ -540,7 +542,7 @@ public class SemanticParser {
 		dimensions.remove("Proficiency in Spoken English/Language of Male Parent");
 		dimensions.remove("Proficiency in Spoken English/Language of Female Parent");
 		
-		dimensions.remove("Selected Labour Force, Education and Migration Characteristics");
+		// dimensions.remove("Selected Labour Force, Education and Migration Characteristics");
 
 		dimensions.remove("State of Destination");
 		dimensions.remove("State of Origin");

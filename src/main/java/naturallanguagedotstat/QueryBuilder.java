@@ -50,11 +50,12 @@ public class QueryBuilder {
 		queryInputs = semanticParser.getDimensions();	
 		dataset = findBestMatchDatasetForDimensionNames();
 	
+		System.out.println("best matched dataset is "+dataset.getName());
 		for (Dimension dim: dataset.getDimensions() ){
 			if(dim.getName().equalsIgnoreCase("Age") ){
 				getBestAgeCodeLists(queryInputs, dataset);
 			};
-		}
+		};
 
 		setDefaultsForMissingDimensions(dataset);
 		removeExtraneousDimensions(dataset);
