@@ -2,29 +2,29 @@ female,Females
 women,Females
 male,Males
 men,Males
-median age,Median age of persons 
-average age,Median age of persons 
-personal income,Median total personal income ($/weekly) 
-median income,Median total personal income ($/weekly) 
-average income,Median total personal income ($/weekly) 
-income for people,Median total personal income ($/weekly) 
-income for persons,Median total personal income ($/weekly) 
-family income,Median total family income ($/weekly) 
-income for families,Median total family income ($/weekly) 
-family of families,Median total family income ($/weekly) 
-household income,Median total household income ($/weekly) 
-income for households,Median total household income ($/weekly) 
-income of households,Median total household income ($/weekly) 
-mortgage,Median mortgage repayment ($/monthly) 
-repayment,Median mortgage repayment ($/monthly) 
-repayments,Median mortgage repayment ($/monthly) 
-rental,Median rent ($/weekly) 
-payment,Median rent ($/weekly) 
-rent,Median rent ($/weekly) 
-night of,Counted at home on Census Night 
-at home on,Counted at home on Census Night 
-same Statistical Area Level 2,Same Statistical Area Level 2 (SA2) 
-same SA2,Same Statistical Area Level 2 (SA2) 
+median age,Median age of persons
+average age,Median age of persons
+personal income,Median total personal income ($/weekly)
+median income,Median total personal income ($/weekly)
+average income,Median total personal income ($/weekly)
+income for people,Median total personal income ($/weekly)
+income for persons,Median total personal income ($/weekly)
+family income,Median total family income ($/weekly)
+income for families,Median total family income ($/weekly)
+family of families,Median total family income ($/weekly)
+household income,Median total household income ($/weekly)
+income for households,Median total household income ($/weekly)
+income of households,Median total household income ($/weekly)
+mortgage,Median mortgage repayment ($/monthly)
+repayment,Median mortgage repayment ($/monthly)
+repayments,Median mortgage repayment ($/monthly)
+rental,Median rent ($/weekly)
+payment,Median rent ($/weekly)
+rent,Median rent ($/weekly)
+night of,Counted at home on Census Night
+at home on,Counted at home on Census Night
+same Statistical Area Level 2,Same Statistical Area Level 2 (SA2)
+same SA2,Same Statistical Area Level 2 (SA2)
 married,Married(a)
 marriages,Married(a)
 widows,Widowed
@@ -141,13 +141,13 @@ total employment,Employed total
 full time,Full-time(a)
 part time,Part-time
 labour force,Total labour force
-agricultural,Agriculture, forestry and fishing 
+agricultural,Agriculture, forestry and fishing
 agriculture,Agriculture, forestry and fishing
 farming,Agriculture, forestry and fishing
 farmers,Agriculture, forestry and fishing
-forestry,Agriculture, forestry and fishing 
-fishing,Agriculture, forestry and fishing 
-fishermen,Agriculture, forestry and fishing 
+forestry,Agriculture, forestry and fishing
+fishing,Agriculture, forestry and fishing
+fishermen,Agriculture, forestry and fishing
 utilities,Electricity, gas, water and waste services
 electricity,Electricity, gas, water and waste services
 electrical,Electricity, gas, water and waste services
