@@ -22,16 +22,16 @@ public class LocalTest {
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException{
 
-		log = false;
+		log = true;
 		localLoad = true;
 		unitTests = true;
 
-/*
+
 		// The following don't work for whatever reasons.
-		printQueryResult("females in adelaide over 30") ; //Q11	"does not parse over 30"
+		printQueryResult("What is the food CPI in Sydney?") ; //Q11	"does not parse over 30"
   		
   		
- */
+ 
 		
 		
 		

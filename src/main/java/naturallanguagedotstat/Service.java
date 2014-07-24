@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import naturallanguagedotstat.model.Dataset;
 import naturallanguagedotstat.model.Dimension;
+import naturallanguagedotstat.parser.SemanticParser;
 import naturallanguagedotstat.test.LocalTest;
 import naturallanguagedotstat.test.UnitTester;
 import naturallanguagedotstat.utils.Utils;
@@ -55,6 +56,7 @@ public class Service {
 		if(LocalTest.localLoad){
 			datasets = Utils.loadDatasets();
 			ASGS2011 = Utils.loadASGS_2011();
+			SemanticParser.synonyms = Utils.loadSynonyms();
 		}
 	}
 
@@ -125,7 +127,6 @@ public class Service {
 
 			queryBuilder = new QueryBuilder(query, ASGS2011);
 			urlToRead = queryBuilder.build();
-
 
 			String data = null;
 			double result = -1;

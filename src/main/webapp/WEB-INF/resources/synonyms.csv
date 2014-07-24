@@ -1,0 +1,260 @@
+female,Females
+women,Females
+male,Males
+men,Males
+median age,Median age of persons 
+average age,Median age of persons 
+personal income,Median total personal income ($/weekly) 
+median income,Median total personal income ($/weekly) 
+average income,Median total personal income ($/weekly) 
+income for people,Median total personal income ($/weekly) 
+income for persons,Median total personal income ($/weekly) 
+family income,Median total family income ($/weekly) 
+income for families,Median total family income ($/weekly) 
+family of families,Median total family income ($/weekly) 
+household income,Median total household income ($/weekly) 
+income for households,Median total household income ($/weekly) 
+income of households,Median total household income ($/weekly) 
+mortgage,Median mortgage repayment ($/monthly) 
+repayment,Median mortgage repayment ($/monthly) 
+repayments,Median mortgage repayment ($/monthly) 
+rental,Median rent ($/weekly) 
+payment,Median rent ($/weekly) 
+rent,Median rent ($/weekly) 
+night of,Counted at home on Census Night 
+at home on,Counted at home on Census Night 
+same Statistical Area Level 2,Same Statistical Area Level 2 (SA2) 
+same SA2,Same Statistical Area Level 2 (SA2) 
+married,Married(a)
+marriages,Married(a)
+widows,Widowed
+widowers,Widowed
+separations,Separated
+divorces,Divorced
+never married,Never married
+never been married,Never married
+registered marriage,Married in a registered marriage
+de facto,Married in a de facto marriage(b)
+single,Not married
+unmarried,Not married
+indigenous,Indigenous(a)
+aboriginal,Indigenous(a)
+aboriginals,Indigenous(a)
+aborgines,Indigenous(a)
+torres strait,Indigenous(a)
+non indigenous,Non-Indigenous
+not indigenous,Non-Indigenous
+China,China (excl. SARs and Taiwan)(b)
+Yugoslavia,Former Yugoslav Republic of Macedonia (FYROM)
+Hong Kong,Hong Kong (SAR of China)(b)
+Korea,Korea, Republic of (South)
+United Kingdom,United Kingdom, Channel Islands and Isle of Man(d)
+UK,United Kingdom, Channel Islands and Isle of Man(d)
+USA,United States of America
+US,United States of America
+NZ,New Zealnd
+United States,United States of America
+America,United States of America
+speak only English,Speaks English only
+speak English,Speaks English only
+speak another language,Speaks other language total
+language other than English,Speaks other language total
+speak Chinese,Chinese languages total
+Chinese speakers,Chinese languages total
+speak Iranian,Iranic Languages total
+Buddhist,Buddhism
+Buddhists,Buddhism
+Christian,Christianity total
+Christians,Christianity total
+Christianity,Christianity total
+Anglicans,Anglican
+Assyrian Apostolics,Assyrian Apostolic
+apostolic,Assyrian Apostolic
+apostolics,Assyrian Apostolic
+Baptists,Baptist
+Catholics,Catholic
+Catholicism,Catholic
+Church of Christ,Churches of Christ
+Witnesses,Jehovah's Witnesses
+Latter Day,Latter-day Saints
+Mormons,Latter-day Saints
+Lutherans,Lutheran
+Pentecostals,Pentecostal
+Presbyterian,Presbyterian and Reformed
+Presbyterians,Presbyterian and Reformed
+Adventist,Seventh-day Adventist
+Adventists,Seventh-day Adventist
+Hindu,Hinduism
+Hindus,Hinduism
+muslim,Islam
+muslims,Islam
+islamic,Islam
+jewish,Judaism
+jews,Judaism
+Aboriginal religions,Australian Aboriginal Traditional Religions
+Aboriginal traditional religions,Australian Aboriginal Traditional Religions
+no religion,No religion(b)
+year 12,Year 12 or equivalent
+grade 12,Year 12 or equivalent
+year 11,Year 11 or equivalent
+grade 11,Year 11 or equivalent
+year 10,Year 10 or equivalent
+grade 10,Year 10 or equivalent
+year 9,Year 9 or equivalent
+grade 9,Year 9 or equivalent
+year 8,Year 8 or below
+grade 8,Year 8 or below
+need assistance,Has need for assistance
+needs assistance,Has need for assistance
+has need for assistance,Has need for assistance
+have need for assistance,Has need for assistance
+does not have need for assistance,Does not have need for assistance
+do not have need for assistance,Does not have need for assistance
+does not need assistance,Does not have need for assistance
+do not need assistance,Does not have need for assistance
+voluntary work,Volunteer
+volunteered,Volunteer
+unpaid domestic,Did unpaid domestic work
+no unpaid domestic,no unpaid domestic work
+provided unpaid assistance,Provided unpaid assistance
+not provide unpaid assistance,No unpaid assistance provided
+postgraduate,Postgraduate Degree Level
+post graduate,Postgraduate Degree Level
+postgraduates,Postgraduate Degree Level
+post graduates,Postgraduate Degree Level
+diploma,Graduate Diploma and Graduate Certificate Level
+graduate diploma,Graduate Diploma and Graduate Certificate Level
+graduate diplomas,Graduate Diploma and Graduate Certificate Level
+bachelor,Bachelor Degree Level
+bachelors,Bachelor Degree Level
+science,Natural and Physical Sciences
+engineering,Engineering and Related Technologies
+architecture,Architecture and Building
+study environmental,Agriculture, Environmental and Related Studies
+studied environmental,Agriculture, Environmental and Related Studies
+manangement,Management and Commerce
+commerce,Management and Commerce
+employed,Employed total
+not employed,Not in the labour force
+in employment,Employed total
+total employment,Employed total
+full time,Full-time(a)
+part time,Part-time
+labour force,Total labour force
+agricultural,Agriculture, forestry and fishing 
+agriculture,Agriculture, forestry and fishing
+farming,Agriculture, forestry and fishing
+farmers,Agriculture, forestry and fishing
+forestry,Agriculture, forestry and fishing 
+fishing,Agriculture, forestry and fishing 
+fishermen,Agriculture, forestry and fishing 
+utilities,Electricity, gas, water and waste services
+electricity,Electricity, gas, water and waste services
+electrical,Electricity, gas, water and waste services
+electricians,Electricity, gas, water and waste services
+waste,Electricity, gas, water and waste services
+wholesale,Wholesale trade
+wholesalers,Wholesale trade
+retail,Retail trade
+retailing,Retail trade
+retailers,Retail trade
+accommodation,Accommodation and food services
+cooks,Accommodation and food services
+chefs,Accommodation and food services
+hospitality,Accommodation and food services
+transport,Transport, postal and warehousing
+transportation,Transport, postal and warehousing
+drivers,Transport, postal and warehousing
+postal,Transport, postal and warehousing
+postmen,Transport, postal and warehousing
+warehousing,Transport, postal and warehousing
+computing,Information media and telecommunications
+computing industry,Information media and telecommunications
+ICT,Information media and telecommunications
+ICT industry,Information media and telecommunications
+IT,Information media and telecommunications
+IT industry,Information media and telecommunications
+telecommunication,Information media and telecommunications	
+telecommunications,Information media and telecommunications	
+financial,Financial and insurance services
+finance,Financial and insurance services
+finances,Financial and insurance services
+banking,Financial and insurance services
+bankers,Financial and insurance services
+insurance,Financial and insurance services
+real estate,Rental, hiring and real estate services
+professional,Professional, scientific and technical services
+scientific,Professional, scientific and technical services
+scienctists,Professional, scientific and technical services
+technical,Professional, scientific and technical services	
+administrative,Administrative and support services
+support,Administrative and support services
+public,Public administration and safety
+safety,Public administration and safety
+work in education,Education and training
+education,Education and training
+teachers,Education and training
+training,Education and training
+health,Health care and social assistance
+healthcare,Health care and social assistance
+doctors,Health care and social assistance
+dentists,Health care and social assistance
+nurses,Health care and social assistance
+arts industry,Arts and recreation services
+recreation,Arts and recreation services
+technicians,Technicians and trades workers
+community workers,Community and personal service  workers
+trades,Technicians and trades workers
+trade,Technicians and trades workers
+tradesmen,Technicians and trades workers
+trade workers,Technicians and trades workers
+builders,Technicians and trades workers
+plumbers,Technicians and trades workers
+electricians,Technicians and trades workers
+clerical,Clerical and administrative workers
+clerks,Clerical and administrative workers
+secretaries,Clerical and administrative workers
+administrative,Clerical and administrative workers
+administration,Clerical and administrative workers
+sales,Sales workers
+salesmen,Sales workers
+machinery,Machinery operators and drivers
+drivers,Machinery operators and drivers
+inflation,All groups CPI
+CPI,All groups CPI
+Consumer price index,All groups CPI
+CPI for food,Food and non-alcoholic beverages
+CPI for alcohol,Alcohol and tobacco
+CPI for tobacco,Alcohol and tobacco
+CPI for housing,Housing
+CPI for furnishing,Furnishings, household equipment and services
+CPI for health,Health
+CPI for transport,Transport
+CPI for communication,Communication
+CPI for recreation,Recreation and culture
+CPI for education,Education
+index for food,Food and non-alcoholic beverages
+index,Alcohol and tobacco
+index for tobacco,Alcohol and tobacco
+index for housing,Housing
+index for furnishing,Furnishings, household equipment and services
+index for health,Health
+index for transport,Transport
+index for communication,Communication
+index for recreation,Recreation and culture
+index for education,Education
+food CPI,Food and non-alcoholic beverages
+alcohol CPI,Alcohol and tobacco
+tobacco CPI,Alcohol and tobacco
+housing CPI,Housing
+furnishing CPI,Furnishings, household equipment and services
+health CPI,Health
+transport CPI,Transport
+communication CPI,Communication
+recreation CPI,Recreation and culture
+education CPI,Education
+unemployment,% Unemployment(d)
+participation,% Labour force participation(e)
+employment to population,% Employment to population(f)
+employment rate,% Employment to population(f)
+employment ratio,% Employment to population(f)

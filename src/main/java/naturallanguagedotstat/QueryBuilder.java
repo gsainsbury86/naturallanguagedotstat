@@ -46,7 +46,7 @@ public class QueryBuilder {
 
 		SemanticParser semanticParser = new SemanticParser(this.query, this.ASGS2011);
 		semanticParser.parseText();
-
+		
 		queryInputs = semanticParser.getDimensions();	
 		dataset = findBestMatchDatasetForDimensionNames();
 	

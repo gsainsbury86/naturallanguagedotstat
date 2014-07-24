@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,6 +15,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -163,6 +165,29 @@ public class Utils {
 		}
 		return c;
 
+	}
+
+
+
+
+	public static LinkedHashMap<String, String> loadSynonyms() throws IOException, ClassNotFoundException,
+	FileNotFoundException {
+
+		LinkedHashMap<String, String> toReturn = new LinkedHashMap<String, String>();
+
+		BufferedReader br = new BufferedReader(new FileReader(new File(local_webapp+RES_DIR+"synonyms.csv")));
+		String line = null;
+
+		while ((line = br.readLine()) != null) {
+
+			// use comma as separator
+			String[] newSynonym = line.split(",");
+
+			toReturn.put(newSynonym[0],newSynonym[1]);
+		}
+		
+		br.close();
+		return toReturn;
 	}
 
 }

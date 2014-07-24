@@ -1,11 +1,14 @@
 package naturallanguagedotstat;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -13,6 +16,7 @@ import javax.servlet.ServletContextListener;
 
 import naturallanguagedotstat.model.Dataset;
 import naturallanguagedotstat.model.Dimension;
+import naturallanguagedotstat.parser.SemanticParser;
 
 public class ContextListener implements ServletContextListener {
 
@@ -25,6 +29,7 @@ public class ContextListener implements ServletContextListener {
 		try {
 			Service.datasets = loadDatasets();
 			Service.ASGS2011 = loadASGS_2011();
+			SemanticParser.synonyms = loadSynonyms();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -82,6 +87,28 @@ public class ContextListener implements ServletContextListener {
 
 		return ASGS2011;
 
+	}
+
+	public LinkedHashMap<String, String> loadSynonyms() throws IOException, ClassNotFoundException,
+	FileNotFoundException {
+		InputStream fileIn;
+		fileIn = context.getResourceAsStream(RES_DIR+"synonyms.csv");
+
+		LinkedHashMap<String, String> toReturn = new LinkedHashMap<String, String>();
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(fileIn));
+		String line = null;
+
+		while ((line = br.readLine()) != null) {
+
+			// use comma as separator
+			String[] newSynonym = line.split(",");
+
+			toReturn.put(newSynonym[0],newSynonym[1]);
+		}
+		
+		br.close();
+		return toReturn;
 	}
 
 }
