@@ -28,23 +28,15 @@ public class LocalTest {
 
 
 		// The following don't work for whatever reasons.
-		
+		// http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/3.7.0.AUS.0.A/ABS?startTime=2011&endTime=2011
 		
 		
 /*
 		// These work and need to be web checked and then integrated into unit tests.
-		printQueryResult("Number of atheists?");  	// Q637
-		printQueryResult("Average wage?");  		// Q875. 
-		printQueryResult("coffee cpi?");  		// Q877. 
-		printQueryResult("foreign language speakers in howrah?"); 
-		printQueryResult("How many people follow the jedi religion?");  //Q1235.
-		printQueryResult("How many females are engineers?"); 
-		"How many Irish women live in Adelaide?",			//Q1390
-
-
+		printQueryResult("How many people follow the jedi religion?");  // Q1235.
 
  */
-		 
+		printQueryResult("How many people are jedi?"); 
 
 	}
 	

@@ -245,12 +245,15 @@ public class SemanticParser {
 				dimensions.remove("Place of Usual Residence on Census Night");
 			};
 			
-		if(		!grammarParser.inputText.contains("born") 
+
+  		if(		!grammarParser.inputText.contains("born") 
 			&&	!grammarParser.inputText.contains("birth") 
 			&&  !grammarParser.inputText.contains("from") 
+			&&  !grammarParser.inputText.contains("live") 
 			 ){
 			dimensions.remove("Country of Birth of Person");
 		};
+ 
 
 		if(grammarParser.inputText.contains("lived") ){
 			dimensions.remove("Country of Birth of Person");

@@ -72,6 +72,11 @@ public class UnitTester {
 
 	public static final String[] TEST_QUERIES = {
 		
+		"Number of atheists?", 										// Q637 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/3.7.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"Average wage?",  											// Q875. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTPI.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"foreign language speakers in howrah?",  					//	 	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/3.LOTE.6.SA2.601021007.A/ABS?startTime=2011&endTime=2011
+		"How many females are engineers?",							// 		http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/03.2.O15.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+
 		"Number of females in adelaide aged 30 who are managers?",	// Q1380. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/T25.2.1.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011
 		"How many people whose country of birth is New Zealand live in Tasmania?", //Q1297. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.1201.6.STE.6.A/ABS?startTime=2011&endTime=2011
 		"median rent in VIC?", 										// Q1282 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MRENT.2.STE.2.A/ABS?startTime=2011&endTime=2011
@@ -502,6 +507,11 @@ public class UnitTester {
 	};
 
 	private static final String[] TEST_RESULTS = {
+		
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/3.7.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTPI.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/3.LOTE.6.SA2.601021007.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/03.2.O15.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
 		
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/T25.2.1.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.1201.6.STE.6.A/ABS?startTime=2011&endTime=2011",
