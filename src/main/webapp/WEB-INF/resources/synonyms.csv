@@ -187,7 +187,6 @@ professional,Professional, scientific and technical services
 scientific,Professional, scientific and technical services
 scienctists,Professional, scientific and technical services
 technical,Professional, scientific and technical services	
-administrative,Administrative and support services
 support,Administrative and support services
 public,Public administration and safety
 safety,Public administration and safety
@@ -210,7 +209,6 @@ tradesmen,Technicians and trades workers
 trade workers,Technicians and trades workers
 builders,Technicians and trades workers
 plumbers,Technicians and trades workers
-electricians,Technicians and trades workers
 clerical,Clerical and administrative workers
 clerks,Clerical and administrative workers
 secretaries,Clerical and administrative workers
@@ -219,7 +217,6 @@ administration,Clerical and administrative workers
 sales,Sales workers
 salesmen,Sales workers
 machinery,Machinery operators and drivers
-drivers,Machinery operators and drivers
 inflation,All groups CPI
 CPI,All groups CPI
 Consumer price index,All groups CPI
