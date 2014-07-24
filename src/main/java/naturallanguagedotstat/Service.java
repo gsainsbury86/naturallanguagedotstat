@@ -72,9 +72,6 @@ public class Service {
 	@Path("/randomQueries/{n}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response randomQueries(@PathParam("n") int n){
-		//Random r = new Random();
-		//int index = r.nextInt(UnitTester.TEST_QUERIES.length);
-		//return Response.status(200).entity(UnitTester.TEST_QUERIES[index]).build();
 
 		ArrayList<String> toReturn = new ArrayList<String>();
 		for(int i = 0; i < UnitTester.TEST_QUERIES.length; i++){
