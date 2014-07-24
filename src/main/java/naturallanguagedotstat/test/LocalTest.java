@@ -44,8 +44,8 @@ public class LocalTest {
 
 
  */
-		
-		printQueryResult("How many women in Sandy Bay are not employed?"); 
+		 
+		printQueryResult("How many people in Tasmania were born in Hungary?"); 
 
 	}
 	

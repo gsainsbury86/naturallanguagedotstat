@@ -84,7 +84,7 @@ public class UnitTester {
 		"How many people in Tasmania were born in Sri Lanka?",		// Q559 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.7107.6.STE.6.A/ABS?startTime=2011&endTime=2011
 		"How many people in Tasmania were born in Germany?",		// Q558 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.2304.6.STE.6.A/ABS?startTime=2011&endTime=2011
 		"How many people in Tasmania were born in uk?",				// Q557 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.2100.6.STE.6.A/ABS?startTime=2011&endTime=2011
-		"How many people in Tasmania were born in Hungary?",		// Q556 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.6.STE.6.A/ABS?startTime=2011&endTime=2011
+		"How many people in Tasmania were born in Hungary?",		// Q556 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B01/3.BPELSE.6.STE.6.A/ABS?startTime=2011&endTime=2011
 		"How many in Tasmania are married?",						// Q554 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.TT.5.6.STE.6.A/ABS?startTime=2011&endTime=2011
 		"What is the cpi for food?", 								// Q553 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.50.20001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
 		"What is the cpi for tas?",									// Q552 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.6.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
@@ -487,7 +487,7 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.7107.6.STE.6.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.2304.6.STE.6.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.2100.6.STE.6.A/ABS?startTime=2011&endTime=2011",
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.6.STE.6.A/ABS?startTime=2011&endTime=2011",
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B01/3.BPELSE.6.STE.6.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.TT.5.6.STE.6.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.50.20001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.6.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1",
