@@ -56,16 +56,17 @@ $(document).ready(function() {
 							}
 							e = dataArray.sort(function(a,b) { return a	- b;});
 							if(e.length > 3) {
-								f = e[0] + ", ... , " + e[e.length - 1]
+								e = e[0] + ", ... , " + e[e.length - 1];
 							} else {
 								f=e[0];
-								for (j=1; j < e.length-1;j++){
+								for (j=1; j < e.length-1; j++){
 									f = f + ", " + e[j];
 								};
+								e=f;
 							};
 						};
 		
-						$("#map").append(index + " : " + f + '<br>');
+						$("#map").append(index + " : " + e + '<br>');
 					}
 
 				});
