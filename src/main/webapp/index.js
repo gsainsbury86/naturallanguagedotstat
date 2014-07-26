@@ -50,9 +50,11 @@ $(document).ready(function() {
 						if ($.isArray(e) && e.length > 1 && index == "Age") {
 							var dataArray = [];
 							
+							// returns the first number found in the string, otherwise returns the original string;
 							function getFirstNumber(s){
-								if (s.indexOf(" ") != -1){
-									return s.substring(1, s.indexOf(" ")-1 ) ;
+								var num = s.match("/\d+/");
+								if(num){
+									return num;
 								} else {
 									return s;
 								};
