@@ -56,6 +56,7 @@ $(document).ready(function() {
 							};
 							
 							e = dataArray.sort(
+									// Comapres the first found number in each string, and uses a comparative value of -1 if no numbers are found.
 									function(a,b){
 										return ( a.match("/\d+/")?a.match("/\d+/"):-1 ) - ( b.match("/\d+/")?b.match("/\d+/"):-1) ;
 									} 
