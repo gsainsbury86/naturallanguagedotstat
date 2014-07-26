@@ -58,7 +58,7 @@ $(document).ready(function() {
 							if(e.length > 3) {
 								e = e[0] + ",... , " + e[e.length - 1];
 							} else {
-								f=e[0];
+								f=e[0]; 
 								for (j=1; j < e.length; j++){
 									f = f + ", " + e[j];
 								};
