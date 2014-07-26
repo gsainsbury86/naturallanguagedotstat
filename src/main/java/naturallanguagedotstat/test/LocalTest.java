@@ -36,7 +36,7 @@ public class LocalTest {
 		printQueryResult("How many people follow the jedi religion?");  // Q1235.
 
  */
-		printQueryResult("How many people are jedi?"); 
+		printQueryResult("How many women aged 20-40 in Tasmania?"); 
 
 	}
 	

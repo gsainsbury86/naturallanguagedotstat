@@ -336,13 +336,13 @@ public class QueryBuilder {
 
 		ArrayList<String> list = new ArrayList<String>();
 		Double scoreMax = matches.get(getKeyForMaxValue(matches) );
-
+		
 		double epsilon = 0.000001;
 		for (String descr: ageCodeListDescriptions){
-			if(Math.abs(matches.get(descr) - scoreMax ) < epsilon ){
+			if(Math.abs(matches.get(descr) - scoreMax ) < epsilon  || matches.get(descr) > 0.5){
 				list.add(descr);
 			}
-		}
+		};
 
 		// Treat B04 differently as it is the only dataset with hierarchical age ranges.
 		if(doAggregateAges && dataset.getName().equals("ABS_CENSUS2011_B04")){
@@ -397,13 +397,14 @@ public class QueryBuilder {
 			};
 		};
 
-		//if query and codelist are both intervals
+		//if query and codelist are both intervals. 
+		// returns what fraction of (b0,b1) is overlapping.
 		if(a1 !=-1  && b1 !=-1 ){
 			if(a0 <= b0 && b0 <= a1){
-				return 1.0* (a1-b0+1) / Math.max(a1-a0+1, b1-b0+1);
+				return 1.0* Math.min(b1-b0+1, a1-b0+1) / (b1-b0+1);
 			};
 			if(b0 <= a0 && a0 <= b1){
-				return 1.0* (b1-a0+1) / Math.max(a1-a0+1, b1-b0+1);
+				return 1.0* Math.min(b1-b0+1, b1-a0+1) / (b1-b0+1);
 			};
 		};
 
