@@ -45,7 +45,8 @@ $(document).ready(function() {
 				$.each(	data, function(index) {
 					if (index != 'result' && index != 'url' && index != 'datasetName' && index != 'datasetURL') {
 						var e = data[index];
-
+						var f = data[0];
+						var j;
 						/*TODO: Fix for age ranges*/
 						if ($.isArray(e) && e.length > 1 && index == "Age") {
 							var dataArray = [];
@@ -54,9 +55,17 @@ $(document).ready(function() {
 								dataArray.push(word);
 							}
 							e = dataArray.sort(function(a,b) { return a	- b;});
-							e = e[0] + ", ... , " + e[e.length - 1];
-						}
-						$("#map").append(index + " : " + e + '<br>');
+							if(e.length > 3) {
+								f = e[0] + ", ... , " + e[e.length - 1]
+							} else {
+								f=e[0];
+								for (j=1; j < e.length-1;j++){
+									f = f + ", " + e[j];
+								};
+							};
+						};
+		
+						$("#map").append(index + " : " + f + '<br>');
 					}
 
 				});
