@@ -45,21 +45,33 @@ $(document).ready(function() {
 				$.each(	data, function(index) {
 					if (index != 'result' && index != 'url' && index != 'datasetName' && index != 'datasetURL') {
 						var e = data[index];
-						var f = data[0];
-						var j;
+
 						/*TODO: Fix for age ranges*/
 						if ($.isArray(e) && e.length > 1 && index == "Age") {
 							var dataArray = [];
+							
+							function getFirstNumber(s){
+								if (s.indexOf(" ") != -1){
+									return s.substring(1, s.indexOf(" ")-1 ) ;
+								} else {
+									return s;
+								};
+							};
+							
+							function sortFunction(a,b) {
+								return getFirstNumber(a) - getFirstNumber(b);
+							};
+							
 							for (year in e) {
 								var word = e[year];
 								dataArray.push(word);
 							}
-							e = dataArray.sort(function(a,b) { return a	- b;});
+							e = dataArray.sort(sortFunction);
 							if(e.length > 3) {
-								e = e[0] + ",... , " + e[e.length - 1];
+								e = e[0] + ",...," + e[e.length - 1];
 							} else {
-								f=e[0]; 
-								for (j=1; j < e.length; j++){
+								var f = data[0];
+								for (var j=1; j < e.length; j++){
 									f = f + ", " + e[j];
 								};
 								e=f;
