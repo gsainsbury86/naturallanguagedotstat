@@ -49,34 +49,13 @@ $(document).ready(function() {
 						/*TODO: Fix for age ranges*/
 						if ($.isArray(e) && e.length > 1 && index == "Age") {
 							var dataArray = [];
-							
 							for (year in e) {
 								var word = e[year];
 								dataArray.push(word);
-							};
-							function myStringToInt(a){
-								if( a.match("/\d+/") != null){
-									return a.match("/\d+/");
-								} else {
-									return -1;
-								}
-							};
-							
-							e = dataArray.sort(
-									// Comapres the first found number in each string, and uses a comparative value of -1 if no numbers are found.
-									function(a,b){ return myStringToInt(a) - myStringToInt(b); } );
-							
-							if(e.length > 3) {
-								e = e[0] + ",...," + e[e.length - 1];
-							} else {
-								var f = data[0];
-								for (var j=1; j < e.length; j++){
-									f = f + ", " + e[j];
-								};
-								e=f;
-							};
-						};
-		
+							}
+							e = dataArray.sort(function(a,b) { return parseInt(a) - parseInt(b);});
+							e = e[0] + ", ... , " + e[e.length - 1];
+						}
 						$("#map").append(index + " : " + e + '<br>');
 					}
 
