@@ -54,7 +54,7 @@ $(document).ready(function() {
 								dataArray.push(word);
 							}
 							e = dataArray.sort(function(a,b) { return parseInt(a) - parseInt(b);});
-							e = e[0] + ", ... , " + e[e.length - 1];
+							e = e[0] + ",... , " + e[e.length - 1];
 						}
 						$("#map").append(index + " : " + e + '<br>');
 					}
