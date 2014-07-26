@@ -50,26 +50,17 @@ $(document).ready(function() {
 						if ($.isArray(e) && e.length > 1 && index == "Age") {
 							var dataArray = [];
 							
-							// returns the first number found in the string, otherwise returns the original string;
-							function getFirstNumber(s){
-								var num = s.match("/\d+/");
-								if(num){
-									return parseInt(num);
-								} else {
-									return -1;
-								};
-							};
-							
-							function sortFunction(a,b) {
-								return getFirstNumber(a) - getFirstNumber(b);
-							};
-							
 							for (year in e) {
 								var word = e[year];
 								dataArray.push(word);
 							};
 							
-							e = dataArray.sort(sortFunction);
+							e = dataArray.sort(
+									function(a,b){
+										return ( a.match("/\d+/")?a.match("/\d+/"):-1 ) - ( b.match("/\d+/")?b.match("/\d+/"):-1) ;
+									} 
+								);
+							
 							if(e.length > 3) {
 								e = e[0] + ",...," + e[e.length - 1];
 							} else {
