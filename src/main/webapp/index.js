@@ -54,13 +54,17 @@ $(document).ready(function() {
 								var word = e[year];
 								dataArray.push(word);
 							};
+							function myStringToInt(a){
+								if( a.match("/\d+/") != null){
+									return a.match("/\d+/");
+								} else {
+									return -1;
+								}
+							};
 							
 							e = dataArray.sort(
 									// Comapres the first found number in each string, and uses a comparative value of -1 if no numbers are found.
-									function(a,b){
-										return ( a.match("/\d+/")?a.match("/\d+/"):-1 ) - ( b.match("/\d+/")?b.match("/\d+/"):-1) ;
-									} 
-								);
+									function(a,b){ return myStringToInt(a) - myStringToInt(b); } );
 							
 							if(e.length > 3) {
 								e = e[0] + ",...," + e[e.length - 1];
