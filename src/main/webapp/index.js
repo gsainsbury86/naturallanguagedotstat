@@ -54,9 +54,9 @@ $(document).ready(function() {
 							function getFirstNumber(s){
 								var num = s.match("/\d+/");
 								if(num){
-									return num;
+									return parseInt(num);
 								} else {
-									return s;
+									return -1;
 								};
 							};
 							
@@ -67,7 +67,8 @@ $(document).ready(function() {
 							for (year in e) {
 								var word = e[year];
 								dataArray.push(word);
-							}
+							};
+							
 							e = dataArray.sort(sortFunction);
 							if(e.length > 3) {
 								e = e[0] + ",...," + e[e.length - 1];
