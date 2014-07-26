@@ -47,15 +47,6 @@ $(document).ready(function() {
 						var e = data[index];
 						var f = data[0];
 						var j;
-						
-						function getFirstWord(myString) {
-							var str  = myString;
-							if(myString.indexOf(" ") != -1){
-								str = myString.substring(1, myString.indeoxOf(" ")); 
-							};
-						    return str;              
-						};
-						
 						/*TODO: Fix for age ranges*/
 						if ($.isArray(e) && e.length > 1 && index == "Age") {
 							var dataArray = [];
@@ -63,7 +54,7 @@ $(document).ready(function() {
 								var word = e[year];
 								dataArray.push(word);
 							}
-							e = dataArray.sort(function(a,b) { return getFirstWord(a) - getFirstWord(b);});
+							e = dataArray.sort(function(a,b) { return a	- b;});
 							if(e.length > 3) {
 								e = e[0] + ",... , " + e[e.length - 1];
 							} else {
