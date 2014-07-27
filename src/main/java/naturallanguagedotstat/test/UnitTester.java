@@ -872,13 +872,13 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B19/1.A20.2.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", //How many men aged 20-25 in Goulburn did volunteer work?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B19/1.A20.2.1.SA3.10102.A/ABS?startTime=2011&endTime=2011", //How many men aged 20-25 in Goulburn did volunteer work?
 
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B21/2.O15+A15.2.0.AUS.0.A/ABS?startTime=2011&endTime=2011", //How many women aged 15-19 provided unpaid assistance in Australia?
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B21/2.A15.2.0.AUS.0.A/ABS?startTime=2011&endTime=2011", //How many women aged 15-19 provided unpaid assistance in Australia?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B21/2.O15.2.0.AUS.0.A/ABS?startTime=2011&endTime=2011", //How many women provided unpaid assistance in Australia?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B21/2.O15.2.1.SA3.10102.A/ABS?startTime=2011&endTime=2011", //How many women provided unpaid assistance in Queanbeyan?
 
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B37/NSQ_2.2.1.SA4.101.A/ABS?startTime=2011&endTime=2011", //How many women in Capital Region have a graduate diploma?
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B37/NSQ_3.2.1.SA4.101.A/ABS?startTime=2011&endTime=2011", //How many women have a bachelor degree in Capital Region?
-		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/3.O15+T15.2.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", //How many people 15-24 have a diploma in Goulburn
+		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/3.T15.2.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", //How many people 15-24 have a diploma in Goulburn
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/2.T25.1.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", //How many women 25-34 in Goulburn have a postgraduate degree
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/1.T35.3.1.SA2.101011001.A/ABS?startTime=2011&endTime=2011", //How many 35-44 year old men in Goulburn have a bachelors degree 
 

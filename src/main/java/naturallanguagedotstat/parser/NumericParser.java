@@ -37,6 +37,22 @@ public class NumericParser {
 		inputWords = splitTextIntoWords(inputString);
 		explicitNumbers = extractExplicitNumbers(inputWords);
 		identifyComparator();
+		
+		if(explicitNumbers.size()==1){
+			if(comparator.equals(Comparator.greaterThan)){
+				explicitNumbers.add("199");
+				comparator = Comparator.between;
+			};
+			if(comparator.equals(Comparator.lessThan)){
+				String temp = explicitNumbers.get(0);
+				explicitNumbers.clear();
+				explicitNumbers.add("0");
+				explicitNumbers.add(temp);
+				comparator = Comparator.between;
+			};
+			
+		};
+		
 		outputString = createStandardizedString();
 	}		
 

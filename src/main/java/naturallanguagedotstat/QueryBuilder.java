@@ -320,7 +320,7 @@ public class QueryBuilder {
 				b1 = Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) );
 
 				if (comparatorDescriptor.equals(">") )
-					b1 = 999;
+					b1 = 199;
 
 				if (comparatorDescriptor.equals("<") ){
 					b1 = b0;
@@ -328,7 +328,13 @@ public class QueryBuilder {
 				};
 			}
 
-
+			// This is a hack to prevent double-counting of age categories.
+			// eg  15 years and over category for codeLists is merely the equivalent as "Total all ages", rather than a explicit age range.
+			if(b0 == 15 && b1 == 199){
+				b0 = -1;
+				b1 = -1;
+			};
+			
 			overlapScore =  getOverlapScore(a0, a1, b0, b1);
 			matches.put(descr, overlapScore);
 			ageDescriptionParser = null;
