@@ -350,6 +350,7 @@ public class QueryBuilder {
 			}
 		};
 
+		
 		// Treat B04 differently as it is the only dataset with hierarchical age ranges.
 		if(doAggregateAges && dataset.getName().equals("ABS_CENSUS2011_B04")){
 			for (Iterator<String> iter = list.iterator(); iter.hasNext();) {
@@ -360,7 +361,12 @@ public class QueryBuilder {
 		};
 
 		// System.out.println("Matched AGE intervals are:" + list);
-		queryInputs2.put(AGE, list);
+		if(scoreMax >= 0){
+			queryInputs2.put(AGE, list);
+		} else {
+			// Remove any explicit age parameter, so that the default dimensional values will be inserted.
+			queryInputs2.remove(AGE);
+		}
 	}
 
 	private boolean isNumber(String aString)

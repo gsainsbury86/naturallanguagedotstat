@@ -8,7 +8,7 @@ $(document).ready(function() {
 //	var canvas = $('#myCanvas');
 //	canvas.width($(window).width());
 //	canvas.height($(window).height());
-	var numQueriesInCloud = 13;
+	var numQueriesInCloud = 11;
 
 	$.get('main/randomQueries/'+numQueriesInCloud, function(data){
 		$('#query').attr('placeholder',data.queries[0]);
