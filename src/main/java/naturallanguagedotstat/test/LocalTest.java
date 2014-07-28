@@ -29,14 +29,19 @@ public class LocalTest {
 
 		// The following don't work for whatever reasons.
 		// http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/3.7.0.AUS.0.A/ABS?startTime=2011&endTime=2011
-		
+		// "How many Italian people in Australia?" // Q1655. returns number of people who speak Italian.
 		
 /*
 		// These work and need to be web checked and then integrated into unit tests.
 		printQueryResult("How many people follow the jedi religion?");  // Q1235.
+		
+		
 
+		
+		
+		
  */
-		printQueryResult("Managers younger than 12 years old?"); 
+		printQueryResult("How many people are retired in Tocumwal?"); 
 
 	}
 	

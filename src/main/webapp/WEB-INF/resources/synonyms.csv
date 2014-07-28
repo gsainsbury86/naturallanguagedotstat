@@ -1,3 +1,11 @@
+Australian,Australia
+Australians,Australia
+New South Welshmen,New South Wales
+Victorian,Victoria
+Queenslander,Queensland
+Queenslanders,Queensland
+Tasmanian,Tasmania
+Tasmanians,Tasmania
 female,Females
 women,Females
 male,Males
@@ -167,6 +175,8 @@ graduate diploma,Graduate Diploma and Graduate Certificate Level
 graduate diplomas,Graduate Diploma and Graduate Certificate Level
 bachelor,Bachelor Degree Level
 bachelors,Bachelor Degree Level
+university degree,Bachelor Degree Level
+university degrees,Bachelor Degree Level
 science,Natural and Physical Sciences
 engineering,Engineering and Related Technologies
 engineers,Engineering and Related Technologies
@@ -176,12 +186,17 @@ studied environmental,Agriculture, Environmental and Related Studies
 manangement,Management and Commerce
 commerce,Management and Commerce
 employed,Employed total
+working,Employed total
 not employed,Not in the labour force
+unemployed,Unemployed total
+dole,Unemployed total
 in employment,Employed total
 total employment,Employed total
 full time,Full-time(a)
 part time,Part-time
 labour force,Total labour force
+retired,Not in the labour force
+retirees,Not in the labour force
 agricultural,Agriculture, forestry and fishing
 agriculture,Agriculture, forestry and fishing
 farming,Agriculture, forestry and fishing
@@ -241,6 +256,8 @@ healthcare,Health care and social assistance
 doctors,Health care and social assistance
 dentists,Health care and social assistance
 nurses,Health care and social assistance
+pilot,Transport, postal and warehousing
+pilots,Transport, postal and warehousing
 arts industry,Arts and recreation services
 recreation,Arts and recreation services
 technicians,Technicians and trades workers
