@@ -8,8 +8,10 @@ Tasmanian,Tasmania
 Tasmanians,Tasmania
 female,Females
 women,Females
+girls,Females
 male,Males
 men,Males
+boys,Males
 median age,Median age of persons
 average age,Median age of persons
 personal income,Median total personal income ($/weekly)
@@ -106,6 +108,7 @@ foreign language,Speaks other language total
 speak Chinese,Chinese languages total
 Chinese speakers,Chinese languages total
 speak Iranian,Iranic Languages total
+Iranians,Iranic Languages total
 Buddhist,Buddhism
 Buddhists,Buddhism
 Christian,Christianity total
@@ -142,6 +145,12 @@ atheist,No religion(b)
 atheists,No religion(b)
 jedi,Other religious affiliation(c) 
 jedis,Other religious affiliation(c) 
+primary school,Infants/Primary Total
+high school,Technical or Further Educational Institution(a) Total
+attend university,University or other Tertiary InstitutionTotal
+attended university,University or other Tertiary InstitutionTotal
+attending university,University or other Tertiary InstitutionTotal
+to university,University or other Tertiary InstitutionTotal
 year 12,Year 12 or equivalent
 grade 12,Year 12 or equivalent
 year 11,Year 11 or equivalent
@@ -218,6 +227,7 @@ accommodation,Accommodation and food services
 cooks,Accommodation and food services
 chefs,Accommodation and food services
 hospitality,Accommodation and food services
+tourism,Accommodation and food services
 transport,Transport, postal and warehousing
 transportation,Transport, postal and warehousing
 drivers,Transport, postal and warehousing
@@ -260,6 +270,7 @@ pilot,Transport, postal and warehousing
 pilots,Transport, postal and warehousing
 arts industry,Arts and recreation services
 recreation,Arts and recreation services
+racing,Arts and recreation services
 technicians,Technicians and trades workers
 community workers,Community and personal service  workers
 trades,Technicians and trades workers
@@ -290,6 +301,8 @@ CPI for transport,Transport
 CPI for communication,Communication
 CPI for recreation,Recreation and culture
 CPI for education,Education
+CPI for Child care,Child care
+CPI for childcare,Child care
 index for food,Food and non-alcoholic beverages
 index,Alcohol and tobacco
 index for tobacco,Alcohol and tobacco
@@ -311,6 +324,8 @@ transport CPI,Transport
 communication CPI,Communication
 recreation CPI,Recreation and culture
 education CPI,Education
+child care CPI,Child care
+childcare CPI,Child care
 unemployment,% Unemployment(d)
 participation,% Labour force participation(e)
 employment to population,% Employment to population(f)

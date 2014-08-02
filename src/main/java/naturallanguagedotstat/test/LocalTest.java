@@ -35,13 +35,16 @@ public class LocalTest {
 		// These work and need to be web checked and then integrated into unit tests.
 		printQueryResult("How many people follow the jedi religion?");  // Q1235.
 		
-		
-
-		
+		printQueryResult("Number of Iranians in Sandy Bay?"); 
+		printQueryResult("Number of people in NSW attending university?"); 
+		printQueryResult("Number of people Iranians in NSW?"); 
+		printQueryResult("Number of people who speak Cantonese?"); 
+		printQueryResult("Childcare CPI for QLD?"); 
+		printQueryResult("How many women in Australia are Irish?"); 
 		
 		
  */
-		printQueryResult("How many people are retired in Tocumwal?"); 
+		printQueryResult("How many women in Australia are Irish?"); 
 
 	}
 	

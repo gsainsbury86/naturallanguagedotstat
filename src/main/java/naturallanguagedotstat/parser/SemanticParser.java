@@ -177,10 +177,10 @@ public class SemanticParser {
 		
 		grammarParser.parseText();
 		identifyDimensions(grammarParser.keyPhrases);
-		//System.out.println("Dimensions are :" + dimensions);
+		System.out.println("Dimensions are :" + dimensions);
 		identifyRegion(grammarParser.inputText.toLowerCase());
 		cleanUpDimensions();
-		//System.out.println("After cleanUp: Dimensions are :" + dimensions);
+		System.out.println("After cleanUp: Dimensions are :" + dimensions);
 	}
 
 	private void identifyRegion(String inputString) {
@@ -202,7 +202,6 @@ public class SemanticParser {
 		dimensions.remove("Ancestry");
 		dimensions.remove("Method of Travel to Work");
 		dimensions.remove("Count of Families");
-		dimensions.remove("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)");
 		
 		dimensions.remove("Count of Dwellings");
 		dimensions.remove("Count of Families and Persons in Families");
@@ -214,78 +213,86 @@ public class SemanticParser {
 		dimensions.remove("Proficiency in Spoken English/Language of Male Parent");
 		dimensions.remove("Proficiency in Spoken English/Language of Female Parent");
 		
-		// dimensions.remove("Selected Labour Force, Education and Migration Characteristics");
 
 		dimensions.remove("State of Destination");
 		dimensions.remove("State of Origin");
 
-		// Begin the conditional checking.....
+		dimensions.remove("Country of Destination");
+		dimensions.remove("Country of Origin");
+
+		// dimensions.remove("Selected Labour Force, Education and Migration Characteristics");
+		// dimensions.remove("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)");
+
 		
+		// Begin the conditional checking.....
+		String query = grammarParser.inputText.toLowerCase();
 		
 		if(dimensions.containsKey("Registered Marital Status") && dimensions.containsKey("Social Marital Status")){
 			dimensions.remove("Registered Marital Status");
 		};
 
 		if(dimensions.containsKey("Sex") ){
-			dimensions.remove("Country of Origin"); //EXPORTS
-			dimensions.remove("Country of Destination"); //IMPORTS
 			dimensions.remove("Index"); //CPI
 		};
 
-		
-		if(grammarParser.inputText.contains("born") ||	grammarParser.inputText.contains("birth")   ){
-			if(!dimensions.containsKey("Country of Birth of Person")){
-				dimensions.put("Selected Person Characteristics", "Birthplace Elsewhere");
-			};
-			dimensions.remove("Country of Origin");
-			dimensions.remove("Country of Destination");
+		// Deals with queries where the country of birth is not in the ABS.Stat list of countries.
+		if( !dimensions.containsKey("Country of Birth of Person") 
+		&& (query.contains("born") || query.contains("birth") ) ) {
+			dimensions.put("Selected Person Characteristics", "Birthplace Elsewhere");
 		};
 
-		if(	!grammarParser.inputText.toLowerCase().contains("census") ){
+		if(	!query.contains("census") ){
 				dimensions.remove("Place of Usual Residence on Census Night");
-			};
+		};
 			
 
-  		if(		!grammarParser.inputText.contains("born") 
-			&&	!grammarParser.inputText.contains("birth") 
-			&&  !grammarParser.inputText.contains("from") 
-			&&  !grammarParser.inputText.contains("live") 
-			 ){
+		if(	query.contains("cpi") || query.contains("index")  || query.contains("inflation") 
+			){
+			dimensions.remove("Industry of Employment");
+		};
+
+			
+		// if detected "Country of Birth" is not australia, then it has definitely NOT been mistaken for region.
+		boolean keepCountryOfBirth = false;
+		if (dimensions.containsKey("Country of Birth of Person")){
+			if(!dimensions.get("Country of Birth of Person").equalsIgnoreCase("australia")){
+				keepCountryOfBirth = true;
+			};
+		};
+		
+		// Ensures that the word "Australia" will only go to "Country of birth" if query has an explicit term in it.
+		if(		!query.contains("born") 
+  			&&	!query.contains("birth") 
+			&&  !query.contains("from") 
+			&&  !keepCountryOfBirth
+			 )	{
 			dimensions.remove("Country of Birth of Person");
 		};
  
-
-		if(grammarParser.inputText.contains("lived") ){
+		if(query.contains("lived") ){
 			dimensions.remove("Country of Birth of Person");
 		};
 
 		
-		if( grammarParser.inputText.contains("speak") ){
+		// Ensures data for "Language spoken at home" does not go to "Country of Birth" or "Ancestry"
+		if( query.contains("speak") ){
 			dimensions.remove("Country of Birth of Person");
 			dimensions.remove("Ancestry");			
 		};
 
-
-		
-		if(grammarParser.inputText.contains("assistance") ){
+		if(query.contains("assistance") ){
 			dimensions.remove("Country of Birth of Person");
 		};
 
-		if(grammarParser.inputText.contains("employed") ){
+		if(query.contains("employed") ){
 			dimensions.remove("Country of Birth of Person");
 		};
 
 		
-		if(grammarParser.inputText.contains("voluntary") ||  grammarParser.inputText.contains("volunteer")  ){
+		if(query.contains("voluntary") ||  query.contains("volunteer")  ){
 				dimensions.remove("Country of Birth of Person");
 		};
 
-		if(grammarParser.inputText.toLowerCase().contains("cpi") 
-		|| grammarParser.inputText.toLowerCase().contains("price index") 
-		|| grammarParser.inputText.toLowerCase().contains("inflation") 
-		){
-			dimensions.remove("Industry of Employment");
-		};
 
 
 		// ...................................

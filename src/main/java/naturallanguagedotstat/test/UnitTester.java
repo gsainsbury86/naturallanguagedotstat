@@ -122,6 +122,7 @@ public class UnitTester {
 		"How many men were born in Ghana?",							// Q441 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B01/1.BPELSE.0.AUS.0.A/ABS?startTime=2011&endTime=2011
 		"How many women in Sandy Bay are not employed?", 			// 		 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B37/LF_6.2.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
 
+		// Queries 501-600
  		"How many people are from Korea?",							// Q599 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.6203.0.AUS.0.A/ABS?startTime=2011&endTime=2011
  		"How many aboriginal people in Tasmania?", 					// Q588 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/3.TT.4.6.STE.6.A/ABS?startTime=2011&endTime=2011
  		"How many single women in Unley?",							// Q577 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.4.SA3.40107.A/ABS?startTime=2011&endTime=2011
@@ -153,11 +154,11 @@ public class UnitTester {
 		"What is the unemployment rate in NSW?",					// Q503 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B37/UER.3.1.STE.1.A/ABS?startTime=2011&endTime=2011
 		"What is the current CPI in NSW?",							// Q500 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.1.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
 
+		// Queries 401-500
 		"How many women in Murrumbeena are single?", 				// Q488. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.2.SA2.208021181.A/ABS?startTime=2011&endTime=2011
 		"How many women in Tasmania are unmarried?"	,				// Q433. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.6.STE.6.A/ABS?startTime=2011&endTime=2011
 		"What is the employment rate in Victoria?",					// Q342 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B37/EPR.3.2.STE.2.A/ABS?startTime=2011&endTime=2011
 		"What is the participation rate for QLD?",					// Q341 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B37/LFPR.3.3.STE.3.A/ABS?startTime=2011&endTime=2011
-
 		"How many Jewish people live in Caufield?", 				// Q495. 97335. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/3.5.0.AUS.0.A/ABS?startTime=2011&endTime=2011
 		"how many women in Murrumbeena are single?",					// Q488. 1526. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.2.SA2.208021181.A/ABS?startTime=2011&endTime=2011
 		"how many women in Australia are aged 65-99", 				// Q456. 1121632. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.79+78+77+67+66+69+68+70+71+72+73+74+75+76+65.0.AUS.0.A/ABS?startTime=2011&endTime=2011
@@ -167,10 +168,11 @@ public class UnitTester {
 		"How many women in Tasmania are not married?", 				// Q434. 78276.  http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.6.STE.6.A/ABS?startTime=2011&endTime=2011
 		"How many women in Tasmania are unmarried?",				// Q433. 78276. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.6.STE.6.A/ABS?startTime=2011&endTime=2011
 
+		// Queries 301-400
 		"What is the average family income for Darwin?", 			//	Q377. 2040. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTFI.7.SA4.701.A/ABS?startTime=2011&endTime=2011
 		"What is the median family income for Darwin?", 			//	Q377. 2040. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTFI.7.SA4.701.A/ABS?startTime=2011&endTime=2011
-		"How many men in Belconnen aged 30-40 are divorced?", 		//Q374. 25. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.T35.3.8.SA2.801011002.A/ABS?startTime=2011&endTime=2011
-		"How many men in Collingwood aged 15-20 are widowed?",		//Q370. 0. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.A15.2.2.SA2.206071141.A/ABS?startTime=2011&endTime=2011
+		"How many men in Belconnen aged 30-40 are divorced?", 		// Q374. 25. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.T35.3.8.SA2.801011002.A/ABS?startTime=2011&endTime=2011
+		"How many men in Collingwood aged 15-20 are widowed?",		// Q370. 0. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.A15.2.2.SA2.206071141.A/ABS?startTime=2011&endTime=2011
 		"What is the current CPI for housing in NSW?", 				// Q369. 0.5. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.1.20003.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
 		"What is the current CPI for food?", 						// Q367. 0.6. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.50.20001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
 		"What is the current inflation rate for food?", 			// Q367. 0.6. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.50.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
@@ -178,12 +180,12 @@ public class UnitTester {
 		"What is the current CPI for housing?", 					// Q365. 0.6. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.50.20003.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
 		"How many teachers are there in WA?", 						// Q364. 88075. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/3.O15.P.5.STE.5.A/ABS?startTime=2011&endTime=2011
 		"How many men in Queensland aged 15-20 are widowed", 		// Q363. 64. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.A15.2.3.STE.3.A/ABS?startTime=2011&endTime=2011
-		"How many men aged 15-20 are widowed?", 						// Q361. 352. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.A15.2.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"How many men aged 15-20 are widowed?", 					// Q361. 352. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.A15.2.0.AUS.0.A/ABS?startTime=2011&endTime=2011
 		"What is the housing CPI for Canberra?", 					// Q340. -0.2, http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.8.20003.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
 		"What is the inflation rate for TAS?", 						// Q337. 0.5. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.6.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
 		"What is the CPI for New South Wales?", 					// Q335. 0.6 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.1.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
 		"What is the CPI for NSW?", 								// Q335. 0.6 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.1.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
-		"Number of women in Queensland who were born in Vietnam?", 	//Q327. 8830. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.5105.3.STE.3.A/ABS?startTime=2011&endTime=2011
+		"Number of women in Queensland who were born in Vietnam?", 	// Q327. 8830. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.5105.3.STE.3.A/ABS?startTime=2011&endTime=2011
 		"Number of women who speak Chinese in Tasmania?", 			// Q325. 1701. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/2.71.6.STE.6.A/ABS?startTime=2011&endTime=2011
 		"Number of indigenous in Hobart?", 							// Q318. 91. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/3.TT.4.6.SA2.601051027.A/ABS?startTime=2011&endTime=2011
 		"Median family income for Sandy Bay?", 						// Q314. 1892. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTFI.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
@@ -192,7 +194,7 @@ public class UnitTester {
 		"How many women in Bendigo were born in Germany?", 			// Q305. 17.http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.2304.2.SA2.202011018.A/ABS?startTime=2011&endTime=2011
 		"How many women speak Chinese?", 							//. Q304. 348957 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/2.71.0.AUS.0.A/ABS?startTime=2011&endTime=2011
 
-		
+		// Queries 201-300
  		"How many Anglicans in Aust?", 								// Q299, 3679907. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/3.201.0.AUS.0.A/ABS?startTime=2011&endTime=2011
  		"How many women in Bendigo were born in Germany?", 			// Q286.17. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.2304.2.SA2.202011018.A/ABS?startTime=2011&endTime=2011	
  		"How many women in Mildura are Buddhists?",					 // Q285. 167. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/2.101.2.SA3.21502.A/ABS?startTime=2011&endTime=2011
@@ -203,9 +205,9 @@ public class UnitTester {
  		"How many men in Geelong are teachers?", 					// Q278. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.O15.P.2.SA2.203021039.A/ABS?startTime=2011&endTime=2011
  		"How many men in Richmond are teachers?", 					// Q277. 2784. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.O15.P.1.SA4.112.A/ABS?startTime=2011&endTime=2011
  		"Pop of redfern?", 											// Q276. 16559. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.1.SA2.117031335.A/ABS?startTime=2011&endTime=2011
- 		"how many women in Tasmania are teachers?", 				//Q275. 13549. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/2.O15.P.6.STE.6.A/ABS?startTime=2011&endTime=2011
- 		"How many women aged 30-40 in Tasmania were born in Vietnam?", //Q 269. 138. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.5105.6.STE.6.A/ABS?startTime=2011&endTime=2011
- 		"How many women in Tasmania were born in Vietnam?", 		//Q268. 138. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.5105.6.STE.6.A/ABS?startTime=2011&endTime=2011
+ 		"how many women in Tasmania are teachers?", 				// Q275. 13549. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/2.O15.P.6.STE.6.A/ABS?startTime=2011&endTime=2011
+ 		"How many women aged 30-40 in Tasmania were born in Vietnam?", // Q269. 138. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.5105.6.STE.6.A/ABS?startTime=2011&endTime=2011
+ 		"How many women in Tasmania were born in Vietnam?", 		// Q268. 138. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.5105.6.STE.6.A/ABS?startTime=2011&endTime=2011
  		"Number of women aged 30-40 in IT in Sandy Bay?", 			// Q267. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/2.T35.J.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
  		"Women in IT in Taroona?", 									// Q265. 9. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/2.O15.J.6.SA2.601041026.A/ABS?startTime=2011&endTime=2011
  		"Women in Taroona?", 										// Q263. 1822. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.6.SA2.601041026.A/ABS?startTime=2011&endTime=2011
@@ -228,62 +230,66 @@ public class UnitTester {
 		"How many females in Victoria?", 							// Q206. 2721423. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.2.STE.2.A/ABS?startTime=2011&endTime=2011
 		"how many men aged 20-30 work in finance?", 				// Q203. 11722. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.A20.K.0.AUS.0.A/ABS?startTime=2011&endTime=2011
 		
-		"how many men in sandy bay are married?", 						// Q153. 2221. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.5.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
-		"How many women in Tasmania work in IT?", 						// Q141. 1554. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/2.O15.J.6.STE.6.A/ABS?startTime=2011&endTime=2011
-		"What is the transport CPI for Tasmania?", 						// Q139. 0.6 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.6.20005.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
-		"What is the number of people married in Tasmania", 			// Q123. 190898. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.TT.5.6.STE.6.A/ABS?startTime=2011&endTime=2011
-		"What is the average age of people in Victoria?", 				// Q104. 37. 	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.2.STE.2.A/ABS?startTime=2011&endTime=2011
-		"What is the average age of people in Braidwood?",				// Q103. 46. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.1.SA2.101021007.A/ABS?startTime=2011&endTime=2011
-		"What is the average age of people in Tasmania?",  				// Q102. 40. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.6.STE.6.A/ABS?startTime=2011&endTime=2011
+		// Queries 101-200
+		"how many men in sandy bay are married?", 					// Q153. 2221. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.5.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
+		"How many women in Tasmania work in IT?", 					// Q141. 1554. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/2.O15.J.6.STE.6.A/ABS?startTime=2011&endTime=2011
+		"What is the transport CPI for Tasmania?", 					// Q139. 0.6 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.6.20005.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
+		"What is the number of people married in Tasmania", 		// Q123. 190898. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.TT.5.6.STE.6.A/ABS?startTime=2011&endTime=2011
+		"What is the average age of people in Victoria?", 			// Q104. 37. 	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.2.STE.2.A/ABS?startTime=2011&endTime=2011
+		"What is the average age of people in Braidwood?",			// Q103. 46. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.1.SA2.101021007.A/ABS?startTime=2011&endTime=2011
+		"What is the average age of people in Tasmania?",  			// Q102. 40. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.6.STE.6.A/ABS?startTime=2011&endTime=2011
 		
-		"How many men aged 40-45 in Tasmania have a graduate diploma?", // Q100. 514  http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/1.T35.2.6.STE.6.A/ABS?startTime=2011&endTime=2011
-		"How many women studied engineering?", 							// Q99. 102766. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/03.2.O15.0.AUS.0.A/ABS?startTime=2011&endTime=2011
-		"How many women in Australia studied engineering?", 			// Q98. 102776. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/03.2.O15.0.AUS.0.A/ABS?startTime=2011&endTime=2011
-		"How many women aged 20-50 work in the Agricultural industry", 	// Q97. 3652. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/2.A20+T25+T35+T45.A.0.AUS.0.A/ABS?startTime=2011&endTime=2011
-		"How many people in Tasmania were born in New Zealand?", 		// Q96.4927. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.1201.6.STE.6.A/ABS?startTime=2011&endTime=2011 
-		"How many men in Sandy Bay speak Mandarin?", 					// Q95.294.  http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/1.7104.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
-		"How many men in Sandy Bay speak Chinese?", 					// Q93.436.  http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/1.71.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
-		"How many people aged 30-40 speak a language other than English?", 		// Q91. 3912939. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/3.LOTE.0.AUS.0.A/ABS?startTime=2011&endTime=2011
-		"How many women in Adelaide follow Buddhism?", 							// Q90. 513. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/2.101.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011
-		"How many women follow Buddhism?", 								// Q88. 288792. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/2.101.0.AUS.0.A/ABS?startTime=2011&endTime=2011
-		"What is the average rental payment for South Australia?", 		// Q87. 220. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MRENT.4.STE.4.A/ABS?startTime=2011&endTime=2011
-		"What is the average household income for Sandy Bay?", 			// Q86. 1278. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTHI.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
-		"How many men in Sandy Bay are Baptist?", 						// Q85. 42. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/1.203.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
-		"How many men are Baptist?", 									// Q84. 166187. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/1.203.0.AUS.0.A/ABS?startTime=2011&endTime=2011
-		"How many men aged 40-50 are buddhists?", 						// Q78. 240185. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/1.101.0.AUS.0.A/ABS?startTime=2011&endTime=2011 
+		// Queries 51-100
+		"How many men aged 40-45 in Tasmania have a graduate diploma?", 	// Q100. 514  http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/1.T35.2.6.STE.6.A/ABS?startTime=2011&endTime=2011
+		"How many women studied engineering?", 								// Q99. 102766. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/03.2.O15.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"How many women in Australia studied engineering?", 				// Q98. 102776. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/03.2.O15.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"How many women aged 20-50 work in the Agricultural industry", 		// Q97. 3652. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/2.A20+T25+T35+T45.A.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"How many people in Tasmania were born in New Zealand?", 			// Q96.4927. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.1201.6.STE.6.A/ABS?startTime=2011&endTime=2011 
+		"How many men in Sandy Bay speak Mandarin?", 						// Q95.294.  http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/1.7104.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
+		"How many men in Sandy Bay speak Chinese?", 						// Q93.436.  http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/1.71.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
+		"How many people aged 30-40 speak a language other than English?", 	// Q91. 3912939. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/3.LOTE.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"How many women in Adelaide follow Buddhism?", 						// Q90. 513. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/2.101.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011
+		"How many women follow Buddhism?", 									// Q88. 288792. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/2.101.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"What is the average rental payment for South Australia?", 			// Q87. 220. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MRENT.4.STE.4.A/ABS?startTime=2011&endTime=2011
+		"What is the average household income for Sandy Bay?", 				// Q86. 1278. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTHI.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
+		"How many men in Sandy Bay are Baptist?", 							// Q85. 42. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/1.203.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
+		"How many men are Baptist?", 										// Q84. 166187. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/1.203.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"How many men aged 40-50 are buddhists?", 							// Q78. 240185. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/1.101.0.AUS.0.A/ABS?startTime=2011&endTime=2011 
 		"How many men aged 40-50 are Baptist?", 							// Q77.166187. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/1.203.0.AUS.0.A/ABS?startTime=2011&endTime=2011
-		"How many men aged 40-50 are Catholics?", 						// Q76. 2607251. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/1.207.0.AUS.0.A/ABS?startTime=2011&endTime=2011
-		"how many 15-20 year olds in Australia are widowed?", 			// Q75. 722. 	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.A15.2.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"How many men aged 40-50 are Catholics?", 							// Q76. 2607251. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/1.207.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"how many 15-20 year olds in Australia are widowed?", 				// Q75. 722. 	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.A15.2.0.AUS.0.A/ABS?startTime=2011&endTime=2011
 		"How many female 30-40 year olds in Adelaide have never been married?", 			// Q73. 262. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T35.1.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011
 		"How many female 30-40 year olds in Adelaide are in de facto relationships?", 	// Q72. 75.  http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.T35.2.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011
 		"How many female 30-40 year olds in Adelaide are not married?", 					// Q71. 239. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.T35.3.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011
-		"How many women in Sandy Bay are unemployed?", 					// Q64 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/2.O15.UEMP.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
+		"How many women in Sandy Bay are unemployed?", 						// Q64 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/2.O15.UEMP.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
 		"How many persons in Victoria are employed full time?", 			// Q64 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B42/3.O15.1.2.STE.2.A/ABS?startTime=2011&endTime=2011
 		"How many 0-15 year old females live in Tasmania?", 				// Q62 48994	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.3+2+1+0+7+6+5+4+9+8+15+13+14+11+12+10.6.STE.6.A/ABS?startTime=2011&endTime=2011
-		"How many 40-43 year olds live in Tasmania?", 					// Q62 27492	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.43+42+41+40.6.STE.6.A/ABS?startTime=2011&endTime=2011
-		"How many 40-41 year olds live in Adelaide?", 					// Q60	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.41+40.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011
+		"How many 40-43 year olds live in Tasmania?", 						// Q62 27492	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.43+42+41+40.6.STE.6.A/ABS?startTime=2011&endTime=2011
+		"How many 40-41 year olds live in Adelaide?", 						// Q60	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.41+40.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011
 		"How many women in Sandy Bay?", 									// Q54.5696	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
 		"How many women in Sandy Bay are married?", 						// Q51.2246	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.5.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
+		
+		// Queries 01-50
 		"How many women are there in Tasmania?", 						// Q49.262679	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.6.STE.6.A/ABS?startTime=2011&endTime=2011
-		"What is the population of Sandy Bay?", 							// Q43. 11157	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
+		"What is the population of Sandy Bay?", 						// Q43. 11157	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
 		"What is the population of Tasmania?", 							// Q41.495354	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.6.STE.6.A/ABS?startTime=2011&endTime=2011
-		"What is the population of Australia?", 							// Q40.21507719	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.0.AUS.0.A/ABS?startTime=2011&endTime=2011
-		"What is the current CPI?", 										// Q39.0.6	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.50.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
+		"What is the population of Australia?", 						// Q40.21507719	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"What is the current CPI?", 									// Q39.0.6	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.50.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
 		"How many women aged 15-18 live in Lindisfarne?", 				// Q35.136	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.17+18+15+16.6.SA2.601021008.A/ABS?startTime=2011&endTime=2011
 		"What is the CPI of Tasmania?", 								// Q32. 0.5	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.6.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
 		"How many men live in Sandy Bay", 								// Q32. 5461 http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/1.TT.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
 		"How many women in Tasmania are there?", 						// Q30. 252679	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.6.STE.6.A/ABS?startTime=2011&endTime=2011
 		"How many people live in Tasmania?", 							// Q27. 495354	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.6.STE.6.A/ABS?startTime=2011&endTime=2011
 		"What is the CPI for Australia?", 								// Q24. 0.6		http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.50.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
-		"How many men aged 35-40 years in Moonah work in agriculture?", 	// Q18. 8	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.T35.A.6.SA2.601031019.A/ABS?startTime=2011&endTime=2011
-		"cpi?", 															// Q17. 0.6	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.50.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
+		"How many men aged 35-40 years in Moonah work in agriculture?", // Q18. 8	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.T35.A.6.SA2.601031019.A/ABS?startTime=2011&endTime=2011
+		"cpi?", 														// Q17. 0.6	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.50.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1
 		"How many women in Tasmania are divorced?", 					//Q16. 22334. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.3.6.STE.6.A/ABS?startTime=2011&endTime=2011
 		"Females in adelaide 30 who are from Korea?", 					// Q15	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.6203.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011
-		"Females in adelaide 30 who are managers?", 						// Q14	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/T25.2.1.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011
+		"Females in adelaide 30 who are managers?", 					// Q14	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/T25.2.1.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011
 		"Females in adelaide 30?", 										// Q13	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.30.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011
 		"Females in adelaide 30 to 80?", 								// Q12	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.35+36+33+34+39+37+38+43+42+41+40+30+32+31+79+78+77+67+66+69+68+70+71+72+73+74+75+76+59+58+57+56+55+64+65+62+63+60+61+49+48+45+44+47+46+51+52+53+54+50.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011
-		"Females in adelaide?", 											// Q10. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011
-		"Females?", 														// Q8. 10873705	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.0.AUS.0.A/ABS?startTime=2011&endTime=2011
+		"Females in adelaide?", 										// Q10. http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011
+		"Females?", 													// Q8. 10873705	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.0.AUS.0.A/ABS?startTime=2011&endTime=2011
 		"How many women aged 20-40 in Tasmania are living in a de facto relationship?", 	// Q5. 3164	"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.A20+T25+T35.2.6.STE.6.A/ABS?startTime=2011&endTime=2011"
 		"How many women aged 20-40 in Tasmania are not married?", 		// Q3. 8758	
 		"Number of women in Sandy Bay who are managers?", 				// Q2. 265	http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B45/O15.2.1.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011
@@ -576,6 +582,7 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B01/1.BPELSE.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B37/LF_6.2.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011",
 
+		// Queries 501-600
  		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/3.6203.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
  		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B07/3.TT.4.6.STE.6.A/ABS?startTime=2011&endTime=2011",
  		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.4.SA3.40107.A/ABS?startTime=2011&endTime=2011",
@@ -607,11 +614,11 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B37/UER.3.1.STE.1.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.1.10001.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1",
 		
+		// Queries 401-500
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.2.SA2.208021181.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.6.STE.6.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B37/EPR.3.2.STE.2.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B37/LFPR.3.3.STE.3.A/ABS?startTime=2011&endTime=2011",
-
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/3.5.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.2.SA2.208021181.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.79+78+77+67+66+69+68+70+71+72+73+74+75+76+65.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
@@ -621,6 +628,7 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.6.STE.6.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.TT.3.6.STE.6.A/ABS?startTime=2011&endTime=2011",
 
+		// Queries 301-400
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTFI.7.SA4.701.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MTFI.7.SA4.701.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.T35.3.8.SA2.801011002.A/ABS?startTime=2011&endTime=2011",
@@ -646,6 +654,7 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.2304.2.SA2.202011018.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B13/2.71.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
 
+		// Queries 201-300
  		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/3.201.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
  		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B09/2.2304.2.SA2.202011018.A/ABS?startTime=2011&endTime=2011",	
  		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/2.101.2.SA3.21502.A/ABS?startTime=2011&endTime=2011",
@@ -681,7 +690,7 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.2.STE.2.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/1.A20+T25.K.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
 		
-		//Queries 101-200
+		// Queries 101-200
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/1.TT.5.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B43/2.O15.J.6.STE.6.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/2.6.20005.10.Q/ABS?startTime=2014-Q1&endTime=2014-Q1",
@@ -690,7 +699,7 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.1.SA2.101021007.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B02/MAGE.6.STE.6.A/ABS?startTime=2011&endTime=2011",
 
-		//Queries 0-100
+		//Queries 50-100
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B40/1.T35.2.6.STE.6.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/03.2.O15.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B41/03.2.O15.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
@@ -708,7 +717,6 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/1.101.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/1.203.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B14/1.207.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
-		
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/3.A15.2.0.AUS.0.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.T35.1.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B06/2.T35.2.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011",
@@ -719,6 +727,8 @@ public class UnitTester {
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.43+42+41+40.6.STE.6.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.41+40.4.SA2.401011001.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011",
+		
+		//Queries 01-50
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B05/2.TT.5.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/2.TT.6.STE.6.A/ABS?startTime=2011&endTime=2011",
 		"http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ABS_CENSUS2011_B04/3.TT.6.SA2.601051031.A/ABS?startTime=2011&endTime=2011",
