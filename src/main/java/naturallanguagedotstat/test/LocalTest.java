@@ -45,7 +45,7 @@ public class LocalTest {
 		
  */
 		printQueryResult("How many women in Australia are Irish?"); 
-
+ 
 	}
 	
 	public static void printQueryResult( String str) throws IOException, ClassNotFoundException, SQLException{
