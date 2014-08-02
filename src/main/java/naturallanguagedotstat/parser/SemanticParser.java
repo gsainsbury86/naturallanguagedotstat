@@ -177,10 +177,10 @@ public class SemanticParser {
 		
 		grammarParser.parseText();
 		identifyDimensions(grammarParser.keyPhrases);
-		System.out.println("Dimensions are :" + dimensions);
+		//System.out.println("Dimensions are :" + dimensions);
 		identifyRegion(grammarParser.inputText.toLowerCase());
 		cleanUpDimensions();
-		System.out.println("After cleanUp: Dimensions are :" + dimensions);
+		//System.out.println("After cleanUp: Dimensions are :" + dimensions);
 	}
 
 	private void identifyRegion(String inputString) {
