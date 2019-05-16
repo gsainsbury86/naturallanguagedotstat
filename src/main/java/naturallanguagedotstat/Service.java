@@ -48,7 +48,7 @@ import au.com.bytecode.opencsv.CSVWriter;
 @Path("/main")
 public class Service {
 
-	static final String serverName = "stat.abs.gov.au";
+	static final String serverName = "stat.data.abs.gov.au";
 	public static ArrayList<Dataset> datasets;
 	public static Dimension ASGS2011;
 
@@ -108,13 +108,6 @@ public class Service {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response query(String query) throws SQLException{
 
-		if(!LocalTest.unitTests){
-			JsonReader jsonReader = Json.createReader(new StringReader(query));
-			JsonObject object = jsonReader.readObject();
-			jsonReader.close();
-
-			query = object.getString("query");
-		}
 
 		JsonObject responseObject = null;
 		String error = null;
@@ -156,7 +149,7 @@ public class Service {
 				datasetNamePrefix = "";
 			};
 			builder.add("datasetName", datasetNamePrefix + queryBuilder.getDataset().getEnglishName());
-			builder.add("datasetURL", "http://stat.abs.gov.au/Index.aspx?DatasetCode="+queryBuilder.getDataset().getName());
+			builder.add("datasetURL", "http://stat.data.abs.gov.au/Index.aspx?DatasetCode="+queryBuilder.getDataset().getName());
 			for(String key : queryBuilder.getQueryInputs().keySet()){
 				JsonArrayBuilder jab = factory.createArrayBuilder();
 				for(String dimValue : queryBuilder.getQueryInputs().get(key)){
@@ -168,6 +161,7 @@ public class Service {
 		}catch(Exception e) {
 			responseCode = 500;
 			error = e.toString();
+			e.printStackTrace();
 		} finally {
 
 			if(!LocalTest.unitTests){
