@@ -30,17 +30,16 @@ import org.xml.sax.InputSource;
 
 public class Utils {
 
-	public static final String RES_DIR = "/WEB-INF/resources/";
-	public static final String local_webapp = "src/main/webapp/";
+//	public static final String local_webapp = "";
 
 	@SuppressWarnings("unchecked")
-	public static ArrayList<Dataset> loadDatasets(String collectionGroupName) throws IOException, ClassNotFoundException,
+	public static ArrayList<Dataset> loadDatasets(String resourceDir, String collectionGroupName) throws IOException, ClassNotFoundException,
 	FileNotFoundException {
 
 		ArrayList<Dataset> datasets = new ArrayList<Dataset>();
 
 		InputStream fileIn;
-		fileIn = new FileInputStream(new File(local_webapp+RES_DIR+String.format("/dataset_summaries_%s.ser", collectionGroupName)));
+		fileIn = new FileInputStream(new File(resourceDir+String.format("/dataset_summaries_%s.ser", collectionGroupName)));
 		ObjectInputStream objIn = new ObjectInputStream(fileIn);
 		datasets = (ArrayList<Dataset>) objIn.readObject();
 		objIn.close();
@@ -73,11 +72,11 @@ public class Utils {
 
 
 
-	public static Dimension loadRegionDimension(String collectionGroupName) throws IOException, ClassNotFoundException,
+	public static Dimension loadRegionDimension(String resourceDir, String collectionGroupName) throws IOException, ClassNotFoundException,
 	FileNotFoundException {
 		InputStream fileIn;
 		//fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"ASGS_2011.ser"));
-		fileIn = new FileInputStream(new File(local_webapp+RES_DIR+String.format("/ASGS_%s.ser", collectionGroupName)));
+		fileIn = new FileInputStream(new File(resourceDir+String.format("/ASGS_%s.ser", collectionGroupName)));
 		ObjectInputStream objIn = new ObjectInputStream(fileIn);
 		Dimension regionDimension = (Dimension) objIn.readObject();
 		objIn.close();
@@ -176,12 +175,12 @@ public class Utils {
 
 
 
-	public static LinkedHashMap<String, String> loadSynonyms() throws IOException, ClassNotFoundException,
+	public static LinkedHashMap<String, String> loadSynonyms(String resourcesDir) throws IOException, ClassNotFoundException,
 	FileNotFoundException {
 
 		LinkedHashMap<String, String> toReturn = new LinkedHashMap<String, String>();
 
-		BufferedReader br = new BufferedReader(new FileReader(new File(local_webapp+RES_DIR+"synonyms.csv")));
+		BufferedReader br = new BufferedReader(new FileReader(new File(resourcesDir+"synonyms.csv")));
 		String line = null;
 
 		while ((line = br.readLine()) != null) {

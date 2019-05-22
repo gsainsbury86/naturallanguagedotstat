@@ -50,21 +50,25 @@ public class Service {
 
 	static final String serverName = "stat.data.abs.gov.au";
 	
-	static String collectionGroupName = "Census_2011";
-	static String regionTypeName = "Region Type";
+
+	public static String resourcesDir = "/WEB-INF/resources/";
+	static String collectionGroupName = "Census_2016";
+	static String regionTypeName = "Geography Level";
 	
 	public static ArrayList<Dataset> datasets;
 	public static Dimension regionDimension;
+	
 
-	public Service(String collectionGroupName, String regionTypeName) throws IOException, ClassNotFoundException{
+	public Service(String resourcesDir, String collectionGroupName, String regionTypeName) throws IOException, ClassNotFoundException{
 		if(LocalTest.localLoad){
-			datasets = Utils.loadDatasets(collectionGroupName);
-			regionDimension = Utils.loadRegionDimension(collectionGroupName);
-			SemanticParser.synonyms = Utils.loadSynonyms();
+			datasets = Utils.loadDatasets(resourcesDir, collectionGroupName);
+			regionDimension = Utils.loadRegionDimension(resourcesDir, collectionGroupName);
+			SemanticParser.synonyms = Utils.loadSynonyms(resourcesDir);
+			this.regionTypeName = regionTypeName;
+			this.resourcesDir = resourcesDir;
 		}
 		
-		this.regionTypeName = regionTypeName;
-		
+
 	}
 
 	@GET

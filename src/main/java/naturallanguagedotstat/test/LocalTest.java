@@ -23,6 +23,9 @@ public class LocalTest {
 	/* TODO: flag to switch between Census versions. Fix later. */
 	public static String collectionGroupName;
 	public static String regionTypeName;
+	
+	public static final String RES_DIR = "src/main/webapp//WEB-INF/resources/";
+
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException{
 
@@ -78,7 +81,7 @@ Questions 1100-1600
 	}
 	
 	public static void printQueryResult( String str, String collectionGroupName, String regionTypeName) throws IOException, ClassNotFoundException, SQLException{
-		Service service = new Service(collectionGroupName, regionTypeName);
+		Service service = new Service(RES_DIR, collectionGroupName, regionTypeName);
 		
 		Response res = service.query(str);
 		

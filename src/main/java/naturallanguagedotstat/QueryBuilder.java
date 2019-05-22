@@ -98,7 +98,7 @@ public class QueryBuilder {
 
 
 		try {
-			BufferedReader abc = new BufferedReader(new FileReader(Utils.local_webapp+Utils.RES_DIR+"/defaultDimensionSelectors.csv"));
+			BufferedReader abc = new BufferedReader(new FileReader(Service.resourcesDir+"/defaultDimensionSelectors.csv"));
 			List<String[]> lines = new ArrayList<String[]>();
 			String thisLine;
 

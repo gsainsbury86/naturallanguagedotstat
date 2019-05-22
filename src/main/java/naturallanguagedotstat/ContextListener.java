@@ -17,18 +17,19 @@ import javax.servlet.ServletContextListener;
 import naturallanguagedotstat.model.Dataset;
 import naturallanguagedotstat.model.Dimension;
 import naturallanguagedotstat.parser.SemanticParser;
+import naturallanguagedotstat.utils.Utils;
 
 public class ContextListener implements ServletContextListener {
 
 	private ServletContext context = null;
-	private static final String RES_DIR = "/WEB-INF/resources/";
+	//private static final String RES_DIR = "/WEB-INF/resources/";
 
 
 	public void contextInitialized(ServletContextEvent event) {
 		context = event.getServletContext();
 		try {
-			Service.datasets = loadDatasets();
-			Service.regionDimension = loadASGS_2011();
+			Service.datasets = Utils.loadDatasets(Service.resourcesDir, Service.collectionGroupName);
+			Service.regionDimension = Utils.loadRegionDimension(Service.resourcesDir, Service.collectionGroupName);
 			SemanticParser.synonyms = loadSynonyms();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -42,57 +43,11 @@ public class ContextListener implements ServletContextListener {
 	public void contextDestroyed(ServletContextEvent event) {
 	}
 
-	@SuppressWarnings("unchecked")
-	public ArrayList<Dataset> loadDatasets() throws IOException, ClassNotFoundException,
-	FileNotFoundException {
-
-		ArrayList<Dataset> datasets = new ArrayList<Dataset>();
-
-		InputStream fileIn;
-		fileIn = context.getResourceAsStream(RES_DIR+"datasets.ser");
-		ObjectInputStream objIn = new ObjectInputStream(fileIn);
-		datasets = (ArrayList<Dataset>) objIn.readObject();
-		objIn.close();
-		fileIn.close();
-
-		HashSet<Dataset> toRemove = new HashSet<Dataset>();
-
-		for(Dataset ds : datasets){
-			String name = ds.getName();
-			if(!(name.startsWith("ABS_CENSUS2011_B") && name.length() == 18)
-					&& !name.equals("CPI") 
-					&& !name.equals("LF") 
-					&& !name.equals("MERCH_EXP") 
-					&& !name.equals("MERCH_IMP") 
-					&& !name.equals("BOP") 
-					&& !name.equals("RT") 
-					){
-				toRemove.add(ds);
-			}
-		}
-
-		datasets.removeAll(toRemove);
-		return datasets;
-	}
-
-
-	public Dimension loadASGS_2011() throws IOException, ClassNotFoundException,
-	FileNotFoundException {
-		InputStream fileIn;
-		fileIn = context.getResourceAsStream(RES_DIR+"ASGS_2011.ser");
-		ObjectInputStream objIn = new ObjectInputStream(fileIn);
-		Dimension ASGS2011 = (Dimension) objIn.readObject();
-		objIn.close();
-		fileIn.close();
-
-		return ASGS2011;
-
-	}
 
 	public LinkedHashMap<String, String> loadSynonyms() throws IOException, ClassNotFoundException,
 	FileNotFoundException {
 		InputStream fileIn;
-		fileIn = context.getResourceAsStream(RES_DIR+"synonyms.csv");
+		fileIn = context.getResourceAsStream(Service.resourcesDir+"synonyms.csv");
 
 		LinkedHashMap<String, String> toReturn = new LinkedHashMap<String, String>();
 

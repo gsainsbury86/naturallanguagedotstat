@@ -204,7 +204,7 @@ public class SemanticParser {
 
 		BufferedReader abc;
 		try {
-			abc = new BufferedReader(new FileReader(Utils.local_webapp+Utils.RES_DIR+"/dimensionsToRemove.txt"));
+			abc = new BufferedReader(new FileReader(Service.resourcesDir+"/dimensionsToRemove.txt"));
 
 			List<String> lines = new ArrayList<String>();
 

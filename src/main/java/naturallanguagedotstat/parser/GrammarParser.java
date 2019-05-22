@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import naturallanguagedotstat.Service;
 import naturallanguagedotstat.utils.Utils;
 
 public class GrammarParser {
@@ -22,7 +23,7 @@ public class GrammarParser {
 		inputText = str;
 		keyPhrases  = new ArrayList<String>(); 
 		
-		BufferedReader abc = new BufferedReader(new FileReader(Utils.local_webapp+Utils.RES_DIR+"/auxiliaryWords.txt"));
+		BufferedReader abc = new BufferedReader(new FileReader(Service.resourcesDir+"/auxiliaryWords.txt"));
 		List<String> lines = new ArrayList<String>();
 
 		String line;
