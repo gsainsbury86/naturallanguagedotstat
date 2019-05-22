@@ -49,15 +49,22 @@ import au.com.bytecode.opencsv.CSVWriter;
 public class Service {
 
 	static final String serverName = "stat.data.abs.gov.au";
+	
+	static String collectionGroupName = "Census_2011";
+	static String regionTypeName = "Region Type";
+	
 	public static ArrayList<Dataset> datasets;
-	public static Dimension ASGS2011;
+	public static Dimension regionDimension;
 
-	public Service() throws IOException, ClassNotFoundException{
+	public Service(String collectionGroupName, String regionTypeName) throws IOException, ClassNotFoundException{
 		if(LocalTest.localLoad){
-			datasets = Utils.loadDatasets();
-			ASGS2011 = Utils.loadASGS_2011();
+			datasets = Utils.loadDatasets(collectionGroupName);
+			regionDimension = Utils.loadRegionDimension(collectionGroupName);
 			SemanticParser.synonyms = Utils.loadSynonyms();
 		}
+		
+		this.regionTypeName = regionTypeName;
+		
 	}
 
 	@GET
@@ -118,8 +125,10 @@ public class Service {
 
 		try{
 
-			queryBuilder = new QueryBuilder(query, ASGS2011);
+			queryBuilder = new QueryBuilder(query);
 			urlToRead = queryBuilder.build();
+			
+			System.out.println(urlToRead);
 
 			String data = null;
 			double result = -1;

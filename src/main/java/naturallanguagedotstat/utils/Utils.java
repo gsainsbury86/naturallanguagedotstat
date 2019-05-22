@@ -30,17 +30,17 @@ import org.xml.sax.InputSource;
 
 public class Utils {
 
-	private static final String RES_DIR = "/WEB-INF/resources/";
-	private static final String local_webapp = "src/main/webapp/";
+	public static final String RES_DIR = "/WEB-INF/resources/";
+	public static final String local_webapp = "src/main/webapp/";
 
 	@SuppressWarnings("unchecked")
-	public static ArrayList<Dataset> loadDatasets() throws IOException, ClassNotFoundException,
+	public static ArrayList<Dataset> loadDatasets(String collectionGroupName) throws IOException, ClassNotFoundException,
 	FileNotFoundException {
 
 		ArrayList<Dataset> datasets = new ArrayList<Dataset>();
 
 		InputStream fileIn;
-		fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"datasets.ser"));
+		fileIn = new FileInputStream(new File(local_webapp+RES_DIR+String.format("/dataset_summaries_%s.ser", collectionGroupName)));
 		ObjectInputStream objIn = new ObjectInputStream(fileIn);
 		datasets = (ArrayList<Dataset>) objIn.readObject();
 		objIn.close();
@@ -48,9 +48,12 @@ public class Utils {
 
 		HashSet<Dataset> toRemove = new HashSet<Dataset>();
 
+		//TODO: Check which datasets should be excluded from 2016.
+		/*
 		for(Dataset ds : datasets){
 			String name = ds.getName();
-			if(!(name.startsWith("ABS_CENSUS2011_B") && name.length() == 18)
+			if(!(name.startsWith("ABS_CENSUS2011_B") && 
+					name.length() == 18)
 					&& !name.equals("CPI") 
 					&& !name.equals("LF") 
 					&& !name.equals("MERCH_EXP") 
@@ -63,22 +66,24 @@ public class Utils {
 		}
 
 		datasets.removeAll(toRemove);
+		*/
 		return datasets;
 	}
 
 
 
 
-	public static Dimension loadASGS_2011() throws IOException, ClassNotFoundException,
+	public static Dimension loadRegionDimension(String collectionGroupName) throws IOException, ClassNotFoundException,
 	FileNotFoundException {
 		InputStream fileIn;
-		fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"ASGS_2011.ser"));
+		//fileIn = new FileInputStream(new File(local_webapp+RES_DIR+"ASGS_2011.ser"));
+		fileIn = new FileInputStream(new File(local_webapp+RES_DIR+String.format("/ASGS_%s.ser", collectionGroupName)));
 		ObjectInputStream objIn = new ObjectInputStream(fileIn);
-		Dimension ASGS2011 = (Dimension) objIn.readObject();
+		Dimension regionDimension = (Dimension) objIn.readObject();
 		objIn.close();
 		fileIn.close();
 
-		return ASGS2011;
+		return regionDimension;
 
 	}
 
@@ -140,13 +145,14 @@ public class Utils {
 	 * @return the key for that value
 	 */
 	public static String findValue(HashMap<String, String> map,
-			String value) {
+			String value){
 		for(String key : map.keySet()){
 			// if (map.get(key).trim().toLowerCase().equals(value.toLowerCase())){  
 			if (map.get(key).toLowerCase().equals(value.toLowerCase())){
 				return key;
 			}
 		}
+		System.err.println(String.format("Missing value: %s. Not in %s", value, map));
 		return null;
 	}
 

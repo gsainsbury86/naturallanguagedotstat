@@ -1,0 +1,18 @@
+Selected Person Characteristics
+Year of Arrival in Australia
+Ancestry
+Method of Travel to Work
+Count of Families
+Count of Dwellings
+Count of Families and Persons in Families
+Type of Internet Connection
+Number of Motor Vehicles
+Place of Usual Residence 5 Years Ago
+Place of Usual Residence 1 Year Ago
+Proficiency in Spoken English/Language
+Proficiency in Spoken English/Language of Male Parent
+Proficiency in Spoken English/Language of Female Parent
+State of Destination
+State of Origin
+Country of Destination
+Country of Origin

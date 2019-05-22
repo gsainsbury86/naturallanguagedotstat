@@ -2,6 +2,7 @@ package naturallanguagedotstat.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Dataset implements Serializable{
 	
@@ -30,6 +31,14 @@ public class Dataset implements Serializable{
 	
 	public ArrayList<Dimension> getDimensions() {
 		return dimensions;
+	}
+	
+	public HashSet<String> getDimensionNames() {
+		HashSet<String> dimensionNames = new HashSet<String>();
+		for(Dimension dimension : dimensions) {
+			dimensionNames.add(dimension.getName());
+		}
+		return dimensionNames;
 	}
 	
 	public void setDimensions(ArrayList<Dimension> dimensions) {

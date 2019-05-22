@@ -1,13 +1,18 @@
 package naturallanguagedotstat.parser;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import naturallanguagedotstat.Service;
 import naturallanguagedotstat.model.Dataset;
 import naturallanguagedotstat.model.Dimension;
+import naturallanguagedotstat.utils.Utils;
 
 
 public class SemanticParser {
@@ -16,32 +21,28 @@ public class SemanticParser {
 
 	private HashMap<String, String> flatCodeList;
 	public static LinkedHashMap<String, String> synonyms;
-	private Dimension ASGS2011;
 
 	private GrammarParser grammarParser;
-	
+
 	// constructor
-	public SemanticParser (String str, Dimension ASGS2011) throws IOException, ClassNotFoundException{
+	public SemanticParser (String str) throws IOException, ClassNotFoundException{
 		flatCodeList = new HashMap<String, String>();
 		dimensions = new HashMap<String, String>();
-		grammarParser = new GrammarParser(str);
-		
-		this.ASGS2011 = ASGS2011;		
-		
-		
+		grammarParser = new GrammarParser(str);		
+
 		createFlatCodeList(Service.datasets); 
 	}		
 
 	public HashMap<String, ArrayList<String>> getDimensions() {
 
 		HashMap<String, ArrayList<String>> toReturn = new HashMap<String, ArrayList<String>>();
-		
+
 		for(String key : dimensions.keySet()){
 			ArrayList<String> list = new ArrayList<String>();
 			list.add(dimensions.get(key));
 			toReturn.put(key,list);
 		}
-				
+
 		return toReturn;
 	}
 
@@ -90,7 +91,7 @@ public class SemanticParser {
 			}
 		};
 	}
-	
+
 	private void matchSynonymsOfCodeList(String str){
 		String rootWord = new String();
 		for (String keyWord : synonyms.keySet() ) {
@@ -104,6 +105,8 @@ public class SemanticParser {
 
 
 	private void matchCodeList(String str){
+
+		System.out.println(str);
 		for(Dataset dataset : Service.datasets){
 			for(Dimension dim : dataset.getDimensions() ){
 				HashMap<String, String> map = dim.getCodelist();
@@ -117,6 +120,8 @@ public class SemanticParser {
 				}
 			}
 		};
+		System.out.println(dimensions);
+
 	}
 
 	public void identifyDimensions(ArrayList<String> phrases){
@@ -130,7 +135,7 @@ public class SemanticParser {
 			if(numericalString.length() > 0){
 				dimensions.put("Age", numericalString ); 		
 			};
-			
+
 			// check for all other dimensions
 			matchCodeList(phrase);
 			matchSynonymsOfCodeList(phrase);
@@ -172,9 +177,9 @@ public class SemanticParser {
 	}
 
 
-	
+
 	public void parseText(){
-		
+
 		grammarParser.parseText();
 		identifyDimensions(grammarParser.keyPhrases);
 		//System.out.println("Dimensions are :" + dimensions);
@@ -185,7 +190,7 @@ public class SemanticParser {
 
 	private void identifyRegion(String inputString) {
 		identifyAbbreviatedRegions(inputString);
-	
+
 		String str = inputString;
 		if(!str.contains("cpi") && !str.contains("inflation") && !str.contains("index")){
 			String region = identifyASGSRegion(inputString);
@@ -196,37 +201,32 @@ public class SemanticParser {
 	}
 
 	private void cleanUpDimensions(){
-		
-		dimensions.remove("Selected Person Characteristics"); // This eliminates Statistical Collections that are merely summaries of other ones.
-		dimensions.remove("Year of Arrival in Australia"); // This eliminates Statistical Collections that are merely summaries of other ones.
-		dimensions.remove("Ancestry");
-		dimensions.remove("Method of Travel to Work");
-		dimensions.remove("Count of Families");
-		
-		dimensions.remove("Count of Dwellings");
-		dimensions.remove("Count of Families and Persons in Families");
-		dimensions.remove("Type of Internet Connection");
-		dimensions.remove("Number of Motor Vehicles");
-		dimensions.remove("Place of Usual Residence 5 Years Ago");
-		dimensions.remove("Place of Usual Residence 1 Year Ago");
-		dimensions.remove("Proficiency in Spoken English/Language");
-		dimensions.remove("Proficiency in Spoken English/Language of Male Parent");
-		dimensions.remove("Proficiency in Spoken English/Language of Female Parent");
-		
 
-		dimensions.remove("State of Destination");
-		dimensions.remove("State of Origin");
+		BufferedReader abc;
+		try {
+			abc = new BufferedReader(new FileReader(Utils.local_webapp+Utils.RES_DIR+"/dimensionsToRemove.txt"));
 
-		dimensions.remove("Country of Destination");
-		dimensions.remove("Country of Origin");
+			List<String> lines = new ArrayList<String>();
 
-		// dimensions.remove("Selected Labour Force, Education and Migration Characteristics");
-		// dimensions.remove("Type of Educational Institution Attending (Full/Part-Time Student Status by Age)");
+			String line;
+			while((line = abc.readLine()) != null) {
+				lines.add(line);
+			}
+			abc.close();
 
-		
+
+			for(String lineToRemove : lines) {
+				dimensions.remove(lineToRemove);
+			}
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		// Begin the conditional checking.....
 		String query = grammarParser.inputText.toLowerCase();
-		
+
 		if(dimensions.containsKey("Registered Marital Status") && dimensions.containsKey("Social Marital Status")){
 			dimensions.remove("Registered Marital Status");
 		};
@@ -237,21 +237,21 @@ public class SemanticParser {
 
 		// Deals with queries where the country of birth is not in the ABS.Stat list of countries.
 		if( !dimensions.containsKey("Country of Birth of Person") 
-		&& (query.contains("born") || query.contains("birth") ) ) {
+				&& (query.contains("born") || query.contains("birth") ) ) {
 			dimensions.put("Selected Person Characteristics", "Birthplace Elsewhere");
 		};
 
 		if(	!query.contains("census") ){
-				dimensions.remove("Place of Usual Residence on Census Night");
+			dimensions.remove("Place of Usual Residence on Census Night");
 		};
-			
+
 
 		if(	query.contains("cpi") || query.contains("index")  || query.contains("inflation") 
-			){
+				){
 			dimensions.remove("Industry of Employment");
 		};
 
-			
+
 		// if detected "Country of Birth" is not australia, then it has definitely NOT been mistaken for region.
 		boolean keepCountryOfBirth = false;
 		if (dimensions.containsKey("Country of Birth of Person")){
@@ -259,21 +259,21 @@ public class SemanticParser {
 				keepCountryOfBirth = true;
 			};
 		};
-		
+
 		// Ensures that the word "Australia" will only go to "Country of birth" if query has an explicit term in it.
 		if(		!query.contains("born") 
-  			&&	!query.contains("birth") 
-			&&  !query.contains("from") 
-			&&  !keepCountryOfBirth
-			 )	{
+				&&	!query.contains("birth") 
+				&&  !query.contains("from") 
+				&&  !keepCountryOfBirth
+				)	{
 			dimensions.remove("Country of Birth of Person");
 		};
- 
+
 		if(query.contains("lived") ){
 			dimensions.remove("Country of Birth of Person");
 		};
 
-		
+
 		// Ensures data for "Language spoken at home" does not go to "Country of Birth" or "Ancestry"
 		if( query.contains("speak") ){
 			dimensions.remove("Country of Birth of Person");
@@ -288,17 +288,17 @@ public class SemanticParser {
 			dimensions.remove("Country of Birth of Person");
 		};
 
-		
+
 		if(query.contains("voluntary") ||  query.contains("volunteer")  ){
-				dimensions.remove("Country of Birth of Person");
+			dimensions.remove("Country of Birth of Person");
 		};
 
 
 
 		// ...................................
-		
+
 		int c = (dimensions.containsKey("Region")) ? 1 : 0;
-		
+
 		if(dimensions.containsKey("Country of Birth of Person") && dimensions.size() == c){
 			dimensions.put("Age","Total all ages");
 		};
@@ -318,20 +318,20 @@ public class SemanticParser {
 		if(dimensions.size() == c+1  && dimensions.containsKey("Age")){
 			dimensions.put("Sex","persons");
 		};
-		
+
 		// the word "persons" is often used as a generic grammar term and not as a direct semantic indicator of sum of males+females.
 		if(	dimensions.containsKey("Place of Usual Residence on Census Night") || dimensions.containsKey("Selected Medians and Averages") ){
 			dimensions.remove("Sex");
 		};
-		
+
 		// if query does not have <Region>, set it to the default value of "Australia";
 		if(!dimensions.containsKey("Region") ) {dimensions.put("Region","Australia");};
-	
+
 	}
-	
+
 
 	// ...........................................................................
-		
+
 	// converts to lowercase, eliminates hyphens and space delimits the string.
 	private String normalise(String str){
 		// we apply spaces before and after the main phrase so that we can do a whole-word only search,
@@ -341,15 +341,15 @@ public class SemanticParser {
 			s = s+ w+" ";
 		return s;
 	}
-	
+
 	public String identifyASGSRegion(String str){
 		HashMap<String, String> identifiedRegions = new HashMap<String, String>() ;
-		HashMap<String, String> regions = ASGS2011.getCodelist();
+		HashMap<String, String> regions = Service.regionDimension.getCodelist();
 		String normalisedStr = normalise(str);
 		String normalisedRegion = new String();
-		
+
 		String[] regionComponents;
-		
+
 		for(String key : regions.keySet()){
 			normalisedRegion = normalise(regions.get(key));
 			if(normalisedStr.contains(normalisedRegion) ){
@@ -357,7 +357,7 @@ public class SemanticParser {
 				//System.out.println("1: "+key+" ~ "+ regions.get(key));
 			}
 		};
-		
+
 		if(identifiedRegions.isEmpty()){
 			for(String key : regions.keySet()){
 				if(regions.get(key).contains("-")){
@@ -371,11 +371,11 @@ public class SemanticParser {
 				};
 			};
 		};
-		
+
 		if (wholeWordContains(str, "Canberra"))						
 			identifiedRegions.put("80105", "North Canberra");
 
-		
+
 		if (wholeWordContains(str, "Aust"))						
 			identifiedRegions.put("0", "Australia");
 		if (wholeWordContains(str, "Aus"))						
@@ -396,8 +396,8 @@ public class SemanticParser {
 			identifiedRegions.put("7", "Northern Territory");		
 		if (wholeWordContains(str, "ACT"))						
 			identifiedRegions.put("8", "Australian Capital Territory");
-		
-		
+
+
 		//System.out.println("Best match: "+ getLargestRegion(str,identifiedRegions) );
 		return getLargestRegion(str,identifiedRegions);
 	}
@@ -418,17 +418,17 @@ public class SemanticParser {
 			dimensions.put("Region", region);
 		}
 	}
-	
-	
+
+
 	public String eliminateHyphens(String str){
 		return str.replaceAll("-", " ").replaceAll("\\s+", " ");
 	}
 
-	
+
 	// Selects the best match region 
 	private String getLargestRegion(String str, HashMap<String, String> hashmap){
 		HashMap<String, String> regions = hashmap;
-		
+
 		// excludes Australia if multiple regions are identified, as it is most likely associated with phrases such as "born in Australia".
 		if(regions.size() >1 && regions.containsKey("0")){
 			// System.out.println("removing australia from regions. ");
@@ -444,7 +444,7 @@ public class SemanticParser {
 		return getLargestRegion(regions); //default if user does not explicitly include the RegionType.
 	};
 
-	
+
 	// Selects the largest region as the one at the highest level hierarchy.
 	private String getLargestRegion(HashMap<String, String> regions){
 		int minLengthKey = 9999;
@@ -460,7 +460,7 @@ public class SemanticParser {
 		} else {
 			return null;
 		}
-			
+
 	};
 	// ...........................................................................
 

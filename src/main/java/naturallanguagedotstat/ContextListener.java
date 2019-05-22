@@ -28,7 +28,7 @@ public class ContextListener implements ServletContextListener {
 		context = event.getServletContext();
 		try {
 			Service.datasets = loadDatasets();
-			Service.ASGS2011 = loadASGS_2011();
+			Service.regionDimension = loadASGS_2011();
 			SemanticParser.synonyms = loadSynonyms();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

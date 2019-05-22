@@ -1,11 +1,15 @@
 package naturallanguagedotstat;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import naturallanguagedotstat.model.Dataset;
 import naturallanguagedotstat.model.Dimension;
@@ -18,8 +22,7 @@ public class QueryBuilder {
 	private static final String AGE = "Age";
 
 	private boolean doAggregateAges;
-	private Dimension ASGS2011;
-	
+
 	private Dataset dataset;
 
 	private String query;
@@ -35,21 +38,22 @@ public class QueryBuilder {
 
 	private String restfulURL;
 
-	public QueryBuilder(String query, Dimension ASGS2011) {
+	public QueryBuilder(String query) {
 		this.query = query;
-		this.ASGS2011 = ASGS2011;
 
 		doAggregateAges = true;
 	}
 
 	public String build() throws IOException, ClassNotFoundException {
 
-		SemanticParser semanticParser = new SemanticParser(this.query, this.ASGS2011);
+		SemanticParser semanticParser = new SemanticParser(this.query);
 		semanticParser.parseText();
-		
-		queryInputs = semanticParser.getDimensions();	
+
+		queryInputs = semanticParser.getDimensions();
+
+		System.out.println(queryInputs);
 		dataset = findBestMatchDatasetForDimensionNames();
-	
+
 		//System.out.println("best matched dataset is "+dataset.getName());
 		for (Dimension dim: dataset.getDimensions() ){
 			if(dim.getName().equalsIgnoreCase("Age") ){
@@ -57,78 +61,65 @@ public class QueryBuilder {
 			};
 		};
 
+		System.out.println(dataset.getName());
+
 		setDefaultsForMissingDimensions(dataset);
 		removeExtraneousDimensions(dataset);
 		
+
+		System.out.println("Required Dimensions");
+		System.out.println("----------------------");		
+		for(Dimension dimension : dataset.getDimensions()){
+
+			System.out.println(dimension.getName());
+		}
+
+		System.out.println("----------------------");
+
+		System.out.println("Dimension Selectors found/created for:");
+		System.out.println("----------------------");		
+		for(String name : queryInputs.keySet()) {
+
+			System.out.println(name);
+		}
+		System.out.println("----------------------");
+
 		restfulURL = generateURL(dataset);
 		return restfulURL;
 	}
 
+	//TODO: Fix these! Work out which dimensions are in which datasets and set defaults.
 	private void setDefaultsForMissingDimensions(Dataset dataset) {
 
 		setDefaultsForMissingCensusRegionDimensions(dataset);
 		setDefaultsForMissingCensusAgeDimension(dataset);
 
 
-		if(dataset.getName().contains("ABS_CENSUS2011"))
-			setDefaultValueForDimension(dataset, "Frequency", "Annual");									
 
-		if(dataset.getName().contains("ABS_CENSUS2011_B02"))
-			setDefaultValueForDimension(dataset, "Selected Medians and Averages", "Median age of persons");									
 
-		if(dataset.getName().contains("ABS_CENSUS2011_B03"))
-			setDefaultValueForDimension(dataset, "Place of Usual Residence on Census Night", "Counted at home on Census Night");									
+		try {
+			BufferedReader abc = new BufferedReader(new FileReader(Utils.local_webapp+Utils.RES_DIR+"/defaultDimensionSelectors.csv"));
+			List<String[]> lines = new ArrayList<String[]>();
+			String thisLine;
 
-		if(dataset.getName().contains("ABS_CENSUS2011_B05"))
-			setDefaultValueForDimension(dataset, "Registered Marital Status", "Married(a)");									
+			while ((thisLine = abc.readLine()) != null) {
+				lines.add(thisLine.trim().split("\\s*,\\s*"));
 
-		if(dataset.getName().contains("ABS_CENSUS2011_B06"))
-			setDefaultValueForDimension(dataset, "Social Marital Status", "Married in a registered marriage");									
+			}
+			for(String[] defaults : lines) {
+				//TODO: This for collection specific ones. I think whether dimensions exist is already checked when you set defaults so you don't actually need this.
+				//if(dataset.getName().contains(defaults[0])) {
+				//	setDefaultValueForDimension(dataset, defaults[1], defaults[2]);
+				//}
 
-		if(dataset.getName().contains("ABS_CENSUS2011_B07"))
-			setDefaultValueForDimension(dataset, "Indigenous Status", "Indigenous(a)");									
+				setDefaultValueForDimension(dataset, defaults[0], defaults[1]);
 
-		if(dataset.getName().contains("ABS_CENSUS2011_B09"))
-			setDefaultValueForDimension(dataset, "Country of Birth of Person", "Australia");									
+			}
 
-		if(dataset.getName().contains("ABS_CENSUS2011_B13"))
-			setDefaultValueForDimension(dataset, "Language Spoken at Home", "Speaks English only");									
-
-		if(dataset.getName().contains("ABS_CENSUS2011_B14"))
-			setDefaultValueForDimension(dataset, "Religious Affiliation", "Total");									
-
-		if(dataset.getName().contains("ABS_CENSUS2011_B15"))
-			setDefaultValueForDimension(dataset, "Type of Educational Institution Attending (Full/Part-Time Student Status by Age)", "Total");									
-
-		if(dataset.getName().contains("ABS_CENSUS2011_B16"))
-			setDefaultValueForDimension(dataset, "Highest Year of School Completed", "Total");									
-		
-		if(dataset.getName().contains("ABS_CENSUS2011_B19"))
-			setDefaultValueForDimension(dataset, "Voluntary Work for an Organisation or Group", "Volunteer");									
-
-		if(dataset.getName().contains("ABS_CENSUS2011_B21"))
-			setDefaultValueForDimension(dataset, "Unpaid Assistance to a Person with a Disability", "Provided unpaid assistance");									
-
-		if(dataset.getName().contains("ABS_CENSUS2011_B37"))
-			setDefaultValueForDimension(dataset, "Selected Labour Force, Education and Migration Characteristics", "Total labour force");									
-		
-		if(dataset.getName().contains("ABS_CENSUS2011_B38"))
-			setDefaultValueForDimension(dataset, "Place of Usual Residence 1 Year Ago", "Same usual address 1 year ago as in 2011");									
-
-		if(dataset.getName().contains("ABS_CENSUS2011_B39"))
-			setDefaultValueForDimension(dataset, "Place of Usual Residence 5 Years Ago", "Same usual address 5 years ago as in 2011");									
-
-		if(dataset.getName().contains("ABS_CENSUS2011_B40"))
-			setDefaultValueForDimension(dataset, "Non-School Qualification: Level of Education", "Total");									
-
-		if(dataset.getName().contains("ABS_CENSUS2011_B41"))
-			setDefaultValueForDimension(dataset, "Non-School Qualification: Field of Study", "Total");									
-
-		if(dataset.getName().contains("ABS_CENSUS2011_B2"))
-			setDefaultValueForDimension(dataset, "Labour Force Status", "Employed Total");									
-
-		if(dataset.getName().contains("ABS_CENSUS2011_B43"))
-			setDefaultValueForDimension(dataset, "Industry of Employment", "Total");									
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 
 		if(dataset.getName().contains("ABS_CENSUS2011_B44")){
@@ -136,14 +127,14 @@ public class QueryBuilder {
 			setDefaultValueForDimension(dataset, "Occupation", "Total");												
 		}
 
-		
+
 		if(dataset.getName().contains("LF")){
 			setDefaultValueForDimension(dataset, "Region", "Total");									
 			setDefaultValueForDimension(dataset, "Age", "Total");
 			setDefaultValueForDimension(dataset, "Frequency", "Monthly");									
 			setDefaultValueForDimension(dataset, "Adjustment Type", "Original");
 		}
-		
+
 		//Begin MEI defaults
 		setDefaultRegionForCPI(dataset);
 		setDefaultValueForDimension(dataset, "Measure", 		"Percentage Change from Previous Period"); 		// CPI
@@ -152,17 +143,18 @@ public class QueryBuilder {
 		setDefaultValueForDimension(dataset, "Adjustment Type", "Original");									// CPI
 		setDefaultValueForDimension(dataset, "Frequency", 		"Quarterly");									// CPI
 
-	
+
 		setDefaultValueForDimension(dataset, "Age", "Total all ages");
 		setDefaultValueForDimension(dataset, "Sex", "Persons");
 		setDefaultValueForDimension(dataset, "Selected Person Characteristics", "Total persons");
-		
+
+
 	}
 
 	private void setDefaultRegionForCPI(Dataset dataset) {
 		if(dataset.getName().contains("CPI") ){
 			ArrayList<String> a1 = new ArrayList<String>();
-			
+
 			String str = queryInputs.get("Region").get(0);
 			if(str.equalsIgnoreCase("Australia"))
 				a1.add("Weighted average of eight capital cities");
@@ -190,7 +182,7 @@ public class QueryBuilder {
 
 			if(str.equalsIgnoreCase("Australian Capital Territory")|| str.equalsIgnoreCase("Canberra") )
 				a1.add("Canberra");
-			
+
 			//System.out.println("a1 = "+a1);
 			queryInputs.put("Region",a1);
 
@@ -200,17 +192,17 @@ public class QueryBuilder {
 	private void setDefaultsForMissingCensusAgeDimension(Dataset dataset) {
 		if(!dataset.getName().contains("ABS_CENSUS2011")) 
 			return;
-		
+
 		for(Dimension dim : dataset.getDimensions()){
 			if(dim.getName().equals(AGE) && queryInputs.get(AGE) == null){
 				if(dataset.getName().equals("ABS_CENSUS2011_B19")  
-				|| dataset.getName().equals("ABS_CENSUS2011_B20")  
-				|| dataset.getName().equals("ABS_CENSUS2011_B21")  
-				|| dataset.getName().equals("ABS_CENSUS2011_B40") 
-				|| dataset.getName().equals("ABS_CENSUS2011_B41") 
-				|| dataset.getName().equals("ABS_CENSUS2011_B42") 
-				|| dataset.getName().equals("ABS_CENSUS2011_B43") 
-				|| dataset.getName().equals("ABS_CENSUS2011_B45") 
+						|| dataset.getName().equals("ABS_CENSUS2011_B20")  
+						|| dataset.getName().equals("ABS_CENSUS2011_B21")  
+						|| dataset.getName().equals("ABS_CENSUS2011_B40") 
+						|| dataset.getName().equals("ABS_CENSUS2011_B41") 
+						|| dataset.getName().equals("ABS_CENSUS2011_B42") 
+						|| dataset.getName().equals("ABS_CENSUS2011_B43") 
+						|| dataset.getName().equals("ABS_CENSUS2011_B45") 
 						){
 					ArrayList<String> list2 = new ArrayList<String>();
 					list2.add("15 years and over");
@@ -221,12 +213,18 @@ public class QueryBuilder {
 	}
 
 	private void setDefaultsForMissingCensusRegionDimensions(Dataset dataset) {
-		if(!dataset.getName().contains("ABS_CENSUS2011")) 
-				return;
+		//TODO: Removing this probably breaks CPI etc.
+		//if(!dataset.getName().contains("ABS_CENSUS2011")) 
+		//	return;
+
 		
-		String regionCode = Utils.findValue(ASGS2011.getCodelist(), queryInputs.get("Region").get(0));
+	
+		String regionCode = Utils.findValue(Service.regionDimension.getCodelist(), queryInputs.get("Region").get(0));
 		String stateCode = regionCode.substring(0,1);
 		String regionType = regionTypeForRegionCode(regionCode);
+
+
+
 
 		ArrayList<String> stateList = new ArrayList<String>();
 
@@ -241,44 +239,36 @@ public class QueryBuilder {
 
 		Dimension regionTypeDim = null;
 		for(Dimension dim : dataset.getDimensions()){
-			if(dim.getName().equals("Region Type")){
+			if(dim.getName().equals(Service.regionTypeName)){
 				regionTypeDim = dim;
+				ArrayList<String> regionTypeList = new ArrayList<String>();
+				regionTypeList.add(regionTypeDim.getCodelist().get(regionType));
+
+				queryInputs.put("State",stateList);
+				queryInputs.put(Service.regionTypeName, regionTypeList);
 			}
 		}
 
-		ArrayList<String> regionTypeList = new ArrayList<String>();
-		regionTypeList.add(regionTypeDim.getCodelist().get(regionType));
 
-		queryInputs.put("State",stateList);
-		queryInputs.put("Region Type", regionTypeList);
 	}
 
 	private void removeExtraneousDimensions(Dataset dataset) {
-		ArrayList<String> dimList = new ArrayList<String>();
-		for(Dimension dim : dataset.getDimensions()){
-			dimList.add(dim.getName());
-		}
 
-		ArrayList<String> toRemove = new ArrayList<String>();
-
-		for(String dimName : queryInputs.keySet()){
-			if(!dimList.contains(dimName)){
-				toRemove.add(dimName);
-			}
-		}
-
-		for(String rem : toRemove){
-			queryInputs.remove(rem);
-		}
+		queryInputs.keySet().retainAll(dataset.getDimensionNames());
+	
 	}
+
+	static int count = 0;
 
 	private void setDefaultValueForDimension(Dataset dataset, String dimName, String dimValue) {
 		for(Dimension dim : dataset.getDimensions()){
-			if(dim.getName().equals(dimName) && queryInputs.get(dimName) == null){
-				ArrayList<String> list = new ArrayList<String>();
-				list.add(dimValue);
-				queryInputs.put(dimName, list);
-			};
+			if(dim.getName().equals(dimName)) {
+				if(queryInputs.get(dimName) == null){
+					ArrayList<String> list = new ArrayList<String>();
+					list.add(dimValue);
+					queryInputs.put(dimName, list);
+				}
+			}
 		};
 	}
 
@@ -292,81 +282,81 @@ public class QueryBuilder {
 		int a1 = (ageQueryParser.getExplicitNumbers().size() >1) 
 				? Integer.parseInt(ageQueryParser.getExplicitNumbers().get(1) ) : -1;
 
-		HashMap<String, String> ageCodeList = null;
-		for(Dimension dim : dataset.getDimensions()){
-			if(dim.getName().equals(AGE)){
-				ageCodeList = dim.getCodelist();
-			};
-		};
-
-		List<String> ageCodeListDescriptions = new ArrayList<String>(ageCodeList.values());
-
-		HashMap< String, Double> matches = new HashMap< String, Double>();
-
-		Double overlapScore;
-		for (String descr: ageCodeListDescriptions){
-			NumericParser ageDescriptionParser = new NumericParser(descr);
-
-			int b0 = (ageDescriptionParser.getExplicitNumbers().size() >0) 
-					? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(0) ) : -1;
-
-			int b1 = (ageDescriptionParser.getExplicitNumbers().size() >1) 
-						? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) ) : -1;
-
-			if(ageDescriptionParser.getExplicitNumbers().size() >1){
-				String comparatorDescriptor = ageDescriptionParser.comparatorAsString (ageDescriptionParser.getComparator() );
-
-			if (comparatorDescriptor.equals("∈") )
-				b1 = Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) );
-
-				if (comparatorDescriptor.equals(">") )
-					b1 = 199;
-
-				if (comparatorDescriptor.equals("<") ){
-					b1 = b0;
-					b0 = 0;
+				HashMap<String, String> ageCodeList = null;
+				for(Dimension dim : dataset.getDimensions()){
+					if(dim.getName().equals(AGE)){
+						ageCodeList = dim.getCodelist();
+					};
 				};
-			}
 
-			// This is a hack to prevent double-counting of age categories.
-			// eg  15 years and over category for codeLists is merely the equivalent as "Total all ages", rather than a explicit age range.
-			if(b0 == 15 && b1 == 199){
-				b0 = -1;
-				b1 = -1;
-			};
-			
-			overlapScore =  getOverlapScore(a0, a1, b0, b1);
-			matches.put(descr, overlapScore);
-			ageDescriptionParser = null;
-		};
+				List<String> ageCodeListDescriptions = new ArrayList<String>(ageCodeList.values());
 
-		ArrayList<String> list = new ArrayList<String>();
-		Double scoreMax = matches.get(getKeyForMaxValue(matches) );
-		
-		double epsilon = 0.000001;
-		for (String descr: ageCodeListDescriptions){
-			if(Math.abs(matches.get(descr) - scoreMax ) < epsilon  || matches.get(descr) > 0.5){
-				list.add(descr);
-			}
-		};
+				HashMap< String, Double> matches = new HashMap< String, Double>();
 
-		
-		// Treat B04 differently as it is the only dataset with hierarchical age ranges.
-		if(doAggregateAges && dataset.getName().equals("ABS_CENSUS2011_B04")){
-			for (Iterator<String> iter = list.iterator(); iter.hasNext();) {
-				String s = iter.next();
-				if (!isNumber(s) ) 
-					iter.remove();
-			};
-		};
+				Double overlapScore;
+				for (String descr: ageCodeListDescriptions){
+					NumericParser ageDescriptionParser = new NumericParser(descr);
 
-		// System.out.println("Matched AGE intervals are:" + list);
-		if(scoreMax >= 0){
-			queryInputs2.put(AGE, list);
-		} else {
-			// Remove any explicit age parameter, so that the default dimensional values will be inserted.
-			queryInputs2.remove(AGE);
-		}
+					int b0 = (ageDescriptionParser.getExplicitNumbers().size() >0) 
+							? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(0) ) : -1;
+
+							int b1 = (ageDescriptionParser.getExplicitNumbers().size() >1) 
+									? Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) ) : -1;
+
+									if(ageDescriptionParser.getExplicitNumbers().size() >1){
+										String comparatorDescriptor = ageDescriptionParser.comparatorAsString (ageDescriptionParser.getComparator() );
+
+										if (comparatorDescriptor.equals("∈") )
+											b1 = Integer.parseInt(ageDescriptionParser.getExplicitNumbers().get(1) );
+
+										if (comparatorDescriptor.equals(">") )
+											b1 = 199;
+
+										if (comparatorDescriptor.equals("<") ){
+											b1 = b0;
+											b0 = 0;
+										};
+									}
+
+									// This is a hack to prevent double-counting of age categories.
+									// eg  15 years and over category for codeLists is merely the equivalent as "Total all ages", rather than a explicit age range.
+									if(b0 == 15 && b1 == 199){
+										b0 = -1;
+										b1 = -1;
+									};
+
+									overlapScore =  getOverlapScore(a0, a1, b0, b1);
+									matches.put(descr, overlapScore);
+									ageDescriptionParser = null;
+				};
+
+				ArrayList<String> list = new ArrayList<String>();
+				Double scoreMax = matches.get(getKeyForMaxValue(matches) );
+
+				double epsilon = 0.000001;
+				for (String descr: ageCodeListDescriptions){
+					if(Math.abs(matches.get(descr) - scoreMax ) < epsilon  || matches.get(descr) > 0.5){
+						list.add(descr);
+					}
+				};
+
+
+				// Treat B04 differently as it is the only dataset with hierarchical age ranges.
+				if(doAggregateAges && dataset.getName().equals("ABS_CENSUS2011_B04")){
+					for (Iterator<String> iter = list.iterator(); iter.hasNext();) {
+						String s = iter.next();
+						if (!isNumber(s) ) 
+							iter.remove();
+					};
+				};
+
+				// System.out.println("Matched AGE intervals are:" + list);
+				if(scoreMax >= 0){
+					queryInputs2.put(AGE, list);
+				} else {
+					// Remove any explicit age parameter, so that the default dimensional values will be inserted.
+					queryInputs2.remove(AGE);
+				}
 	}
 
 	private boolean isNumber(String aString)
@@ -433,24 +423,16 @@ public class QueryBuilder {
 	public String generateURL(Dataset ds){
 		String url;
 
-		url = "http://";
-
-		url += Service.serverName;
-
-		url += "/restsdmx/sdmx.ashx/GetData/";
-
-		url += ds.getName()+"/";
-
+		url = String.format("http://%s/restsdmx/sdmx.ashx/GetData/%s/",Service.serverName, ds.getName());
 
 		/* ensure order */
 		for(Dimension dim : ds.getDimensions()){
-
 
 			for(String dimKey : queryInputs.keySet()){
 				if(dim.getName().equals(dimKey)){
 					for(String str: queryInputs.get(dimKey)){
 						if(dimKey.equals("Region") && ds.getName().contains("CENSUS")){
-							String regionCode = Utils.findValue(ASGS2011.getCodelist(), str);
+							String regionCode = Utils.findValue(Service.regionDimension.getCodelist(), str);
 							url += regionCode + ".";
 						}else{
 							url += Utils.findValue(dim.getCodelist(),str) + "+";
@@ -467,10 +449,11 @@ public class QueryBuilder {
 		url += "/ABS";
 
 		//TODO: Add one for end time and have some better decision making
-		url += "?startTime=";
-		url += findStartTime(ds.getTimeDimension());
-		url += "&endTime=";
-		url += findStartTime(ds.getTimeDimension());
+		//TODO: Removed I don't think this is important for Census queries.
+		//url += "?startTime=";
+		//url += findStartTime(ds.getTimeDimension());
+		//url += "&endTime=";
+		//url += findStartTime(ds.getTimeDimension());
 
 		return url;
 	}
@@ -500,7 +483,7 @@ public class QueryBuilder {
 	public Dataset findBestMatchDatasetForDimensionNames(){
 
 		HashMap<String, Integer> weights = new HashMap<String, Integer>();
-		
+
 		for(String dimensionName : queryInputs.keySet()){
 			int cnt = 0;
 			for(Dataset ds : Service.datasets){
@@ -513,13 +496,15 @@ public class QueryBuilder {
 			weights.put(dimensionName, cnt );
 		};
 
+		System.out.println(weights);
+
 		Dataset toReturn = null;
 		double bestScore = -9999.0; //The higher the better.
-		
+
 		for(Dataset ds : Service.datasets){
 			boolean b  = false;
 			double datasetScore = 0;
-			
+
 			for(Dimension dim : ds.getDimensions()){
 				for(String dimensionName : queryInputs.keySet()){
 					if(dim.getName().equals(dimensionName)){
@@ -528,7 +513,7 @@ public class QueryBuilder {
 					}
 				}
 			};
-			
+
 			if(datasetScore > bestScore && b){
 				bestScore = datasetScore;
 				toReturn = ds;

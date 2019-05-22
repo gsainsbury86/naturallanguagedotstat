@@ -1,26 +1,39 @@
 package naturallanguagedotstat.parser;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
+import naturallanguagedotstat.utils.Utils;
 
 public class GrammarParser {
 	public String inputText;
 	public String[] words;
 	public ArrayList<String> keyPhrases; 
 	
-	private String[] auxiliaryWords = {
-			"what","how","many","there", "where", 
-			"the", "a", 
-			"that", "which", "who", 
-			"of",  
-			"is", "are","were",
-			"do", "did","will", "can","have",
-			"only"
-	};
+
+	String[] auxiliaryWords;
 
 	// Constructor
-	public GrammarParser (String str){
+	public GrammarParser (String str) throws IOException{
 		inputText = str;
 		keyPhrases  = new ArrayList<String>(); 
+		
+		BufferedReader abc = new BufferedReader(new FileReader(Utils.local_webapp+Utils.RES_DIR+"/auxiliaryWords.txt"));
+		List<String> lines = new ArrayList<String>();
+
+		String line;
+		while((line = abc.readLine()) != null) {
+		    lines.add(line);
+		}
+		abc.close();
+
+		auxiliaryWords = lines.toArray(new String[]{});
+		
+		
 	}		
 		
 	
@@ -70,6 +83,7 @@ public class GrammarParser {
 
 		if(str.length() >0 )
 			keyPhrases.add(str);
+		
 	};	
 	
 	private boolean isAuxiliary(String str){	

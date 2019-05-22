@@ -1,0 +1,21 @@
+Collection, Dimension, Default
+ABS_CENSUS2011, Frequency, Annual
+ABS_CENSUS2011_B02, Selected Medians and Averages, Median age of persons
+ABS_CENSUS2011_B03, Place of Usual Residence on Census Night, Counted at home on Census Night
+ABS_CENSUS2011_B05, Registered Marital Status, Married(a)
+ABS_CENSUS2011_B06, Social Marital Status, Married in a registered marriage
+ABS_CENSUS2011_B07, Indigenous Status, Indigenous(a)
+ABS_CENSUS2011_B09, Country of Birth of Person, Australia
+ABS_CENSUS2011_B13, Language Spoken at Home, Speaks English only
+ABS_CENSUS2011_B14, Religious Affiliation, Total
+ABS_CENSUS2011_B15, Type of Educational Institution Attending (Full/Part-Time Student Status by Age), Total
+ABS_CENSUS2011_B16, Highest Year of School Completed, Total
+ABS_CENSUS2011_B19, Voluntary Work for an Organisation or Group, Volunteer
+ABS_CENSUS2011_B21, Unpaid Assistance to a Person with a Disability, Provided unpaid assistance
+ABS_CENSUS2011_B37, Selected Labour Force, Education and Migration Characteristics, Total labour force
+ABS_CENSUS2011_B38, Place of Usual Residence 1 Year Ago, Same usual address 1 year ago as in 2011
+ABS_CENSUS2011_B39, Place of Usual Residence 5 Years Ago, Same usual address 5 years ago as in 2011
+ABS_CENSUS2011_B40, Non-School Qualification: Level of Education, Total
+ABS_CENSUS2011_B41, Non-School Qualification: Field of Study, Total
+ABS_CENSUS2011_B2, Labour Force Status, Employed Total
+ABS_CENSUS2011_B43, Industry of Employment, Total

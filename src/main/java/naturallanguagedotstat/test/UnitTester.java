@@ -32,7 +32,8 @@ public class UnitTester {
 		LocalTest.unitTests = true;
 		
 		collector = new ErrorCollector();
-		service = new Service();
+		//TODO: Adjust for different collection groups
+		service = new Service("Census_2011", "Region Type");
 	}
 
 	@Test

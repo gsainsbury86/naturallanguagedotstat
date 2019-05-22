@@ -20,10 +20,25 @@ public class LocalTest {
 	/* running locally so load data irrespective of web context */
 	public static boolean localLoad = false;
 
+	/* TODO: flag to switch between Census versions. Fix later. */
+	public static String collectionGroupName;
+	public static String regionTypeName;
+
 	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException{
 
 		log = true;
 		localLoad = true;
+		
+		//collectionGroupName = "Census_2011";
+		//regionTypeName = "Region Type";
+		
+		collectionGroupName = "Census_2016";
+		regionTypeName = "Geography Level";
+		
+		
+				
+				
+		
 		
 
 		// The following don't work for whatever reasons.
@@ -52,15 +67,21 @@ Questions 1100-1600
 		
 		
  */
-		printQueryResult("How many women in Australia are Irish?"); 
+		//printQueryResult("How many women in Australia are Irish?", collectionGroupName, regionTypeName);
+		
+		int random = (int)(Math.random() * 50 + 1);
+		//int random = 1;
+		printQueryResult(UnitTester.TEST_QUERIES[random], collectionGroupName, regionTypeName);
+		
+		
  
 	}
 	
-	public static void printQueryResult( String str) throws IOException, ClassNotFoundException, SQLException{
-		Service service = new Service();
+	public static void printQueryResult( String str, String collectionGroupName, String regionTypeName) throws IOException, ClassNotFoundException, SQLException{
+		Service service = new Service(collectionGroupName, regionTypeName);
 		
 		Response res = service.query(str);
-
+		
 
 		JsonReader jsonReader = Json.createReader(new StringReader((String) res.getEntity()));
 		JsonObject object = jsonReader.readObject();
