@@ -59,13 +59,15 @@ public class Service {
 	public static Dimension regionDimension;
 	
 
-	public Service(String resourcesDir, String collectionGroupName, String regionTypeName) throws IOException, ClassNotFoundException{
+	public Service() throws IOException, ClassNotFoundException{
 		if(LocalTest.localLoad){
+			this.collectionGroupName = LocalTest.collectionGroupName;
+			this.regionTypeName = LocalTest.regionTypeName;
+			this.resourcesDir = LocalTest.resourcesDir;
 			datasets = Utils.loadDatasets(resourcesDir, collectionGroupName);
 			regionDimension = Utils.loadRegionDimension(resourcesDir, collectionGroupName);
 			SemanticParser.synonyms = Utils.loadSynonyms(resourcesDir);
-			this.regionTypeName = regionTypeName;
-			this.resourcesDir = resourcesDir;
+
 		}
 		
 
